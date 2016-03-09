@@ -101,3 +101,16 @@
    }
 
 
+   .navbar-form .input-group {
+    display: table;
+	}
+
+	.navbar-form .input-group .input-group-addon, .navbar-form .input-group .input-group-btn {
+    white-space: nowrap;
+    width: 5%;
+	}
+	.navbar-form .input-group .form-control {
+    width: 100%;
+	}
+
+
