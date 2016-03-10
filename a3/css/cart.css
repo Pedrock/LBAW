@@ -1,0 +1,75 @@
+#cart .row {
+   vertical-align: middle;
+   border-bottom: 1px solid #AAAAAA;
+   padding-bottom: 10px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+#cart .top_row {
+   margin-bottom: 15px;
+   margin-top: 20px;
+   border-bottom-style: groove;
+   padding-bottom: 10px;
+   padding-left: 15px;
+}
+
+#cart_title {
+   font-size: large;
+}
+
+#cart .product_img {
+   border: 1px solid #AAAAAA;
+   height: 50px;
+   float: left;
+   margin-right: 10px;
+}
+
+#cart .product_info {
+   max-height: 50px;
+}
+
+#cart .product_info .desc {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   height: 10px;
+}
+
+#cart .product_title {
+   font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+   .qty_price {
+      padding-top: 20px;
+   }
+   #cart .qty {
+      min-width: 70px;
+      margin-right: 10px;
+   }
+}
+
+#cart .subtotal {
+   text-align: right;
+}
+
+/* Sticky footer */
+
+html {
+   position: relative;
+   min-height: 100%
+}
+
+footer {
+   position: absolute;
+   bottom: 0;
+   width: 100%;
+   /* Set the fixed height of the footer here */
+   height: 60px;
+   background-color: #f5f5f5;
+}
+
+body {
+   /* Margin bottom by footer height */
+   margin-bottom: 58px;
+}

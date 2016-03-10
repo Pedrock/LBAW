@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Online Store</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/cart.css">
+</head>
+
+<body>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Online Store</a>
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<!--<div id="logo">
+		  <img src="Images/logo.png" alt="Logo">
+		</div>-->
+			</div>
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<div class="col-lg-8 col-md-7 col-sm-6 ">
+					<form id="seachBar" class="navbar-form navbar-left" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" name="search" placeholder="Search...">
+							<span class="input-group-btn">
+					<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+						</div>
+					</form>
+				</div>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+					<li class="dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Your Account<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li><a href="#">Favorites</a></li>
+							<li><a href="#">My Orders</a></li>
+							<li><a href="#">Profile</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a href="#">Sign Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<div id="conteudo" class="container">
+		<div id="cart">
+			<div class="top_row row">
+				<div id="cart_title" class="col-xs-12 col-sm-8">
+					<span class="title">Shopping Cart</span>
+				</div>
+				<div class="hidden-xs col-xs-2">
+					Quantity
+				</div>
+				<div class="hidden-xs col-xs-2">
+					Price
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8">
+					<a href="#" class="link-p">
+						<img class="product_img" src="Images/product-1.jpg" alt="">
+					</a>
+					<div class="product_info">
+						<a href="#"><span class="product_title">Product 1</span></a>
+						<br>
+						<div class="desc">
+						</div>
+						<a href="#">Delete</a>
+					</div>
+				</div>
+					<div class="col-xs-2">
+						<div class="qty_price"><input type="text" class="form-control qty" value="4"></div>
+					</div>
+					<div class="col-xs-2"><div class="qty_price">152.32€</div></div>
+			</div>
+			<div class="row">
+				<div class="col-xs-8"></div>
+				<div class="col-xs-2 subtotal">Subtotal: </div>
+				<div class="col-xs-2">
+					<span>1000€</span>
+				</div>
+			</div>
+		</div>
+		<button type="button" id="btn-checkout" class="btn btn-primary pull-right">
+			<span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
+		</button>
+	</div>
+	<footer id="footer" class="footer">
+		<div id="inside-footer" class="container">
+			<a href="#"><span class="glyphicon glyphicon-phone-alt"></span> Contact Us</a>
+			<a href="#"> About Us</a>
+		</div>
+	</footer>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>
+	window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')
+	</script>
+	<script src="js/vendor/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>
