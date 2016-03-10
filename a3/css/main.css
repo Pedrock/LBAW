@@ -20,16 +20,6 @@
    	padding-bottom: 10px;
    }
 
-   #btn-deals {
-   	margin-top: 10px;
-   	margin-bottom: 10px;
-   	padding-left: 50px;
-   	padding-right: 50px;
-   	font-size: large;
-   }
-
-
-
    .carousel-inner {
    	overflow: hidden;
    }
@@ -53,7 +43,7 @@
    	padding: 6px;
    }
 
-   .button-product, #btn-deals{
+   .button-product, #main-menu a{
    	border-radius: 0px;
    }
 
@@ -75,6 +65,11 @@
 
    #main-menu > div > div > div > a {
    	background-color: #fafafa;
+   }
+
+   a#deals{
+   	background-color: rgb(181, 212, 207);
+   	margin-bottom: 5px;
    }
 
    #conteudo{
