@@ -57,10 +57,6 @@
    	border-radius: 0px;
    }
 
-   #feature-products {
-   	margin-top: 78px;
-   }
-
    #main-menu{
    	margin-top: 10px;
    }
@@ -113,5 +109,23 @@
     width: 100%;
 	}
 
-
-
+   /* Sticky footer */
+   
+   html {
+      position: relative;
+      min-height: 100%
+   }
+   
+   footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      /* Set the fixed height of the footer here */
+      height: 60px;
+      background-color: #f5f5f5;
+   }
+   
+   body {
+      /* Margin bottom by footer height */
+      margin-bottom: 58px;
+   }
