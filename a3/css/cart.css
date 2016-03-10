@@ -52,3 +52,14 @@
 #cart .subtotal {
    text-align: right;
 }
+
+#btn-update {
+   margin-left: 10px;
+}
+
+#cart .glyphicon-remove {
+   position: relative;
+   top: 2px;
+   margin-right: 3px;
+   /* color: red; */
+}
