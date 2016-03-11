@@ -29,10 +29,9 @@
    	height: 300px;
    }
 
-   #categories, #feature-products {
+   #categories, #featured-products {
    	font-size: large;
    	margin-bottom: 15px;
-   	margin-top: 20px;
    	border-bottom-style: groove;
    	padding-bottom: 10px;
    	padding-left: 15px;
@@ -72,13 +71,9 @@
    	margin-bottom: 2px;
    }
 
-   #conteudo{
+   #wrapper{
    	padding-bottom: 20px;
-   }
-
-   #footer{
-   	border-top-style: ridge;
-   	background-color: #1a1a1a;
+      padding-top: 20px;
    }
 
    #inside-footer{
@@ -90,7 +85,6 @@
    	text-decoration: none;
    	color: #9d9d9d;
    }
-
 
    .navbar-form .input-group {
     display: table;
@@ -112,12 +106,14 @@
    }
    
    footer {
+      border-top-style: ridge;
+      background-color: #1a1a1a;
+
       position: absolute;
       bottom: 0;
       width: 100%;
       /* Set the fixed height of the footer here */
       height: 53px;
-      background-color: #f5f5f5;
    }
    
    body {
