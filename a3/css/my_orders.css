@@ -20,11 +20,15 @@
 	right: 30px;
 }
 
-.order_date,
 .order-info .product_title {
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
+}
+
+
+.order_date {
+	white-space: nowrap;
 }
 
 .order {
