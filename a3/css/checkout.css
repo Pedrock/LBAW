@@ -1,0 +1,37 @@
+#shipping_address .top_row,
+#payment_methods .top_row {
+	margin-bottom: 15px;
+	margin-top: 20px;
+	border-bottom-style: groove;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.shipping_tab_content {
+	background: white;
+	border: 1px solid #DDDDDD;
+	border-top: none;
+	padding: 15px;
+}
+
+#saved_addresses ul {
+	padding-left: 5px;
+	margin-bottom: 0;
+}
+
+#saved_addresses ul input {
+	margin-right: 15px;
+}
+
+#saved_addresses li {
+	display: table-row;
+}
+
+#saved_addresses ul label {
+	font-weight: normal;
+}
+
+#saved_addresses li div {
+	display: table-cell;
+	vertical-align: middle;
+}

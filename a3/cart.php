@@ -90,4 +90,10 @@ include("templates/header.php") ?>
 				</div>
 			</div>
 		</div>
+		<a href="checkout.php" id="btn-update" class="btn btn-primary pull-right">
+			<span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
+		</a>
+		<a href="#" id="btn-checkout" class="btn btn-warning pull-right">
+			<span>Update </span><span class="glyphicon glyphicon-refresh"></span>
+		</a>
 <?php include("templates/footer.php") ?>
