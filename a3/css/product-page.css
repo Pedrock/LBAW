@@ -26,10 +26,14 @@
    margin: 0;
 }
 
-#btn-favorites{
+.btn-favorites{
    line-height: 20px;
    padding: 4px;
    border-radius: 0;
+}
+
+.bold{
+   font-weight: bold;
 }
 
 #info-product{
