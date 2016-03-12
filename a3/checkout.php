@@ -18,7 +18,7 @@
 		<div class="shipping_tab_content tab-content">
 			<div id="new_address" class="tab-pane fade in active">
 				<form>
-					<div class="col-lg-6">
+					<div class="col-md-6">
 						<div class="row">
 							<fieldset class="form-group">
 								<label for="name">Name</label>
@@ -38,9 +38,9 @@
 							</fieldset>
 						</div>
 					</div>
-					<div class="col-lg-1 hidden-md">
+					<div class="col-md-1 hidden-sm">
 					</div>
-					<div class="col-lg-5">
+					<div class="col-md-5">
 						<div class="row">
 							<fieldset class="form-group">
 								<label for="name">ZIP</label>
@@ -311,7 +311,7 @@
 			</div>
 			<div id="saved_addresses" class="tab-pane fade">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-md-6">
 						<div class="row">
 							<div>
 								<input checked="checked" type="radio" name="addr" id="arrd1" value="addr1">
@@ -325,7 +325,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-lg-5">
+					<div class="col-md-5">
 						<div class="row">
 							<div>
 								<input type="radio" name="addr" id="arrd2" value="addr2">
