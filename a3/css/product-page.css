@@ -49,9 +49,7 @@
 }
 
 #btn-add-to-cart{
-   background-color: rgb(181, 212, 207);;
-   color: black;
-   border-color: rgb(181, 212, 207);;
+   padding: 3px 6px;
    border-radius: 0;
 }
 

@@ -50,7 +50,7 @@ include("templates/header.php");
 			<div class="row form-row">
 				<form class="form-inline" role="form">
 					<label class="form-product" for="text">49.99€</label>
-					<button id="btn-add-to-cart" type="submit" form="nameform" value="Submit">Add to Cart</button>
+					<button id="btn-add-to-cart" class="btn btn-info" type="submit" form="nameform" value="Submit">Add to Cart</button>
 				</form>
 			</div>
 			<div id="row-score" class="row form-row">
