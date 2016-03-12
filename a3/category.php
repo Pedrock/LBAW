@@ -1,7 +1,8 @@
 <?php 
-$title = "Favorites";
-$css = ["favorites.css"];
+$title = "Online Store - Subitem 1 a";
+$css = ["category.css"];
 $category = true;
+
 include("templates/header.php") ?>
 
 <div id="featured-products">

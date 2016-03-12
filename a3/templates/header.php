@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/bootstrap-theme.min.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
 	<?php
 		if (isset($css))
 		{
@@ -50,7 +51,7 @@
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Your Account<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="favorites.php">Favorites</a></li>
-							<li><a href="#">My Orders</a></li>
+							<li><a href="my_orders.php">My Orders</a></li>
 							<li><a href="#">Profile</a></li>
 							<li role="separator" class="divider"></li>
 							<li><a href="#">Sign Out</a></li>
@@ -65,7 +66,7 @@
 
 	<div id="wrapper" class="container-fluid">
 		<div class="row">
-		<?php if (isset($remove_categories))
+		<?php if (isset($remove_categories) && $remove_categories)
 		{ ?>
 			<div id="content-wrapper" class="container">
 		<?php
