@@ -310,36 +310,30 @@
 				</form>
 			</div>
 			<div id="saved_addresses" class="tab-pane fade">
-				<div class="row">
-					<div class="col-md-6">
-						<div class="row">
-							<div>
-								<input checked="checked" type="radio" name="addr" id="arrd1" value="addr1">
-							</div>
-							<div>
-								<label for="arrd1">
-									John Smith
-									<br> 660 Sherwood Drive
-									<br> Coram, NY 11727
-								</label>
-							</div>
+				<ul>
+					<li>
+						<div>
+							<input checked="checked" type="radio" name="addr" id="arrd1" value="addr1">
 						</div>
-					</div>
-					<div class="col-md-5">
-						<div class="row">
-							<div>
-								<input type="radio" name="addr" id="arrd2" value="addr2">
-							</div>
-							<div>
-								<label for="arrd2">
-									John Smith
-									<br>6415 Cobblestone Court
-									<br>Chelsea, MA 02150
-								</label>
-							</div>
+						<div>
+							<label for="arrd1">
+								John Smith
+								<br> 660 Sherwood Drive
+								<br> Coram, NY 11727</label>
 						</div>
-					</div>
-				</div>
+					</li>
+					<li>
+						<div>
+							<input type="radio" name="addr" id="arrd2" value="addr2">
+						</div>
+						<div>
+							<label for="arrd2">
+								John Smith
+								<br>6415 Cobblestone Court
+								<br>Chelsea, MA 02150
+						</div>
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
