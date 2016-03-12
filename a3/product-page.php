@@ -8,7 +8,7 @@ include("templates/header.php");
 		<h1 id="product-name">Age Of Wisdom Tan Graphic Tee</h1>
 	</div>
 	<div class="col-sm-2 hidden-xs">
-		<button id="btn-favorites" type="button" class="btn btn-primary pull-right" aria-label="Left Align">
+		<button type="button" class="btn btn-primary btn-favorites pull-right" aria-label="Left Align">
 			<span aria-hidden="true"> Add to Favorites</span>
 		</button>
 	</div>
@@ -39,23 +39,23 @@ include("templates/header.php");
 				</p>
 			</div>
 			<div class="row">
-				<form class="form-inline" role="form">
+				<form class="form-inline">
 					<div class="form-group form-product">
-						<label for="text">Quantity</label>
-						<input type="text" class="form-control" id="quantity">
+						<label for="quantity">Quantity</label>
+						<input type="number" id="quantity" min="1" max="3" value="1">
 					</div>
-					<label for="text">3 Available</label>
+					<span class="bold" >3 Available</span>
 				</form>
 			</div>
 			<div class="row form-row">
-				<form class="form-inline" role="form">
-					<label class="form-product" for="text">49.99€</label>
-					<button id="btn-add-to-cart" type="submit" form="nameform" value="Submit">Add to Cart</button>
+				<form class="form-inline">
+					<span class="form-product bold">49.99€</span>
+					<button id="btn-add-to-cart" class="btn btn-info" type="submit" value="Submit">Add to Cart</button>
 				</form>
 			</div>
 			<div id="row-score" class="row form-row">
 				<span id="product-score">3.5<span class="glyphicon glyphicon-star star" aria-hidden="true"></span></span>
-				<button id="btn-favorites" type="button" class="btn btn-primary visible-xs" aria-label="Left Align">
+				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
 					<span aria-hidden="true"> Add to Favorites</span>
 				</button>
 			</div>
@@ -115,7 +115,6 @@ include("templates/header.php");
 		</div>
 
 	</div>
-</div>
 </div>
 
 <?php include("templates/footer.php") ?>
