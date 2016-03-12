@@ -1,5 +1,9 @@
 /*Pagina de Login*/
 
+body{
+    background-color: #fafafa;
+}
+
 .form-signin > *{
 	 border-radius: initial;
 }
