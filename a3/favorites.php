@@ -24,8 +24,8 @@ function product($name, $id)
 							<h4 class="modal-title">Change category</h4>
 						</div>
 						<div class="modal-body">
-							<label for="sel1">Select new category:</label>
-							<select class="form-control" id="sel1">
+							<label for="#<?=$id?>">Select new category:</label>
+							<select class="form-control" id="#<?=$id?>">
 								<option>None</option>
 								<option>T-shirts</option>
 								<option>Computers</option>

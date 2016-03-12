@@ -57,7 +57,7 @@ include("templates/header.php") ?>
 							<span class="qty">2x </span><a href="#"><span>Classic Laundry Green Graphic T-Shirt</span></a>
 						</div>
 						<div class="col-xs-4">
-							<div class="qty_price"><span class="vert_centered"><span class="vert_centered">70€</span></div>
+							<div class="qty_price"><span class="vert_centered"><span class="vert_centered">70€</span></span></div>
 						</div>
 					</div>
 					<div class="order-details row">
