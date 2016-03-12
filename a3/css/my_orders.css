@@ -89,12 +89,6 @@
 	border-top: 1px solid #ccc;
 }
 
-.qty_price {
-	height: 40px;
-}
-
 .vert_centered {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
+	line-height: 40px;
 }
