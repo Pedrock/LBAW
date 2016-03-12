@@ -42,7 +42,7 @@ include("templates/header.php");
 				<form class="form-inline">
 					<div class="form-group form-product">
 						<label for="quantity">Quantity</label>
-						<input type="number" id="quantity" min="1" max="100">
+						<input type="number" id="quantity" min="1" max="3" value="1">
 					</div>
 					<span class="bold" >3 Available</span>
 				</form>
