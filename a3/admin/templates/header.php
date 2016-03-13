@@ -38,9 +38,14 @@
         			<a href="#" class="list-group-item">Add Product</a>
         			<a href="#" class="list-group-item">Edit product</a>
         		</div>
-        		<a href="#sub3" class="list-group-item">Users</a>
-        		<a href="#sub4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
+        		<a href="#sub4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Categories<span class="caret"></span></a>
         		<div class="collapse" id="sub4" aria-expanded="false">
+        			<a href="#" class="list-group-item">Add Category</a>
+        			<a href="#" class="list-group-item">Edit Category</a>
+        		</div>
+        		<a href="#sub5" class="list-group-item">Users</a>
+        		<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
+        		<div class="collapse" id="sub6" aria-expanded="false">
         			<a href="#" class="list-group-item">Coupon codes</a>
         			<a href="#" class="list-group-item">Promotions</a>
         		</div>
