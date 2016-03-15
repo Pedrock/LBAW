@@ -22,7 +22,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>                        
 					</button>
-					<a class="navbar-brand" href="#">Online Store Administration</a>
+					<a class="navbar-brand" href="index.php">Online Store Administration</a>
 				</div>
 			</div>
 		</nav>
@@ -31,21 +31,21 @@
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
         	<div id="sidebar" class="list-group panel">
-        		<a href="#sub1" class="list-group-item">Dashboard</a>
+        		<a href="index.php" class="list-group-item">Dashboard</a>
         		<a href="#sub2" class="list-group-item">Orders</a>
         		<a href="#sub3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Products<span class="caret"></span></a>
-        		<div class="collapse" id="sub3" aria-expanded="false">
-        			<a href="#" class="list-group-item">Add Product</a>
+        		<div class="collapse" id="sub3" aria-expanded="false" role="link">
+        			<a href="new-product.php" class="list-group-item">Add Product</a>
         			<a href="#" class="list-group-item">Edit product</a>
         		</div>
         		<a href="#sub4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Categories<span class="caret"></span></a>
-        		<div class="collapse" id="sub4" aria-expanded="false">
+        		<div class="collapse" id="sub4" aria-expanded="false" role="link">
         			<a href="#" class="list-group-item">Add Category</a>
         			<a href="#" class="list-group-item">Edit Category</a>
         		</div>
         		<a href="#sub5" class="list-group-item">Users</a>
         		<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
-        		<div class="collapse" id="sub6" aria-expanded="false">
+        		<div class="collapse" id="sub6" aria-expanded="false" role="link">
         			<a href="#" class="list-group-item">Coupon codes</a>
         			<a href="#" class="list-group-item">Promotions</a>
         		</div>

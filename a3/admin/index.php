@@ -1,4 +1,6 @@
-<?php include("templates/header.php"); ?>
+<?php 
+$title = "Dashboard";
+include("templates/header.php"); ?>
 
 <div class="row">
 	<div class="col-lg-12">
