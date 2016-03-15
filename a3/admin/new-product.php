@@ -99,7 +99,7 @@ include("templates/header.php");
 					</div>
 					<div id="row-submit" class="row">
 						<div id="field-submit" class="col-md-3">
-							<fieldset id="btn-sub" class="form-group">
+							<fieldset class="form-group">
 								<button id="btn-new-product" class="btn btn-info" type="submit" value="Submit">Submit</button>
 							</fieldset>
 						</div>
