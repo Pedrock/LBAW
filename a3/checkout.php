@@ -304,14 +304,20 @@
 								<label for="name">Phone number</label>
 								<input type="text" class="form-control" id="phone">
 							</fieldset>
+							<br>
+							<fieldset class="form-group">
+								<label class="checkbox-inline">
+									<input type="checkbox" name="save" id="save"> Save for future purchases
+								</label>
+							</fieldset>
 						</div>
 					</div>
 					<div class="row"></div>
 				</form>
 			</div>
 			<div id="saved_addresses" class="tab-pane fade">
-				<ul>
-					<li>
+				<ul class="row">
+					<li class="list-group-item col-sm-6">
 						<div>
 							<input checked="checked" type="radio" name="addr" id="arrd1" value="addr1">
 						</div>
@@ -319,10 +325,11 @@
 							<label for="arrd1">
 								John Smith
 								<br> 660 Sherwood Drive
-								<br> Coram, NY 11727</label>
+								<br> Coram, NY 11727
+							</label>
 						</div>
 					</li>
-					<li>
+					<li class="list-group-item col-sm-6">
 						<div>
 							<input type="radio" name="addr" id="arrd2" value="addr2">
 						</div>
@@ -331,6 +338,7 @@
 								John Smith
 								<br>6415 Cobblestone Court
 								<br>Chelsea, MA 02150
+							</label>
 						</div>
 					</li>
 				</ul>
