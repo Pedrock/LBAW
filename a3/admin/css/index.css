@@ -196,6 +196,10 @@ body{
     padding-right: 0;
 }
 
+#new-product *{
+    border-radius: 0;
+}
+
 .insert-category{
     max-width: 200px;
 }
@@ -207,10 +211,6 @@ body{
 
 #btn-new-product{
     border-radius: 0;
-}
-
-#btn-sub{
-    margin-bottom: 0px;
 }
 
 #field-submit{
