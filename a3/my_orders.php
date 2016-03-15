@@ -26,7 +26,7 @@ include("templates/header.php") ?>
 		<li><a href="#">&raquo;</a></li>
 	</ul>
 </div>
-<div class="panel panel-default" id="accordion">
+<div class="panel panel-primary" id="accordion">
 	<div class="panel-heading">
 		<div class="top_row row">
 			<div class="col-xs-4">Number</div>
@@ -35,10 +35,10 @@ include("templates/header.php") ?>
 			<div class="col-xs-2 hidden-xs"></div>
 		</div>
 	</div>
-	<div class="panel-orders-list panel-body">
-		<div class="order panel panel-default">
+	<div id="accordion-container" class="panel-orders-list panel-body">
+		<div class="order panel panel-primary">
 			<!-- order1 START -->
-			<a data-toggle="collapse" data-parent="#accordion" href="#order1">
+			<a data-toggle="collapse" data-parent="#accordion-container" href="#order1">
 				<div class="panel-heading">
 					<div class="col-xs-4">#201504201</div>
 					<div class="order_date col-xs-4">2016-03-12 12.50</div>
@@ -76,7 +76,7 @@ include("templates/header.php") ?>
 			</div>
 			<!-- #order1 END -->
 			<!-- #order2 START -->
-			<a data-toggle="collapse" data-parent="#accordion" href="#order2">
+			<a data-toggle="collapse" data-parent="#accordion-container" href="#order2">
 				<div class="panel-heading">
 					<div class="col-xs-4">#201502460</div>
 					<div class="order_date col-xs-4">2016-03-04 13:52</div>
@@ -115,7 +115,7 @@ include("templates/header.php") ?>
 			</div>
 			<!-- #order2 END -->
 			<!-- #order3 START -->
-			<a data-toggle="collapse" data-parent="#accordion" href="#order3">
+			<a data-toggle="collapse" data-parent="#accordion-container" href="#order3">
 				<div class="last-panel-heading panel-heading">
 					<div class="col-xs-4">#201503201</div>
 					<div class="order_date col-xs-4">2016-03-01 22:30</div>
