@@ -40,7 +40,7 @@ include("templates/header.php") ?>
 					<h4><a href="#">Age Of Wisdom Tan Graphic Tee</a></h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
+						<a href="product-page.php" class="btn btn-default button-product">See Details</a>
 						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
 					</div>
 				</div>

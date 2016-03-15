@@ -223,4 +223,22 @@ body{
     margin-bottom: 30px;
 }
 
-   
+/*Edit Page*/
+#form-edit-product{
+    padding-bottom: 20px;
+}
+
+.seleciona{
+    margin-top: 15px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
+    background-color: #607D8B;
+    border-color: #607D8B;
+}
+
+.pagination>li>a, .pagination>li>span{
+    color: #607D8B;
+   }
