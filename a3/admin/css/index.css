@@ -247,7 +247,7 @@ body{
     color: #607D8B;
    }
 
-#btn-edit1, #btn-edit2{
+#btn-edit1, #btn-edit2, #btn-remove1, #btn-remove2{
     padding-right: 23px;
     padding-left: 23px;
 }

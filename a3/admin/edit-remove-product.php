@@ -4,16 +4,9 @@ $css = ["../../css/product-page.css"];
 include("templates/header.php");
 ?>
 <div id="title-products">
-	<!-- <div class="col-xs-10"> -->
-		<h1 id="product-name">Age Of Wisdom Tan Graphic Tee</h1>
-	<!-- </div> 
-	<div class="col-sm-1 hidden-xs" > -->
-		<button type="button" class="btn btn-danger btn-favorites hidden-xs pull-right" aria-label="Left Align">Remove</button>
-		<button type="button" id="btn-edit1" class="btn btn-warning btn-favorites hidden-xs pull-right" aria-label="Left Align">Edit</button>
-	<!-- </div>
-	<div class="col-sm-1 hidden-xs"> -->
-		
-	<!-- </div> -->
+	<h1 id="product-name">Age Of Wisdom Tan Graphic Tee</h1>
+	<button type="button" id="btn-remove1" class="btn btn-danger btn-favorites hidden-xs hidden-sm pull-right" aria-label="Left Align">Remove</button>
+	<button type="button" id="btn-edit1" class="btn btn-warning btn-favorites hidden-xs hidden-sm pull-right" aria-label="Left Align">Edit</button>
 </div>
 
 <div id="info-product" class="container-fluid">
@@ -58,7 +51,7 @@ include("templates/header.php");
 			</div>
 		</div>
 	</div>
-	<div id="row-score" class="row form-row visible-xs">
+	<div id="row-score" class="row form-row visible-xs visible-sm">
 		<button type="button" id="btn-edit2" class="btn btn-warning btn-favorites" aria-label="Left Align">Edit</button>
 		<button type="button" id="btn-remove2" class="btn btn-danger btn-favorites " aria-label="Left Align">Remove</button>
 	</div>
