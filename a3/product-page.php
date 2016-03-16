@@ -74,7 +74,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star "></span>
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Pedro Martins</span>
 				<span class="info-review pull-right">10 days ago</span>
 				<p>This product was great in terms of quality. I would definitely buy another!</p>
 			</div>
@@ -89,7 +89,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Luis Camacho</span>
 				<span class=" info-review pull-right">12 days ago</span>
 				<p>I've alredy ordered another one!</p>
 			</div>
@@ -104,7 +104,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Diana Faria</span>
 				<span class="info-review pull-right">15 days ago</span>
 				<p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
 			</div>

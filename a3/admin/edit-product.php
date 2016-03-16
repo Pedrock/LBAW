@@ -93,16 +93,11 @@ include("templates/header.php");
 					<div class="row">
 						<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 							<div class="thumbnail">
-								<a href="#" class="link-p">
+								<a href="edit-remove-product.php" class="link-p">
 									<img src="../Images/product-1.jpg" alt="">
 								</a>
 								<div class="caption">
-									<h4><a href="#">Age Of Wisdom Tan Graphics Tee T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="edit-remove-product.php" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
+									<h4><a href="edit-remove-product.php">Age Of Wisdom Tan Graphics Tee T-Shirt</a></h4>
 								</div>
 							</div>
 						</div>
@@ -113,11 +108,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -128,11 +118,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -143,11 +128,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -158,11 +138,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -173,11 +148,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -188,11 +158,6 @@ include("templates/header.php");
 								</a>
 								<div class="caption">
 									<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-									<div class="btn-group">
-										<a href="#" class="btn btn-default button-product">See Details</a>
-										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
-									</div>
 								</div>
 							</div>
 						</div>

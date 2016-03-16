@@ -73,7 +73,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star "></span>
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Pedro Martins</span>
 				<span class="info-review pull-right">10 days ago</span>
 				<p>This product was great in terms of quality. I would definitely buy another!</p>
 				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
@@ -89,7 +89,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Luis Camacho</span>
 				<span class=" info-review pull-right">12 days ago</span>
 				<p>I've alredy ordered another one!</p>
 				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
@@ -105,7 +105,7 @@ include("templates/header.php");
 				<span class="glyphicon glyphicon-star star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
 				<span class="glyphicon glyphicon-star-empty star"></span>
-				<span class="info-review">Anonymous</span>
+				<span class="info-review">Diana Faria</span>
 				<span class="info-review pull-right">15 days ago</span>
 				<p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
 				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
