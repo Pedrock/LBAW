@@ -73,13 +73,13 @@
 		}
 		else
 		{ ?>
-			<div class="col-lg-2 col-sm-4 col-md-2">
+			<div class="col-sm-4 col-md-2">
 				<div id="categories">
 					<span class="title">Categories</span>
 				</div>
 				<div id="main-menu" class="list-group panel">
 					<a href="#" id="deals" class="list-group-item">Deals</a>
-					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing, Shoes &amp; Jewelry<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
+					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing &amp Shoes<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 					<div class="collapse<?php if (isset($category)) echo ' in'?>" id="sub1">
 						<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Men<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 						<div class="collapse<?php if (isset($category)) echo ' in'?>" id="SubMenu1">
@@ -103,12 +103,12 @@
 					<a href="#" class="list-group-item">Electronics</a>
 					<a href="#" class="list-group-item">Home</a>
 					<a href="#" class="list-group-item">Sports &amp; Outdoors</a>
-					<a href="#" class="list-group-item">Tools &amp; Home Improvement</a>
+					<a href="#" class="list-group-item">Home Improvement</a>
 					<a href="#" class="list-group-item">Toys &amp; Games</a>
 					<a href="#" class="list-group-item">Video Games</a>
 				</div>
 			</div>
-			<div id="content-wrapper" class="col-lg-10 col-md-10 col-sm-8">
+			<div id="content-wrapper" class="col-md-10 col-sm-8">
 		<?php
 		}
 		?>
