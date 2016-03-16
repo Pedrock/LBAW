@@ -15,12 +15,10 @@ include("templates/header.php");
 				<div class="caption">
 					<h4 class="product-title">Age Of Wisdom Tan Graphic Tee</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-
-					<div class="btn-group">
-						<a href="product-page.php" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
-
+						&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 				</div>
 			</div>
 		</div>
@@ -31,10 +29,10 @@ include("templates/header.php");
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 
 				</div>
 			</div>
@@ -46,10 +44,10 @@ include("templates/header.php");
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 
 				</div>
 			</div>
@@ -61,10 +59,10 @@ include("templates/header.php");
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 
 				</div>
 			</div>
@@ -76,10 +74,10 @@ include("templates/header.php");
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 
 				</div>
 			</div>
@@ -90,12 +88,10 @@ include("templates/header.php");
 				<div class="caption">
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
-
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 				</div>
 			</div>
 		</div>
@@ -105,12 +101,10 @@ include("templates/header.php");
 				<div class="caption">
 					<h4 class="product-title">Classic Laundry Green Graphic T-Shirt</h4>
 					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
-
-					<div class="btn-group">
-						<a href="#" class="btn btn-default button-product">See Details</a>
-						<a href="#" class="btn btn-primary button-product"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-					</div>
-
+					&nbsp;
+						<div class="pull-left price">49.99€</div>
+						<a href="#" class="pull-right button-product">
+						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 				</div>
 			</div>
 		</div>
