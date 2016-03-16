@@ -83,7 +83,7 @@
 	</div>
 </div>
 <br>
-<a href="checkout.php" id="btn-update" class="btn btn-success pull-right">
+<a href="#" id="btn-update" class="btn btn-success pull-right">
 	Continue <span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 <?php include("templates/footer.php") ?>
