@@ -35,7 +35,7 @@
 				</button>
 			</div>
 			<div class="collapse navbar-collapse" id="myNavbar">
-				<div class="col-lg-8 col-md-7 col-sm-6 ">
+				<div class="col-lg-8 col-md-7 col-sm-6">
 					<form id="seachBar" class="navbar-form navbar-left" role="search">
 						<div class="input-group">
 							<input type="text" class="form-control" name="search" placeholder="Search...">
@@ -73,13 +73,13 @@
 		}
 		else
 		{ ?>
-			<div class="col-sm-4 col-md-2">
+			<div class="col-sm-4 col-md-3 col-lg-2">
 				<div id="categories">
 					<span class="title">Categories</span>
 				</div>
 				<div id="main-menu" class="list-group panel">
 					<a href="#" id="deals" class="list-group-item">Deals</a>
-					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing &amp Shoes<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
+					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing &amp; Shoes<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 					<div class="collapse<?php if (isset($category)) echo ' in'?>" id="sub1">
 						<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Men<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 						<div class="collapse<?php if (isset($category)) echo ' in'?>" id="SubMenu1">
@@ -108,7 +108,7 @@
 					<a href="#" class="list-group-item">Video Games</a>
 				</div>
 			</div>
-			<div id="content-wrapper" class="col-md-10 col-sm-8">
+			<div id="content-wrapper" class="col-sm-8 col-md-9 col-lg-10">
 		<?php
 		}
 		?>
