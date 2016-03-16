@@ -35,3 +35,34 @@
 	display: table-cell;
 	vertical-align: middle;
 }
+
+.top_row {
+	margin-bottom: 15px;
+	margin-top: 20px;
+	border-bottom-style: groove;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.content {
+	background: white;
+	border: 1px solid #DDDDDD;
+	padding: 15px;
+	padding-bottom: 0px;
+}
+
+.content .radio {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+
+.order-info img {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	width: 30px;
+}
+
+.order-details {
+	padding: 15px;
+}
