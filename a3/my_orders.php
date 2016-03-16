@@ -179,4 +179,5 @@ include("templates/header.php") ?>
 		</div>
 	</div>
 </div>
+
 <?php include("templates/footer.php") ?>

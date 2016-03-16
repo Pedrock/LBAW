@@ -86,4 +86,5 @@
 <a href="#" id="btn-update" class="btn btn-success pull-right">
 	Continue <span class="glyphicon glyphicon-chevron-right"></span>
 </a>
+</div>
 <?php include("templates/footer.php") ?>

@@ -52,7 +52,7 @@ include("templates/header.php");
 				<form class="form-inline">
 					<div class="form-group form-product-price">
 						<label for="quantity">Price</label>
-						<input type="number" id="quantity" value="49.99">
+						<input type="number" id="price" value="49.99">
 					</div>
 				</form>
 			</div>
@@ -60,7 +60,7 @@ include("templates/header.php");
 	</div>
 	<div id="row-score" class="row form-row visible-xs">
 		<button type="button" id="btn-edit2" class="btn btn-warning btn-favorites" aria-label="Left Align">Edit</button>
-		<button type="button" id="btn-edit2" class="btn btn-danger btn-favorites " aria-label="Left Align">Remove</button>
+		<button type="button" id="btn-remove2" class="btn btn-danger btn-favorites " aria-label="Left Align">Remove</button>
 	</div>
 </div>
 <div id="product-reviews" class="row">
