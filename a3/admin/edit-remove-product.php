@@ -1,20 +1,26 @@
 <?php 
-$title = "Product Page";
-$css = ["product-page.css"];
+$title = "Edit or Remove Product ";
+$css = ["../../css/product-page.css"];
 include("templates/header.php");
 ?>
 <div id="title-products">
+	<!-- <div class="col-xs-10"> -->
 		<h1 id="product-name">Age Of Wisdom Tan Graphic Tee</h1>
-		<button type="button" class="btn btn-primary btn-favorites pull-right hidden-xs" aria-label="Left Align">
-			<span aria-hidden="true"> Add to Favorites</span>
-		</button>
+	<!-- </div> 
+	<div class="col-sm-1 hidden-xs" > -->
+		<button type="button" class="btn btn-danger btn-favorites hidden-xs pull-right" aria-label="Left Align">Remove</button>
+		<button type="button" id="btn-edit1" class="btn btn-warning btn-favorites hidden-xs pull-right" aria-label="Left Align">Edit</button>
+	<!-- </div>
+	<div class="col-sm-1 hidden-xs"> -->
+		
+	<!-- </div> -->
 </div>
 
 <div id="info-product" class="container-fluid">
 	<div class="row">
 		<div class="col-lg-3 col-md-4">
 			<div id="product-main-img" class="row">
-				<img class="img-responsive" src="Images/product-1.jpg" alt="">
+				<img class="img-responsive" src="../Images/product-1.jpg" alt="">
 			</div>
 			<div id="product-imgs" class="row">
 				<div class="col-xs-3 other-photos"><a href="#x"><img src="http://static.planetminecraft.com/files/resource_media/screenshot/1341/11Minecraft-Creeper-Wallpaper-1080p-HD-250x250up_6509836_lrg.jpg" alt="Image" class="img-responsive"></a>
@@ -37,35 +43,28 @@ include("templates/header.php");
 			<div class="row">
 				<form class="form-inline">
 					<div class="form-group form-product">
-						<label for="quantity">Quantity</label>
-						<input type="number" id="quantity" min="1" max="3" value="1">
+						<label for="quantity">Available</label>
+						<input type="number" id="quantity" value="3">
 					</div>
-					<span class="bold" >3 Available</span>
 				</form>
 			</div>
 			<div class="row form-row">
 				<form class="form-inline">
-					<span class="form-product bold">49.99€</span>
-					<button id="btn-add-to-cart" class="btn btn-info" type="submit" value="Submit">Add to Cart</button>
+					<div class="form-group form-product-price">
+						<label for="quantity">Price</label>
+						<input type="number" id="quantity" value="49.99">
+					</div>
 				</form>
 			</div>
-			<div id="row-score" class="row form-row">
-				<span id="product-score">3.7<span class="glyphicon glyphicon-star star" aria-hidden="true"></span></span>
-				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
-					<span aria-hidden="true"> Add to Favorites</span>
-				</button>
-			</div>
 		</div>
+	</div>
+	<div id="row-score" class="row form-row visible-xs">
+		<button type="button" id="btn-edit2" class="btn btn-warning btn-favorites" aria-label="Left Align">Edit</button>
+		<button type="button" id="btn-edit2" class="btn btn-danger btn-favorites " aria-label="Left Align">Remove</button>
 	</div>
 </div>
 <div id="product-reviews" class="row">
 	<div class="well">
-
-		<div class="text-right">
-			<a id="leave-a-review" class="btn btn-success">Leave a Review</a>
-		</div>
-
-		<hr>
 
 		<div class="row">
 			<div class="col-md-12">
@@ -77,6 +76,7 @@ include("templates/header.php");
 				<span class="info-review">Anonymous</span>
 				<span class="info-review pull-right">10 days ago</span>
 				<p>This product was great in terms of quality. I would definitely buy another!</p>
+				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
 			</div>
 		</div>
 
@@ -92,6 +92,7 @@ include("templates/header.php");
 				<span class="info-review">Anonymous</span>
 				<span class=" info-review pull-right">12 days ago</span>
 				<p>I've alredy ordered another one!</p>
+				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
 			</div>
 		</div>
 
@@ -107,6 +108,7 @@ include("templates/header.php");
 				<span class="info-review">Anonymous</span>
 				<span class="info-review pull-right">15 days ago</span>
 				<p>I've seen some better than this, but not at this price. I definitely recommend this item.</p>
+				<button type="button" class="btn btn-danger btn-circle pull-right"><i class="glyphicon glyphicon-remove"></i></button>
 			</div>
 		</div>
 

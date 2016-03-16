@@ -246,3 +246,32 @@ body{
 .pagination>li>a, .pagination>li>span{
     color: #607D8B;
    }
+
+#btn-edit1, #btn-edit2{
+    padding-right: 23px;
+    padding-left: 23px;
+}
+
+#btn-edit2{
+    display: inline!important;
+}
+
+#btn-edit1{
+    margin-right: 5px;
+}
+
+.form-product-price input{
+    max-width: 78px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  margin-top: -10px;
+}
+

@@ -3,7 +3,7 @@
 #title-products{
    font-size: large;
    border-bottom-style: groove;
-   padding: 0px 15px 35px;
+   padding: 0px 15px 5px;
 }
 
 #product-top {
@@ -16,6 +16,10 @@
 
 #row-score{
    font-size: large;
+}
+
+#product-name {
+   display: inline-block;
 }
 
 #product-name, #product-score{
