@@ -2,6 +2,8 @@
 
 body{
     background-color: #fafafa;
+    background-image: url('background.png');
+   
 }
 
 .form-signin > *{
