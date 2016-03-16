@@ -351,3 +351,13 @@ select.form-control,
 #orders .panel-orders-list a:last-of-type .panel-heading {
 	border-bottom: none !important;
 }
+
+#orders .sort_div select {
+	max-width: 120px;
+	display: inline;
+	margin-right: 15px;
+}
+
+#orders .order_date {
+	white-space: nowrap;
+}

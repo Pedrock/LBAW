@@ -7,18 +7,29 @@
 	<div class="col-lg-12">
 		<div class="content">
 			<h1>Orders</h1>
-			<div class="seleciona sort_div pull-left">
-				<div class="form-group">
-					<select class="form-control" id="sel_sort">
-						<option value="" disabled selected>Sort by</option>
-						<option>a..z</option>
-						<option>z..a</option>
-						<option>Price asc.</option>
-						<option>Price desc.</option>
-						<option>Date asc.</option>
-						<option>Date desc.</option>
-					</select>
+			<br>
+			<form id="searchBar" role="search">
+				<div class="input-group">
+					<input type="text" class="form-control" name="search" placeholder="Search...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+					</span>
 				</div>
+			</form>
+			<br>
+			<div class="sort_div">
+				<select class="form-control" id="sel_sort">
+					<option value="" disabled selected>Sort by</option>
+					<option>a..z</option>
+					<option>z..a</option>
+					<option>Price asc.</option>
+					<option>Price desc.</option>
+					<option>Date asc.</option>
+					<option>Date desc.</option>
+				</select>
+				<label class="checkbox-inline">
+					<input type="checkbox" name="show_shipped" id="show_shipped"> Show only pending shipments
+				</label>
 			</div>
 			<div class="next-page text-center">
 				<ul class="pagination pagination-sm">
