@@ -29,7 +29,7 @@ include("templates/header.php");
 							<div class="col-md-6">
 								<fieldset class="form-group">
 									<label for="country">Category</label>
-									<select size="7" class="form-control insert-category" id="country">
+									<select multiple="multiple" size="7" class="form-control insert-category" id="country">
 										<option>Appliances</option>
 										<option>Apps &amp; Games</option>
 										<option>Arts, Crafts &amp; Sewing</option>
