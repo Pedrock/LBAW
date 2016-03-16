@@ -79,25 +79,33 @@
 				</div>
 				<div id="main-menu" class="list-group panel">
 					<a href="#" id="deals" class="list-group-item">Deals</a>
-					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Electonics<i class="fa fa-caret-down pull-right"></i></a>
+					<a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing, Shoes &amp; Jewelry<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 					<div class="collapse<?php if (isset($category)) echo ' in'?>" id="sub1">
-						<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Computers<i class="fa fa-caret-down"></i></a>
+						<a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Men<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 						<div class="collapse<?php if (isset($category)) echo ' in'?>" id="SubMenu1">
 							<a href="category.php" class="list-group-item" data-parent="#SubMenu1">
-							<?php if (isset($category)) echo '<span class="glyphicon glyphicon-chevron-right"></span> '?>Subitem 1 a</a>
-							<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 2 b</a>
-							<a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Subitem 3 c <i class="fa fa-caret-down"></i></a>
+							<?php if (isset($category)) echo '<span class="glyphicon glyphicon-chevron-right"></span> '?>T-shirts</a>
+							<a href="#" class="list-group-item" data-parent="#SubMenu1">Pants</a>
+							<a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Underwear<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
 							<div class="collapse" id="SubSubMenu1">
-								<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 1</a>
-								<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Sub sub item 2</a>
+								<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Boxers</a>
+								<a href="#" class="list-group-item" data-parent="#SubSubMenu1">Socks</a>
 							</div>
-							<a href="#" class="list-group-item" data-parent="#SubMenu1">Subitem 4 d</a>
 						</div>
-						<a href="#" class="list-group-item">Subitem 2</a>
-						<a href="#" class="list-group-item">Subitem 3</a>
-						<a href="#" class="list-group-item">Subitem 3</a>
+						<a href="#" class="list-group-item">Women</a>
+						<a href="#" class="list-group-item">Boys</a>
+						<a href="#" class="list-group-item">Girls</a>
+						<a href="#" class="list-group-item">Baby</a>
 					</div>
-					<a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+					<a href="#" class="list-group-item">Beauty</a>
+					<a href="#" class="list-group-item">Computers</a>
+					<a href="#" class="list-group-item">Software</a>
+					<a href="#" class="list-group-item">Electronics</a>
+					<a href="#" class="list-group-item">Home</a>
+					<a href="#" class="list-group-item">Sports &amp; Outdoors</a>
+					<a href="#" class="list-group-item">Tools &amp; Home Improvement</a>
+					<a href="#" class="list-group-item">Toys &amp; Games</a>
+					<a href="#" class="list-group-item">Video Games</a>
 				</div>
 			</div>
 			<div id="content-wrapper" class="col-lg-10 col-md-10 col-sm-8">
