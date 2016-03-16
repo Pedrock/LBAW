@@ -2,7 +2,11 @@
 
 body{
     background-color: #fafafa;
-    background-image: url('background.png');
+    background-image: url('../Images/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: bottom; 
+    background-size: 100% auto;
    
 }
 
