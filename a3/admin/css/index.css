@@ -276,7 +276,7 @@ body {
 
 .input-group-btn > *,
 select.form-control,
-.pagination.pagination-sm > li > a {
+.pagination.pagination-sm > li > a, {
 	border-radius: 0;
 }
 
@@ -360,4 +360,13 @@ select.form-control,
 
 #orders .order_date {
 	white-space: nowrap;
+}
+
+.btn-ship.btn {
+	border-radius: 0;
+}
+
+#searchBar *,
+.sort_div select {
+	border-radius: 0;
 }

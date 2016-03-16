@@ -6,7 +6,7 @@ $category = true;
 include("templates/header.php") ?>
 
 <div id="main-title">
-	<span class="title">Subitem 1 a</span>
+	<span class="title">T-shirts</span>
 </div>
 <div class="sort_div pull-left">
 	<div class="form-group">

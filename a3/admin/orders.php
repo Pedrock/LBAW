@@ -28,7 +28,7 @@
 					<option>Date desc.</option>
 				</select>
 				<label class="checkbox-inline">
-					<input type="checkbox" name="show_shipped" id="show_shipped"> Show only pending shipments
+					<input type="checkbox" checked="checked" name="show_shipped" id="show_shipped"> Show only pending shipments
 				</label>
 			</div>
 			<div class="next-page text-center">
