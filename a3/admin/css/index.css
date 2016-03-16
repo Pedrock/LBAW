@@ -30,9 +30,6 @@
 
 #wrapper {
     padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
@@ -54,9 +51,6 @@
     margin-left: -250px;
     overflow-y: auto;
     background: #000;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
 }
 
@@ -188,7 +182,6 @@ body{
     min-height: 100%;
     font-size: 100px;
     text-align: right;
-    filter: alpha(opacity=0);
     opacity: 0;
     outline: none;
     background: white;
@@ -240,7 +233,7 @@ body{
 
 .pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover {
     background-color: #607D8B;
-    border-color: #607D8B;
+    border-color: #546d79;
 }
 
 .pagination>li>a, .pagination>li>span{
