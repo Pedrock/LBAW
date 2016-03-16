@@ -13,8 +13,8 @@ include("templates/header.php");
 			<div class="thumbnail">
 			<a href="product-page.php" class="link-p">
 				<img src="Images/product-1.jpg" alt="">
-				<div class="caption">
 				</a>
+					<div class="caption">
 					<h4><a href="product-page.php">Age Of Wisdom Tan Graphic Tee</a></h4>
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
