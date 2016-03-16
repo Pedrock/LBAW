@@ -97,10 +97,10 @@ include("templates/header.php");
 									<img src="../Images/product-1.jpg" alt="">
 								</a>
 								<div class="caption">
-									<h4><a href="#">Age Of Wisdom Tan Graphic Tee</a></h4>
+									<h4><a href="#">Age Of Wisdom Tan Graphics Tee T-Shirt</a></h4>
 									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
 									<div class="btn-group">
-										<a href="../product-page.php" class="btn btn-default button-product">See Details</a>
+										<a href="edit-remove-product.php" class="btn btn-default button-product">See Details</a>
 										<a href="#" class="btn btn-danger button-product"><i class="fa fa-shopping-cart"></i>Delete</a>
 									</div>
 								</div>

@@ -11,6 +11,15 @@
 		<link rel="stylesheet" href="../css/bootstrap-theme.min.css">
 		<link rel="stylesheet" href="css/index.css">
 		<link rel="shortcut icon" type="image/png" href="favicon.ico"/>
+        <?php
+        if (isset($css))
+        {
+            foreach ($css as $elem)
+            {
+                echo '<link rel="stylesheet" href="css/'.$elem.'">';
+            }
+        }
+        ?>
 	</head>
 
 	<body>

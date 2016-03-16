@@ -48,7 +48,7 @@
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Your Account<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="favorites.php">Favorites</a></li>
 							<li><a href="my_orders.php">My Orders</a></li>
