@@ -60,12 +60,8 @@ include("templates/header.php");
 </div>
 <div id="product-reviews" class="row">
 	<div class="well">
-
-		<div class="text-right">
-			<a id="leave-a-review" class="btn btn-success">Leave a Review</a>
-		</div>
-
-		<hr>
+		<h3>Reviews</h3>
+		<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
 
 		<div class="row">
 			<div class="col-md-12">

@@ -275,3 +275,8 @@ body{
   margin-top: -10px;
 }
 
+.input-group-btn > *,
+select.form-control,
+.pagination.pagination-sm > li > a {
+    border-radius: 0;
+}

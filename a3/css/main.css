@@ -145,3 +145,13 @@
       color: #337ab7;
    }
 
+   .pagination.pagination-sm > li > a,
+   .thumbnail, 
+   #searchBar *, 
+   .well,
+   .form-group > select,
+   .form-control.qty,
+   .btn
+   {
+      border-radius: 0;
+   }

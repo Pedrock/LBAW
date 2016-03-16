@@ -108,3 +108,18 @@
 .info-review{
    font-weight: bold;
 }
+
+#product-reviews > .well {
+   margin-left: 5px;
+   margin-right: 5px;
+}
+
+#product-reviews h3 {
+   display: inline-block;
+   margin-bottom: 30px;
+   margin-top: 4px;
+}
+
+#product-reviews #leave-a-review {
+   float: right;
+}

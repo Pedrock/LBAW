@@ -1,6 +1,6 @@
 <?php 
 $title = "Edit Product";
-$css = ["checkout.css", "category.css"];
+
 include("templates/header.php"); 
 ?>
 

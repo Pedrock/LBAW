@@ -1,6 +1,6 @@
 <?php 
 $title = "New Product";
-$css = ["checkout.css"];
+
 include("templates/header.php"); 
 ?>
 
