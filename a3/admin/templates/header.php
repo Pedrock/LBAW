@@ -41,7 +41,7 @@
         <div id="sidebar-wrapper">
         	<div id="sidebar" class="list-group panel">
         		<a href="index.php" class="list-group-item">Dashboard</a>
-        		<a href="#sub2" class="list-group-item">Orders</a>
+        		<a href="orders.php" class="list-group-item">Orders</a>
         		<a href="#sub3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Products<span class="caret"></span></a>
         		<div class="collapse" id="sub3" aria-expanded="false" role="link">
         			<a href="new-product.php" class="list-group-item">Add Product</a>
