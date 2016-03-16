@@ -3,7 +3,7 @@ $title = "Online Store";
 $display_carousel = true;
 include("templates/header.php");
 ?>
-<div id="featured-products">
+<div id="main-title">
 	<span class="title">Featured Products</span>
 </div>
 

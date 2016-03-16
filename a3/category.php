@@ -5,7 +5,7 @@ $category = true;
 
 include("templates/header.php") ?>
 
-<div id="featured-products">
+<div id="main-title">
 	<span class="title">Subitem 1 a</span>
 </div>
 <div class="sort_div pull-left">

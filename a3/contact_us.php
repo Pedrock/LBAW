@@ -1,9 +1,8 @@
 <?php 
-$title = "Online Store - My Orders";
-$css = ["my_orders.css"];
+$title = "Online Store - Contact Us";
 
 include("templates/header.php") ?>
-<div id="featured-products">
+<div id="main-title">
 	<span class="title">Contact Us</span>
 </div>
 <div class="well">

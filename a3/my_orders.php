@@ -3,7 +3,7 @@ $title = "Online Store - My Orders";
 $css = ["my_orders.css"];
 
 include("templates/header.php") ?>
-<div id="featured-products">
+<div id="main-title">
 	<span class="title">Order History</span>
 </div>
 <div class="sort_div pull-left">

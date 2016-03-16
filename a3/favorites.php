@@ -45,7 +45,7 @@ function product($name, $id)
 }
 
 include("templates/header.php") ?>
-<div id="featured-products">
+<div id="main-title">
 	<span class="title">Favorites</span>
 </div>
 <div id="favorites">
