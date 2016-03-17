@@ -1,0 +1,84 @@
+html, body {
+ margin-top: 0px; 
+}
+
+body { background-color: #FFFFFF; font-family: verdana,arial,helvetica,sans-serif; font-size: small; }
+td { font-family: verdana,arial,helvetica,sans-serif; font-size: small; }
+th { font-family: verdana,arial,helvetica,sans-serif; font-size: small; }
+
+table {
+  border-collapse: collapse;
+  margin:auto;
+}
+
+.displayAddressLI {
+  list-style-type: none;
+}
+
+.displayAddressUL {
+  padding: 0;
+  margin: 0;
+}
+
+th, .border{
+  border: 3px solid black;
+}
+
+.center {
+  text-align: center;
+}
+
+.bold {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.italic {
+  font-style: italic;
+}
+
+body table {
+  width: 100%;
+}
+
+body > table {
+  width: 95%;
+}
+
+th {
+  font-weight: bold;
+  font-size: medium;
+  padding: 5px;
+}
+
+.padding {
+  padding: 15px 5px;
+}
+
+body > table table {
+  margin: 10px 0;
+}
+
+.align-right {
+  text-align: right;
+}
+
+#totals {
+  text-align: right;
+}
+
+#totals > table {
+  display: inline;
+}
+
+#totals td:first-child {
+  padding-right: 10px;
+}
+
+#items-ordered div {
+  padding-bottom: 5px;
+}
+
+.footer table {
+  margin: 0;
+}
