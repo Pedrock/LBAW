@@ -1,4 +1,5 @@
 #shipping_address .top_row,
+#billing_address .top_row,
 #payment_methods .top_row {
 	margin-bottom: 15px;
 	margin-top: 20px;
@@ -7,6 +8,7 @@
 	padding-left: 15px;
 }
 
+.billing_tab_content,
 .shipping_tab_content {
 	background: white;
 	border: 1px solid #DDDDDD;
@@ -14,24 +16,29 @@
 	padding: 15px;
 }
 
-#saved_addresses ul {
+#saved_shipping_addresses ul,
+#saved_billing_addresses ul {
 	margin-bottom: 0;
 }
 
-#saved_addresses ul input {
+#saved_shipping_addresses ul input,
+#saved_billing_addresses ul input {
 	margin-right: 15px;
 }
 
-#saved_addresses li {
+#saved_shipping_addresses li,
+#saved_billing_addresses li {
 	display: table-row;
 	border: none;
 }
 
-#saved_addresses ul label {
+#saved_shipping_addresses ul label,
+#saved_billing_addresses ul label {
 	font-weight: normal;
 }
 
-#saved_addresses li div {
+#saved_shipping_addresses li div,
+#saved_billing_addresses li div {
 	display: table-cell;
 	vertical-align: middle;
 }
@@ -65,4 +72,21 @@
 
 .order-details {
 	padding: 15px;
+}
+
+#billing_address > .row {
+	margin-top: 20px;
+}
+
+#same_as_shipping {
+	background: white;
+	border: 1px solid #DDDDDD;
+	padding: 15px;
+	margin-top: 20px;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+#billing_box {
+	display: none;
 }
