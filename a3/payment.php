@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<div class="order-details row">
-				<div><b>Total:</b> 70€</div>
+				<div><b>Total:</b> 154.89€</div>
 				<div>
 					<br><b>Shipping address:</b>
 					<br> John Smith
