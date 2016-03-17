@@ -346,6 +346,32 @@
 		</div>
 	</div>
 </div>
+<div id="payment_methods">
+	<div class="top_row row">
+		<span class="title"><span class="glyphicon glyphicon-credit-card"> </span> Payment Method</span>
+	</div>
+	<div class="row content">
+		Please choose a payment method:
+		<div class="row">
+			<div class="col-xs-4 radio">
+				<label>
+					<input type="radio" name="method" value="cc" id="cc">Credit Card
+				</label>
+			</div>
+			<div class="col-xs-4 radio">
+				<label>
+					<input type="radio" name="method" value="pp" id="pp">PayPal
+				</label>
+			</div>
+			<div class="col-xs-4 radio">
+				<label>
+					<input type="radio" name="method" value="atm" id="atm">ATM
+				</label>
+			</div>
+			&nbsp;
+		</div>
+	</div>
+</div>
 <br>
 <a href="payment.php" id="btn-update" class="btn btn-success pull-right">
 	Continue <span class="glyphicon glyphicon-chevron-right"></span>
