@@ -66,10 +66,16 @@ include("templates/header.php") ?>
 						<div><span class="bold">Payment method:</span> Credit Card </div>
 						<div><span class="bold">Tracking number:</span> EA613412616PT</div>
 						<div>
-							<br><span class="bold">Shipped to:</span>
+							<br><span class="bold">Shipping Address:</span>
 							<br> John Smith
 							<br> 660 Sherwood Drive
 							<br> Coram, NY 11727
+						</div>
+						<div>
+							<br><span class="bold">Billing Address:</span>
+							<br> John Smith
+							<br> 664 Sherwood Drive
+							<br> Coram, LA 11732
 						</div>
 					</div>
 				</div>
@@ -105,7 +111,7 @@ include("templates/header.php") ?>
 						<div><span class="bold">Payment method:</span> Credit Card </div>
 						<div><span class="bold">Tracking number:</span> EA634872636PT</div>
 						<div>
-							<br><span class="bold">Shipped to:</span>
+							<br><span class="bold">Billing &amp; Shipping address:</span>
 							<br> John Smith
 							<br> 660 Sherwood Drive
 							<br> Coram, NY 11727
@@ -167,10 +173,16 @@ include("templates/header.php") ?>
 						<div><span class="bold">Payment method:</span> Credit Card </div>
 						<div><span class="bold">Tracking number:</span> EA613412616PT</div>
 						<div>
-							<br><span class="bold">Shipped to:</span>
+							<br><span class="bold">Shipping Address:</span>
 							<br> John Smith
 							<br> 660 Sherwood Drive
 							<br> Coram, NY 11727
+						</div>
+						<div>
+							<br><span class="bold">Billing Address:</span>
+							<br> John Smith
+							<br> 664 Sherwood Drive
+							<br> Coram, LA 11732
 						</div>
 					</div>
 				</div>

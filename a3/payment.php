@@ -53,6 +53,12 @@
 					<br> 660 Sherwood Drive
 					<br> Coram, NY 11727
 				</div>
+				<div>
+					<br><b>Billing Address:</b>
+					<br> John Smith
+					<br> 664 Sherwood Drive
+					<br> Coram, LA 11732
+				</div>
 				<br>
 				<b>Payment Method:</b> PayPal
 			</div>

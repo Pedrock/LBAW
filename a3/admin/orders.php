@@ -82,10 +82,16 @@
 										<br>
 										<div><span class="bold">Payment method:</span> Credit Card </div>
 										<div>
-											<br><span class="bold">Shipment address:</span>
+											<br><span class="bold">Shipping Address:</span>
 											<br> John Smith
 											<br> 660 Sherwood Drive
 											<br> Coram, NY 11727
+										</div>
+										<div>
+											<br><span class="bold">Billing Address:</span>
+											<br> John Smith
+											<br> 664 Sherwood Drive
+											<br> Coram, LA 11732
 										</div>
 									</div>
 									<div class="btns pull-right">
@@ -123,10 +129,16 @@
 										<br>
 										<div><span class="bold">Payment method:</span> Credit Card </div>
 										<div>
-											<br><span class="bold">Shipment address:</span>
+											<br><span class="bold">Shipping Address:</span>
 											<br> John Smith
 											<br> 660 Sherwood Drive
 											<br> Coram, NY 11727
+										</div>
+										<div>
+											<br><span class="bold">Billing Address:</span>
+											<br> John Smith
+											<br> 664 Sherwood Drive
+											<br> Coram, LA 11732
 										</div>
 									</div>
 									<div class="btns pull-right">
