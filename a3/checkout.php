@@ -33,10 +33,10 @@
 								<label for="name">Address line 2</label>
 								<input type="text" class="form-control" id="addr2" placeholder="Appartment, suite, unit, building, floor, etc">
 							</fieldset>
-							<fieldset class="form-group">
+							<!--<fieldset class="form-group">
 								<label for="name">City</label>
 								<input type="text" class="form-control" id="city">
-							</fieldset>
+							</fieldset>-->
 						</div>
 					</div>
 					<div class="col-md-1 hidden-sm">
@@ -47,7 +47,7 @@
 								<label for="name">ZIP</label>
 								<input type="text" class="form-control" id="zip">
 							</fieldset>
-							<fieldset class="form-group">
+							<!--<fieldset class="form-group">
 								<label for="country">Country</label>
 								<select class="form-control" id="country">
 									<option value="AF">Afghanistan</option>
@@ -300,7 +300,7 @@
 									<option value="ZM">Zambia</option>
 									<option value="ZW">Zimbabwe</option>
 								</select>
-							</fieldset>
+							</fieldset>-->
 							<fieldset class="form-group">
 								<label for="name">Phone number</label>
 								<input type="text" class="form-control" id="phone">
@@ -353,9 +353,14 @@
 			<span class="title"><span class="glyphicon glyphicon-euro"> </span> Billing Address</span>
 		</div>
 	</div>
-	<label class="checkbox-inline">
-		<input checked="checked" type="checkbox" name="same" id="same"> Same as shipping
-	</label>
+	<form class="form-inline" role="form">
+		<label for="name">NIF</label>
+		<input type="text" class="form-control" id="nif" value="505745011">
+		&nbsp;&nbsp;
+		<label class="checkbox-inline">
+			<input checked="checked" type="checkbox" name="same" id="same"> Same address as shipping
+		</label>
+	</form>
 	<div id="same_as_shipping">
 		The shipping address chosen above will be used as billing address.
 	</div>
@@ -381,10 +386,10 @@
 								<label for="billing_addr2">Address line 2</label>
 								<input type="text" class="form-control" id="billing_addr2" placeholder="Appartment, suite, unit, building, floor, etc">
 							</fieldset>
-							<fieldset class="form-group">
+							<!--<fieldset class="form-group">
 								<label for="billing_city">City</label>
 								<input type="text" class="form-control" id="billing_city">
-							</fieldset>
+							</fieldset>-->
 						</div>
 					</div>
 					<div class="col-md-1 hidden-sm">
@@ -395,7 +400,7 @@
 								<label for="billing_zip">ZIP</label>
 								<input type="text" class="form-control" id="billing_zip">
 							</fieldset>
-							<fieldset class="form-group">
+							<!--<fieldset class="form-group">
 								<label for="billing_country">Country</label>
 								<select class="form-control" id="billing_country">
 									<option value="AF">Afghanistan</option>
@@ -648,7 +653,7 @@
 									<option value="ZM">Zambia</option>
 									<option value="ZW">Zimbabwe</option>
 								</select>
-							</fieldset>
+							</fieldset>-->
 							<fieldset class="form-group">
 								<label for="billing_phone">Phone number</label>
 								<input type="text" class="form-control" id="billing_phone">
