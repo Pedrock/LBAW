@@ -201,9 +201,10 @@ CREATE TABLE Favorite(
 	product_position SERIAL NOT NULL,
 	CONSTRAINT FavoritePrimary PRIMARY KEY (idProduct, IdUser)
 );
- 
+
 CREATE TABLE CarrosselPhoto(
 	idCarrosselPhoto SERIAL NOT NULL PRIMARY KEY,
+    active BOOLEAN NOT NULL DEFAULT TRUE,
 	photo_order INTEGER NOT NULL UNIQUE,
 	location TEXT NOT NULL UNIQUE
 );
