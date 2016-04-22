@@ -1,23 +1,27 @@
 <?php
   include_once('../../config/init.php');
   include_once($BASE_DIR .'database/users.php');  
+  session_start();
 
-  if (!$_POST['username'] || !$_POST['email'] || !$_POST['nif'] || !$_POST['password']) {
+  if (!$_POST['email'] || !$_POST['password']) {
     return_error('All fields are mandatory');
     exit;
   }
 
   $email = strip_tags($_POST['email']);
-  $username = strip_tags($_POST['username']);
-  $nif = strip_tags($_POST['nif']);
   $password = $_POST['password'];
 
   try {
-    createUser($username, $email, $nif, $password);
-  } catch (PDOException $e) {
-    if (strpos($e->getMessage(), 'email') !== false)
-      return_error('Username already exists');
+    $user = isLoginCorrect($email, $password);
+    if ($user === false)
+    {
+      return_error("Invalid user/password combination.");
+    }
     else
+    {
+      $_SESSION['user'] = $user['iduser'];
+    }
+  } catch (PDOException $e) {
       return_error($e->getMessage());
   }
 

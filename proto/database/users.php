@@ -8,8 +8,8 @@
 
   function isLoginCorrect($email, $password) {
     global $conn;
-    $stmt = $conn->prepare("SELECT idUser FROM Users WHERE (username = ? OR LOWER(email) = LOWER(?)) AND password = ?;");
+    $stmt = $conn->prepare("SELECT iduser FROM Users WHERE (username = ? OR LOWER(email) = LOWER(?)) AND password = ?;");
     $stmt->execute(array($email, $email, sha1($password)));
-    return $stmt->fetch() == true;
+    return $stmt->fetch();
   }
 ?>

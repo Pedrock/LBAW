@@ -41,6 +41,7 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          {if $smarty.session.user}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account<span class="caret"></span></a>
             <ul class="dropdown-menu">
@@ -51,6 +52,9 @@
               <li><a href="#">Sign Out</a></li>
             </ul>
           </li>
+          {else}
+          <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+          {/if}
         </ul>
       </div>
     </div>
