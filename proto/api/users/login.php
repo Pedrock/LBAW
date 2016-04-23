@@ -1,14 +1,13 @@
 <?php
   include_once('../../config/init.php');
   include_once($BASE_DIR .'database/users.php');  
-  session_start();
 
   if (!$_POST['email'] || !$_POST['password']) {
-    return_error('All fields are mandatory');
+    return_error("Both fields are required", 400);
     exit;
   }
 
-  $email = strip_tags($_POST['email']);
+  $email = $_POST['email'];
   $password = $_POST['password'];
 
   try {
@@ -22,12 +21,13 @@
       $_SESSION['user'] = $user['iduser'];
     }
   } catch (PDOException $e) {
-      return_error($e->getMessage());
+  	  error_log($e->getMessage());
+      return_error("Server error");
   }
 
-function return_error($error)
+function return_error($error, $code = 422)
 {
-  http_response_code(422);
+  http_response_code($code);
   echo json_encode(array('error' => $error));
   die();
 }

@@ -18,12 +18,13 @@ function complete(xhr)
 	{
 		window.location.href = "index.php";
 	}
-	else if(xhr.responseJSON)
+	else 
 	{
-		alert(xhr.responseJSON.error);
-	}
-	else
-	{
-		alert("Server error");
+		$("#sign-error").remove();
+		var error = xhr.responseJSON ? xhr.responseJSON.error : "Server error. Please try again.";
+		$('<div id="sign-error" class="alert alert-danger fade in"> <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'
+			+'<strong>Error!</strong> '
+			+error
+			+'</div>').hide().fadeIn("fast").insertBefore($("#account-wall"));
 	}
 }

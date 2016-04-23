@@ -49,7 +49,7 @@
               <li><a href="my_orders.php">My Orders</a></li>
               <li><a href="#">Profile</a></li>
               <li role="separator" class="divider"></li>
-              <li><a href="#">Sign Out</a></li>
+              <li><a id="logout" href="#">Sign Out</a></li>
             </ul>
           </li>
           {else}
