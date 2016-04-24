@@ -81,7 +81,12 @@
 				<p>{$review.body}</p>
 			</div>
 		</div>
+		{foreachelse}
+		<div class="row">
+		<p>No reviews yet</p>
+		</div>
 		{/foreach}
+
 	</div>
 </div>
 
