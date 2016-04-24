@@ -1,4 +1,4 @@
-{assign "title" "Online Store"}
+{assign "title" "HashStore"}
 {assign "display_carousel" true}
 {include file='common/header.tpl'}
 <div id="main-title">
@@ -9,11 +9,11 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="product-page.php" class="link-p">
+			<a href="product.php?id=1" class="link-p">
 				<img src="../images/products/product-1.jpg" alt="">
 				</a>
 					<div class="caption">
-					<h4><a href="product-page.php">Age Of Wisdom Tan Graphic Tee</a></h4>
+					<h4><a href="product.php?id=1">Age Of Wisdom Tan Graphic Tee</a></h4>
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
 						<a href="#" class="pull-right button-product">
@@ -23,11 +23,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=2" class="link-p">
 				<img src="../images/products/product-2.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=2">Classic Laundry Green Graphic T-Shirt</a></h4>
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
 						<a href="#" class="pull-right button-product">
@@ -38,11 +38,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=3" class="link-p">
 				<img src="../images/products/product-3.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=3">Classic Laundry Green Graphic T-Shirt</a></h4>
 
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
@@ -54,11 +54,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=4" class="link-p">
 				<img src="../images/products/product-4.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=4">Classic Laundry Green Graphic T-Shirt</a></h4>
 
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
@@ -70,11 +70,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=5" class="link-p">
 				<img src="../images/products/product-5.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=5">Classic Laundry Green Graphic T-Shirt</a></h4>
 
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
@@ -86,11 +86,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=6" class="link-p">
 				<img src="../images/products/product-6.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=6">Classic Laundry Green Graphic T-Shirt</a></h4>
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
 						<a href="#" class="pull-right button-product">
@@ -100,11 +100,11 @@
 		</div>
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
-			<a href="#" class="link-p">
+			<a href="product.php?id=7" class="link-p">
 				<img src="../images/products/product-7.jpg" alt="">
 				</a>
 				<div class="caption">
-					<h4><a href="#">Classic Laundry Green Graphic T-Shirt</a></h4>
+					<h4><a href="product.php?id=7">Classic Laundry Green Graphic T-Shirt</a></h4>
 					&nbsp;
 						<div class="pull-left price">49.99€</div>
 						<a href="#" class="pull-right button-product">
