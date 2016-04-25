@@ -1,3 +1,16 @@
-#content-wrapper .pagination {
-   margin-top: 3px;
+
+.breadcrumb {
+	font-size: large;
+   	margin-bottom: 15px;
+   	border-bottom-style: groove;
+   	padding-bottom: 10px;
+   	padding-top: 0;
+   	background-color: initial;
+   	border-radius: 0;
+}
+
+.breadcrumb > li + li:before {
+    color: #ccc;
+    content: "> ";
+    padding: 0 5px;
 }

@@ -145,6 +145,10 @@
       color: #337ab7;
    }
 
+   #content-wrapper .pagination {
+      margin-top: 3px;
+   }
+
    .pagination.pagination-sm > li > a,
    .thumbnail, 
    #searchBar *, 
@@ -154,4 +158,9 @@
    .btn
    {
       border-radius: 0;
+   }
+
+   #no-pagination
+   {
+      height: 60px;
    }

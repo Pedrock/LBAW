@@ -66,46 +66,20 @@
 
   <div id="wrapper" class="container-fluid">
     <div class="row">
-    {if $remove_categories}
-      <div id="content-wrapper" class="container">
-    {else}
+    {if $categories}
       <div class="col-sm-4 col-md-3 col-lg-2">
         <div id="categories">
           <span class="title">Categories</span>
         </div>
         <div id="main-menu" class="list-group panel">
           <a href="#" id="deals" class="list-group-item">Deals</a>
-          <a href="#sub1" class="list-group-item" data-toggle="collapse" data-parent="#main-menu">Clothing &amp; Shoes<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
-          <div class="collapse{if $category} in{/if}" id="sub1">
-            <a href="#SubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubMenu1">Men<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
-            <div class="collapse{if $category} in{/if}" id="SubMenu1">
-              <a href="category.php" class="list-group-item" data-parent="#SubMenu1">
-              {if $category}
-                <span class="glyphicon glyphicon-chevron-right"></span>{/if}T-shirts</a>
-              
-              <a href="#" class="list-group-item" data-parent="#SubMenu1">Pants</a>
-              <a href="#SubSubMenu1" class="list-group-item" data-toggle="collapse" data-parent="#SubSubMenu1">Underwear<span class="glyphicon glyphicon-menu-down pull-right"></span></a>
-              <div class="collapse" id="SubSubMenu1">
-                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Boxers</a>
-                <a href="#" class="list-group-item" data-parent="#SubSubMenu1">Socks</a>
-              </div>
-            </div>
-            <a href="#" class="list-group-item">Women</a>
-            <a href="#" class="list-group-item">Boys</a>
-            <a href="#" class="list-group-item">Girls</a>
-            <a href="#" class="list-group-item">Baby</a>
-          </div>
-          <a href="#" class="list-group-item">Beauty</a>
-          <a href="#" class="list-group-item">Computers</a>
-          <a href="#" class="list-group-item">Software</a>
-          <a href="#" class="list-group-item">Electronics</a>
-          <a href="#" class="list-group-item">Home</a>
-          <a href="#" class="list-group-item">Sports &amp; Outdoors</a>
-          <a href="#" class="list-group-item">Home Improvement</a>
-          <a href="#" class="list-group-item">Toys &amp; Games</a>
-          <a href="#" class="list-group-item">Video Games</a>
+          {foreach from=$categories item=category}
+          <a href="category.php?id={$category.id}" class="list-group-item">{$category.name}</a>
+          {/foreach}
         </div>
       </div>
       <div id="content-wrapper" class="col-sm-8 col-md-9 col-lg-10">
+    {else}
+      <div id="content-wrapper" class="container">
     {/if}
       

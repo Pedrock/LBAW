@@ -1,10 +1,18 @@
-{assign "title" "HashStore - Search"}
-{assign "css" ["category.css"]}
+{assign "title" "HashStore"}
+{assign "display_carousel" true}
+{assign "css" ['category.css']}
 {include file='common/header.tpl'}
+<ol class="breadcrumb">
+	<li><a href="index.php">Home</a></li>
+    {foreach from=$breadcrumbs|@array_reverse:true item=cat}
+    	{if $cat.id == $category}
+    		<li class="active">{$cat.name}</li>
+    	{else}
+    		<li><a href="category.php?id={$cat.id}">{$cat.name}</a></li>
+    	{/if}
+    {/foreach}
+</ol>
 
-<div id="main-title">
-	<span class="title">Search: {$query}</span>
-</div>
 <div class="sort_div pull-left">
 	<div class="form-group">
 		<select class="form-control" id="sel_sort">
@@ -21,16 +29,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="search.php?q={$query}&page={$page-1}">&laquo;</a></li>
+		<li><a href="category.php?id={$category}&page={$page-1}">&laquo;</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="search.php?q={$query}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="category.php?id={$category}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="search.php?q={$query}&page={$page+1}">&raquo;</a></li>
+		<li><a href="category.php?id={$category}&page={$page+1}">&raquo;</a></li>
 		{/if}
 	</ul>
 </div>
+{else}
+<div id="no-pagination"></div>
 {/if}
 
 <div class="container-fluid">
@@ -62,13 +72,13 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="search.php?q={$query}&page={$page-1}">&laquo;</a></li>
+		<li><a href="category.php?id={$category}&page={$page-1}">&laquo;</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="search.php?q={$query}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="category.php?id={$category}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="search.php?q={$query}&page={$page+1}">&raquo;</a></li>
+		<li><a href="category.php?id={$category}&page={$page+1}">&raquo;</a></li>
 		{/if}
 	</ul>
 </div>

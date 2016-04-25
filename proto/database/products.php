@@ -41,4 +41,60 @@
     return $stmt->fetchAll();
   }
 
+  function getMainCategories()
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT idCategory AS id, name 
+        FROM Category
+        WHERE idSuperCategory IS NULL;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  function getSubCategories($parent_category)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT idCategory AS id, name 
+        FROM Category
+        WHERE idSuperCategory = ?;");
+    $stmt->execute(array($parent_category));
+    return $stmt->fetchAll();
+  }
+
+  function getCategoryProducts($category, $limit, $page)
+  {
+    $offset = ($page-1)*$limit;
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT idproduct AS id,name,get_product_price(idProduct) price, COUNT(idProduct) OVER () AS product_count
+        FROM get_category_products(?) AS idProduct
+        INNER JOIN Product USING(idProduct)
+        LIMIT ? OFFSET ?;");
+    $stmt->execute(array($category, $limit, $offset));
+    return $stmt->fetchAll();
+  }
+
+  function getCategoryBreadcrumbs($category)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "WITH RECURSIVE parents( idcategory ) 
+        AS (
+          SELECT idcategory, idsupercategory, name
+          FROM category
+          WHERE idcategory = ?
+
+          UNION ALL
+
+          SELECT t.idcategory, t.idsupercategory, t.name
+          FROM parents p
+          JOIN category t
+          ON p.idsupercategory = t.idcategory
+        )
+        SELECT idCategory AS id, idsupercategory AS parent, name FROM parents");
+    $stmt->execute(array($category));
+    return $stmt->fetchAll();
+  }
 ?>
