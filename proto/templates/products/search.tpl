@@ -21,16 +21,26 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="search.php?q={$query}&page={$page-1}">&laquo;</a></li>
+		<li><a href="search.php?q={$query}&page=1">&laquo; First</a></li>
+		<li><a href="search.php?q={$query}&page={$page-1}">&lsaquo; Previous</a></li>
+		{else}
+		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
+		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
 		<li{if $p == $page} class="active"{/if}><a href="search.php?q={$query}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="search.php?q={$query}&page={$page+1}">&raquo;</a></li>
+		<li><a href="search.php?q={$query}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="search.php?q={$query}&page={$n_pages}">Last &raquo;</a></li>
+		{else}
+		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
+		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
 		{/if}
 	</ul>
 </div>
+{else}
+<div id="no-pagination"></div>
 {/if}
 
 <div class="container-fluid">
@@ -62,13 +72,21 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="search.php?q={$query}&page={$page-1}">&laquo;</a></li>
+		<li><a href="search.php?q={$query}&page=1">&laquo; First</a></li>
+		<li><a href="search.php?q={$query}&page={$page-1}">&lsaquo; Previous</a></li>
+		{else}
+		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
+		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
 		<li{if $p == $page} class="active"{/if}><a href="search.php?q={$query}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="search.php?q={$query}&page={$page+1}">&raquo;</a></li>
+		<li><a href="search.php?q={$query}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="search.php?q={$query}&page={$n_pages}">Last &raquo;</a></li>
+		{else}
+		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
+		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
 		{/if}
 	</ul>
 </div>
