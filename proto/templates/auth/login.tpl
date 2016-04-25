@@ -15,7 +15,7 @@
 	</form>
 </div>
 <a href="register.php" class="text-center new-account">Create an account </a>
-
+<script> redirect_dest = '{$redirect_dest}'; </script> <!-- FIXME -->
 {assign var=js value=['login.js']}
 
 {include file='auth/footer.tpl'}

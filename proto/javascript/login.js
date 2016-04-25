@@ -16,7 +16,7 @@ function complete(xhr)
 {
 	if (Math.floor(xhr.status/100) == 2)
 	{
-		window.location.href = "index.php";
+		window.location.href = redirect_dest;
 	}
 	else 
 	{

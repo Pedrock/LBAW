@@ -52,6 +52,41 @@
     return $stmt->fetchAll();
   }
 
+  function getAllCategoriesLeveled()
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "WITH RECURSIVE CategoryRec AS 
+       (
+           SELECT idCategory, idSuperCategory, name, 1 as level
+           FROM category
+           where idSuperCategory IS NULL
+       
+           UNION ALL
+       
+           SELECT c.idCategory, c.idSuperCategory, c.name, (cr.Level + 1) as level
+           FROM Category c INNER JOIN
+           CategoryRec AS cr ON c.idSuperCategory = cr.idCategory
+       ),
+       CategoryRec2 as
+       (
+           SELECT idCategory, idSuperCategory, name, level
+           FROM CategoryRec
+       
+           UNION ALL
+       
+           SELECT cr.idCategory, c.idSuperCategory, cr.name, cr.level
+           FROM CategoryRec2 AS cr INNER JOIN
+           CategoryRec AS c ON cr.idSuperCategory = c.idCategory
+           WHERE c.idSuperCategory IS NOT NULL
+       )
+       SELECT idCategory as id, idSuperCategory, name, level
+       FROM CategoryRec2;
+       ;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
   function getSubCategories($parent_category)
   {
     global $conn;

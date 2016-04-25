@@ -28,4 +28,11 @@
     $stmt->execute(array($email));
     return $stmt->fetch() !== false;
   }
+
+  function isAdmin($userid) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT iduser FROM Users WHERE idUser = ? AND isAdmin");
+    $stmt->execute(array($userid));
+    return $stmt->fetch() !== false;
+  }
 ?>
