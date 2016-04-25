@@ -1,5 +1,4 @@
 {assign "title" "HashStore"}
-{assign "display_carousel" true}
 {assign "css" ['category.css']}
 {include file='common/header.tpl'}
 <ol class="breadcrumb">
