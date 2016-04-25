@@ -164,3 +164,7 @@
    {
       height: 60px;
    }
+
+   .text-center>.pagination>.disabled>a {
+      cursor: default;
+   }
