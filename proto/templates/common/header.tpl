@@ -40,8 +40,11 @@
           </form>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
           {if $smarty.session.user}
+            {if $smarty.session.admin}
+              <li><a href="admin/"><span class="glyphicon glyphicon-alert"></span>&nbsp; Admin</a></li> <!-- TODO: better glyph icon? -->
+            {/if}
+          <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> My Account<span class="caret"></span></a>
             <ul class="dropdown-menu">
