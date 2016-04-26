@@ -11,9 +11,9 @@ if (isset($_GET['id']))
 	}
 	else
 	{
-		$reviews = getProductReviews($id,10,1);
 		$smarty->assign('product', $product);
-		$smarty->assign('reviews', $reviews);
+		$smarty->assign('reviews', getProductReviews($id,10,1));
+		$smarty->assign('photos', getProductPhotos($id));
 		$smarty->display('products/product-page.tpl');
 	}
 }

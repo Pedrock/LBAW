@@ -7,7 +7,7 @@
     	{if $cat.id == $category}
     		<li class="active">{$cat.name}</li>
     	{else}
-    		<li><a href="category.php?id={$cat.id}">{$cat.name}</a></li>
+    		<li><a href="?id={$cat.id}">{$cat.name}</a></li>
     	{/if}
     {/foreach}
 </ol>
@@ -28,18 +28,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="category.php?id={$category}&page=1">&laquo; First</a></li>
-		<li><a href="category.php?id={$category}&page={$page-1}">&lsaquo; Previous</a></li>
+		<li><a href="?id={$category}&page=1">&laquo; First</a></li>
+		<li><a href="?id={$category}&page={$page-1}">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="category.php?id={$category}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="?id={$category}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="category.php?id={$category}&page={$page+1}">Next &rsaquo;</a></li>
-		<li><a href="category.php?id={$category}&page={$n_pages}">Last &raquo;</a></li>
+		<li><a href="?id={$category}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="?id={$category}&page={$n_pages}">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -57,7 +57,7 @@
 		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
 			<a href="product.php?id={$product.id}" class="link-p">
-				<img src="../images/products/product-1.jpg" alt="">
+				<img src="../images/products/{$product.photo}" alt="">
 				</a>
 				<div class="caption">
 				
@@ -79,18 +79,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="category.php?id={$category}&page=1">&laquo; First</a></li>
-		<li><a href="category.php?id={$category}&page={$page-1}">&lsaquo; Previous</a></li>
+		<li><a href="?id={$category}&page=1">&laquo; First</a></li>
+		<li><a href="?id={$category}&page={$page-1}">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="category.php?id={$category}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="?id={$category}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="category.php?id={$category}&page={$page+1}">Next &rsaquo;</a></li>
-		<li><a href="category.php?id={$category}&page={$n_pages}">Last &raquo;</a></li>
+		<li><a href="?id={$category}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="?id={$category}&page={$n_pages}">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>

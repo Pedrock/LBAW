@@ -10,6 +10,17 @@
     return $stmt->fetch();
   }
 
+  function getProductPhotos($idProduct) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT location, photo_order
+      FROM Photo
+      WHERE idProduct = ?
+      ORDER BY photo_order");
+    $stmt->execute(array($idProduct));
+    return $stmt->fetchAll();
+  }
+
   function getProductReviews($idProduct,$limit,$page)
   {
     $offset = ($page-1)*$limit;
@@ -24,19 +35,37 @@
     return $stmt->fetchAll();
   }
 
+  function getFeaturedProducts($limit, $page)
+  {
+    $offset = ($page-1)*$limit;
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT f.idProduct AS id, discount, get_product_price(f.idProduct) price, location AS photo
+        FROM
+        (SELECT P.idProduct, COALESCE(percentage,0) AS discount
+        FROM Product P
+        LEFT JOIN Discount USING(idProduct)
+        ORDER BY discount DESC, purchases DESC
+        LIMIT ? OFFSET ?) f
+        LEFT JOIN Photo ON Photo.idProduct = f.idProduct AND photo_order = 1;");
+    $stmt->execute(array($limit,$offset));
+    return $stmt->fetchAll();
+  }
+
   function searchProducts($query, $limit, $page)
   {
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-       "SELECT idProduct AS id, name, get_product_price(idProduct) price, product_count
+       "SELECT P.idProduct AS id, name, get_product_price(P.idProduct) price, product_count, location AS photo
         FROM
           (SELECT idProduct, COUNT(idProduct) OVER () AS product_count
           FROM product_search, plainto_tsquery(?) AS q
           WHERE (tsv @@ q)
           ORDER BY ts_rank_cd(tsv, q) DESC 
           LIMIT ? OFFSET ?) results
-        INNER JOIN Product USING(idProduct);");
+        INNER JOIN Product P USING(idProduct)
+        LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1;");
     $stmt->execute(array($query,$limit,$offset));
     return $stmt->fetchAll();
   }
@@ -104,9 +133,10 @@
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT idproduct AS id,name,get_product_price(idProduct) price, COUNT(idProduct) OVER () AS product_count
+      "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
         FROM get_category_products(?) AS idProduct
-        INNER JOIN Product USING(idProduct)
+        INNER JOIN Product P USING(idProduct)
+        LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
         LIMIT ? OFFSET ?;");
     $stmt->execute(array($category, $limit, $offset));
     return $stmt->fetchAll();

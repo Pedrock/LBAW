@@ -12,17 +12,14 @@
 	<div class="row">
 		<div class="col-lg-3 col-md-4">
 			<div id="product-main-img" class="row">
-				<img class="img-responsive" src="../images/products/product-1.jpg" alt="">
+				{if !empty($photos)}
+				<img class="img-responsive" src="../images/products/{$photos[0].location}" alt="">
+				{/if}
 			</div>
 			<div id="product-imgs" class="row">
-				<div class="col-xs-3 other-photos"><a href="#"><img src="http://static.planetminecraft.com/files/resource_media/screenshot/1341/11Minecraft-Creeper-Wallpaper-1080p-HD-250x250up_6509836_lrg.jpg" alt="Image" class="img-responsive"></a>
-				</div>
-				<div class="col-xs-3 other-photos"><a href="#"><img src="http://www.autreplanete.com/ap-social-media-image-maker/ressources/img/img_format/google_profil_252x252.png" alt="Image" class="img-responsive"></a>
-				</div>
-				<div class="col-xs-3 other-photos"><a href="#"><img src="https://i.warosu.org/data/vr/img/0014/31/1393441050054.jpg" alt="Image" class="img-responsive"></a>
-				</div>
-				<div class="col-xs-3 other-photos"><a href="#" ><img src="http://www.cigarsnapshot.com/wp-content/uploads/2011/07/ad-placeholder250x250.gif" alt="Image" class="img-responsive"></a>
-				</div>
+			{foreach from=$photos item=photo} 
+				<div class="col-xs-3 other-photos"><a href="#"><img src="../images/products/{$photo.location}" alt="Image {$photo.photo_order}" class="img-responsive"></a></div>
+			{/foreach} 
 			</div>
 		</div>
 		<div class="col-lg-9 col-md-8">
