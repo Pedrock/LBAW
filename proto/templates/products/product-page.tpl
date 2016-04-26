@@ -51,7 +51,16 @@
 			</div>
 			<div id="row-score" class="row form-row">
 				{if $product.averagescore}
-				<span id="product-score">{$product.averagescore} <span class="glyphicon glyphicon-star star" aria-hidden="true"></span></span>
+				<div id="score-container" class="col-xs-3">
+					<br>
+					<span id="product-score">{$product.averagescore}</span>
+					<br>
+					<div class="ratings">
+					    <div class="empty-stars"></div>
+					    <div class="full-stars" style="width:{$product.averagescore * 20}%"></div>
+					</div>
+					<br>
+				</div>
 				{/if}
 				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
 					<span aria-hidden="true"> Add to Favorites</span>
