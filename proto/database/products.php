@@ -169,24 +169,57 @@
     $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description) VALUES (?, ?, ?, ?, ?) RETURNING idProduct");
     $stmt->execute(array($name, $price, $stock, $weight, $description));
     $product_id = $stmt->fetch()['idproduct'];
-    $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
-    $first = true;
-    $arr = array();
-    foreach($categories as $cat) {
-      if(!$first)
-        $query = $query . ',';
-      else
-        $first = false;
 
-      $query = $query . '(?,?)';
-      array_push($arr, $product_id);
-      array_push($arr, $cat);
+    if($categories != null) {
+      $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
+      $first = true;
+      $arr = array();
+      foreach($categories as $cat) {
+        if(!$first)
+          $query = $query . ',';
+        else
+          $first = false;
+
+        $query = $query . '(?,?)';
+        array_push($arr, $product_id);
+        array_push($arr, $cat);
+      }
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute($arr);
     }
-    $stmt = $conn->prepare($query);
-    $stmt->execute($arr);
 
     return $product_id;
   }
+
+  function createEmptyProduct() {
+        global $conn;
+    $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description) VALUES (?, ?, ?, ?, ?) RETURNING idProduct");
+    $stmt->execute(array($name, $price, $stock, $weight, $description));
+    $product_id = $stmt->fetch()['idproduct'];
+
+    if($categories != null) {
+      $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
+      $first = true;
+      $arr = array();
+      foreach($categories as $cat) {
+        if(!$first)
+          $query = $query . ',';
+        else
+          $first = false;
+
+        $query = $query . '(?,?)';
+        array_push($arr, $product_id);
+        array_push($arr, $cat);
+      }
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute($arr);
+    }
+
+    return $product_id;
+  }
+
 
   function addProductPhotos($product_id, $files) {
     global $conn;

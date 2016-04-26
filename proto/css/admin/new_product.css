@@ -3,4 +3,20 @@
 	width: 100%;
 	border: 1px solid #CCC;
 	margin-top: 10px;
+	overflow-y: scroll;
+}
+
+#files {
+	display: none;
+}
+
+.product_img {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	width: 90px;
+	height: 90px;
+	margin: 5px;
+	margin-right: 0;
+	display: inline-block;
 }

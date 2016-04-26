@@ -8,6 +8,9 @@
 				<div id="new-product-title">
 					<h1>New Product</h1>
 				</div>
+				<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
+					<input type="file" id="files" name="files[]" multiple>
+				</form>
 				<form action="../../api/admin/new_product.php" method="post">
 					<div id="new-product" class="row">
 						<div class="col-md-6">
@@ -16,17 +19,14 @@
 									<label for="name">Name</label>
 									<input type="text" class="form-control" id="name" name="name">
 								</fieldset>
-								<!--<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
+								<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
 									<fieldset class="form-group">
-										<span class="btn btn-default btn-file">
-											Browse <input type="file" id="files" name="files[]" multiple>
-										</span>
-										<label class="control-label">Select Images</label>
-								<button id="btn-upload-images" class="pull-right btn btn-info" type="button" value="Upload">Upload images</button>
+											<input class="btn btn-default btn-file"type="button" id="files_btn" value="Browse">
+										<label class="control-label">Add Images</label>
 										<div class="drop_zone">
 										</div>
 									</fieldset>
-								</form>-->
+								</form>
 							</div>
 							<div class="col-md-6">
 								<fieldset class="form-group">
