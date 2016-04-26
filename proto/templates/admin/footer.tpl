@@ -18,6 +18,8 @@
         $("#wrapper").toggleClass("toggled");
     });
     </script>
-
+    {foreach $js as $elem}
+        <script src="../../javascript/admin/{$elem}"></script>
+    {/foreach}
 	</body>
 </html>

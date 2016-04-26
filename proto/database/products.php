@@ -55,7 +55,7 @@
   function getAllCategoriesLeveled()
   {
     global $conn;
-    $stmt = $conn->prepare(
+    /*$stmt = $conn->prepare(
       "WITH RECURSIVE CategoryRec AS 
        (
            SELECT idCategory, idSuperCategory, name, 1 as level
@@ -82,7 +82,8 @@
        )
        SELECT idCategory as id, idSuperCategory, name, level
        FROM CategoryRec2;
-       ;");
+       ;");*/
+    $stmt = $conn->prepare('SELECT idCategory AS id, name FROM Category');
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -131,5 +132,52 @@
         SELECT idCategory AS id, idsupercategory AS parent, name FROM parents");
     $stmt->execute(array($category));
     return $stmt->fetchAll();
+  }
+  
+  function createProduct($name, $price, $stock, $weight, $description, $categories) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description) VALUES (?, ?, ?, ?, ?) RETURNING idProduct");
+    $stmt->execute(array($name, $price, $stock, $weight, $description));
+    $product_id = $stmt->fetch()['idproduct'];
+    $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
+    $first = true;
+    $arr = array();
+    foreach($categories as $cat) {
+      if(!$first)
+        $query = $query . ',';
+      else
+        $first = false;
+
+      $query = $query . '(?,?)';
+      array_push($arr, $product_id);
+      array_push($arr, $cat);
+    }
+    $stmt = $conn->prepare($query);
+    $stmt->execute($arr);
+
+    return $product_id;
+  }
+
+  function addProductPhotos($product_id, $files) {
+    global $conn;
+    $query = "INSERT INTO Photo(idProduct, photo_order, location) VALUES ";
+    $first = true;
+    $i = 1;
+    $arr = array();
+    foreach($files as $file) {
+      if(!$first)
+        $query = $query . ',';
+      else
+        $first = false;
+
+      $query = $query . "(?,?,?)";
+      array_push($arr, $product_id);
+      array_push($arr, $i++);
+      array_push($arr, $product_id . '_' . $file);
+    }
+    $stmt = $conn->prepare($query);
+    $stmt->execute($arr);
+
+    return $product_id;
   }
 ?>
