@@ -74,7 +74,7 @@
         <div id="categories">
           <span class="title">Categories</span>
         </div>
-        <div id="main-menu" class="list-group panel">
+        <div id="main-menu">
           <a href="#" id="deals" class="list-group-item">Deals</a>
           {foreach from=$categories item=category}
           <a href="category.php?id={$category.id}" class="list-group-item">{$category.name}</a>
