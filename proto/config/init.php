@@ -1,11 +1,11 @@
 <?php
-  session_set_cookie_params(3600, '/LBAW/proto/'); //FIXME
+  session_set_cookie_params(3600, '/~lbaw1564/'); //FIXME
   session_start();
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
-  $BASE_DIR = 'C:/Storage/Programs/XAMPP/htdocs/LBAW/proto/'; //FIXME
-  $BASE_URL = '/LBAW/proto/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1564/public_html/proto/'; //FIXME
+  $BASE_URL = '/~lbaw1564/proto/'; //FIXME
 
   $conn = new PDO('pgsql:host=dbm;dbname=lbaw1564', 'lbaw1564', 'CQ11M0G8'); //FIXME
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
