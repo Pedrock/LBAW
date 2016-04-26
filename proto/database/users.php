@@ -1,9 +1,10 @@
-<?php
+  <?php
   
   function createUser($username, $email, $nif, $password) {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser");
     $stmt->execute(array($username, $email, $nif, sha1($password)));
+    return $stmt->fetch();
   }
 
   function isLoginCorrect($email, $password) {

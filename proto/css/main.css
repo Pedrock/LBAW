@@ -68,22 +68,13 @@
 
    #main-menu{
    	margin-top: 10px;
+      background-color: initial;
    }
 
-   #main-menu > a{
-   	background-color: #d9d9d9;
-   }
-
-   #main-menu > div > a{
-   	background-color: #e6e6e6;
-   }
-
-   #main-menu > div > div > a {
-   	background-color: #f2f2f2;
-   }
-
-   #main-menu > div > div > div > a {
-   	background-color: #fafafa;
+   #main-menu > a {
+   	background-color: initial;
+      border-left: none;
+      border-right: none;
    }
 
    a#deals{
