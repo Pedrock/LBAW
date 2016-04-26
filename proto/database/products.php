@@ -40,9 +40,9 @@
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT f.idProduct AS id, discount, get_product_price(f.idProduct) price, location AS photo
+      "SELECT f.idProduct AS id, name, discount, get_product_price(f.idProduct) price, location AS photo
         FROM
-        (SELECT P.idProduct, COALESCE(percentage,0) AS discount
+        (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount
         FROM Product P
         LEFT JOIN Discount USING(idProduct)
         ORDER BY discount DESC, purchases DESC
