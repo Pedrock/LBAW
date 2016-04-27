@@ -1,6 +1,7 @@
 {assign "title" "HashStore"}
 {assign "display_carousel" true}
 {include file='common/header.tpl'}
+{assign "js" ['index.js']}
 
 <div id="f"></div>
 <div id="main-title">
@@ -8,10 +9,10 @@
 </div>
 
 <div class="container-fluid">
-	<div class="row">
-
+	<div id="products" class="row">
 		{foreach from=$products item=product}
-		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+		{if $product@iteration <= $limit}
+		<div class="product col-lg-3 col-md-4 col-sm-6 text-center">
 			<div class="thumbnail">
 			<a href="product.php?id={$product.id}" class="link-p">
 				<img src="../images/products/{$product.photo}" alt="">
@@ -26,6 +27,9 @@
 				</div>
 			</div>
 		</div>
+		{else}
+			{break}
+		{/if}
 		{foreachelse}
 		<div class="text-center">No featured products yet.</div>
 		{/foreach}
@@ -36,18 +40,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="?page=1#f">&laquo; First</a></li>
-		<li><a href="?page={$page-1}#f">&lsaquo; Previous</a></li>
+		<li><a href="#" onclick="changePage(1);return false;">&laquo; First</a></li>
+		<li><a href="#" onclick="changePage({$page-1});return false;">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="?page={$p}#f">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="#" onclick="changePage({$p});return false;">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="?page={$page+1}#f">Next &rsaquo;</a></li>
-		<li><a href="?page={$n_pages}#f">Last &raquo;</a></li>
+		<li><a href="#" onclick="changePage({$page+1});return false;">Next &rsaquo;</a></li>
+		<li><a href="#" onclick="changePage({$n_pages});return false;">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -55,5 +59,11 @@
 	</ul>
 </div>
 {/if}
+
+<script> 
+var limit = {$limit};
+var n_pages = {$n_pages};
+var products = {$products|@json_encode}; 
+</script>
 
 {include file='common/footer.tpl'}
