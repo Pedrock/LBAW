@@ -2,7 +2,7 @@
 {include file='auth/header.tpl'}
 
 <div id="account-wall">
-	<img class="profile-img" src="../images/assets/logo2.png" alt="Online Store">
+	<img class="profile-img" src="{$BASE_URL}images/assets/logo2.png" alt="Online Store">
 
 	<form id="form-signin">
 		<input name="email" type="text" id="login-email" class="form-control" placeholder="Email / Username" required autofocus>

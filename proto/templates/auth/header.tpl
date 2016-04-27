@@ -8,9 +8,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <link rel="stylesheet" href="../css/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/login.css">
 
 </head>
 <body>

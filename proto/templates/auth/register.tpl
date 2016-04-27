@@ -2,7 +2,7 @@
 {include file='auth/header.tpl'}
 
 <div id="account-wall">
-  <img class="profile-img" src="../images/assets/logo2.png" alt="Online Store">
+  <img class="profile-img" src="{$BASE_URL}images/assets/logo2.png" alt="Online Store">
   <div class="panel-title"><h4>Create an Account</h4></div>
   <form id="form-signin">
 
