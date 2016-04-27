@@ -14,9 +14,11 @@ $(document).ready(function() {
 		category_id = $(this).children('.category_id').html();
 		category_name = $(this).children('.category_name').text();
 		category_parent = $(this).children('.category_parent').html();
+		if (category_parent == "") category_parent = 0;
 		console.log('edit ' + category_id + " " + category_name + " " + category_parent);
 		$('.modal .category_name').text(category_name);
 		$('#edit_name').val(category_name);
+		$('#edit_parent option').filter(":selected").removeAttr('selected');
 		$('#edit_parent option[value='+category_parent+']').attr('selected','selected');
 		$('#edit').modal('toggle');
 	});
@@ -74,12 +76,10 @@ $(document).ready(function() {
 
 		var new_parent = $("#edit_parent").val();
 
-		console.log(new_parent);
-
 		$.ajax({
 			url: "../../api/admin/category/edit.php",
 			type: "POST",
-			data: {'id':category_id,'name':name,'new_parent':new_parent},
+			data: {'id':category_id,'name':name,'parent':new_parent},
 			success: function(html) {
 				console.log('success');
 				location.reload();
