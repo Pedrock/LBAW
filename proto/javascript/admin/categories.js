@@ -1,28 +1,34 @@
 $(document).ready(function() {
 	$(".href_add").on('click', function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
 		$('#add_name').val("");
+		$('#add').modal('toggle');
 		console.log('add on ' + category_id);
 	});
 
 	$(".href_edit").on('click', function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
 		category_name = $(this).children('.category_name').html();
 		category_parent = $(this).children('.category_parent').html();
 		console.log('edit ' + category_id + " " + category_name + " " + category_parent);
-		$('.category_name').html(category_name);
+		$('.modal .category_name').html(category_name);
 		$('#edit_name').val(category_name);
 		$("#edit_parent select").val(category_parent);
+		$('#edit').modal('toggle');
 	});
 
 	$(".href_del").on('click', function(event) {
 		event.preventDefault();
+		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
 		category_name = $(this).children('.category_name').html();
 		console.log('delete ' + category_id);
-		$('.category_name').html(category_name);
+		$('.modal .category_name').html(category_name);
+		$('#del').modal('toggle');
 	});
 
 	$('#add_name').on('input',function(e){
