@@ -76,7 +76,7 @@
 										<img src="{$BASE_URL}images/products/{$product.photo}" alt="">
 									</a>
 									<div class="caption">
-										<h4><a href="product.php?id={$product.id}">{$product.name}</a></h4>
+										<h4><a href="edit.php?id={$product.id}">{$product.name}</a></h4>
 										&nbsp;
 									</div>
 								</div>
