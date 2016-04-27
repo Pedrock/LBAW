@@ -34,26 +34,26 @@
 							</div>
 							{assign var="cur_level" value=$cur_level - 1}
 						{elseif $category.level eq $cur_level}
-							</li>
+							
 						{/if}
 							<a href="#{$category.id}" class="list-group-item clearfix" data-toggle="collapse">
 									{$category.name}
 									<span class="pull-right">
-										<a href="javascript:void(0);" class="href_add" data-toggle="modal" data-target="#add">
+										<button class="href_add" data-toggle="modal" data-target="#add">
 											<span class="hidden category_id">{$category.id}</span>
 											<span class="glyphicon glyphicon-plus"></span>
-										</a>
-										<a href="javascript:void(0);" class="href_edit" data-toggle="modal" data-target="#edit">
+										</button>
+										<button class="href_edit" data-toggle="modal" data-target="#edit">
 											<span class="hidden category_id">{$category.id}</span>
 											<span class="hidden category_name">{$category.name}</span>
 											<span class="hidden category_parent">{$category.parent}</span>
 											<span class="glyphicon glyphicon-pencil"></span>
-										</a>
-										<a href="javascript:void(0);" class="href_del" data-toggle="modal" data-target="#del">
+										</button>
+										<button class="href_del" data-toggle="modal" data-target="#del">
 											<span class="hidden category_id">{$category.id}</span>
 											<span class="hidden category_name">{$category.name}</span>
 											<span class="glyphicon glyphicon-trash"></span>
-										</a>
+										</button>
 									</span>
 							</a>
 						{assign var="prev_id" value=$category.id}
