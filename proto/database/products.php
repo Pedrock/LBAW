@@ -3,7 +3,7 @@
   function getProduct($id) {
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price 
+      "SELECT idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price, weight 
         FROM Product,get_product_discount_and_price(idProduct)
         WHERE idProduct = ?;");
     $stmt->execute(array($id));
@@ -88,6 +88,15 @@
     $stmt->execute();
     return $stmt->fetchAll();
   }
+
+  function getAllProductCategories($id)
+  {
+    global $conn;
+    $stmt = $conn->prepare('SELECT idCategory FROM CategoryProduct WHERE idProduct = ?');
+    $stmt->execute(array($id));
+    return $stmt->fetchAll();
+  }
+
 
   function getSubCategories($parent_category)
   {
@@ -174,6 +183,34 @@
     }
 
     return $product_id;
+  }
+
+  function editProduct($id, $name, $price, $stock, $weight, $description, $categories) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Product SET name = ?, price = ?, stock = ?, weight = ?, description = ? WHERE idProduct = ?");
+    $stmt->execute(array($name, $price, $stock, $weight, $description, $id));
+
+    if($categories != null) {
+      $stmt = $conn->prepare("DELETE FROM CategoryProduct WHERE idProduct = ?");
+      $stmt->execute(array($id));
+
+      $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
+      $first = true;
+      $arr = array();
+      foreach($categories as $cat) {
+        if(!$first)
+          $query = $query . ',';
+        else
+          $first = false;
+
+        $query = $query . '(?,?)';
+        array_push($arr, $id);
+        array_push($arr, $cat);
+      }
+
+      $stmt = $conn->prepare($query);
+      $stmt->execute($arr);
+    }
   }
 
   function createEmptyProduct() {
