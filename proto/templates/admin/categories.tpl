@@ -8,6 +8,7 @@
 				<div id="title">
 					<h1>Categories</h1>
 				</div>
+				<!--
 				<div class="category">
 					Root
 					<a href="javascript:void(0,root,0)" class="href_add" data-toggle="modal" data-target="#add">
@@ -15,6 +16,50 @@
 						<span class="glyphicon glyphicon-plus"></span>
 					</a>
 				</div>
+				-->
+				<a href="javascript:void(0,root,0)" class="href_add" data-toggle="modal" data-target="#add">
+						<span class="hidden category_id">0</span>
+						New category
+				</a>
+				<br>
+				<br>
+				<div class="list-group list-group-root well">
+					{assign var="cur_level" value=0}
+					{assign var="prev_id" value=0}
+					{foreach from=$categories item=category}
+						{if $category.level gt $cur_level}
+							<div class="list-group collapse" id="{$prev_id}">
+							{assign var="cur_level" value=$cur_level + 1}
+						{elseif $category.level lt $cur_level}
+							</div>
+							{assign var="cur_level" value=$cur_level - 1}
+						{elseif $category.level eq $cur_level}
+							</li>
+						{/if}
+							<a href="#{$category.id}" class="list-group-item clearfix" data-toggle="collapse">
+									{$category.name}
+									<span class="pull-right">
+										<a href="javascript:void(0);" class="href_add" data-toggle="modal" data-target="#add">
+											<span class="hidden category_id">{$category.id}</span>
+											<span class="glyphicon glyphicon-plus"></span>
+										</a>
+										<a href="javascript:void(0);" class="href_edit" data-toggle="modal" data-target="#edit">
+											<span class="hidden category_id">{$category.id}</span>
+											<span class="hidden category_name">{$category.name}</span>
+											<span class="hidden category_parent">{$category.parent}</span>
+											<span class="glyphicon glyphicon-pencil"></span>
+										</a>
+										<a href="javascript:void(0);" class="href_del" data-toggle="modal" data-target="#del">
+											<span class="hidden category_id">{$category.id}</span>
+											<span class="hidden category_name">{$category.name}</span>
+											<span class="glyphicon glyphicon-trash"></span>
+										</a>
+									</span>
+							</a>
+						{assign var="prev_id" value=$category.id}
+					{/foreach}
+				</div>
+				<!--
 				<ul class="tree">
 					{assign var="cur_level" value=-1}
 					{foreach from=$categories item=category}
@@ -47,7 +92,7 @@
 						</div>
 					{/foreach}
 				</ul>
-
+	-->
 				<!-- Modal Add -->
 				<div class="modal fade" id="add" role="dialog">
 					<div class="modal-dialog modal-sm">
