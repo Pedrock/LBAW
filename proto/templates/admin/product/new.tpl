@@ -9,9 +9,10 @@
 					<h1>New Product</h1>
 				</div>
 				<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">
-					<input type="file" id="files" name="files[]" multiple>
+					<!--<input type="file" id="files" name="files[]" multiple>-->
 				</form>
-				<form action="{$BASE_URL}api/admin/product/new.php" method="post">
+				<form id="main_form" action="{$BASE_URL}api/admin/product/new.php" method="post" enctype="multipart/form-data">
+					<input type="file" id="files" name="files[]" multiple>
 					<div id="new-product" class="row">
 						<div class="col-md-6">
 							<div class="col-md-12">
