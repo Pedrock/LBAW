@@ -29,7 +29,7 @@
 						{/if}
 							{assign var="n" value=25}
 							{$color=-255/($n - 1)*$category.level + 255}
-							<a href="#{$category.id}" class="list-group-item collapsed" data-toggle="collapse" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
 								{if $category.numChilds neq 0}
 									<span class="icon"></span>
 								{/if}
