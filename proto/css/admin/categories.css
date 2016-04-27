@@ -13,19 +13,8 @@
   text-decoration: none;
 }
 
-.category .glyphicon {
-	  visibility: hidden;
-	opacity: 0;
-	transition: visibility 0s, opacity 0.2s linear;
-}
-
 .category a {
 	outline: 0 !important;
-}
-
-.category:hover .glyphicon {
-	visibility: visible;
-	opacity: 1;
 }
 
 .category .glyphicon {
@@ -38,6 +27,18 @@
 
 .href_add, .href_edit, .href_del {
     display: inline;
+}
+
+.list-group-item > .icon:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e259";
+    margin-right: 5px;
+    position: relative;
+    top: 3px;
+    font-size: 12px;
+}
+.list-group-item.collapsed > .icon:after {
+    content: "\e258";
 }
 
 /* ----- */
@@ -76,6 +77,42 @@
   padding-left: 45px;
 }
 
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 60px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 75px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 90px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 105px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 120px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 135px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 150px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group-item {
+  padding-left: 165px;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group > .list-group .list-group > .list-group-item {
+  padding-left: 180px;
+}
+
 .list-group-item .glyphicon {
   margin-right: 5px;
 }
@@ -85,10 +122,6 @@
   top: 2px;
 }
 
-.categ_name .glyphicon {
-  position: relative;
-  top: 2px;
-}
 .categ_num_child {
   font-style: italic;
   color: #aaa;

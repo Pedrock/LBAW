@@ -20,22 +20,21 @@
 					{foreach from=$categories item=category}
 						{if $category.level gt $cur_level}
 							<div class="list-group collapse" id="{$prev_id}">
-							{assign var="cur_level" value=$cur_level + 1}
+							{assign var="cur_level" value=$category.level}
 						{elseif $category.level lt $cur_level}
+							{while $category.level lt $cur_level}
 							</div>
-							{assign var="cur_level" value=$cur_level - 1}
-						{elseif $category.level eq $cur_level}
-							
+							{assign var="cur_level" value=$cur_level-1}
+							{/while}
 						{/if}
 							{assign var="n" value=25}
 							{$color=-255/($n - 1)*$category.level + 255}
-							<a href="#{$category.id}" class="list-group-item clearfix" data-toggle="collapse" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+							<a href="#{$category.id}" class="list-group-item collapsed" data-toggle="collapse" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+								{if $category.numChilds neq 0}
+									<span class="icon"></span>
+								{/if}
 								<span class="categ_name">
-									{if $category.numChilds neq 0}
-									<span class="glyphicon glyphicon-menu-right"></span>
-									{/if}
 									{$category.name}
-									{$color}
 									{if $category.numChilds neq 0}
 										<span class="categ_num_child">{$category.numChilds} subcategories</span>
 									{/if}
