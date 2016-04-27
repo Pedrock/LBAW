@@ -75,11 +75,15 @@ $(document).ready(function() {
 		}
 
 		var new_parent = $("#edit_parent").val();
+		if (new_parent == 0) 
+			var post_data = {'id':category_id,'name':name};
+		else 
+			var post_data = {'id':category_id,'name':name,'parent':new_parent};
 
 		$.ajax({
 			url: "../../api/admin/category/edit.php",
 			type: "POST",
-			data: {'id':category_id,'name':name,'parent':new_parent},
+			data: post_data,
 			success: function(html) {
 				console.log('success');
 				location.reload();
