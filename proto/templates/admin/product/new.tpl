@@ -1,5 +1,5 @@
 {assign "title" "New Product"}
-{assign "css" ['admin/new_product.css']}
+{assign "css" ['admin/product/new.css']}
 {include file='admin/common/header.tpl'}
 <div class="row">
 	<div class="col-lg-12">
@@ -8,10 +8,10 @@
 				<div id="new-product-title">
 					<h1>New Product</h1>
 				</div>
-				<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
+				<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">
 					<input type="file" id="files" name="files[]" multiple>
 				</form>
-				<form action="../../api/admin/new_product.php" method="post">
+				<form action="{$BASE_URL}api/admin/product/new.php" method="post">
 					<div id="new-product" class="row">
 						<div class="col-md-6">
 							<div class="col-md-12">
@@ -77,6 +77,6 @@
 	</div>
 </div>
 
-{assign var=js value=['new_product.js']}
+{assign var=js value=['product/new.js']}
 
 {include file='admin/common/footer.tpl'}

@@ -8,9 +8,9 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap.min.css">
-  <link rel="stylesheet" href="../css/bootstrap/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/main.css">
   <link rel="shortcut icon" type="image/png" href="favicon.ico"/>
   {foreach $css as $elem}
         <link rel="stylesheet" href="../css/{$elem}">

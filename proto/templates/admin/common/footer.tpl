@@ -6,10 +6,10 @@
     <!-- /#wrapper -->
 
     <!-- jQuery -->
-    <script src="../../javascript/vendor/jquery-1.11.2.min.js"></script>
+    <script src="{$BASE_URL}javascript/vendor/jquery-1.11.2.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="../../javascript/vendor/bootstrap.min.js"></script>
+    <script src="{$BASE_URL}javascript/vendor/bootstrap.min.js"></script>
 
     <!-- Menu Toggle Script -->
     <script>
@@ -19,7 +19,7 @@
     });
     </script>
     {foreach $js as $elem}
-        <script src="../../javascript/admin/{$elem}"></script>
+        <script src="{$BASE_URL}javascript/admin/{$elem}"></script>
     {/foreach}
 	</body>
 </html>

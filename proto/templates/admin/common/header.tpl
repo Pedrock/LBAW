@@ -8,12 +8,12 @@
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
-	<link rel="stylesheet" href="../../css/bootstrap/bootstrap.min.css">
-	<link rel="stylesheet" href="../../css/bootstrap/bootstrap-theme.min.css">
-	<link rel="stylesheet" href="../../css/admin/main.css">
-	<link rel="shortcut icon" type="image/png" href="favicon.ico" />
+	<link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap.min.css">
+	<link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css">
+	<link rel="stylesheet" href="{$BASE_URL}css/admin/main.css">
+	<link rel="shortcut icon" type="image/png" href="{$BASE_URL}favicon.ico" />
 	{foreach $css as $elem}
-		<link rel="stylesheet" href="../../css/{$elem}">
+		<link rel="stylesheet" href="{$BASE_URL}css/{$elem}">
 	{/foreach}
 </head>
 
@@ -26,7 +26,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="index.php">Online Store Administration</a>
+				<a class="navbar-brand" href="{$BASE_URL}pages/admin/index.php">Online Store Administration</a>
 			</div>
 		</div>
 	</nav>
@@ -34,14 +34,14 @@
 		<!-- Sidebar -->
 		<div id="sidebar-wrapper">
 			<div id="sidebar" class="list-group panel">
-				<a href="index.php" class="list-group-item">Dashboard</a>
-				<a href="orders.php" class="list-group-item">Orders</a>
+				<a href="{$BASE_URL}pages/admin/index.php" class="list-group-item">Dashboard</a>
+				<a href="{$BASE_URL}pages/admin/orders.php" class="list-group-item">Orders</a>
 				<a href="#sub3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Products<span class="caret"></span></a>
 				<div class="collapse" id="sub3" aria-expanded="false" role="link">
-					<a href="new_product.php" class="list-group-item">New Product</a>
-					<a href="edit-product.php" class="list-group-item">Edit product</a>
+					<a href="{$BASE_URL}pages/admin/product/new.php" class="list-group-item">New Product</a>
+					<a href="{$BASE_URL}pages/admin/product/edit.php" class="list-group-item">Edit product</a>
 				</div>
-				<a href="categories.php" class="list-group-item">Categories</a>
+				<a href="{$BASE_URL}pages/admin/categories.php" class="list-group-item">Categories</a>
 				<a href="#sub5" class="list-group-item">Users</a>
 				<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
 				<div class="collapse" id="sub6" aria-expanded="false" role="link">
