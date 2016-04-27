@@ -1,6 +1,6 @@
 {assign "title" "Categories"}
 {assign "css" ['admin/categories.css']}
-{include file='admin/header.tpl'}
+{include file='admin/common/header.tpl'}
 <div class="row">
 	<div class="col-lg-12">
 		<div class="content tab-content">
@@ -136,4 +136,4 @@
 
 {assign var=js value=['categories.js']}
 
-{include file='admin/footer.tpl'}
+{include file='admin/common/footer.tpl'}

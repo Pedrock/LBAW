@@ -1,6 +1,6 @@
 {assign "title" "New Product"}
 {assign "css" ['admin/new_product.css']}
-{include file='admin/header.tpl'}
+{include file='admin/common/header.tpl'}
 <div class="row">
 	<div class="col-lg-12">
 		<div class="content tab-content">
@@ -79,4 +79,4 @@
 
 {assign var=js value=['new_product.js']}
 
-{include file='admin/footer.tpl'}
+{include file='admin/common/footer.tpl'}
