@@ -12,12 +12,12 @@ $(document).ready(function() {
 		event.preventDefault();
 		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
-		category_name = $(this).children('.category_name').html();
+		category_name = $(this).children('.category_name').text();
 		category_parent = $(this).children('.category_parent').html();
 		console.log('edit ' + category_id + " " + category_name + " " + category_parent);
-		$('.modal .category_name').html(category_name);
+		$('.modal .category_name').text(category_name);
 		$('#edit_name').val(category_name);
-		$("#edit_parent select").val(category_parent);
+		$('#edit_parent option[value='+category_parent+']').attr('selected','selected');
 		$('#edit').modal('toggle');
 	});
 
@@ -25,9 +25,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
-		category_name = $(this).children('.category_name').html();
+		category_name = $(this).children('.category_name').text();
 		console.log('delete ' + category_id);
-		$('.modal .category_name').html(category_name);
+		$('.modal .category_name').text(category_name);
 		$('#del').modal('toggle');
 	});
 
@@ -79,7 +79,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: "../../api/admin/category/edit.php",
 			type: "POST",
-			data: "id=" + category_id + "&name=" + encodeURI(name) + (new_parent != 0 ? "&parent=" + new_parent : ""),
+			data: {'id':category_id,'name':name,'new_parent':new_parent},
 			success: function(html) {
 				console.log('success');
 				location.reload();
