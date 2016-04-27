@@ -1,3 +1,4 @@
+{assign "title" "HashStore - Login"}
 {include file='auth/header.tpl'}
 
 <div id="account-wall">
