@@ -39,7 +39,7 @@
 				<a href="#sub3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Products<span class="caret"></span></a>
 				<div class="collapse" id="sub3" aria-expanded="false" role="link">
 					<a href="{$BASE_URL}pages/admin/product/new.php" class="list-group-item">New Product</a>
-					<a href="{$BASE_URL}pages/admin/product/edit.php" class="list-group-item">Edit product</a>
+					<a href="{$BASE_URL}pages/admin/product/list.php" class="list-group-item">Edit product</a>
 				</div>
 				<a href="{$BASE_URL}pages/admin/categories.php" class="list-group-item">Categories</a>
 				<a href="#sub5" class="list-group-item">Users</a>

@@ -1,0 +1,24 @@
+.dropdown-menu {
+	height: auto;
+	max-height: 500px;
+	overflow-x: hidden;
+	left: 0;
+	width: 280px;
+}
+
+#no-pagination {
+	height: 70px;
+}
+
+.product {
+	width: 300px;
+}
+
+.product img {
+	width: 200px;
+	height: auto;
+}
+
+.product .caption {
+	height: 50px;
+}
