@@ -104,13 +104,25 @@
   {
     $offset = ($page-1)*$limit;
     global $conn;
-    $stmt = $conn->prepare(
-      "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
-        FROM get_category_products(?) AS idProduct
-        INNER JOIN Product P USING(idProduct)
-        LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
-        LIMIT ? OFFSET ?;");
-    $stmt->execute(array($category, $limit, $offset));
+    if ($category === null)
+    {
+      $stmt = $conn->prepare(
+        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
+          FROM Product P
+          LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
+          LIMIT ? OFFSET ?;");
+      $stmt->execute(array($limit, $offset));
+    }
+    else
+    {
+      $stmt = $conn->prepare(
+        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
+          FROM get_category_products(?) AS idProduct
+          INNER JOIN Product P USING(idProduct)
+          LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
+          LIMIT ? OFFSET ?;");
+      $stmt->execute(array($category, $limit, $offset));
+   }
     return $stmt->fetchAll();
   }
 
