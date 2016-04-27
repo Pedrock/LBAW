@@ -81,38 +81,10 @@
     return $stmt->fetchAll();
   }
 
-  function getAllCategoriesLeveled()
+  function getAllCategories()
   {
     global $conn;
-    /*$stmt = $conn->prepare(
-      "WITH RECURSIVE CategoryRec AS 
-       (
-           SELECT idCategory, idSuperCategory, name, 1 as level
-           FROM category
-           where idSuperCategory IS NULL
-       
-           UNION ALL
-       
-           SELECT c.idCategory, c.idSuperCategory, c.name, (cr.Level + 1) as level
-           FROM Category c INNER JOIN
-           CategoryRec AS cr ON c.idSuperCategory = cr.idCategory
-       ),
-       CategoryRec2 as
-       (
-           SELECT idCategory, idSuperCategory, name, level
-           FROM CategoryRec
-       
-           UNION ALL
-       
-           SELECT cr.idCategory, c.idSuperCategory, cr.name, cr.level
-           FROM CategoryRec2 AS cr INNER JOIN
-           CategoryRec AS c ON cr.idSuperCategory = c.idCategory
-           WHERE c.idSuperCategory IS NOT NULL
-       )
-       SELECT idCategory as id, idSuperCategory, name, level
-       FROM CategoryRec2;
-       ;");*/
-    $stmt = $conn->prepare('SELECT idCategory AS id, name FROM Category');
+    $stmt = $conn->prepare('SELECT idCategory AS id, name, idSuperCategory as parent FROM Category ORDER BY name');
     $stmt->execute();
     return $stmt->fetchAll();
   }
@@ -242,5 +214,24 @@
     $stmt->execute($arr);
 
     return $product_id;
+  }
+
+  function createCategory($name, $parent) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO category(name, idSupercategory) VALUES (?, ?) RETURNING idCategory");
+    $stmt->execute(array($name, $parent));
+    return $$stmt->fetch()['idCategory'];
+  }
+
+  function editCategory($id, $name, $parent) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE category SET name = ?, idSupercategory = ? WHERE idCategory = ?");
+    $stmt->execute(array($name, $parent, $id));
+  }
+
+  function deleteCategory($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE from category WHERE idCategory = ?");
+    $stmt->execute(array($id));
   }
 ?>

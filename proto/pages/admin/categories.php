@@ -22,5 +22,5 @@
 
 	$smarty->assign('categories', $arr);
 
-	$smarty->display('admin/new_product.tpl');
+	$smarty->display('admin/categories.tpl');
 ?>

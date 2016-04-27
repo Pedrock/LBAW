@@ -41,11 +41,7 @@
 					<a href="new_product.php" class="list-group-item">New Product</a>
 					<a href="edit-product.php" class="list-group-item">Edit product</a>
 				</div>
-				<a href="#sub4" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Categories<span class="caret"></span></a>
-				<div class="collapse" id="sub4" aria-expanded="false" role="link">
-					<a href="#" class="list-group-item">Add Category</a>
-					<a href="#" class="list-group-item">Edit Category</a>
-				</div>
+				<a href="categories.php" class="list-group-item">Categories</a>
 				<a href="#sub5" class="list-group-item">Users</a>
 				<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
 				<div class="collapse" id="sub6" aria-expanded="false" role="link">
