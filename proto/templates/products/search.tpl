@@ -47,13 +47,12 @@
 	<div class="row">
 
 		{foreach from=$products item=product}
-		<div class="col-lg-3 col-md-4 col-sm-6 text-center">
+		<div class="product col-lg-3 col-sm-6 text-center">
 			<div class="thumbnail">
 			<a href="product.php?id={$product.id}" class="link-p">
 				<img src="../images/products/{$product.photo}" alt="">
 				</a>
 				<div class="caption">
-				
 					<h4><a href="product.php?id={$product.id}">{$product.name}</a></h4>
 					&nbsp;
 						<div class="pull-left price">{$product.price}€</div>

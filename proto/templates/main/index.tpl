@@ -12,7 +12,7 @@
 	<div id="products" class="row">
 		{foreach from=$products item=product}
 		{if $product@iteration <= $limit}
-		<div class="product col-lg-3 col-md-4 col-sm-6 text-center">
+		<div class="product col-lg-3 col-sm-6 text-center">
 			<div class="thumbnail">
 			<a href="product.php?id={$product.id}" class="link-p">
 				<img src="../images/products/{$product.photo}" alt="">
@@ -40,18 +40,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="#" onclick="changePage(1);return false;">&laquo; First</a></li>
-		<li><a href="#" onclick="changePage({$page-1});return false;">&lsaquo; Previous</a></li>
+		<li><a href="javascript:void(0)" onclick="changePage(1);">&laquo; First</a></li>
+		<li><a href="javascript:void(0)" onclick="changePage({$page-1});">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="#" onclick="changePage({$p});return false;">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="javascript:void(0)" onclick="changePage({$p});">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="#" onclick="changePage({$page+1});return false;">Next &rsaquo;</a></li>
-		<li><a href="#" onclick="changePage({$n_pages});return false;">Last &raquo;</a></li>
+		<li><a href="javascript:void(0)" onclick="changePage({$page+1});">Next &rsaquo;</a></li>
+		<li><a href="javascript:void(0)" onclick="changePage({$n_pages});">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
