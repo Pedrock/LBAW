@@ -7,6 +7,7 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="shortcut icon" type="image/png" href="{$BASE_URL}images/assets/favicon.ico" />
 
   <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css">
