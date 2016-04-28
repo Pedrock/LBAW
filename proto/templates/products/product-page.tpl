@@ -3,9 +3,11 @@
 {include file='common/header.tpl'}
 <div id="title-products">
 		<h1 id="product-name">{$product.name}</h1>
+		{if $smarty.session.user}
 		<button type="button" class="btn btn-primary btn-favorites pull-right hidden-xs" aria-label="Left Align">
 			<span aria-hidden="true"> Add to Favorites</span>
 		</button>
+		{/if}
 </div>
 
 <div id="info-product" class="container-fluid">
@@ -62,9 +64,11 @@
 					<br>
 				</div>
 				{/if}
+				{if $smarty.session.user}
 				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
 					<span aria-hidden="true"> Add to Favorites</span>
 				</button>
+				{/if}
 			</div>
 		</div>
 	</div>
@@ -72,8 +76,9 @@
 <div id="product-reviews" class="row">
 	<div class="well">
 		<h3>Reviews</h3>
+		{if $smarty.session.user}
 		<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
-
+		{/if}
 		{foreach from=$reviews item=review}
 		<div class="row">
 			<div class="col-md-12">
