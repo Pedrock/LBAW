@@ -7,6 +7,10 @@ $(document).ready(function() {
 		$("#main_form").submit();
 	});
 
+	$('#confirmation').on('hidden.bs.modal',function(event) {
+		window.location.href = "list.php";
+	});
+	
 	function alert_error(error) {
 		console.log('alert: ' + error)
 	}
@@ -18,7 +22,8 @@ $(document).ready(function() {
 	function complete(xhr) {
 		console.log(xhr.responseText);
 		if (Math.floor(xhr.status / 100) == 2) {
-			window.location.href = "edit.php?id=" + xhr.responseText; // TODO
+			$("#confirmation").modal('toggle');
+			 // TODO
 		} else if (xhr.responseJSON) {
 			if (xhr.responseJSON.errors) {
 				input_valid(".form-group");

@@ -78,6 +78,17 @@
 	</div>
 </div>
 
+<div class="modal fade" id="confirmation" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Product created successfully</h4>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 {assign var=js value=['product/new.js']}
 
 {include file='admin/common/footer.tpl'}
