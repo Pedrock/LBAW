@@ -286,4 +286,21 @@
     $stmt = $conn->prepare("DELETE from category WHERE idCategory = ?");
     $stmt->execute(array($id));
   }
+  function deleteproduct($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE from photo WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from metadata WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+     $stmt = $conn->prepare("DELETE from productorder WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from categoryproduct WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from product WHERE idProduct = ?");
+    $stmt->execute(array($id));
+  }
 ?>

@@ -18,7 +18,7 @@ $(document).ready(function() {
 	function complete(xhr) {
 		console.log(xhr.responseText);
 		if (Math.floor(xhr.status / 100) == 2) {
-			//window.location.href = "edit.php?id="; // TODO
+			window.location.href = "edit.php?id=" + xhr.responseText; // TODO
 		} else if (xhr.responseJSON) {
 			if (xhr.responseJSON.errors) {
 				input_valid(".form-group");
