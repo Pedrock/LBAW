@@ -50,7 +50,7 @@
               <li><a href="#">Profile</a></li>
               {if $smarty.session.admin}
                 <li role="separator" class="divider"></li>
-                <li><a href="admin/">Administration</a></li> <!-- TODO: better glyph icon? -->
+                <li><a href="admin/">Administration</a></li>
               {/if}
               <li role="separator" class="divider"></li>
               <li><a id="logout" href="#">Sign Out</a></li>
