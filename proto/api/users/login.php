@@ -19,8 +19,8 @@
     else
     {
       $_SESSION['user'] = $user['iduser'];
-      if(isAdmin($_SESSION['user'])) // FIXME we could avoid 1 extra query if this was also returned by isLoginCorrect
-        $_SESSION['admin'] = true;
+      $_SESSION['username'] = $user['username'];
+      $_SESSION['admin'] = $user['isadmin'];
     }
   } catch (PDOException $e) {
   	  error_log($e->getMessage());

@@ -9,7 +9,7 @@
 
   function isLoginCorrect($email, $password) {
     global $conn;
-    $stmt = $conn->prepare("SELECT iduser FROM Users WHERE (username = ? OR LOWER(email) = LOWER(?)) AND password = ?;");
+    $stmt = $conn->prepare("SELECT iduser, username, isadmin FROM Users WHERE (username = ? OR LOWER(email) = LOWER(?)) AND password = ?;");
     $stmt->execute(array($email, $email, sha1($password)));
     return $stmt->fetch();
   }
@@ -30,10 +30,4 @@
     return $stmt->fetch() !== false;
   }
 
-  function isAdmin($userid) {
-    global $conn;
-    $stmt = $conn->prepare("SELECT iduser FROM Users WHERE idUser = ? AND isAdmin");
-    $stmt->execute(array($userid));
-    return $stmt->fetch() !== false;
-  }
 ?>
