@@ -29,13 +29,13 @@
 	}*/
 
 	function return_error($error) {
-		http_response_code(200);
+		http_response_code(422);
 		echo json_encode(array('error' => $error));
 		die();
 	}
 
 	function return_errors($error) {
-		http_response_code(200);
+		http_response_code(422);
 		echo json_encode(array('errors' => $error));
 		die();
 	}

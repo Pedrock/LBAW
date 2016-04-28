@@ -47,7 +47,7 @@ $(document).ready(function() {
 			data: "id=" + id,
 			success: function(html) {
 				console.log('success' + html);
-				//window.location.href="list.php";
+				window.location.href="list.php";
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');

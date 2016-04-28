@@ -294,10 +294,16 @@
     $stmt = $conn->prepare("DELETE from metadata WHERE idProduct = ?");
     $stmt->execute(array($id));
 
+     $stmt = $conn->prepare("DELETE from productcart WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
      $stmt = $conn->prepare("DELETE from productorder WHERE idProduct = ?");
     $stmt->execute(array($id));
 
     $stmt = $conn->prepare("DELETE from categoryproduct WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+        $stmt = $conn->prepare("DELETE from favorite WHERE idProduct = ?");
     $stmt->execute(array($id));
 
     $stmt = $conn->prepare("DELETE from product WHERE idProduct = ?");
