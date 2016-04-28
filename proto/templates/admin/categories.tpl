@@ -23,21 +23,17 @@
 							{assign var="cur_level" value=$category.level}
 						{elseif $category.level lt $cur_level}
 							{while $category.level lt $cur_level}
-							</div>
-							{assign var="cur_level" value=$cur_level-1}
+								</div>
+								{assign var="cur_level" value=$cur_level-1}
 							{/while}
 						{/if}
 							{assign var="n" value=25}
 							{$color=-255/($n - 1)*$category.level + 255}
-							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
-								{if $category.numChilds neq 0}
-									<span class="icon"></span>
-								{/if}
+							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+								<span class="icon {if $category.numChilds eq 0}hidden{/if}"></span>
 								<span class="categ_name">
 									{$category.name}
-									{if $category.numChilds neq 0}
-										<span class="categ_num_child">{$category.numChilds} subcategories</span>
-									{/if}
+									<span class="categ_num_child">{if $category.numChilds neq 0}{$category.numChilds} subcategories{/if}</span>
 								</span>
 								<span class="pull-right">
 									<button class="href_add" data-toggle="modal" data-target="#add">

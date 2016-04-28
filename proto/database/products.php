@@ -272,7 +272,7 @@
     global $conn;
     $stmt = $conn->prepare("INSERT INTO category(name, idSupercategory) VALUES (?, ?) RETURNING idCategory");
     $stmt->execute(array($name, $parent));
-    return $$stmt->fetch()['idCategory'];
+    return $stmt->fetch()['idcategory'];
   }
 
   function editCategory($id, $name, $parent) {

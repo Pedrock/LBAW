@@ -23,6 +23,8 @@
 		return_error("An error occurred while creating the category. Please try again." . $e->getMessage());
 	}
 
+	echo json_encode(array('id' => $category_id));
+
 	function return_error($error) {
 		http_response_code(422);
 		echo json_encode(array('error' => $error));

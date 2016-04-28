@@ -50,13 +50,26 @@ $(document).ready(function() {
 			return false;
 		}
 
+		var cat = $('#cat_' + category_id);
+		
+		var new_num_child = cat.children('.categ_name').children('.categ_num_child');
+		var num_updated = 1;
+
+		if(typeof new_num_child.html() !== 'undefined')
+			num_updated = parseInt(new_num_child.html().replace(' subcategories', ''));
+
+		if(isNaN(num_updated))
+			num_updated = 1;
+
 		$.ajax({
 			url: "../../api/admin/category/new.php",
 			type: "POST",
 			data: "name=" + encodeURI(name) + (category_id != 0 ? "&parent=" + category_id : ""),
 			success: function(html) {
-				console.log('success');
+				console.log('success' + html);
+				// FIXME todo
 				location.reload();
+				updateNum(cat, num_updated);
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
@@ -95,17 +108,50 @@ $(document).ready(function() {
 		});
 	});
 
+	function updateNum(cat, num) {
+		var par = $('#cat_' + cat.parent().attr('id'));
+
+		var num_child = par.children('.categ_name').children('.categ_num_child');
+
+		if(typeof num_child.html() !== 'undefined') {
+			var new_num = parseInt(num_child.html().replace(' subcategories', '')) + num;
+
+			if(new_num == 0) {
+				num_child.html('');
+				par.children('.icon').slideUp();
+			}
+			else
+				num_child.html(new_num + " subcategories");
+
+			updateNum(par, num);
+		}
+	}
+
 	$("#btn_delete").on('click', function(event) {
+		var cat = $('#cat_' + category_id);
+		
+		var deleting_num_child = cat.children('.categ_name').children('.categ_num_child');
+		var num_deleting = 1;
+
+		if(typeof deleting_num_child.html() !== 'undefined')
+			num_deleting = parseInt(deleting_num_child.html().replace(' subcategories', ''));
+
+		if(isNaN(num_deleting))
+			num_deleting = 1;
+
 		$.ajax({
 			url: "../../api/admin/category/delete.php",
 			type: "POST",
 			data: "id=" + encodeURI(category_id),
 			success: function(html) {
 				console.log('success');
-				location.reload();
+				updateNum(cat, -num_deleting);
+				$('#cat_' + category_id).slideUp();
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
+				console.log(xhr);
+
 				//$(".status_message").html('Failed to rename');
 			}
 		});
