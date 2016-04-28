@@ -303,7 +303,13 @@
     $stmt = $conn->prepare("DELETE from categoryproduct WHERE idProduct = ?");
     $stmt->execute(array($id));
 
-        $stmt = $conn->prepare("DELETE from favorite WHERE idProduct = ?");
+    $stmt = $conn->prepare("DELETE from favorite WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from discount WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from review WHERE idProduct = ?");
     $stmt->execute(array($id));
 
     $stmt = $conn->prepare("DELETE from product WHERE idProduct = ?");
