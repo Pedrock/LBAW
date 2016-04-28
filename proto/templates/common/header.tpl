@@ -57,7 +57,7 @@
             </ul>
           </li>
           {else}
-          <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+          <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
           {/if}
         </ul>
       </div>

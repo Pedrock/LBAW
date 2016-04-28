@@ -47,12 +47,13 @@
 		{/if}
 	</ul>
 </div>
+{else}
+<div id="no-pagination"></div>
 {/if}
 
 
 <div class="container-fluid">
 	<div class="row">
-
 		{foreach from=$products item=product}
 		<div class="product col-lg-3 col-sm-6 text-center">
 			<div class="thumbnail">
@@ -69,7 +70,7 @@
 			</div>
 		</div>
 		{foreachelse}
-		<div class="text-center">No products in this category.</div>
+		<div class="text-center">No products in this category yet.</div>
 		{/foreach}
 	</div>
 </div>
