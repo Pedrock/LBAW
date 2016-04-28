@@ -33,7 +33,8 @@ CREATE TABLE Product(
 	price NUMERIC(12,2) NOT NULL CHECK(price > 0), 
     purchases INTEGER NOT NULL DEFAULT 0,
 	stock INTEGER NOT NULL CHECK(stock >= 0),
-	weight INTEGER NOT NULL CHECK(weight > 0)
+	weight INTEGER NOT NULL CHECK(weight > 0),
+	isDeleted BOOLEAN DEFAULT FALSE
 );
  
 CREATE TABLE Photo(
