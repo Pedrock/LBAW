@@ -25,3 +25,12 @@
 	position: relative;
 	right: 20px;
 }
+
+#confirmation button {
+	margin-top: 20px;
+}
+
+#confirmation .modal-header{
+	text-align: center
+	
+}
