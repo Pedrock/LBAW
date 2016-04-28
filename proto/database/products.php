@@ -109,8 +109,9 @@
     return $stmt->fetchAll();
   }
 
-  function getCategoryProducts($category, $limit, $page)
+  function getCategoryProducts($category, $limit, $page, $order_by = "")
   {
+    if ($order_by != "") $order_by = "ORDER BY ".$order_by;
     $offset = ($page-1)*$limit;
     global $conn;
     if ($category === null)
@@ -119,6 +120,7 @@
         "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
           FROM Product P
           LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
+          ".$order_by."
           LIMIT ? OFFSET ?;");
       $stmt->execute(array($limit, $offset));
     }
@@ -129,6 +131,7 @@
           FROM get_category_products(?) AS idProduct
           INNER JOIN Product P USING(idProduct)
           LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
+          ".$order_by."
           LIMIT ? OFFSET ?;");
       $stmt->execute(array($category, $limit, $offset));
    }
@@ -281,6 +284,35 @@
   function deleteCategory($id) {
     global $conn;
     $stmt = $conn->prepare("DELETE from category WHERE idCategory = ?");
+    $stmt->execute(array($id));
+  }
+  function deleteproduct($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE from photo WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from metadata WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+     $stmt = $conn->prepare("DELETE from productcart WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+     $stmt = $conn->prepare("DELETE from productorder WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from categoryproduct WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from favorite WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from discount WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from review WHERE idProduct = ?");
+    $stmt->execute(array($id));
+
+    $stmt = $conn->prepare("DELETE from product WHERE idProduct = ?");
     $stmt->execute(array($id));
   }
 ?>

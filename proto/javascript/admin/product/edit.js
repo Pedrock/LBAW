@@ -33,6 +33,29 @@ $(document).ready(function() {
 		}
 	}
 
+	$(".href_del").on('click', function(event) {
+		event.preventDefault();
+		event.stopPropagation();
+		$('#del').modal('toggle');
+	});
+
+	$("#btn_delete").on('click', function(event) {
+		console.log('id:' + id);
+		$.ajax({
+			url: "../../../api/admin/product/delete.php",
+			type: "POST",
+			data: "id=" + id,
+			success: function(html) {
+				console.log('success' + html);
+				window.location.href="list.php";
+			},
+			error: function(xhr, textStatus, errorThrown) {
+				console.log('error');
+				//$(".status_message").html('Failed to rename');
+			}
+		});
+	});
+
 	$("#main_form").on('submit', function(event) {
 		event.preventDefault();
 		$.ajax({

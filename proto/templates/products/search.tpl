@@ -5,17 +5,6 @@
 <div id="main-title">
 	<span class="title">Search: {$query}</span>
 </div>
-<div class="sort_div pull-left">
-	<div class="form-group">
-		<select class="form-control" id="sel_sort">
-			<option value="" disabled selected>Sort by</option>
-			<option>a..z</option>
-			<option>z..a</option>
-			<option>Price asc.</option>
-			<option>Price desc.</option>
-		</select>
-	</div>
-</div>
 
 {if $n_pages > 0}
 <div class="text-center">

@@ -20,3 +20,8 @@
 	margin-right: 0;
 	display: inline-block;
 }
+
+.href_del {
+	position: relative;
+	right: 20px;
+}

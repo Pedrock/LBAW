@@ -75,6 +75,8 @@
 	for($i = 0; $i < $num_files; $i++)
 		move_uploaded_file($src[$i], $images_path . $dst[$i]);
 
+	echo $product_id;
+
 	function return_error($error) {
 		http_response_code(422);
 		echo json_encode(array('error' => $error));

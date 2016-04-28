@@ -66,7 +66,6 @@
 
 	try {
 		editProduct($id, $name, $price, $stock, $weight, $description, $categories);
-		//addProductPhotos($id, $dst);
 		http_response_code(201);
 	} catch (PDOException $e) {
 		return_error("An error occurred while creating the product. Please try again." . $e->getMessage());
