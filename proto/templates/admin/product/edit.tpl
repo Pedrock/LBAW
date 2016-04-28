@@ -51,7 +51,7 @@
 							<div class="col-md-3">
 								<fieldset class="form-group">
 									<label for="stock">Stock</label>
-									<input type="number" class="insert-number form-control" id="stock" name="stock" min="1" max="500" value="{$product.stock}">
+									<input type="number" class="insert-number form-control" id="stock" name="stock" value="{$product.stock}">
 								</fieldset>
 							</div>
 							<div class="col-md-3">
