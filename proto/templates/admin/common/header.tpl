@@ -27,7 +27,11 @@
 					<span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="{$BASE_URL}pages/admin/index.php">Online Store Administration</a>
+
 			</div>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="{$BASE_URL}pages/"><span class="glyphicon glyphicon-log-out"></span> Exit</a></li>
+			</ul>
 		</div>
 	</nav>
 	<div id="wrapper">

@@ -41,9 +41,6 @@
         </div>
         <ul class="nav navbar-nav navbar-right">
           {if $smarty.session.user}
-            {if $smarty.session.admin}
-              <li><a href="admin/"><span class="glyphicon glyphicon-alert"></span>&nbsp; Admin</a></li> <!-- TODO: better glyph icon? -->
-            {/if}
           <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {$smarty.session.username}<span class="caret"></span></a>
@@ -51,12 +48,16 @@
               <li><a href="favorites.php">Favorites</a></li>
               <li><a href="my_orders.php">My Orders</a></li>
               <li><a href="#">Profile</a></li>
+              {if $smarty.session.admin}
+                <li role="separator" class="divider"></li>
+                <li><a href="admin/">Administration</a></li>
+              {/if}
               <li role="separator" class="divider"></li>
               <li><a id="logout" href="#">Sign Out</a></li>
             </ul>
           </li>
           {else}
-          <li><a href="login.php"><span class="glyphicon glyphicon-user"></span> Log In</a></li>
+          <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Log In</a></li>
           {/if}
         </ul>
       </div>

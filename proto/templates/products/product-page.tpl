@@ -94,7 +94,7 @@
 		</div>
 		{foreachelse}
 		<div class="row">
-		<p>No reviews yet</p>
+		<p class="text-center">No reviews yet</p>
 		</div>
 		{/foreach}
 
