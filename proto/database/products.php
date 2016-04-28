@@ -52,20 +52,34 @@
     return $stmt->fetchAll();
   }
 
-  function searchProducts($query, $limit, $page)
+  function searchProducts($query, $limit, $page, $order_by = "")
   {
+    $order_by = processProductOrderBy($order_by);
     $offset = ($page-1)*$limit;
     global $conn;
-    $stmt = $conn->prepare(
+    if ($order_by == "") 
+      $stmt = $conn->prepare(
        "SELECT P.idProduct AS id, name, get_product_price(P.idProduct) price, product_count, location AS photo
         FROM
           (SELECT idProduct, COUNT(idProduct) OVER () AS product_count
           FROM product_search, plainto_tsquery(?) AS q
           WHERE (tsv @@ q)
-          ORDER BY ts_rank_cd(tsv, q) DESC 
+          ORDER BY ts_rank_cd(tsv, q) DESC
           LIMIT ? OFFSET ?) results
         INNER JOIN Product P USING(idProduct)
         LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1;");
+    else
+      $stmt = $conn->prepare(
+       "SELECT results.idProduct AS id, name, price, product_count, location AS photo
+        FROM
+          (SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS product_count
+          FROM product_search
+          INNER JOIN Product P USING(idProduct)
+          WHERE (tsv @@ plainto_tsquery(?))
+          ORDER BY $order_by
+          LIMIT ? OFFSET ?) results
+        LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
+
     $stmt->execute(array($query,$limit,$offset));
     return $stmt->fetchAll();
   }
@@ -109,8 +123,21 @@
     return $stmt->fetchAll();
   }
 
+  function processProductOrderBy($order)
+  {
+    switch($order)
+    {
+      case "pa": return "price ASC";
+      case "pd": return "price DESC";
+      case "na": return "name ASC";
+      case "nd": return "name DESC";
+      default: return "";
+    }
+  }
+
   function getCategoryProducts($category, $limit, $page, $order_by = "")
   {
+    $order_by = processProductOrderBy($order_by);
     if ($order_by != "") $order_by = "ORDER BY ".$order_by;
     $offset = ($page-1)*$limit;
     global $conn;

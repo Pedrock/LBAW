@@ -1,9 +1,23 @@
 {assign "title" "HashStore - Search"}
 {assign "css" ["category.css"]}
+{assign "js" ['search.js']}
 {include file='common/header.tpl'}
 
 <div id="main-title">
 	<span class="title">Search: {$query}</span>
+</div>
+
+<div class="sort_div pull-left">
+	<div class="form-group">
+		<select class="form-control" id="sel_sort" onChange="changeOrder()">
+			<option value="" disabled>Sort by</option>
+			<option value="" {if $order == ""} selected{/if}>Relevance</option>
+			<option value="na"{if $order == "na"} selected{/if}>a..z</option>
+			<option value="nd"{if $order == "nd"} selected{/if}>z..a</option>
+			<option value="pa"{if $order == "pa"} selected{/if}>Price asc.</option>
+			<option value="pd"{if $order == "pd"} selected{/if}>Price desc.</option>
+		</select>
+	</div>
 </div>
 
 {if $n_pages > 0}
@@ -79,5 +93,9 @@
 	</ul>
 </div>
 {/if}
+
+<script>
+var query = '{$query}';
+</script>
 
 {include file='common/footer.tpl'}

@@ -82,11 +82,9 @@
 		{foreach from=$reviews item=review}
 		<div class="row">
 			<div class="col-md-12">
-				<span class="glyphicon glyphicon-star star"></span>
-				<span class="glyphicon glyphicon-star star"></span>
-				<span class="glyphicon glyphicon-star star "></span>
-				<span class="glyphicon glyphicon-star star"></span>
-				<span class="glyphicon glyphicon-star-empty star"></span>
+				{for $star=1 to 5}
+				<span class="glyphicon glyphicon-star{if $review.score < $star}-empty{/if} star"></span>
+				{/for}
 				<span class="info-review">{$review.reviewer}</span>
 				<span class="info-review pull-right">{$review.review_date}</span>
 				<p>{$review.body}</p>
