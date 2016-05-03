@@ -24,10 +24,6 @@
 
 	$smarty->assign('categories', $arr);
 
-	// Products
-
-	var_dump($_GET['category']);
-
 	$category = (isset($_GET['category']) && $_GET['category'] != "" && is_numeric($_GET['category'])) ? $_GET['category'] : null;
 	if(isset($_GET['category'])) {
 		foreach($unsorted as $cat) {

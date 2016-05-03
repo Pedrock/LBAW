@@ -33,43 +33,40 @@
 							<div class="col-md-6">
 								<fieldset class="form-group">
 									<label for="categories">Categories</label>
-									<select multiple="multiple" size="7" class="form-control insert-category" id="categories" name="categories[]">
-									{foreach from=$categories item=category}
-										<option value="{$category.id}" {if in_array($category.id, $productcategories)}{"selected"}{/if}>
-										{for $foo=1 to $category.level}&nbsp;{/for}{$category.name}
-										</option>
+									<select multiple="multiple" size="10" class="form-control insert-category" id="categories" name="categories[]">
+									{foreach from=$categories item=category}<option value="{$category.id}"{if in_array($category.id, $productcategories)} selected{/if}>{for $foo=1 to $category.level}&nbsp;{/for}{$category.name}</option>
 									{/foreach}
 									</select>
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="price">Price</label>
 									<input type="number" class="insert-number form-control" id="price" name="price" placeholder="" value="{$product.price}">
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="stock">Stock</label>
 									<input type="number" class="insert-number form-control" id="stock" name="stock" value="{$product.stock}">
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="weight">Weight</label>
 									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="" value="{$product.weight}">
 								</fieldset>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-sm-12 col-md-6">
 							<fieldset class="form-group">
 								<label for="description">Description</label>
-								<textarea id="description" name="description" class="form-control" rows="12" cols="50" placeholder="" >{$product.description|nl2br}</textarea>
+								<textarea id="description" name="description" class="form-control" rows="14" cols="50" placeholder="" >{$product.description|nl2br}</textarea>
 							</fieldset>
 						</div>
 					</div>
 					<div id="row-submit" class="row">
-						<div id="field-submit" class="col-md-3">
+						<div id="field-submit" class="col-xs-3">
 							<fieldset class="form-group">
 								<button id="btn-edit-product" class="btn btn-info" type="submit" value="Submit">Submit</button>
 							</fieldset>

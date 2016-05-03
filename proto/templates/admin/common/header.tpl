@@ -17,10 +17,10 @@
 	{/foreach}
 </head>
 
-<body>
+<body class="preload">
 	<nav class="navbar navbar-inverse navbar-fixed-top">
 		<div class="container-fluid">
-			<div class="navbar-header">
+			<div class="navbar-header pull-left">
 				<button id="menu-toggle" type="button" class="navbar-toggle navbar-toggle-btn">
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
@@ -29,8 +29,8 @@
 				<a class="navbar-brand" href="{$BASE_URL}pages/admin/index.php">Online Store Administration</a>
 
 			</div>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="{$BASE_URL}pages/"><span class="glyphicon glyphicon-log-out"></span> Exit</a></li>
+			<ul class="nav navbar-nav navbar-right pull-right">
+				<li><a href="{$BASE_URL}pages/"><span class="glyphicon glyphicon-log-out"></span><span class="hidden-xs"> Exit</span></a></li>
 			</ul>
 		</div>
 	</nav>

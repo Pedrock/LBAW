@@ -29,39 +29,39 @@
 									</fieldset>
 								</form>
 							</div>
-							<div class="col-md-6">
+							<div class="col-sm-6">
 								<fieldset class="form-group">
 									<label for="categories">Categories</label>
-									<select multiple="multiple" size="7" class="form-control insert-category" id="categories" name="categories[]">
+									<select multiple="multiple" size="10" class="form-control insert-category" id="categories" name="categories[]">
 									{foreach from=$categories item=category}
 										<option value="{$category.id}">{for $foo=1 to $category.level}&nbsp;{/for}{$category.name}</option>
 									{/foreach}
 									</select>
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="price">Price</label>
-									<input type="number" class="insert-number form-control" id="price" name="price" placeholder="">
+									<input type="number" class="insert-number form-control" id="price" name="price" placeholder="" min="0">
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="stock">Stock</label>
 									<input type="number" class="insert-number form-control" id="stock" name="stock" min="0" value="1">
 								</fieldset>
 							</div>
-							<div class="col-md-3">
+							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
 									<label for="weight">Weight</label>
-									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="">
+									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="" min="0">
 								</fieldset>
 							</div>
 						</div>
-						<div class="col-md-6">
+						<div class="col-sm-12 col-md-6">
 							<fieldset class="form-group">
 								<label for="description">Description</label>
-								<textarea id="description" name="description" class="form-control" rows="12" cols="50"></textarea>
+								<textarea id="description" name="description" class="form-control" rows="14" cols="50"></textarea>
 							</fieldset>
 						</div>
 					</div>

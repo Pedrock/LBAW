@@ -16,6 +16,10 @@
 		{
 			$unsorted = getAllCategories();
 			$ofProduct = getAllProductCategories($id);
+			$productcategories = array();
+			foreach ($ofProduct as $category) {
+				array_push($productcategories, $category['idcategory']);
+			}
 			function addChilds($unsorted, &$arr, $parent, $level) {
 				foreach($unsorted as $cat) {
 					if($cat['parent'] == $parent) {
@@ -33,13 +37,13 @@
 			$smarty->assign('categories', $arr);
 			$smarty->assign('product', $product);
 			$smarty->assign('id', $id);
-			$smarty->assign('productcategories', $ofProduct[0]);
+			$smarty->assign('productcategories', $productcategories);
 			$smarty->display('admin/product/edit.tpl');
+			
 		}
 	}
 	else
 	{
 		http_response_code(404);
-	}
-	$smarty->assign('categories', $arr);
+	}	
 ?>

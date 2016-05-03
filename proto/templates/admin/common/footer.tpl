@@ -21,5 +21,10 @@
     {foreach $js as $elem}
         <script src="{$BASE_URL}javascript/admin/{$elem}"></script>
     {/foreach}
+    <script>
+        $(window).load(function() {
+            $("body").removeClass("preload");
+        });
+    </script>
 	</body>
 </html>

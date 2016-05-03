@@ -28,6 +28,13 @@
 	display: block;
 }
 
+@media (max-width: 767px)
+{
+	.nav .glyphicon-log-out {
+	    color: #fff;
+	}
+}
+
 #wrapper {
 	transition: all 0.5s ease;
 }
@@ -151,133 +158,19 @@ body {
 	background-color: #fafafa;
 }
 
-
-/*new product*/
-
-.insert-number {
-	max-width: 100px;
-}
-
 .content {
 	background: white;
 	border: 1px solid #DDDDDD;
 	padding: 15px;
 }
 
-.btn-file {
-	position: relative;
-	overflow: hidden;
-}
-
-.btn-file input[type=file] {
-	position: absolute;
-	top: 0;
-	right: 0;
-	min-width: 100%;
-	min-height: 100%;
-	font-size: 100px;
-	text-align: right;
-	opacity: 0;
-	outline: none;
-	background: white;
-	cursor: inherit;
-	display: block;
-}
-
-#new-product > div > div {
-	padding-left: 0;
-	padding-right: 0;
-}
-
-#new-product * {
-	border-radius: 0;
-}
-
-.insert-category {
-	max-width: 200px;
-}
-
-#row-submit {
-	margin-bottom: 1px;
-	margin-left: 1px;
-}
-
-#btn-new-product {
-	border-radius: 0;
-}
-
-#field-submit {
-	padding-left: 0px;
-}
-
-#new-product-title h1 {
+h1 {
 	margin-top: 0px;
 	margin-bottom: 30px;
 }
 
-
-/*Edit Page*/
-
-#form-edit-product {
-	padding-bottom: 20px;
-}
-
-.seleciona {
-	margin-top: 15px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-
-.pagination>.active>a,
-.pagination>.active>a:focus,
-.pagination>.active>a:hover,
-.pagination>.active>span,
-.pagination>.active>span:focus,
-.pagination>.active>span:hover {
-	background-color: #607D8B;
-	border-color: #546d79;
-}
-
-.pagination>li>a,
-.pagination>li>span {
-	color: #607D8B;
-}
-
-#btn-edit1,
-#btn-edit2,
-#btn-remove1,
-#btn-remove2 {
-	padding-right: 23px;
-	padding-left: 23px;
-}
-
-#btn-edit2 {
-	display: inline!important;
-}
-
-#btn-edit1 {
-	margin-right: 5px;
-}
-
-.form-product-price input {
-	max-width: 78px;
-}
-
-.btn-circle {
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	padding: 6px 0;
-	font-size: 12px;
-	line-height: 1.428571429;
-	border-radius: 15px;
-	margin-top: -10px;
-}
-
-.input-group-btn > *,
-select.form-control,
-.pagination.pagination-sm > li > a, {
-	border-radius: 0;
+.preload * {
+	transition: none !important;
 }
 
 

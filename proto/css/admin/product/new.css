@@ -34,3 +34,56 @@
 	text-align: center
 	
 }
+
+
+
+
+.insert-number {
+	max-width: 100px;
+}
+
+.btn-file {
+	position: relative;
+	overflow: hidden;
+}
+
+.btn-file input[type=file] {
+	position: absolute;
+	top: 0;
+	right: 0;
+	min-width: 100%;
+	min-height: 100%;
+	font-size: 100px;
+	text-align: right;
+	opacity: 0;
+	outline: none;
+	background: white;
+	cursor: inherit;
+	display: block;
+}
+
+#new-product > div > div, #edit-product > div > div {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+#page-content-wrapper * {
+	border-radius: 0;
+}
+
+.insert-category {
+	max-width: 200px;
+}
+
+#row-submit {
+	margin-bottom: 1px;
+	margin-left: 1px;
+}
+
+#btn-new-product, #btn-edit-product {
+	border-radius: 0;
+}
+
+#field-submit {
+	padding-left: 0px;
+}
