@@ -61,10 +61,15 @@ $(document).ready(function() {
 		if(isNaN(num_updated))
 			num_updated = 1;
 
+		if (category_id == 0) 
+			var post_data = {'name':name};
+		else 
+			var post_data = {'name':name,'parent':category_id};
+
 		$.ajax({
 			url: "../../api/admin/category/new.php",
 			type: "POST",
-			data: "name=" + encodeURI(name) + (category_id != 0 ? "&parent=" + category_id : ""),
+			data: post_data,
 			success: function(html) {
 				console.log('success' + html);
 				// FIXME todo
@@ -142,7 +147,7 @@ $(document).ready(function() {
 		$.ajax({
 			url: "../../api/admin/category/delete.php",
 			type: "POST",
-			data: "id=" + encodeURI(category_id),
+			data: {id: category_id},
 			success: function(html) {
 				console.log('success');
 				updateNum(cat, -num_deleting);
