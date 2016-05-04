@@ -3,8 +3,6 @@
 	width: 100%;
 	border: 1px solid #CCC;
 	margin-top: 10px;
-	display: flex;
-	flex-wrap: wrap;
 }
 
 #files {
@@ -14,14 +12,19 @@
 ul.sortable {
 	width: 100%;
 	float: left;
-	margin: 20px 0;
 	list-style: none;
 	position: relative !important;
+	margin-bottom: 0;
+	margin-top: 0;
+	padding-top: 10px;
+	padding-left: 0px;
+	display: flex;
+	flex-wrap: wrap;
 }
 
 ul.sortable li {
-	height: 200px;
-	width: 200px;
+	height: 150px;
+	width: 150px;
 	float: left;
 	margin: 0 7px 7px 0;
 	border: 2px solid #fff;
@@ -38,8 +41,8 @@ ul.sortable li.ui-sortable-helper {
 }
 
 ul.sortable li.placeholder {
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	float: left;
 	background: #eee;
 	border: 2px dashed #bbb;
@@ -56,13 +59,39 @@ ul.sortable li.placeholder {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
-	width: 200px;
-	height: 200px;
-	margin: 5px;
+	min-width: 150px;
+	min-height: 150px;
 	margin-right: 0;
 	/*display: inline-block;*/
 }
 
 #files_btn {
 	border-radius: 0;
+}
+
+#new-product-title a {
+	position: relative;
+	top: 4px;
+	text-decoration:none;
+	color: black;
+	cursor: pointer; cursor: hand;
+}
+
+#new-product-title h1 {
+	margin-bottom: 15px;
+}
+
+.product_img .del {
+	display: none;
+	background-color: #d11e1e;
+	color: white;
+	position: relative;
+	top: 1px;
+	cursor: pointer; cursor: hand;
+}
+
+.product_img:hover .del {
+	display: inline;
+	padding: 3px 5px;
+	border-radius: 0px 0px 5px 0px;
 }

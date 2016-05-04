@@ -1,9 +1,13 @@
 $(document).ready(function() {
 	$("#files_btn").on('click', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
 		$("#files").click();
 	});
 
 	$("#btn-edit-product").on('click', function(event) {
+		event.stopPropagation();
+		event.preventDefault();
 		$("#main_form").submit();
 	});
 

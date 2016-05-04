@@ -43,16 +43,21 @@
 
 		$file_extension = str_ireplace('image/', '', $img_info['mime']);
 
-		$target = $id . '_' . $order . '.' . $file_extension;
+		// Generate random, unique name
+		$photo_name = bin2hex(openssl_random_pseudo_bytes(8));
+		while(file_exists($images_path . $photo_name . '.' . $file_extension))
+			$photo_name = bin2hex(openssl_random_pseudo_bytes(8));
 
 		try {
-			addProductPhoto($id, $order, $target);
+			addProductPhoto($id, $order, $photo_name . '.' . $file_extension);
 			http_response_code(201);
 		} catch (PDOException $e) {
 			return_error("An error occurred while adding the photo. Please try again." . $e->getMessage());
 		}
 
-		die();
+		echo json_encode(array('success' => 'success'));
+
+		move_uploaded_file($source, $images_path . $photo_name . '.' . $file_extension);
 	} else if($action == 'edit') {
 		if(!isset($_POST['new_order']))
 			return_error('No new_order specified');
@@ -65,6 +70,8 @@
 		} catch (PDOException $e) {
 			return_error("An error occurred while editting the photo. Please try again." . $e->getMessage());
 		}
+
+		echo json_encode(array('success' => 'success'));
 	} else if($action == 'delete') {
 		try {
 			deleteProductPhoto($id, $order);
@@ -72,20 +79,14 @@
 		} catch (PDOException $e) {
 			return_error("An error occurred while deleting the photo. Please try again." . $e->getMessage());
 		}
-		die();
+
+		echo json_encode(array('success' => 'success'));
 	} else {
 		return_error('Invalid action');
 	}
 
-	$images_path = $images_path . '/' . $product_id . '_';
-
-	for($i = 0; $i < $num_files; $i++)
-		move_uploaded_file($src[$i], $images_path . $dst[$i]);
-
-	echo json_encode(array('success' => $product_id));
-
 	function return_error($error) {
-		//http_response_code(422);
+		http_response_code(422);
 		echo json_encode(array('error' => $error));
 		die();
 	}
