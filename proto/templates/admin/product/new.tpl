@@ -8,11 +8,11 @@
 				<div id="new-product-title">
 					<h1>New Product</h1>
 				</div>
-				<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">
-					<!--<input type="file" id="files" name="files[]" multiple>-->
+				<br>
+				<!--<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">-->
 				</form>
 				<form id="main_form" action="{$BASE_URL}api/admin/product/new.php" method="post" enctype="multipart/form-data">
-					<input type="file" id="files" name="files[]" multiple>
+					<!--<input type="file" id="files" name="files[]" multiple> -->
 					<div id="new-product" class="row">
 						<div class="col-md-6">
 							<div class="col-md-12">
@@ -20,14 +20,14 @@
 									<label for="name">Name</label>
 									<input type="text" class="form-control" id="name" name="name">
 								</fieldset>
-								<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
+								<!--<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
 									<fieldset class="form-group">
 											<input class="btn btn-default btn-file"type="button" id="files_btn" value="Browse">
 										<label class="control-label">Add Images</label>
 										<div class="drop_zone">
 										</div>
 									</fieldset>
-								</form>
+								</form>-->
 							</div>
 							<div class="col-sm-6">
 								<fieldset class="form-group">
@@ -84,6 +84,22 @@
 			<div class="modal-header">
 				<h4 class="modal-title">Product created successfully</h4>
 				<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="error" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">There was an error</h4>
+			</div>
+			<div class="modal-body">
+				<span id="error_description">There was an error creating the product</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_ok">OK</button>
 			</div>
 		</div>
 	</div>

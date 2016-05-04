@@ -187,10 +187,10 @@
     return $stmt->fetchAll();
   }
   
-  function createProduct($name, $price, $stock, $weight, $description, $categories) {
+  function createProduct($name, $price, $stock, $weight, $description, $categories, $hidden = false) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description) VALUES (?, ?, ?, ?, ?) RETURNING idProduct");
-    $stmt->execute(array($name, $price, $stock, $weight, $description));
+    $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description, isDeleted) VALUES (?, ?, ?, ?, ?, ?) RETURNING idProduct");
+    $stmt->execute(array($name, $price, $stock, $weight, $description, $hidden));
     $product_id = $stmt->fetch()['idproduct'];
 
     if($categories != null) {
@@ -272,27 +272,23 @@
   }
 
 
-  function addProductPhotos($product_id, $files) {
+  function addProductPhoto($product_id, $order, $file) {
     global $conn;
-    $query = "INSERT INTO Photo(idProduct, photo_order, location) VALUES ";
-    $first = true;
-    $i = 1;
-    $arr = array();
-    foreach($files as $file) {
-      if(!$first)
-        $query = $query . ',';
-      else
-        $first = false;
+    $stmt = $conn->prepare("SELECT add_photo(?, ?, ?)");
+    $stmt->execute(array($product_id, $order, $file));
+  }
 
-      $query = $query . "(?,?,?)";
-      array_push($arr, $product_id);
-      array_push($arr, $i++);
-      array_push($arr, $product_id . '_' . $file);
-    }
-    $stmt = $conn->prepare($query);
-    $stmt->execute($arr);
 
-    return $product_id;
+  function editProductPhoto($product_id, $order, $new_order) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT update_photo_order(?, ?, ?)");
+    $stmt->execute(array($product_id, $order, $new_order));
+  }
+
+  function deleteProductPhoto($product_id, $order) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT delete_photo(?, ?)");
+    $stmt->execute(array($product_id, $order));
   }
 
   function createCategory($name, $parent) {

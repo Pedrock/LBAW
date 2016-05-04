@@ -10,6 +10,10 @@
 	display: none;
 }
 
+#new-product-title h1 {
+	margin-bottom: 10px;
+}
+
 .product_img {
 	background-size: cover;
 	background-repeat: no-repeat;
@@ -36,7 +40,9 @@
 }
 
 
-
+.error_feedback {
+	border-color: red;
+}
 
 .insert-number {
 	max-width: 100px;
