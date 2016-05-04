@@ -18,6 +18,7 @@
 					<!--<li><div class="product_img"></div></li>-->
 					<!--<li><img src="../../../images/products/product-6.jpg" alt=""></li>-->
 				</ul>
+				<div class="clearfix"></div>
 			</div>
 		</div>
 	</div>
