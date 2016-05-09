@@ -87,7 +87,7 @@ $(document).ready(function() {
 
 		$('.progress .bar').css('width', (i / files.length) + '%');
 
-		if (i >= files.length) {
+		if (i >= files.length || error) {
 			if (!error)
 			//$("#uploading").modal('hide');
 				$("#error").html("Photos added successfully.");
