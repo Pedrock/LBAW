@@ -5,7 +5,7 @@
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
 	$unsorted = getAllCategories();
-
+	
 	function addChilds($unsorted, &$arr, $parent, $level) {
 		foreach($unsorted as $cat) {
 			if($cat['parent'] == $parent) {
@@ -24,5 +24,5 @@
 
 	$smarty->assign('categories', $arr);
 
-	$smarty->display('admin/categories.tpl');
+	$smarty->display('admin/categories/categories.tpl');
 ?>

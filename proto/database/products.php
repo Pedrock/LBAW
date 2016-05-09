@@ -186,6 +186,29 @@
     $stmt->execute(array($category));
     return $stmt->fetchAll();
   }
+
+  function getCategoryChildren($category)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "WITH RECURSIVE children( idcategory ) 
+        AS (
+          SELECT idcategory, idsupercategory, name
+          FROM category
+          WHERE idcategory = ?
+
+          UNION ALL
+
+          SELECT t.idcategory, t.idsupercategory, t.name
+          FROM children c
+          JOIN category t
+          ON c.idcategory = t.idsupercategory
+        )
+        SELECT idCategory AS id, idsupercategory AS parent, name FROM children");
+    $stmt->execute(array($category));
+    return $stmt->fetchAll();
+  }
+
   
   function createProduct($name, $price, $stock, $weight, $description, $categories, $hidden = false) {
     global $conn;

@@ -1,14 +1,20 @@
 $(document).ready(function() {
-	$(".href_add").on('click', function(event) {
+	$('.modal').on('shown.bs.modal', function() {
+  		$('.modal input[type=text]').focus();
+	});
+
+	var href_add_on_click = function(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
 		$('#add_name').val("");
 		$('#add').modal('toggle');
 		console.log('add on ' + category_id);
-	});
+	}
 
-	$(".href_edit").on('click', function(event) {
+	$(".href_add").on('click', href_add_on_click);
+
+	function href_edit_on_click(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
@@ -21,9 +27,11 @@ $(document).ready(function() {
 		$('#edit_parent option').filter(":selected").removeAttr('selected');
 		$('#edit_parent option[value='+category_parent+']').attr('selected','selected');
 		$('#edit').modal('toggle');
-	});
+	}
 
-	$(".href_del").on('click', function(event) {
+	$(".href_edit").on('click', href_edit_on_click);
+
+	function href_del_on_click(event) {
 		event.preventDefault();
 		event.stopPropagation();
 		category_id = $(this).children('.category_id').html();
@@ -31,17 +39,23 @@ $(document).ready(function() {
 		console.log('delete ' + category_id);
 		$('.modal .category_name').text(category_name);
 		$('#del').modal('toggle');
-	});
+	}
 
-	$('#add_name').on('input',function(e){
+	$(".href_del").on('click', href_del_on_click);
+
+	function add_name_on_input(e){
 		$(this).css('border-color', '#ccc');
-	});
+	}
 
-	$('#edit_name').on('input',function(e){
+	$('#add_name').on('input', add_name_on_input);
+
+	function edit_name_on_input(e){
 		$(this).css('border-color', '#ccc');
-	});
+	}
 
-	$("#btn_add").on('click', function(event) {
+	$('#edit_name').on('input',edit_name_on_input);
+
+	function btn_add_on_click(event) {
 		var name = $('#add_name').val();
 
 		if(name == '') {
@@ -61,7 +75,7 @@ $(document).ready(function() {
 		if(isNaN(num_updated))
 			num_updated = 1;
 
-		if (category_id == 0) 
+		if (category_id == 0)
 			var post_data = {'name':name};
 		else 
 			var post_data = {'name':name,'parent':category_id};
@@ -71,19 +85,57 @@ $(document).ready(function() {
 			type: "POST",
 			data: post_data,
 			success: function(html) {
-				console.log('success' + html);
+				console.log('success ' + html);
 				// FIXME todo
-				location.reload();
-				updateNum(cat, num_updated);
+				//location.reload();
+				//updateNum(cat, num_updated);
+				$.ajax({
+					url: "../../api/admin/category/info.php",
+					type: "POST",
+					data: {'id' : JSON.parse(html).id},
+					success: function(html) {
+						console.log('success ' + html);
+						var elem = null;
+						if(category_id != 0){
+							elem = $(html);
+							if($("#"+category_id).length == 0){
+								console.log("added div");
+								$("#cat_"+category_id).after("<div class=\"list-group collapse in\" id=\"" + category_id + "\"></div>");
+								//$("#cat_"+category_id).attr("aria-expanded","false");
+								$("#cat_"+category_id).find(".icon").removeClass("hidden");
+								$("#cat_"+category_id).find(".categ_num_child").html("1 subcategories");
+							} 
+							$("#"+category_id).append(elem);
+							$("#"+category_id).addClass("in");
+							elem.slideUp(0).slideDown(400);
+							$("#cat_"+category_id).removeClass("collapsed");
+							$("#cat_"+category_id).attr("aria-expanded", "true");
+						}						
+						elem.find(".href_add").on("click", href_add_on_click);
+						elem.find(".href_edit").on("click", href_edit_on_click);
+						elem.find(".href_del").on("click", href_del_on_click);
+						elem.find("#add_name").on("input", add_name_on_input);
+						elem.find("#edit_name").on("input",edit_name_on_input);
+						elem.find("#btn_add").on("click", btn_add_on_click);
+						elem.find("#btn_edit").on("click", btn_edit_on_click);
+						elem.find("#btn_delete").on("click", btn_delete_on_click);
+						updateNum(cat, num_updated);
+					},
+					error: function(xhr, textStatus, errorThrown) {
+						console.log('error');
+					}
+				});
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
 				//$(".status_message").html('Failed to rename');
 			}
 		});
-	});
+	}
 
-	$("#btn_edit").on('click', function(event) {
+	$("#btn_add").on('click', btn_add_on_click);
+
+	function btn_edit_on_click(event) {
 		var name = $('#edit_name').val();
 
 		if(name == '') {
@@ -104,14 +156,19 @@ $(document).ready(function() {
 			data: post_data,
 			success: function(html) {
 				console.log('success');
-				location.reload();
+				//location.reload();
+				if(new_parent != 0){
+					
+				}
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
 				//$(".status_message").html('Failed to rename');
 			}
 		});
-	});
+	}
+
+	$("#btn_edit").on('click', btn_edit_on_click);
 
 	function updateNum(cat, num) {
 		var par = $('#cat_' + cat.parent().attr('id'));
@@ -125,14 +182,18 @@ $(document).ready(function() {
 				num_child.html('');
 				par.children('.icon').slideUp();
 			}
-			else
-				num_child.html(new_num + " subcategories");
+			else if(isNaN(new_num)){
+				console.log("num: " + num);
+				console.log("parse:" + num_child.html().replace(' subcategories', '')); 
+				num_child.html("1 sub0categories");
+			} else {
+				num_child.html(new_num + " sub1categories");
+			}
 
 			updateNum(par, num);
 		}
 	}
-
-	$("#btn_delete").on('click', function(event) {
+	function btn_delete_on_click(event) {
 		var cat = $('#cat_' + category_id);
 		
 		var deleting_num_child = cat.children('.categ_name').children('.categ_num_child');
@@ -143,7 +204,7 @@ $(document).ready(function() {
 
 		if(isNaN(num_deleting))
 			num_deleting = 1;
-
+		if(event != null)
 		$.ajax({
 			url: "../../api/admin/category/delete.php",
 			type: "POST",
@@ -151,7 +212,8 @@ $(document).ready(function() {
 			success: function(html) {
 				console.log('success');
 				updateNum(cat, -num_deleting);
-				$('#cat_' + category_id).slideUp();
+				
+				$('#'+ category_id).slideUp("normal", function() { $(this).remove(); $('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); } );} );
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
@@ -160,5 +222,6 @@ $(document).ready(function() {
 				//$(".status_message").html('Failed to rename');
 			}
 		});
-	});
+	}
+	$("#btn_delete").on('click', btn_delete_on_click);
 });
