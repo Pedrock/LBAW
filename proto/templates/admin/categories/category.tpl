@@ -3,7 +3,7 @@
 {foreach from=$categories item=category}
 		{assign var="n" value=25}
 		{$color=-255/($n - 1)*$category.level + 255}
-		<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+		<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" data-id="{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
 			<span class="icon {if $category.numChilds eq 0}hidden{/if}"></span>
 			<span class="categ_name">
 				{$category.name}

@@ -4,7 +4,7 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="content tab-content">
-			<div id="new_address" class="tab-pane fade in active">
+			<div id="manage-categories" class="tab-pane fade in active">
 				<div id="title">
 					<h1>Categories</h1><br>
 				</div>
@@ -14,7 +14,7 @@
 				</a>
 				<br>
 				<br>
-				<div class="list-group list-group-root well">
+				<div id="categories-list" class="list-group list-group-root well">
 					{assign var="cur_level" value=0}
 					{assign var="prev_id" value=0}
 					{foreach from=$categories item=category}
@@ -29,7 +29,7 @@
 						{/if}
 							{assign var="n" value=25}
 							{$color=-255/($n - 1)*$category.level + 255}
-							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" data-id="{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
 								<span class="icon {if $category.numChilds eq 0}hidden{/if}"></span>
 								<span class="categ_name">
 									{$category.name}

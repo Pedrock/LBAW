@@ -89,30 +89,35 @@ $(document).ready(function() {
 				// FIXME todo
 				//location.reload();
 				//updateNum(cat, num_updated);
+				var id = JSON.parse(html).id;
 				$.ajax({
 					url: "../../api/admin/category/info.php",
 					type: "POST",
-					data: {'id' : JSON.parse(html).id},
+					data: {'id' : id},
 					success: function(html) {
 						console.log('success ' + html);
 						var elem =  $(html);
 						if(category_id != 0){
 							if($("#"+category_id).length == 0){
 								console.log("added div");
-								$("#cat_"+category_id).after("<div class=\"list-group collapse in\" id=\"" + category_id + "\"></div>");
-								//$("#cat_"+category_id).attr("aria-expanded","false");
-								$("#cat_"+category_id).find(".icon").removeClass("hidden");
-								$("#cat_"+category_id).find(".categ_num_child").html("1 subcategories");
+								var children_div = $("<div class=\"list-group collapse in\" id=\"" + category_id + "\"></div>");
+								children_div.attr("aria-expanded","true");
+								var div_parent = $("#cat_"+category_id);
+								children_div.insertAfter(div_parent);
+								div_parent.find(".icon").removeClass("hidden");
+								div_parent.removeClass("collapsed");
+								div_parent.find(".categ_num_child").html("1 subcategories");
 							} 
 							$("#"+category_id).append(elem);
 							$("#"+category_id).addClass("in");
 							elem.slideUp(0).slideDown(400);
-							$("#cat_"+category_id).removeClass("collapsed");
-							$("#cat_"+category_id).attr("aria-expanded", "true");
+							elem.removeClass("collapsed");
+							elem.attr("aria-expanded", "true");
 						} else{
-							$(".list-group").append(elem);
+							$("#categories-list").append(elem);
 							elem.slideUp(0).slideDown(400);
-						}					
+						}	
+
 						elem.find(".href_add").on("click", href_add_on_click);
 						elem.find(".href_edit").on("click", href_edit_on_click);
 						elem.find(".href_del").on("click", href_del_on_click);
@@ -226,3 +231,52 @@ $(document).ready(function() {
 	}
 	$("#btn_delete").on('click', btn_delete_on_click);
 });
+/*
+<a href="#315" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_315" style="background-color: rgb(255,255,255);">
+	<span class="icon hidden"></span>
+	<span class="categ_name">
+		zzzz
+		<span class="categ_num_child"></span>
+	</span>
+	<span class="pull-right">
+		<button class="href_add" data-toggle="modal" data-target="#add">
+			<span class="hidden category_id">315</span>
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+		<button class="href_edit" data-toggle="modal" data-target="#edit">
+			<span class="hidden category_id">315</span>
+			<span class="hidden category_name">zzzz</span>
+			<span class="hidden category_parent"></span>
+			<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+		<button class="href_del" data-toggle="modal" data-target="#del">
+			<span class="hidden category_id">315</span>
+			<span class="hidden category_name">zzzz</span>
+			<span class="glyphicon glyphicon-trash"></span>
+		</button>
+	</span>
+</a>
+<a href="#316" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_316" style="background-color: rgb(255,255,255);">
+	<span class="icon hidden"></span>
+	<span class="categ_name">
+		zzzzzzzz
+		<span class="categ_num_child"></span>
+	</span>
+	<span class="pull-right">
+		<button class="href_add" data-toggle="modal" data-target="#add">
+			<span class="hidden category_id">316</span>
+			<span class="glyphicon glyphicon-plus"></span>
+		</button>
+		<button class="href_edit" data-toggle="modal" data-target="#edit">
+			<span class="hidden category_id">316</span>
+			<span class="hidden category_name">zzzzzzzz</span>
+			<span class="hidden category_parent"></span>
+			<span class="glyphicon glyphicon-pencil"></span>
+		</button>
+		<button class="href_del" data-toggle="modal" data-target="#del">
+			<span class="hidden category_id">316</span>
+			<span class="hidden category_name">zzzzzzzz</span>
+			<span class="glyphicon glyphicon-trash"></span>
+		</button>
+	</span>
+</a>*/
