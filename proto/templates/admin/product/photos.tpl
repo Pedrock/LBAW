@@ -18,7 +18,7 @@
 				<ul class="sortable">
 				{foreach from=$photos item=photo} 
 				<li class="product_img" id="img_{$photo.photo_order}" style="background-image: url(../../../images/products/{$photo.location});">
-						<div class="del">DEL<span class="hidden">{$photo.photo_order}</span></div>
+					<div class="del">DEL<span class="hidden">{$photo.photo_order}</span></div>
 				</li>
 				{/foreach} 
 				</ul>

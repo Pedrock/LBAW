@@ -12,6 +12,7 @@
 
 #new-product-title h1 {
 	margin-bottom: 10px;
+	display: inline;
 }
 
 .product_img {
@@ -30,15 +31,13 @@
 	right: 20px;
 }
 
-#confirmation button {
+.modal button {
 	margin-top: 20px;
 }
 
-#confirmation .modal-header{
+.modal .modal-header{
 	text-align: center
-	
 }
-
 
 .error_feedback {
 	border-color: red;
