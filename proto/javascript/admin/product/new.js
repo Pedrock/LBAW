@@ -16,7 +16,6 @@ $(document).ready(function() {
 			window.location.href = "photos.php?id=" + product_id;
 		else
 			window.location.href = "list.php";
-
 	});
 
 	function alert_error(error) {
@@ -26,15 +25,10 @@ $(document).ready(function() {
 	}
 
 	$('#name').on('input', function() { input_valid(this); });
-
 	$('#price').on('input', function() { input_valid(this); });
-
 	$('#stock').on('input', function() { input_valid(this); });
-
 	$('#weight').on('input', function() { input_valid(this); });
-
 	$('#description').on('input', function() { input_valid(this); });
-
 	$('#categories').on('change', function() { input_valid(this); });
 
 	function input_error(selector, error) {
@@ -109,61 +103,4 @@ $(document).ready(function() {
 			alert_error("An error occurred. Please try again.");
 		}
 	}
-
-	/*$("#files").on('change', function(event) {
-		var files = event.target.files;
-		var files_len = event.target.files.length;
-
-		var total_size = 0;
-
-		var fd = new FormData();
-
-		$(".drop_zone").html("");
-
-		for (var i = 0; i < files_len; i++) {
-			total_size += files[i].size;
-			fd.append('file[' + i + ']', files[i]);
-
-			var reader = new FileReader();
-
-			(function(ii) {
-				reader.onload = function(e) {
-					var elem = $("<div class=\"product_img\"></div>");
-					$(".drop_zone").append(elem);
-					elem.css('background-image', 'url("' + e.target.result + '")');
-					//elem.css('opacity', '0.5');
-					//elem.html(ii);
-				}
-			}(i));
-
-			reader.readAsDataURL(files[i]);
-
-			continue;
-
-			$.ajax({
-				url: "../../api/admin/product/add_photos.php",
-				type: "POST",
-				data: fd,
-				contentType: false,
-				cache: false,
-				processData: false,
-				success: function(html) {
-					console.log('success: ' + html);
-				},
-				xhr: function() {
-					var xhr = $.ajaxSettings.xhr();
-					xhr.upload.onprogress = function(e) {
-						if (e.lengthComputable) {
-							//var perc = parseInt(100 * e.loaded / e.total);
-							//$(".status_message").html('Uploading... ' + perc + '%');
-						}
-					};
-					return xhr;
-				},
-				error: function(xhr, textStatus, errorThrown) {
-					console.log('error' + textStatus + errorThrown);
-				}
-			});
-		}
-	});*/
 });

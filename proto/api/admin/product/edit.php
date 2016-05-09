@@ -28,7 +28,7 @@
 	if(!is_numeric($stock) || $stock < 0)
 		$errors['stock'] = "The stock must be a non-negative number";
 
-	if(!is_numeric($weight) || $weight < 0)
+	if(!is_numeric($weight) || $weight < 0 || is_decimal($weight))
 		$errors['weight'] = "The weight must be a non-negative number";
 
 	if (!empty($errors))
@@ -51,5 +51,9 @@
 		http_response_code(422);
 		echo json_encode(array('errors' => $error));
 		die();
+	}
+
+	function is_decimal($val) {
+		return is_numeric($val) && floor($val) != $val;
 	}
 ?>

@@ -81,6 +81,21 @@
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="error" role="dialog">
+	<div class="modal-dialog modal-sm">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">There was an error</h4>
+			</div>
+			<div class="modal-body">
+				<span id="error_description">There was an error creating the product</span>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_ok">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
 
 <script> id = '{$id}'; </script> <!-- FIXME -->
 
