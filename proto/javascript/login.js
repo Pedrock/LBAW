@@ -2,11 +2,12 @@ $('#form-signin').submit(function(e) {
 	e.preventDefault();
 	var email = $('input[name="email"]').val();
 	var password = $('input[name="password"]').val();
+	var remember = $('input[name="remember-me"]').prop('checked');
 
 	$.ajax({
 		type: "POST",
 		url: "../api/users/login.php",
-		data: {email:email,password:password},
+		data: {email:email,password:password,remember:remember},
 		complete: complete,
 		dataType: 'json'
 	});

@@ -2,7 +2,7 @@
   include_once('../../config/init.php');
   include_once($BASE_DIR .'database/users.php');  
 
-  if (!$_POST['email'] || !$_POST['password']) {
+  if (!$_POST['email'] || !$_POST['password'] || !$_POST['remember']) {
     return_error("Both fields are required", 400);
     exit;
   }
@@ -21,6 +21,18 @@
       $_SESSION['user'] = $user['iduser'];
       $_SESSION['username'] = $user['username'];
       $_SESSION['admin'] = $user['isadmin'];
+
+      if (json_decode($_POST['remember']) == true)
+      {
+        $token_size = mcrypt_get_iv_size(MCRYPT_CAST_256, MCRYPT_MODE_CFB);
+        $token = mcrypt_create_iv($token_size, MCRYPT_DEV_URANDOM);
+        storeUserLoginToken($user['iduser'], $token);
+        $cookie = $user['iduser'] . ':' . $token;
+        $mac = hash_hmac('sha256', $cookie, SECRET_KEY);
+        $cookie .= ':' . $mac;
+        setcookie('rememberme', $cookie, 2147483647, '/');
+      }
+
     }
   } catch (PDOException $e) {
   	  error_log($e->getMessage());
