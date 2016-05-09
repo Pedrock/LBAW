@@ -10,6 +10,14 @@
     return $stmt->fetch();
   }
 
+  function getCarousel()
+  {
+    global $conn;
+    $stmt = $conn->prepare('SELECT location as image, link FROM carrosselphoto WHERE active = TRUE ORDER BY photo_order');
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
   function getProductPhotos($idProduct) {
     global $conn;
     $stmt = $conn->prepare(

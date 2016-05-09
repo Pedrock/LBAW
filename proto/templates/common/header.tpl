@@ -65,7 +65,7 @@
   </nav>
 
   {if $display_carousel}
-    {include file='main/carroussel.tpl'}
+    {include file='main/carousel.tpl'}
   {/if}
 
   <div id="wrapper" class="container-fluid">
