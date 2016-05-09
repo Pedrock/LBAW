@@ -27,14 +27,14 @@
 					</div>
 				</form>
 			</div>
-				<div class="seleciona sort_div pull-left">
+				<div class="sort_div pull-left">
 					<div class="form-group">
-						<select class="form-control" id="sel_sort">
-							<option value="" disabled selected>Sort by</option>
-							<option>a..z</option>
-							<option>z..a</option>
-							<option>Price asc.</option>
-							<option>Price desc.</option>
+						<select class="form-control" id="sel_sort" onChange="changeOrder()">
+							<option value="" disabled {if !$order} selected{/if}>Sort by</option>
+							<option value="na"{if $order == "na"} selected{/if}>a..z</option>
+							<option value="nd"{if $order == "nd"} selected{/if}>z..a</option>
+							<option value="pa"{if $order == "pa"} selected{/if}>Price asc.</option>
+							<option value="pd"{if $order == "pd"} selected{/if}>Price desc.</option>
 						</select>
 					</div>
 				</div>
@@ -43,20 +43,20 @@
 				<div class="text-center">
 					<ul class="pagination pagination-sm">
 						{if $page != $startpage} 
-							<li><a href="?page=1&category={$category}">&laquo; First</a></li>
-							<li><a href="?page={$page-1}&category={$category}">&lsaquo; Previous</a></li>
+							<li><a href="?page=1{if $order}&order={$order}{/if}&category={$category}">&laquo; First</a></li>
+							<li><a href="?page={$page-1}{if $order}&order={$order}{/if}&category={$category}">&lsaquo; Previous</a></li>
 						{else}
 							<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 							<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 						{/if}
 
 						{for $p=$startpage to $endpage}
-							<li{if $p == $page} class="active"{/if}><a href="?page={$p}&category={$category}">{$p}</a></li>
+							<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}&category={$category}">{$p}</a></li>
 						{/for}
 
 						{if $page != $endpage}
-							<li><a href="?page={$page+1}&category={$category}">Next &rsaquo;</a></li>
-							<li><a href="?page={$n_pages}&category={$category}">Last &raquo;</a></li>
+							<li><a href="?page={$page+1}{if $order}&order={$order}{/if}&category={$category}">Next &rsaquo;</a></li>
+							<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}&category={$category}">Last &raquo;</a></li>
 						{else}
 							<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 							<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -91,20 +91,20 @@
 					<div class="text-center">
 						<ul class="pagination pagination-sm">
 							{if $page != $startpage} 
-								<li><a href="?page=1&category={$category}">&laquo; First</a></li>
-								<li><a href="?page={$page-1}&category={$category}">&lsaquo; Previous</a></li>
+								<li><a href="?page=1{if $order}&order={$order}{/if}&category={$category}">&laquo; First</a></li>
+								<li><a href="?page={$page-1}{if $order}&order={$order}{/if}&category={$category}">&lsaquo; Previous</a></li>
 							{else}
 								<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 								<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 							{/if}
 
 							{for $p=$startpage to $endpage}
-								<li{if $p == $page} class="active"{/if}><a href="?page={$p}&category={$category}">{$p}</a></li>
+								<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}&category={$category}">{$p}</a></li>
 							{/for}
 
 							{if $page != $endpage}
-								<li><a href="?page={$page+1}&category={$category}">Next &rsaquo;</a></li>
-								<li><a href="?page={$n_pages}&category={$category}">Last &raquo;</a></li>
+								<li><a href="?page={$page+1}{if $order}&order={$order}{/if}&category={$category}">Next &rsaquo;</a></li>
+								<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}&category={$category}">Last &raquo;</a></li>
 							{else}
 								<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 								<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -117,6 +117,10 @@
 			</div>
 	</div>
 </div>
+
+<script>
+var category = "{$category}";
+</script>
 
 {assign var=js value=['product/list.js']}
 
