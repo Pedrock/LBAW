@@ -83,9 +83,25 @@
       border-right: none;
    }
 
+   #main-menu > a:hover {
+      background-color: #e5e5e5;
+   }
+
+   #main-menu > a:active {
+      background-color: #ccc;
+   }
+
    a#deals{
    	background-color: rgb(181, 212, 207);
    	margin-bottom: 2px;
+   }
+
+   a#deals:hover {
+      background-color: #c4e8e2;
+   }
+
+   a#deals:active {
+      background-color: #93b5b0;
    }
 
    #wrapper{

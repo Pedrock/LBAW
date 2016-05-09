@@ -3,7 +3,7 @@
   function getProduct($id) {
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price, weight 
+      "SELECT idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price, weight, isdeleted
         FROM Product,get_product_discount_and_price(idProduct)
         WHERE idProduct = ?;");
     $stmt->execute(array($id));
@@ -215,10 +215,10 @@
     return $product_id;
   }
 
-  function editProduct($id, $name, $price, $stock, $weight, $description, $categories) {
+  function editProduct($id, $name, $price, $stock, $weight, $description, $categories, $deleted = false) {
     global $conn;
-    $stmt = $conn->prepare("UPDATE Product SET name = ?, price = ?, stock = ?, weight = ?, description = ? WHERE idProduct = ?");
-    $stmt->execute(array($name, $price, $stock, $weight, $description, $id));
+    $stmt = $conn->prepare("UPDATE Product SET name = ?, price = ?, stock = ?, weight = ?, description = ?, isdeleted = ? WHERE idProduct = ?");
+    $stmt->execute(array($name, $price, $stock, $weight, $description, $deleted, $id));
 
     if($categories != null) {
       $stmt = $conn->prepare("DELETE FROM CategoryProduct WHERE idProduct = ?");
@@ -309,33 +309,9 @@
     $stmt = $conn->prepare("DELETE from category WHERE idCategory = ?");
     $stmt->execute(array($id));
   }
-  function deleteproduct($id) {
+  function deleteproduct($id, $bool) {
     global $conn;
-    $stmt = $conn->prepare("DELETE from photo WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from metadata WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-     $stmt = $conn->prepare("DELETE from productcart WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-     $stmt = $conn->prepare("DELETE from productorder WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from categoryproduct WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from favorite WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from discount WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from review WHERE idProduct = ?");
-    $stmt->execute(array($id));
-
-    $stmt = $conn->prepare("DELETE from product WHERE idProduct = ?");
-    $stmt->execute(array($id));
+    $stmt = $conn->prepare("UPDATE product SET isDeleted = ? WHERE idProduct = ?");
+    $stmt->execute(array($bool, $id));
   }
 ?>

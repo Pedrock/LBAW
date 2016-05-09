@@ -5,13 +5,13 @@
 	<div class="col-lg-12">
 		<div class="content tab-content">
 			<div id="new_address" class="tab-pane fade in active">
-				<div id="new-product-title">
-					<h1>Edit Product</h1>
-				</div>
-				<!--<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">
-					<input type="file" id="files" name="files[]" multiple>
-				</form>-->
 				<form id="main_form" action="{$BASE_URL}api/admin/product/edit.php" method="post" enctype="multipart/form-data">
+					<div id="new-product-title">
+						<h1>Edit Product</h1>
+						<div class="checkbox pull-right">
+							<label><input type="checkbox" name="deleted" {if $product.isdeleted} checked="checked"{/if}>Hide product</label>
+						</div>
+					</div>
 					<input type="hidden" class="form-control" id="id" name="id" value="{$product.id}">
 					<input type="file" id="files" name="files[]" multiple>
 					<div id="edit-product" class="row">
@@ -21,14 +21,6 @@
 									<label for="name">Name</label>
 									<input type="text" class="form-control" id="name" name="name" value="{$product.name}">
 								</fieldset>
-								<!--<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
-									<fieldset class="form-group">
-											<input class="btn btn-default btn-file"type="button" id="files_btn" value="Browse">
-										<label class="control-label">Add Images</label>
-										<div class="drop_zone">
-										</div>
-									</fieldset>
-								</form>-->
 							</div>
 							<div class="col-md-6">
 								<fieldset class="form-group">
@@ -71,10 +63,6 @@
 								<button id="btn-edit-product" class="btn btn-info" type="submit" value="Submit">Submit</button>
 							</fieldset>
 						</div>
-						<button class="href_del btn btn-danger pull-right" data-toggle="modal" data-target="#del">
-							<span class="hidden product_id">{$id}</span>
-							Delete
-						</button>
 					</div>
 
 					<!-- Modal Edit -->
@@ -84,25 +72,6 @@
 								<div class="modal-header">
 									<h4 class="modal-title">Product edited successfully</h4>
 									<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add">OK</button>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Modal Delete -->
-					<div class="modal fade" id="del" role="dialog">
-						<div class="modal-dialog modal-sm">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
-									<h4 class="modal-title">Delete Product</h4>
-								</div>
-								<div class="modal-body">
-									This can't be reversed. Are you sure?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-									<button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_delete">Delete</button>
 								</div>
 							</div>
 						</div>
