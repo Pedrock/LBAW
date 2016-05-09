@@ -95,9 +95,8 @@ $(document).ready(function() {
 					data: {'id' : JSON.parse(html).id},
 					success: function(html) {
 						console.log('success ' + html);
-						var elem = null;
+						var elem =  $(html);
 						if(category_id != 0){
-							elem = $(html);
 							if($("#"+category_id).length == 0){
 								console.log("added div");
 								$("#cat_"+category_id).after("<div class=\"list-group collapse in\" id=\"" + category_id + "\"></div>");
@@ -110,7 +109,10 @@ $(document).ready(function() {
 							elem.slideUp(0).slideDown(400);
 							$("#cat_"+category_id).removeClass("collapsed");
 							$("#cat_"+category_id).attr("aria-expanded", "true");
-						}						
+						} else{
+							$(".list-group").append(elem);
+							elem.slideUp(0).slideDown(400);
+						}					
 						elem.find(".href_add").on("click", href_add_on_click);
 						elem.find(".href_edit").on("click", href_edit_on_click);
 						elem.find(".href_del").on("click", href_del_on_click);
@@ -204,7 +206,6 @@ $(document).ready(function() {
 
 		if(isNaN(num_deleting))
 			num_deleting = 1;
-		if(event != null)
 		$.ajax({
 			url: "../../api/admin/category/delete.php",
 			type: "POST",
@@ -212,13 +213,13 @@ $(document).ready(function() {
 			success: function(html) {
 				console.log('success');
 				updateNum(cat, -num_deleting);
-				
-				$('#'+ category_id).slideUp("normal", function() { $(this).remove(); $('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); } );} );
+				if($('#'+ category_id).length == 0)
+					$('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); });
+				else $('#'+ category_id).slideUp("normal", function() { $(this).remove(); $('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); } );} );
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
 				console.log(xhr);
-
 				//$(".status_message").html('Failed to rename');
 			}
 		});
