@@ -77,6 +77,18 @@
 						</button>
 					</div>
 
+					<!-- Modal Edit -->
+					<div class="modal fade" id="edit" role="dialog">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title">Product edited successfully</h4>
+									<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<!-- Modal Delete -->
 					<div class="modal fade" id="del" role="dialog">
 						<div class="modal-dialog modal-sm">
