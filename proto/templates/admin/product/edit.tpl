@@ -42,8 +42,8 @@
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="stock">Stock</label>
-									<input type="number" class="insert-number form-control" id="stock" name="stock" value="{$product.stock}">
+									<label for="stock">Stock ({$product.stock})</label>
+									<input type="number" class="insert-number form-control" id="stock" name="stock" value="0">
 								</fieldset>
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">

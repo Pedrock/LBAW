@@ -250,7 +250,7 @@
 
   function editProduct($id, $name, $price, $stock, $weight, $description, $categories, $deleted = false) {
     global $conn;
-    $stmt = $conn->prepare("UPDATE Product SET name = ?, price = ?, stock = ?, weight = ?, description = ?, isdeleted = ? WHERE idProduct = ?");
+    $stmt = $conn->prepare("UPDATE Product SET name = ?, price = ?, stock = stock + ?, weight = ?, description = ?, isdeleted = ? WHERE idProduct = ?");
     $stmt->execute(array($name, $price, $stock, $weight, $description, $deleted, $id));
 
     if($categories != null) {

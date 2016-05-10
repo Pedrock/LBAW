@@ -4,7 +4,7 @@
 
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
-	if (!$_POST['id'] || !$_POST['name'] || !$_POST['price']  || !$_POST['stock'] || !$_POST['weight'] || !$_POST['description'])
+	if (!$_POST['id'] || !$_POST['name'] || !$_POST['price']  || !$_POST['weight'] || !$_POST['description'])
 		return_error('All fields are mandatory');
 
 	if (!$_POST['categories'])
@@ -14,7 +14,7 @@
 
 	$name = trim($_POST['name']);
 	$price = trim($_POST['price']);
-	$stock = trim($_POST['stock']);
+	$stock = isset($_POST['stock']) ? trim($_POST['stock']) : '0';
 	$weight = trim($_POST['weight']);
 	$description = $_POST['description'];
 	$categories = $_POST['categories'];
@@ -25,8 +25,8 @@
 	if(!is_numeric($price) || $price < 0)
 		$errors['price'] = "The price must be a non-negative number";
 
-	if(!is_numeric($stock) || $stock < 0)
-		$errors['stock'] = "The stock must be a non-negative number";
+	if(!is_numeric($stock) || is_decimal($stock))
+		$errors['stock'] = "The stock must be a number";
 
 	if(!is_numeric($weight) || $weight < 0 || is_decimal($weight))
 		$errors['weight'] = "The weight must be a non-negative number";
