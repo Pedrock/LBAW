@@ -31,7 +31,7 @@
 	}
 
 	function return_error($error) {
-		//http_response_code(422);
+		http_response_code(422);
 		echo json_encode(array('error' => $error));
 		die();
 	}

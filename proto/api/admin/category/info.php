@@ -4,10 +4,10 @@
 
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
-	if (!$_POST['id'])
+	if (!$_GET['id'])
 		return_error('No category provided');
 
-	$category_id = trim($_POST['id']);
+	$category_id = trim($_GET['id']);
 
 	try {
 		$parent_categories = getCategoryBreadcrumbs($category_id);

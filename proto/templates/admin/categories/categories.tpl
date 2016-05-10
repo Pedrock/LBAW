@@ -29,12 +29,10 @@
 						{/if}
 							{assign var="n" value=25}
 							{$color=-255/($n - 1)*$category.level + 255}
-							<a href="#{$category.id}" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" data-id="{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
+							<a href="#{$category.id}" class="category list-group-item collapsed clearfix" data-toggle="collapse" id="cat_{$category.id}" data-id="{$category.id}" style="background-color: rgb({$color|round:0},{$color|round:0},{$color|round:0});">
 								<span class="icon {if $category.numChilds eq 0}hidden{/if}"></span>
-								<span class="categ_name">
-									{$category.name}
-									<span class="categ_num_child">{if $category.numChilds neq 0}{$category.numChilds} subcategories{/if}</span>
-								</span>
+								<span class="categ_name">{$category.name}</span>
+								<span class="categ_num_child"></span>
 								<span class="pull-right">
 									<button class="href_add" data-toggle="modal" data-target="#add">
 										<span class="hidden category_id">{$category.id}</span>
@@ -56,11 +54,15 @@
 						{assign var="prev_id" value=$category.id}
 					{/foreach}
 				</div>
+				{while $cur_level > 0}
+					</div>
+					{assign var="cur_level" value=$cur_level-1}
+				{/while}
 
 				<!-- Modal Add -->
 				<div class="modal fade" id="add" role="dialog">
 					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
+						<form class="modal-content" action="javascript:void(0);">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">New subcategory</h4>
@@ -72,17 +74,17 @@
 								</fieldset>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_add">Create</button>
+								<button type="submit" class="btn btn-primary" data-dismiss="modal" id="btn_add">Create</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 				
 				<!-- Modal Edit -->
 				<div class="modal fade" id="edit" role="dialog">
 					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
+						<form class="modal-content" action="javascript:void(0);">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Edit &quot;<span class="category_name">Category Name</span>&quot;</h4>
@@ -91,26 +93,25 @@
 								<label for="name">Name</label>
 								<input type="text" class="form-control" id="edit_name" name="name">
 								<br>
-								<label for="asd">Select new parent:</label>
+								<label for="edit_parent">Select new parent:</label>
 								<select class="form-control" id="edit_parent">
 									<option value="0">Root</option>
-								{foreach from=$categories item=category_2}
-									<option value="{$category_2.id}">{for $foo=0 to $category_2.level}&nbsp;{/for}{$category_2.name}</option>
-								{/foreach}
+									{foreach from=$categories item=category_2}<option value="{$category_2.id}">{for $foo=0 to $category_2.level}&nbsp;{/for}{$category_2.name}</option>
+									{/foreach}
 								</select>
 							</div>
 							<div class="modal-footer">
-								<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_edit">OK</button>
+								<button type="submit" class="btn btn-primary" data-dismiss="modal" id="btn_edit">OK</button>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
 				
 				<!-- Modal Delete -->
 				<div class="modal fade" id="del" role="dialog">
 					<div class="modal-dialog modal-sm">
-						<div class="modal-content">
+						<form class="modal-content" action="javascript:void(0);">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal">&times;</button>
 								<h4 class="modal-title">Delete &quot;<span class="category_name">Category Name</span>&quot;</h4>
@@ -120,11 +121,29 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-								<button type="button" class="btn btn-danger" data-dismiss="modal" id="btn_delete">Delete</button>
+								<button type="submit" class="btn btn-danger" data-dismiss="modal" id="btn_delete">Delete</button>
 							</div>
-						</div>
+						</form>
 					</div>
 				</div>
+
+				<!-- Modal Error -->
+				<div class="modal fade" id="error" role="dialog">
+					<div class="modal-dialog modal-sm">
+						<form class="modal-content" action="javascript:void(0);">
+							<div class="modal-header">
+								<h4 class="modal-title">There was an error</h4>
+							</div>
+							<div class="modal-body">
+								<span id="error_description"></span>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary" data-dismiss="modal" id="btn_ok">OK</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>

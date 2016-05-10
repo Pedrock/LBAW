@@ -117,7 +117,7 @@
   margin-right: 5px;
 }
 
-.categ_name {
+.categ_name, .categ_num_child {
   position: relative;
   top: 2px;
 }

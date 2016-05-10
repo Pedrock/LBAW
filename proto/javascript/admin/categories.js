@@ -1,32 +1,48 @@
 $(document).ready(function() {
+
+	function updateCounts() {
+		$('#manage-categories .list-group-item').each(function () {
+			var id = $(this).attr('data-id');
+			var length = $('#' + id).children('a').length;
+			if (length != 0)
+				$(this).find('.categ_num_child').text(length + (length == 1 ? " subcategory" : " subcategories"));
+			else
+				$(this).find('.categ_num_child').text('');
+		});
+	}
+
+	updateCounts();
+
 	$('.modal').on('shown.bs.modal', function() {
   		$('.modal input[type=text]').focus();
+		$('.modal #btn_delete').focus();
 	});
 
-	var href_add_on_click = function(event) {
+	function href_add_on_click(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		category_id = $(this).children('.category_id').html();
+		var category_id = $(this).children('.category_id').html();
 		$('#add_name').val("");
-		$('#add').modal('toggle');
-		console.log('add on ' + category_id);
-	}
+		$('#add').prop('data-id',category_id);
+		$('#add').modal('show');
+	};
 
 	$(".href_add").on('click', href_add_on_click);
 
 	function href_edit_on_click(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		category_id = $(this).children('.category_id').html();
-		category_name = $(this).children('.category_name').text();
-		category_parent = $(this).children('.category_parent').html();
+		var category_id = $(this).children('.category_id').html();
+		var category_name = $(this).children('.category_name').text();
+		var category_parent = $(this).children('.category_parent').html();
 		if (category_parent == "") category_parent = 0;
-		console.log('edit ' + category_id + " " + category_name + " " + category_parent);
 		$('.modal .category_name').text(category_name);
 		$('#edit_name').val(category_name);
-		$('#edit_parent option').filter(":selected").removeAttr('selected');
 		$('#edit_parent option[value='+category_parent+']').attr('selected','selected');
-		$('#edit').modal('toggle');
+		$('#edit_parent select').val(category_parent);
+		$('#edit').prop('data-id',category_id);
+		$('#edit').prop('data-parent',category_parent);
+		$('#edit').modal('show');
 	}
 
 	$(".href_edit").on('click', href_edit_on_click);
@@ -34,11 +50,11 @@ $(document).ready(function() {
 	function href_del_on_click(event) {
 		event.preventDefault();
 		event.stopPropagation();
-		category_id = $(this).children('.category_id').html();
-		category_name = $(this).children('.category_name').text();
-		console.log('delete ' + category_id);
+		var category_id = $(this).children('.category_id').html();
+		var category_name = $(this).children('.category_name').text();
 		$('.modal .category_name').text(category_name);
-		$('#del').modal('toggle');
+		$('#del').prop('data-id',category_id);
+		$('#del').modal('show');
 	}
 
 	$(".href_del").on('click', href_del_on_click);
@@ -58,22 +74,13 @@ $(document).ready(function() {
 	function btn_add_on_click(event) {
 		var name = $('#add_name').val();
 
-		if(name == '') {
+		if (name == '') {
 			$('#add_name').css('border-color', 'red');
 			event.preventDefault();
 			return false;
 		}
 
-		var cat = $('#cat_' + category_id);
-		
-		var new_num_child = cat.children('.categ_name').children('.categ_num_child');
-		var num_updated = 1;
-
-		if(typeof new_num_child.html() !== 'undefined')
-			num_updated = parseInt(new_num_child.html().replace(' subcategories', ''));
-
-		if(isNaN(num_updated))
-			num_updated = 1;
+		var category_id = $('#add').prop('data-id');
 
 		if (category_id == 0)
 			var post_data = {'name':name};
@@ -85,59 +92,91 @@ $(document).ready(function() {
 			type: "POST",
 			data: post_data,
 			success: function(html) {
-				console.log('success ' + html);
-				// FIXME todo
-				//location.reload();
-				//updateNum(cat, num_updated);
-				var id = JSON.parse(html).id;
-				$.ajax({
-					url: "../../api/admin/category/info.php",
-					type: "POST",
-					data: {'id' : id},
-					success: function(html) {
-						console.log('success ' + html);
-						var elem =  $(html);
-						if(category_id != 0){
-							if($("#"+category_id).length == 0){
-								console.log("added div");
-								var children_div = $("<div class=\"list-group collapse in\" id=\"" + category_id + "\"></div>");
-								children_div.attr("aria-expanded","true");
-								var div_parent = $("#cat_"+category_id);
-								children_div.insertAfter(div_parent);
-								div_parent.find(".icon").removeClass("hidden");
-								div_parent.removeClass("collapsed");
-								div_parent.find(".categ_num_child").html("1 subcategories");
-							} 
-							$("#"+category_id).append(elem);
-							$("#"+category_id).addClass("in");
-							elem.slideUp(0).slideDown(400);
-							elem.removeClass("collapsed");
-							elem.attr("aria-expanded", "true");
-						} else{
-							$("#categories-list").append(elem);
-							elem.slideUp(0).slideDown(400);
-						}	
-
-						elem.find(".href_add").on("click", href_add_on_click);
-						elem.find(".href_edit").on("click", href_edit_on_click);
-						elem.find(".href_del").on("click", href_del_on_click);
-						elem.find("#add_name").on("input", add_name_on_input);
-						elem.find("#edit_name").on("input",edit_name_on_input);
-						elem.find("#btn_add").on("click", btn_add_on_click);
-						elem.find("#btn_edit").on("click", btn_edit_on_click);
-						elem.find("#btn_delete").on("click", btn_delete_on_click);
-						updateNum(cat, num_updated);
-					},
-					error: function(xhr, textStatus, errorThrown) {
-						console.log('error');
-					}
-				});
+				console.log('success');
+				var json = JSON.parse(html);
+				insertCategory(category_id, json.html);
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
-				//$(".status_message").html('Failed to rename');
+				show_error('Failed to add');
 			}
 		});
+	}
+
+	function insertCategory(parent_id, html)
+	{
+		var appendCategory = function(parent_div, elem)
+		{
+			var last = true;
+			var name = elem.children('a > .categ_name').text().toLowerCase();
+			parent_div.children('a').each(function()
+			{
+				if ($(this).children('.categ_name').text().toLowerCase() > name) {
+					$(this).before(elem);
+					last = false;
+					return false;
+				}
+			});
+			if (last)
+				parent_div.append(elem);
+		};
+
+		var elem = $(html);
+		if (parent_id != 0) {
+			var div_parent = $("#cat_"+parent_id);
+			if($("#"+parent_id).length == 0)
+			{
+				var children_div = $("<div class=\"list-group collapse in\" id=\"" + parent_id + "\"></div>");
+				children_div.attr("aria-expanded","true");
+				var div_parent = $("#cat_"+parent_id);
+				children_div.insertAfter(div_parent);
+			}
+			div_parent.find(".icon").removeClass("hidden");
+			div_parent.removeClass("collapsed");
+			var parent = $("#"+parent_id);
+			appendCategory(parent,elem);
+
+			if (parent.hasClass('in')) {
+				elem.filter('a').slideUp(0).slideDown(400, function () {
+					$(this).css('display', '');
+				});
+				elem.removeClass("collapsed");
+				elem.attr("aria-expanded", "true");
+			}
+			else
+				parent.collapse('show');
+
+		} else{
+			appendCategory($("#categories-list"),elem);
+			elem.filter('a').slideUp(0).slideDown(400,function(){ $(this).css('display',''); });
+		}
+
+		elem.find(".href_add").on("click", href_add_on_click);
+		elem.find(".href_edit").on("click", href_edit_on_click);
+		elem.find(".href_del").on("click", href_del_on_click);
+		elem.find("#add_name").on("input", add_name_on_input);
+		elem.find("#edit_name").on("input",edit_name_on_input);
+		elem.find("#btn_add").on("click", btn_add_on_click);
+		elem.find("#btn_edit").on("click", btn_edit_on_click);
+		elem.find("#btn_delete").on("click", btn_delete_on_click);
+		updateCounts();
+
+		elem.find('.category').add(elem.filter('.category')).each(function () {
+			var category_id = $(this).attr('data-id');
+			var category = $('[data-id="'+category_id+'"]');
+			var prev = 0;
+			$('.category').each(function() {
+				var id = $(this).attr('data-id');
+				if (id == category_id) return false;
+				prev = id;
+			});
+			var level = category.parentsUntil('#manage-categories','.list-group').length;
+			var str = "";
+			for (var i = 0; i < level; i++) str += "&nbsp;"
+			str += category.children('.categ_name').text();
+			$('#edit_parent option[value="'+prev+'"]').after('<option value="'+category_id+'">'+str+'</option>');
+		});
+
 	}
 
 	$("#btn_add").on('click', btn_add_on_click);
@@ -151,7 +190,10 @@ $(document).ready(function() {
 			return false;
 		}
 
+		var category_id = $('#edit').prop('data-id');
+
 		var new_parent = $("#edit_parent").val();
+
 		if (new_parent == 0) 
 			var post_data = {'id':category_id,'name':name};
 		else 
@@ -163,120 +205,88 @@ $(document).ready(function() {
 			data: post_data,
 			success: function(html) {
 				console.log('success');
-				//location.reload();
-				if(new_parent != 0){
-					
+				if ($('#edit').prop('data-parent') == new_parent)
+				{
+					$('a[data-id="'+category_id+'"] > .categ_name').text(name);
+				}
+				else
+				{
+					$.ajax({
+						url: "../../api/admin/category/info.php",
+						type: "GET",
+						data: {id: category_id},
+						success: function(html) {
+							console.log('success');
+							removeCategory(category_id);
+							insertCategory(new_parent, html);
+						},
+						error: function(xhr, textStatus, errorThrown) {
+							console.log('error');
+							console.log(xhr);
+							show_error('Failed to delete');
+						}
+					});
 				}
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
-				//$(".status_message").html('Failed to rename');
+				show_error('Failed to edit');
 			}
 		});
 	}
 
 	$("#btn_edit").on('click', btn_edit_on_click);
 
-	function updateNum(cat, num) {
-		var par = $('#cat_' + cat.parent().attr('id'));
 
-		var num_child = par.children('.categ_name').children('.categ_num_child');
-
-		if(typeof num_child.html() !== 'undefined') {
-			var new_num = parseInt(num_child.html().replace(' subcategories', '')) + num;
-
-			if(new_num == 0) {
-				num_child.html('');
-				par.children('.icon').slideUp();
-			}
-			else if(isNaN(new_num)){
-				console.log("num: " + num);
-				console.log("parse:" + num_child.html().replace(' subcategories', '')); 
-				num_child.html("1 sub0categories");
-			} else {
-				num_child.html(new_num + " sub1categories");
-			}
-
-			updateNum(par, num);
-		}
-	}
 	function btn_delete_on_click(event) {
-		var cat = $('#cat_' + category_id);
-		
-		var deleting_num_child = cat.children('.categ_name').children('.categ_num_child');
-		var num_deleting = 1;
-
-		if(typeof deleting_num_child.html() !== 'undefined')
-			num_deleting = parseInt(deleting_num_child.html().replace(' subcategories', ''));
-
-		if(isNaN(num_deleting))
-			num_deleting = 1;
+		var category_id = $('#del').prop('data-id');
 		$.ajax({
 			url: "../../api/admin/category/delete.php",
 			type: "POST",
 			data: {id: category_id},
 			success: function(html) {
 				console.log('success');
-				updateNum(cat, -num_deleting);
-				if($('#'+ category_id).length == 0)
-					$('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); });
-				else $('#'+ category_id).slideUp("normal", function() { $(this).remove(); $('#cat_' + category_id).slideUp("normal", function() { $(this).remove(); } );} );
+				removeCategory(category_id);
 			},
 			error: function(xhr, textStatus, errorThrown) {
 				console.log('error');
 				console.log(xhr);
-				//$(".status_message").html('Failed to rename');
+				show_error('Failed to delete');
 			}
 		});
 	}
 	$("#btn_delete").on('click', btn_delete_on_click);
+
+	function removeCategory(category_id)
+	{
+		var category = $('#cat_' + category_id);
+		var children_div = $('#'+ category_id);
+		var parent_category_id = category.parent().prop('id');
+		var parent_category = $("[data-id='"+parent_category_id+"'");
+
+		children_div.find('.category').add(category).each(function () {
+			var id_to_remove = $(this).attr('data-id');
+			$('#edit_parent option[value='+id_to_remove+']').remove();
+		});
+
+
+		var fixClass = function()
+		{
+			var parent_children = $('#'+parent_category_id);
+			if (parent_children.children().length == 0)
+				parent_category.find(".icon").addClass("hidden");
+		};
+
+		if (children_div.length == 0)
+			category.slideUp("normal", function()
+			{ $(this).remove(); fixClass(); updateCounts(); });
+		else children_div.slideUp("normal", function()
+		{ $(this).remove(); category.slideUp("normal", function()
+		{ $(this).remove(); fixClass(); updateCounts(); } );} );
+	}
+	
+	function show_error(error) {
+		$("#error_description").text(error);
+		$('#error').modal('show');
+	}
 });
-/*
-<a href="#315" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_315" style="background-color: rgb(255,255,255);">
-	<span class="icon hidden"></span>
-	<span class="categ_name">
-		zzzz
-		<span class="categ_num_child"></span>
-	</span>
-	<span class="pull-right">
-		<button class="href_add" data-toggle="modal" data-target="#add">
-			<span class="hidden category_id">315</span>
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
-		<button class="href_edit" data-toggle="modal" data-target="#edit">
-			<span class="hidden category_id">315</span>
-			<span class="hidden category_name">zzzz</span>
-			<span class="hidden category_parent"></span>
-			<span class="glyphicon glyphicon-pencil"></span>
-		</button>
-		<button class="href_del" data-toggle="modal" data-target="#del">
-			<span class="hidden category_id">315</span>
-			<span class="hidden category_name">zzzz</span>
-			<span class="glyphicon glyphicon-trash"></span>
-		</button>
-	</span>
-</a>
-<a href="#316" class="list-group-item collapsed clearfix" data-toggle="collapse" id="cat_316" style="background-color: rgb(255,255,255);">
-	<span class="icon hidden"></span>
-	<span class="categ_name">
-		zzzzzzzz
-		<span class="categ_num_child"></span>
-	</span>
-	<span class="pull-right">
-		<button class="href_add" data-toggle="modal" data-target="#add">
-			<span class="hidden category_id">316</span>
-			<span class="glyphicon glyphicon-plus"></span>
-		</button>
-		<button class="href_edit" data-toggle="modal" data-target="#edit">
-			<span class="hidden category_id">316</span>
-			<span class="hidden category_name">zzzzzzzz</span>
-			<span class="hidden category_parent"></span>
-			<span class="glyphicon glyphicon-pencil"></span>
-		</button>
-		<button class="href_del" data-toggle="modal" data-target="#del">
-			<span class="hidden category_id">316</span>
-			<span class="hidden category_name">zzzzzzzz</span>
-			<span class="glyphicon glyphicon-trash"></span>
-		</button>
-	</span>
-</a>*/
