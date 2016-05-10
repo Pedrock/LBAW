@@ -141,3 +141,7 @@
   left: 2px;
   top: 2px;
 }
+
+#manage-categories .modal * {
+    border-radius: 0;
+}
