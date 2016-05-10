@@ -1,13 +1,17 @@
 $(document).ready(function() {
-	$("#files_btn").on("click", function(event) {
-		event.stopPropagation();
-		event.preventDefault();
-		$("#files").click();
-	});
+	var redirect_to = null;
 
 	$("#btn-edit-product").on("click", function(event) {
 		event.stopPropagation();
 		event.preventDefault();
+		redirect_to = null;
+		$("#main_form").submit();
+	});
+
+	$("#edit_photos").on("click", function(event) {
+		event.stopPropagation();
+		event.preventDefault();
+		redirect_to = "photos.php?id=" + $("#id").val();
 		$("#main_form").submit();
 	});
 
@@ -44,7 +48,10 @@ $(document).ready(function() {
 	function complete(xhr) {
 		console.log(xhr.responseText);
 		if (Math.floor(xhr.status / 100) == 2) {
-			$("#edit").modal("toggle");
+			if(redirect_to != null)
+				window.location.href = redirect_to;
+			else
+				$("#edit").modal("toggle");
 		} else if (xhr.responseJSON) {
 			if (xhr.responseJSON.errors) {
 				for (input in xhr.responseJSON.errors)
@@ -58,7 +65,7 @@ $(document).ready(function() {
 	}
 
 	$("#main_form").on("submit", function(event) {
-				event.preventDefault();
+		event.preventDefault();
 		event.stopPropagation();
 
 		var name = $('#name').val();

@@ -13,7 +13,7 @@
 						</div>
 					</div>
 					<br>
-					<a href="photos.php?id={$id}" class="btn btn-info" role="button"><span class="glyphicon glyphicon-picture"></span> Edit Photos</a>
+					<a id="edit_photos" href="photos.php?id={$id}" class="btn btn-info" role="button"><span class="glyphicon glyphicon-picture"></span> Edit Photos</a>
 					<br><br>
 					<input type="hidden" class="form-control" id="id" name="id" value="{$product.id}">
 					<input type="file" id="files" name="files[]" multiple>
