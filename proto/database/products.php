@@ -1,11 +1,11 @@
 <?php
   
-  function getProduct($id) {
+  function getProduct($id,$get_if_deleted) {
     global $conn;
     $stmt = $conn->prepare(
       "SELECT idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price, weight, isdeleted
         FROM Product,get_product_discount_and_price(idProduct)
-        WHERE idProduct = ?;");
+        WHERE idProduct = ?".($get_if_deleted ? "" : " AND isDeleted = FALSE" ).";");
     $stmt->execute(array($id));
     return $stmt->fetch();
   }
@@ -53,6 +53,7 @@
         (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount
         FROM Product P
         LEFT JOIN Discount USING(idProduct)
+        WHERE isDeleted = FALSE 
         ORDER BY discount DESC, purchases DESC
         LIMIT ? OFFSET ?) f
         LEFT JOIN Photo ON Photo.idProduct = f.idProduct AND photo_order = 1;");
@@ -67,15 +68,16 @@
     global $conn;
     if ($order_by == "") 
       $stmt = $conn->prepare(
-       "SELECT P.idProduct AS id, name, get_product_price(P.idProduct) price, product_count, location AS photo
+       "SELECT results.idProduct AS id, name, get_product_price(results.idProduct) price, product_count, location AS photo
         FROM
-          (SELECT idProduct, COUNT(idProduct) OVER () AS product_count
-          FROM product_search, plainto_tsquery(?) AS q
-          WHERE (tsv @@ q)
+          (SELECT idProduct, name, COUNT(idProduct) OVER () AS product_count
+          FROM product_search
+          INNER JOIN Product P USING(idProduct)
+          CROSS JOIN plainto_tsquery(?) AS q
+          WHERE (tsv @@ q) AND isDeleted = FALSE
           ORDER BY ts_rank_cd(tsv, q) DESC
           LIMIT ? OFFSET ?) results
-        INNER JOIN Product P USING(idProduct)
-        LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1;");
+        LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
     else
       $stmt = $conn->prepare(
        "SELECT results.idProduct AS id, name, price, product_count, location AS photo
@@ -83,7 +85,7 @@
           (SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS product_count
           FROM product_search
           INNER JOIN Product P USING(idProduct)
-          WHERE (tsv @@ plainto_tsquery(?))
+          WHERE (tsv @@ plainto_tsquery(?)) AND isDeleted = FALSE
           ORDER BY $order_by
           LIMIT ? OFFSET ?) results
         LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
@@ -274,41 +276,11 @@
     }
   }
 
-  function createEmptyProduct() {
-        global $conn;
-    $stmt = $conn->prepare("INSERT INTO Product(name, price, stock, weight, description) VALUES (?, ?, ?, ?, ?) RETURNING idProduct");
-    $stmt->execute(array($name, $price, $stock, $weight, $description));
-    $product_id = $stmt->fetch()['idproduct'];
-
-    if($categories != null) {
-      $query = "INSERT INTO CategoryProduct (idProduct, idCategory) VALUES ";
-      $first = true;
-      $arr = array();
-      foreach($categories as $cat) {
-        if(!$first)
-          $query = $query . ',';
-        else
-          $first = false;
-
-        $query = $query . '(?,?)';
-        array_push($arr, $product_id);
-        array_push($arr, $cat);
-      }
-
-      $stmt = $conn->prepare($query);
-      $stmt->execute($arr);
-    }
-
-    return $product_id;
-  }
-
-
   function addProductPhoto($product_id, $order, $file) {
     global $conn;
     $stmt = $conn->prepare("SELECT add_photo(?, ?, ?)");
     $stmt->execute(array($product_id, $order, $file));
   }
-
 
   function editProductPhoto($product_id, $order, $new_order) {
     global $conn;
