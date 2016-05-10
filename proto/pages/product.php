@@ -4,7 +4,7 @@ include_once($BASE_DIR .'database/products.php');
 if (isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$product = getProduct($id);
+	$product = getProduct($id, false);
 	if ($product === false)
 	{
 		http_response_code(404);

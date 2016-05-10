@@ -15,6 +15,8 @@ $(document).ready(function() {
 		window.location.href = "list.php";
 	});
 
+    CKEDITOR.replace('description');
+
 	function alert_error(error) {
 		$("#error").modal('toggle');
 			console.log(error);
@@ -63,7 +65,7 @@ $(document).ready(function() {
 		var price = $('#price').val();
 		var stock = $('#stock').val();
 		var weight = $('#weight').val();
-		var description = $('#description').val();
+		var description = CKEDITOR.instances.description.document.getBody().getHtml();
 
 		if (name === "")
 			input_error("#name", "Please enter a product name");
@@ -84,13 +86,16 @@ $(document).ready(function() {
 			input_error("#categories", "Please select at least one category");
 		}
 
+		var fd = new FormData(this);
+		fd.append('description', description);
+
 		if ($(".error_feedback").size() !== 0) {
 			return;
 		} else {
 			$.ajax({
 				url: "../../../api/admin/product/edit.php",
 				type: "POST",
-				data: new FormData(this),
+				data: fd,
 				contentType: false,
 				dataType: 'json',
 				cache: false,

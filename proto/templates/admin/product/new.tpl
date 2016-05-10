@@ -105,6 +105,6 @@
 	</div>
 </div>
 
-{assign var=js value=['product/new.js']}
+{assign var=js value=['product/new.js', '../vendor/ckeditor/ckeditor.js']}
 
 {include file='admin/common/footer.tpl'}

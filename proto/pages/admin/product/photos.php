@@ -6,7 +6,7 @@
 
 	if (isset($_GET['id'])) {
 		$id = $_GET['id'];
-		$product = getProduct($id);
+		$product = getProduct($id, true);
 		if ($product === false) {
 			http_response_code(404);
 		} else {

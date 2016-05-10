@@ -99,6 +99,6 @@
 
 <script> id = '{$id}'; </script> <!-- FIXME -->
 
-{assign var=js value=['product/edit.js']}
+{assign var=js value=['product/edit.js', '../vendor/ckeditor/ckeditor.js']}
 
 {include file='admin/common/footer.tpl'}
