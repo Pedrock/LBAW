@@ -12,6 +12,9 @@
 							<label><input type="checkbox" name="deleted" {if $product.isdeleted} checked="checked"{/if}>Hide product</label>
 						</div>
 					</div>
+					<br>
+					<a href="photos.php?id={$id}" class="btn btn-info" role="button"><span class="glyphicon glyphicon-picture"></span> Edit Photos</a>
+					<br><br>
 					<input type="hidden" class="form-control" id="id" name="id" value="{$product.id}">
 					<input type="file" id="files" name="files[]" multiple>
 					<div id="edit-product" class="row">
