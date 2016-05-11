@@ -66,29 +66,18 @@
     $order_by = processProductOrderBy($order_by);
     $offset = ($page-1)*$limit;
     global $conn;
-    if ($order_by == "") 
-      $stmt = $conn->prepare(
-       "SELECT results.idProduct AS id, name, get_product_price(results.idProduct) price, product_count, location AS photo
-        FROM
-          (SELECT idProduct, name, COUNT(idProduct) OVER () AS product_count
-          FROM product_search
-          INNER JOIN Product P USING(idProduct)
-          CROSS JOIN plainto_tsquery(?) AS q
-          WHERE (tsv @@ q) AND isDeleted = FALSE
-          ORDER BY ts_rank_cd(tsv, q) DESC
-          LIMIT ? OFFSET ?) results
-        LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
-    else
-      $stmt = $conn->prepare(
-       "SELECT results.idProduct AS id, name, price, product_count, location AS photo
-        FROM
-          (SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS product_count
-          FROM product_search
-          INNER JOIN Product P USING(idProduct)
-          WHERE (tsv @@ plainto_tsquery(?)) AND isDeleted = FALSE
-          ORDER BY $order_by
-          LIMIT ? OFFSET ?) results
-        LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
+    if ($order_by == "") $order_by = "ts_rank_cd(tsv, q) DESC";
+    $stmt = $conn->prepare(
+    	"SELECT results.idProduct AS id, name, price, product_count, location AS photo
+    	FROM
+    	(SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS product_count
+    	FROM product_search
+    	INNER JOIN Product P USING(idProduct)
+    	CROSS JOIN plainto_tsquery(?) AS q
+    	WHERE (tsv @@ q) AND isDeleted = FALSE
+    	ORDER BY $order_by
+    	LIMIT ? OFFSET ?) results
+    	LEFT JOIN Photo ON results.idProduct = Photo.idProduct and photo_order = 1;");
 
     $stmt->execute(array($query,$limit,$offset));
     return $stmt->fetchAll();
