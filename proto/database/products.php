@@ -48,15 +48,15 @@
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT f.idProduct AS id, name, discount, get_product_price(f.idProduct) price, location AS photo
+      "SELECT f.idProduct AS id, name, discount, get_product_price(f.idProduct) price, photo
         FROM
-        (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount
+        (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount, location AS photo
         FROM Product P
         LEFT JOIN Discount USING(idProduct)
+        LEFT JOIN Photo ON Photo.idProduct = P.idProduct AND photo_order = 1
         WHERE isDeleted = FALSE 
         ORDER BY discount DESC, purchases DESC
-        LIMIT ? OFFSET ?) f
-        LEFT JOIN Photo ON Photo.idProduct = f.idProduct AND photo_order = 1;");
+        LIMIT ? OFFSET ?) AS f;");
     $stmt->execute(array($limit,$offset));
     return $stmt->fetchAll();
   }

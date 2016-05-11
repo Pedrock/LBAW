@@ -33,7 +33,6 @@
 		{foreachelse}
 		<div class="text-center">No featured products yet.</div>
 		{/foreach}
-
 	</div>
 </div>
 {if $n_pages > 0}

@@ -24,18 +24,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="?q={$query}&page=1">&laquo; First</a></li>
-		<li><a href="?q={$query}&page={$page-1}">&lsaquo; Previous</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page=1">&laquo; First</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$page-1}">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="?q={$query}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="?q={$query}{if $order}&order={$order}{/if}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="?q={$query}&page={$page+1}">Next &rsaquo;</a></li>
-		<li><a href="?q={$query}&page={$n_pages}">Last &raquo;</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$n_pages}">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -74,18 +74,18 @@
 <div class="text-center">
 	<ul class="pagination pagination-sm">
 		{if $page != $startpage} 
-		<li><a href="?q={$query}&page=1">&laquo; First</a></li>
-		<li><a href="?q={$query}&page={$page-1}">&lsaquo; Previous</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page=1">&laquo; First</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$page-1}">&lsaquo; Previous</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 		<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 		{/if}
 		{for $p=$startpage to $endpage}
-		<li{if $p == $page} class="active"{/if}><a href="?q={$query}&page={$p}">{$p}</a></li>
+		<li{if $p == $page} class="active"{/if}><a href="?q={$query}{if $order}&order={$order}{/if}&page={$p}">{$p}</a></li>
 		{/for}
 		{if $page != $endpage}
-		<li><a href="?q={$query}&page={$page+1}">Next &rsaquo;</a></li>
-		<li><a href="?q={$query}&page={$n_pages}">Last &raquo;</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$page+1}">Next &rsaquo;</a></li>
+		<li><a href="?q={$query}{if $order}&order={$order}{/if}&page={$n_pages}">Last &raquo;</a></li>
 		{else}
 		<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 		<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
