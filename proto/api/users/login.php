@@ -30,7 +30,7 @@
         $cookie = $user['iduser'] . ':' . $token;
         $mac = hash_hmac('sha256', $cookie, SECRET_KEY);
         $cookie .= ':' . $mac;
-        setcookie('rememberme', $cookie, 2147483647, '/');
+        setcookie('rememberme', $cookie, 2147483647, $BASE_URL);
       }
 
     }
