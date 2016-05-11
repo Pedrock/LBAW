@@ -5,6 +5,7 @@
 		<div id="inside-footer" class="container">
 			<a href="contact_us.php"><span class="glyphicon glyphicon-phone-alt"></span> Contact Us</a>
 			<a href="about_us.php"> About Us</a>
+			<a href="javascript:void(0)" class="pull-right">Load time: {round(microtime(true) - $load_start, 3)} s</a>
 		</div>
 	</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

@@ -14,7 +14,7 @@
 						<div class="input-group-btn">
 							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{$category_name}&nbsp;<span class="caret"></span></button>
 							<ul class="dropdown-menu dropdown-menu-right">
-								<li><a href="list.php">Any</a></li>
+								<li><a href="list.php?{if $search}&search={$search}{/if}{if $order}&order={$order}{/if}">Any</a></li>
 								{foreach from=$categories item=cat}
 									<li><a href="list.php?category={$cat.id}{if $search}&search={$search}{/if}{if $order}&order={$order}{/if}">{for $foo=0 to $cat.level}&nbsp;{/for}{$cat.name}</a></li>
 								{/foreach}
