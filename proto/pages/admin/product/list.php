@@ -42,7 +42,14 @@
 
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	$limit = isset($_GET['limit']) ? $_GET['limit'] : 16;
-	$products = getCategoryProducts($category,$limit,$page,$_GET['order']);
+
+	if(!$search)
+		$products = getCategoryProducts($category,$limit,$page,$_GET['order']);
+	else
+		$products = searchProducts($search, $limit, $page, $_GET['order'], $category);
+
+	var_dump($products);
+
 	$order_value = (processProductOrderBy($_GET['order']) == "" ? null : $_GET['order']);
 	
 	extract(pagination($products,$limit,$page));
