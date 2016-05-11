@@ -2,7 +2,7 @@
 	include_once('../../../config/init.php');
 	include_once($BASE_DIR . 'database/products.php');
 
-	include_once($BASE_DIR .'lib/pagination.php');  
+	include_once($BASE_DIR . 'lib/pagination.php');  
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
 	// Categories
@@ -38,7 +38,6 @@
 		$category_name = 'Categories';
 
 	$search = (isset($_GET['search']) && $_GET['search'] != "") ? $_GET['search'] : null;
-	// TODO search by category and query
 
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	$limit = isset($_GET['limit']) ? $_GET['limit'] : 16;
@@ -47,8 +46,6 @@
 		$products = getCategoryProducts($category,$limit,$page,$_GET['order']);
 	else
 		$products = searchProducts($search, $limit, $page, $_GET['order'], $category);
-
-	var_dump($products);
 
 	$order_value = (processProductOrderBy($_GET['order']) == "" ? null : $_GET['order']);
 	

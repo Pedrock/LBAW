@@ -18,7 +18,9 @@ DROP TABLE IF EXISTS ZipCode CASCADE;
 DROP TABLE IF EXISTS City CASCADE;
 DROP TABLE IF EXISTS Coupon CASCADE;
 DROP TABLE IF EXISTS CategoryProduct CASCADE;
-DROP TABLE IF EXISTS CarrosselPhoto CASCADE;
+DROP TABLE IF EXISTS CarouselPhoto CASCADE;
+DROP TABLE IF EXISTS password_recovery;
+DROP TABLE IF EXISTS login_tokens;
 DROP TYPE IF EXISTS OrderStatus CASCADE;
 DROP TYPE IF EXISTS ProductOrderStatus CASCADE;
  
@@ -31,17 +33,17 @@ CREATE TABLE Product(
 	description TEXT NOT NULL,
 	name TEXT NOT NULL,
 	price NUMERIC(12,2) NOT NULL CHECK(price > 0), 
-    purchases INTEGER NOT NULL DEFAULT 0,
+        purchases INTEGER NOT NULL DEFAULT 0,
 	stock INTEGER NOT NULL CHECK(stock >= 0),
 	weight INTEGER NOT NULL CHECK(weight > 0),
-	isDeleted BOOLEAN DEFAULT FALSE
+        isDeleted BOOLEAN DEFAULT FALSE
 );
  
 CREATE TABLE Photo(
 	idProduct INTEGER NOT NULL REFERENCES Product(idProduct),
 	photo_order INTEGER NOT NULL,
 	location TEXT NOT NULL,
-	CONSTRAINT PhotoPrimary PRIMARY KEY (idProduct, photo_order)
+	CONSTRAINT PhotoPrimary PRIMARY KEY (idProduct, photo_order) DEFERRABLE INITIALLY DEFERRED
 );
  
 CREATE TABLE MetadataCategory(
@@ -59,7 +61,8 @@ CREATE TABLE Metadata(
 CREATE TABLE Category(
 	idCategory SERIAL PRIMARY KEY,
 	name TEXT NOT NULL,
-	idSuperCategory INTEGER REFERENCES Category(idCategory)
+	idSuperCategory INTEGER REFERENCES Category(idCategory) ON DELETE CASCADE,
+	CHECK (idCategory != idSuperCategory) 
 );
  
 CREATE TABLE ShippingCosts(
@@ -72,7 +75,7 @@ CREATE TABLE ShippingCosts(
 CREATE TABLE Users(
 	idUser SERIAL PRIMARY KEY,
 	email TEXT NOT NULL UNIQUE,
-	isAdmin BOOLEAN NOT NULL,
+	isAdmin BOOLEAN NOT NULL DEFAULT FALSE,
 	isDeleted BOOLEAN NOT NULL DEFAULT FALSE,
 	nif TEXT NOT NULL,
 	password TEXT NOT NULL,
@@ -153,15 +156,15 @@ CREATE TABLE Orders(
 	shipping_zip1 TEXT NOT NULL,
 	shipping_zip2 TEXT NOT NULL,
 	shippingDate DATE,
-	totalPrice NUMERIC(12,2) NOT NULL CHECK(totalPrice >= 0),
-	shippingCost NUMERIC(12,2) NOT NULL CHECK(shippingCost >= 0),
+	totalPrice NUMERIC(12,2) NOT NULL DEFAULT(0) CHECK(totalPrice >= 0),
+	shippingCost NUMERIC(12,2) NOT NULL DEFAULT(0) CHECK(shippingCost >= 0),
 	idUser INTEGER NOT NULL REFERENCES Users(idUser),
 	idCoupon INTEGER REFERENCES Coupon(idCoupon)
 );
  
 CREATE TABLE CategoryProduct(
-	idCategory INTEGER NOT NULL REFERENCES Category(idCategory),
-	idProduct  INTEGER NOT NULL REFERENCES Product(idProduct),
+	idCategory INTEGER NOT NULL REFERENCES Category(idCategory) ON DELETE CASCADE,
+	idProduct  INTEGER NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
 	CONSTRAINT CategoryProductPrimary PRIMARY KEY (idCategory, idProduct)
 );
  
@@ -202,34 +205,37 @@ CREATE TABLE Favorite(
 	product_position SERIAL NOT NULL,
 	CONSTRAINT FavoritePrimary PRIMARY KEY (idProduct, IdUser)
 );
-
-CREATE TABLE CarrosselPhoto(
-	idCarrosselPhoto SERIAL NOT NULL PRIMARY KEY,
-    active BOOLEAN NOT NULL DEFAULT TRUE,
+ 
+CREATE TABLE CarouselPhoto(
+	idCarouselPhoto SERIAL NOT NULL PRIMARY KEY,
+        active BOOLEAN NOT NULL DEFAULT TRUE,
 	photo_order INTEGER NOT NULL UNIQUE,
-	location TEXT NOT NULL UNIQUE
+	location TEXT NOT NULL UNIQUE,
+	link TEXT
+);
+ 
+CREATE TABLE login_tokens(
+	idUser INTEGER NOT NULL REFERENCES Users(idUser),
+	token TEXT NOT NULL
+);
+ 
+CREATE TABLE password_recovery(
+	idUser INTEGER PRIMARY KEY REFERENCES Users(idUser),
+	token TEXT NOT NULL,
+	expires TIMESTAMP NOT NULL DEFAULT now() + INTERVAL '1 day'
 );
 
-CREATE INDEX CouponCode ON Coupon (code);
- 
+CREATE UNIQUE INDEX UsernameLower ON Users(LOWER(username));
+CREATE UNIQUE INDEX EmailLower ON Users(LOWER(email));
+CREATE INDEX CouponCode ON Coupon USING hash(code);
 CREATE INDEX CouponStartdate ON Coupon (startdate);
- 
 CREATE INDEX CouponEnddate ON Coupon (enddate);
- 
 CREATE INDEX DiscountProduct ON Discount (idproduct);
- 
 CREATE INDEX DiscountStartdate ON Discount (startdate);
- 
 CREATE INDEX DiscountEnddate ON Discount (enddate);
- 
 CREATE INDEX AddressUser ON Address(idUser);
- 
 CREATE INDEX OrderUser ON Orders(idUser);
- 
 CREATE INDEX FavoriteUser ON Favorite(idUser,product_position);
- 
 CREATE INDEX FavoriteListUser ON FavoriteList(idUser,idFavoriteList);
-
 CREATE INDEX ProductOrderPosition ON ProductOrder(idOrder,product_position);
-
 CREATE INDEX ProductCartPosition ON ProductCart(idUser,product_position);
