@@ -37,6 +37,9 @@
 	if(!isset($category_name))
 		$category_name = 'Categories';
 
+	$search = (isset($_GET['search']) && $_GET['search'] != "") ? $_GET['search'] : null;
+	// TODO search by category and query
+
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
 	$limit = isset($_GET['limit']) ? $_GET['limit'] : 16;
 	$products = getCategoryProducts($category,$limit,$page,$_GET['order']);
@@ -45,6 +48,7 @@
 	extract(pagination($products,$limit,$page));
 
 	$smarty->assign('category', $category);
+	$smarty->assign('search', $search);
 	$smarty->assign('category_name', $category_name);
 	$smarty->assign('breadcrumbs', $breadcrumbs);
 	$smarty->assign('page', $page);

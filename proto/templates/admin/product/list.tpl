@@ -16,11 +16,11 @@
 							<ul class="dropdown-menu dropdown-menu-right">
 								<li><a href="list.php">Any</a></li>
 								{foreach from=$categories item=cat}
-									<li><a href="list.php?category={$cat.id}">{for $foo=0 to $cat.level}&nbsp;{/for}{$cat.name}</a></li>
+									<li><a href="list.php?category={$cat.id}{if $search}&search={$search}{/if}{if $order}&order={$order}{/if}">{for $foo=0 to $cat.level}&nbsp;{/for}{$cat.name}</a></li>
 								{/foreach}
 							</ul>
 						</div>
-						<input type="text" class="form-control" name="search" placeholder="Search...">
+						<input type="text" class="form-control" name="search" id="search_query" placeholder="Search..." value="{if $search}{$search}{/if}">
 						<span class="input-group-btn">
 							<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
 						</span>
@@ -43,20 +43,20 @@
 				<div class="text-center">
 					<ul class="pagination pagination-sm">
 						{if $page != $startpage} 
-							<li><a href="?page=1{if $order}&order={$order}{/if}&category={$category}">&laquo; First</a></li>
-							<li><a href="?page={$page-1}{if $order}&order={$order}{/if}&category={$category}">&lsaquo; Previous</a></li>
+							<li><a href="?page=1{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">&laquo; First</a></li>
+							<li><a href="?page={$page-1}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">&lsaquo; Previous</a></li>
 						{else}
 							<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 							<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 						{/if}
 
 						{for $p=$startpage to $endpage}
-							<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}&category={$category}">{$p}</a></li>
+							<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">{$p}</a></li>
 						{/for}
 
 						{if $page != $endpage}
-							<li><a href="?page={$page+1}{if $order}&order={$order}{/if}&category={$category}">Next &rsaquo;</a></li>
-							<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}&category={$category}">Last &raquo;</a></li>
+							<li><a href="?page={$page+1}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">Next &rsaquo;</a></li>
+							<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">Last &raquo;</a></li>
 						{else}
 							<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 							<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -91,20 +91,20 @@
 					<div class="text-center">
 						<ul class="pagination pagination-sm">
 							{if $page != $startpage} 
-								<li><a href="?page=1{if $order}&order={$order}{/if}&category={$category}">&laquo; First</a></li>
-								<li><a href="?page={$page-1}{if $order}&order={$order}{/if}&category={$category}">&lsaquo; Previous</a></li>
+								<li><a href="?page=1{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">&laquo; First</a></li>
+								<li><a href="?page={$page-1}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">&lsaquo; Previous</a></li>
 							{else}
 								<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 								<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 							{/if}
 
 							{for $p=$startpage to $endpage}
-								<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}&category={$category}">{$p}</a></li>
+								<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">{$p}</a></li>
 							{/for}
 
 							{if $page != $endpage}
-								<li><a href="?page={$page+1}{if $order}&order={$order}{/if}&category={$category}">Next &rsaquo;</a></li>
-								<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}&category={$category}">Last &raquo;</a></li>
+								<li><a href="?page={$page+1}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">Next &rsaquo;</a></li>
+								<li><a href="?page={$n_pages}{if $order}&order={$order}{/if}{if $search}&search={$search}{/if}&category={$category}">Last &raquo;</a></li>
 							{else}
 								<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 								<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -120,6 +120,7 @@
 
 <script>
 var category = "{$category}";
+var search = "{$search}";
 </script>
 
 {assign var=js value=['product/list.js']}
