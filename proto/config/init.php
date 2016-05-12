@@ -1,4 +1,5 @@
 <?php
+  $load_start = microtime(true);
   define('SECRET_KEY','MqTrC7HetY5YWvmdVAtQ2h4akgqsfNN38BwGg11MPiaRQelTIBCkSqorwS8FG9mI');
   session_set_cookie_params(3600, '/~lbaw1564/'); //FIXME
   session_start();
