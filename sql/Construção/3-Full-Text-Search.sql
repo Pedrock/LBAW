@@ -95,3 +95,10 @@ CREATE TRIGGER OnMetadataTrigger
 AFTER INSERT OR UPDATE OR DELETE ON Metadata
 FOR EACH ROW EXECUTE PROCEDURE
 product_search_metadata_update();
+
+
+
+
+
+
+

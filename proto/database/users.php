@@ -40,14 +40,14 @@
   function storeUserLoginToken($user_id, $token)
   {
     global $conn;
-    $stmt = $conn->prepare('INSERT INTO login_tokens(user_id,token) VALUES (?,?)');
+    $stmt = $conn->prepare('INSERT INTO login_tokens(idUser,token) VALUES (?,?)');
     $stmt->execute(array($user_id, bin2hex($token)));
   }
 
   function isValidLoginToken($user_id, $token)
   {
     global $conn;
-    $stmt = $conn->prepare('SELECT token FROM login_tokens WHERE user_id = ? AND token = ?');
+    $stmt = $conn->prepare('SELECT token FROM login_tokens WHERE idUser = ? AND token = ?');
     $stmt->execute(array($user_id, bin2hex($token)));
     return $stmt->fetch();
   }
@@ -55,7 +55,7 @@
   function deleteLoginToken($user_id, $token)
   {
     global $conn;
-    $stmt = $conn->prepare('DELETE FROM login_tokens WHERE user_id = ? AND token = ?');
+    $stmt = $conn->prepare('DELETE FROM login_tokens WHERE idUser = ? AND token = ?');
     $stmt->execute(array($user_id, bin2hex($token)));
   }
 
