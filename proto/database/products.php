@@ -287,6 +287,7 @@
     global $conn;
     $stmt = $conn->prepare("SELECT delete_photo(?, ?)");
     $stmt->execute(array($product_id, $order));
+    return $stmt->fetch()['delete_photo'];
   }
 
   function createCategory($name, $parent) {

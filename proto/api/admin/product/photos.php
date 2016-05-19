@@ -1,4 +1,9 @@
 <?php
+	$thumbSize = 280;
+	$maxSize = 1000;
+
+	$images_path = '../../../images/products/';
+
 	include_once('../../../config/init.php');
 	include_once($BASE_DIR . 'database/products.php');
 
@@ -24,8 +29,6 @@
 			return_error('No file specified for action ' . $action);
 
 		// The file
-		$images_path = '../../../images/products/';
-
 		$source = $_FILES['file']['tmp_name'];
 
 		if($source == '')
@@ -38,26 +41,21 @@
 
 		$img_size = filesize($source);
 
-		if($img_size > 1024000) // FIXME resize photo + generate thumbnails?
-			return_error('The photo is too large (>1MB)');
-
-		$file_extension = str_ireplace('image/', '', $img_info['mime']);
-
-		// Generate random, unique name
-		$photo_name = bin2hex(openssl_random_pseudo_bytes(8));
-		while(file_exists($images_path . $photo_name . '.' . $file_extension))
-			$photo_name = bin2hex(openssl_random_pseudo_bytes(8));
+		// Generate name, based on photo
+		$photo_name = $id . "_" . md5_file($source) . ".jpg";
+		if(file_exists($images_path . $photo_name))
+			return_error("Photo already exists");
 
 		try {
-			addProductPhoto($id, $order, $photo_name . '.' . $file_extension);
+			addProductPhoto($id, $order, $photo_name);
 			http_response_code(201);
 		} catch (PDOException $e) {
 			return_error("An error occurred while adding the photo. Please try again." . $e->getMessage());
 		}
 
-		echo json_encode(array('success' => 'success'));
+		processImage($source, $images_path, $photo_name);
 
-		move_uploaded_file($source, $images_path . $photo_name . '.' . $file_extension);
+		echo json_encode(array('success' => $photo_name));
 	} else if($action == 'edit') {
 		if(!isset($_POST['new_order']))
 			return_error('No new_order specified');
@@ -74,7 +72,9 @@
 		echo json_encode(array('success' => 'success'));
 	} else if($action == 'delete') {
 		try {
-			deleteProductPhoto($id, $order);
+			$filename = deleteProductPhoto($id, $order);
+			unlink($images_path . $filename);
+			unlink($images_path . 'thumb_' . $filename);
 			http_response_code(201);
 		} catch (PDOException $e) {
 			return_error("An error occurred while deleting the photo. Please try again." . $e->getMessage());
@@ -89,5 +89,42 @@
 		http_response_code(422);
 		echo json_encode(array('error' => $error));
 		die();
+	}
+
+	function processImage($src, $dst_path, $dst_file) {
+		global $thumbSize;
+		global $maxSize;
+
+		list($width, $height) = getimagesize($src);
+
+		$imgContent = file_get_contents($src);
+		$final_img = $img = imagecreatefromstring($imgContent);
+
+		if ($width > $height) {
+			$x = ($width - $height) / 2;
+			$y = 0;
+			$smallest = $height;
+		} else {
+			$x = 0;
+			$y = ($height - $width) / 2;
+			$smallest = $width;
+		}
+
+		$thumb = imagecreatetruecolor($thumbSize, $thumbSize);
+		imagecopyresampled($thumb, $img, 0, 0, $x, $y, $thumbSize, $thumbSize, $smallest, $smallest);
+
+		imagejpeg($thumb, $dst_path . 'thumb_' . $dst_file);
+
+		if($width > $maxSize || $height > $maxSize) {
+			$percentage = $maxSize / ($width > $maxSize ? $width : $height);
+
+			$newwidth = $width * $percentage;
+			$newheight = $height * $percentage;
+		
+			$final_img = imagecreatetruecolor($newwidth, $newheight);
+			imagecopyresized($final_img, $img, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+		}
+
+		imagejpeg($final_img, $dst_path . $dst_file);
 	}
 ?>
