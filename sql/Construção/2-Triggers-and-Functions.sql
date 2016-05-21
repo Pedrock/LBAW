@@ -22,10 +22,14 @@ CREATE TRIGGER ProductAverageScore AFTER INSERT OR DELETE OR UPDATE
     FOR EACH ROW
     EXECUTE PROCEDURE update_product_average_score();
 -- Add product to cart
-CREATE OR REPLACE FUNCTION add_to_cart(userId INTEGER, productId INTEGER, quantity INTEGER) RETURNS void AS $BODY$
+CREATE OR REPLACE FUNCTION add_to_cart(user_id INTEGER, product_id INTEGER, quantity_product INTEGER) RETURNS void AS $BODY$
 BEGIN
-	INSERT INTO ProductCart(userId,productId,quantity,price) 
-		VALUES (userId,productId,quantity, (SELECT price FROM Product WHERE productId = productId));
+	IF EXISTS (SELECT * FROM ProductCart WHERE idProduct = product_id AND idUser = user_id) THEN
+		UPDATE ProductCart SET quantity = quantity + quantity_product WHERE idProduct = product_id AND idUser = user_id;
+	ELSE
+		INSERT INTO ProductCart(idUser,idProduct,quantity,price) 
+			VALUES (user_id,product_id,quantity_product, (SELECT price FROM Product WHERE idProduct = product_id));
+	END IF;
 END;
 $BODY$
 LANGUAGE plpgsql;
