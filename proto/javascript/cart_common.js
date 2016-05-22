@@ -43,7 +43,7 @@ function showCartModal(product)
 	var modal = $('#cartModal');
 	modal.find('.link-p').attr('href',link);
 	modal.find('img').attr('src',image);
-	modal.find('modal-product-name').text(name);
+	modal.find('#modal-product-name').text(name);
 	modal.modal('show');
 }
 

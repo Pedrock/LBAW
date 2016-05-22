@@ -37,7 +37,7 @@
             </div>
             <div class="col-xs-5 col-sm-2">
                 <div class="qty_price">
-                    <a href="#" onclick="updateQuantity({$product.id})" class="fa fa-refresh fa-fw hidden"></a>
+                    <a href="#" onclick="updateQuantity({$product.id});return false;" class="fa fa-refresh fa-fw hidden"></a>
                     <input type="text" class="form-control qty" value="{$product.quantity}">
                 </div>
             </div>

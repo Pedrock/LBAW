@@ -33,3 +33,16 @@ function getUserCart($user_id)
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
 }
+
+function getCartFromJson($products)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT p AS id, name, q AS quantity, get_product_price(p) AS price, location AS photo, stock >= q AS enough_stock
+        FROM json_to_recordset(?) as x(p int, q int)
+        INNER JOIN Product ON p = idProduct
+        LEFT JOIN Photo ON Photo.idProduct = Product.idProduct AND photo_order = 1
+        WHERE Product.isDeleted = false;");
+    $stmt->execute(array($products));
+    return $stmt->fetchAll();
+}
