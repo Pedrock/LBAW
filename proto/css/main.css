@@ -35,7 +35,6 @@
    	border-bottom-style: groove;
    	padding-bottom: 10px;
    	padding-left: 15px;
-   	
    }
 
    .caption .price {
@@ -75,6 +74,7 @@
    #main-menu{
    	margin-top: 10px;
       background-color: initial;
+      margin-bottom: 20px;
    }
 
    #main-menu > a {

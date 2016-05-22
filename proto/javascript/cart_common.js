@@ -35,10 +35,10 @@ function addToCart(product, quantity)
 
 function showCartModal(product)
 {
-	var elem = $('.thumbnail[data-id="'+product+'"]');
+	var elem = $('[data-id="'+product+'"]');
 	var image = elem.find('img').attr('src');
 	var name = elem.find('.product-name').text();
-	var link = elem.find('a').attr('href');
+	var link = elem.find('a.link-p').attr('href');
 
 	var modal = $('#cartModal');
 	modal.find('.link-p').attr('href',link);

@@ -2,7 +2,7 @@
   
   function createUser($username, $email, $nif, $password) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser");
+    $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser,username,idadmin");
     $stmt->execute(array($username, $email, $nif, sha1($password)));
     return $stmt->fetch();
   }

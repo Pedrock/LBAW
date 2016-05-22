@@ -10,7 +10,9 @@ function deleteFromCart(product)
 }
 
 $('.qty_price input').on('change', function() {
+    var product = $(this).closest('.product-cart').attr('data-id');
     $(this).closest('.qty_price').children('a').removeClass('hidden');
+    updateQuantity(product);
 });
 
 function updateQuantity(product)

@@ -1,12 +1,10 @@
 <?php
-include_once('../config/init.php');
 include_once($BASE_DIR .'database/cart.php');
-
-if (empty($_SESSION['user']))
+function cart_cookie_to_db($user_id)
 {
-    if (empty($_COOKIE['cart']))
-        $cart = array();
-    else {
+    global $BASE_URL;
+    if (!empty($_COOKIE['cart']))
+    {
         $products = explode(';',$_COOKIE['cart']);
         $length = count($products);
         $products_objects = array();
@@ -19,12 +17,7 @@ if (empty($_SESSION['user']))
             array_push($products_objects, $item);
         }
         $json = json_encode($products_objects);
-        $cart = getCartFromJson($json);
+        addToCartFromJson($user_id, $json);
+        setcookie('cart', '', 2147483647, $BASE_URL);
     }
 }
-else
-    $cart = getUserCart($_SESSION['user']);
-
-$smarty->assign('cart', $cart);
-$smarty->display('products/cart.tpl');
-?>

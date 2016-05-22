@@ -1,8 +1,9 @@
 <?php
   include_once('../../config/init.php');
-  include_once($BASE_DIR .'database/users.php');  
+  include_once($BASE_DIR .'database/users.php');
+  include_once($BASE_DIR .'lib/cart_cookie_to_db.php');
 
-  if (!$_POST['email'] || !$_POST['password'] || !$_POST['remember']) {
+if (!$_POST['email'] || !$_POST['password'] || !$_POST['remember']) {
     return_error("Both fields are required", 400);
     exit;
   }
@@ -21,6 +22,8 @@
       $_SESSION['user'] = $user['iduser'];
       $_SESSION['username'] = $user['username'];
       $_SESSION['admin'] = $user['isadmin'];
+
+      cart_cookie_to_db($user['iduser']);
 
       if (json_decode($_POST['remember']) == true)
       {

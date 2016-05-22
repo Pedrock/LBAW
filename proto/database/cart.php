@@ -46,3 +46,10 @@ function getCartFromJson($products)
     $stmt->execute(array($products));
     return $stmt->fetchAll();
 }
+
+function addToCartFromJson($user_id, $products)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT add_to_cart_from_json(?,?)");
+    $stmt->execute(array($user_id, $products));
+}

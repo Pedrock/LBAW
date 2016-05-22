@@ -1,7 +1,7 @@
 {assign "title" "HashStore"}
 {assign "display_carousel" true}
-{include file='common/header.tpl'}
 {assign "js" ['index.js','cart_common.js']}
+{include file='common/header.tpl'}
 
 <div id="f"></div>
 <div id="main-title">
@@ -18,9 +18,8 @@
 				<img src="../images/products/{$product.photo}" alt="">
 				</a>
 				<div class="caption">
-					<h4><a class="product-name" href="product.php?id={$product.id}">{$product.name}</a></h4>
-					&nbsp;
-						<div class="pull-left price">{$product.price}€</div>
+					<h4><a class="product-name" href="product.php?id={$product.id}">{$product.name}</a></h4> &nbsp;
+						<div class="pull-left price">{$product.price} €</div>
 						<a href="#" onclick="addToCart({$product.id});return false;" class="pull-right button-product">
 						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 				</div>
