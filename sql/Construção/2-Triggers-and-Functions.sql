@@ -33,6 +33,19 @@ BEGIN
 END;
 $BODY$
 LANGUAGE plpgsql;
+-- Add products to cart from JSON
+CREATE OR REPLACE FUNCTION add_to_cart_from_json(user_id INTEGER, products_json JSON) RETURNS void AS $BODY$
+DECLARE
+	item RECORD;
+BEGIN
+	FOR item IN
+		SELECT * FROM json_to_recordset(products_json) as x(p int, q int)
+	LOOP
+		PERFORM add_to_cart(user_id, item.p, item.q);
+	END LOOP;
+END;
+$BODY$
+LANGUAGE plpgsql;
 -- Get product price considering its discount 
 CREATE OR REPLACE FUNCTION get_product_price(product_id INTEGER) RETURNS FLOAT AS $BODY$
 DECLARE discount_percentage INTEGER;
