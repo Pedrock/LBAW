@@ -1,7 +1,8 @@
 {assign "title" "HashStore"}
 {assign "css" ['category.css']}
-{assign "js" ['category.js']}
+{assign "js" ['category.js','cart_common.js']}
 {include file='common/header.tpl'}
+
 <ol class="breadcrumb">
 	<li><a href="index.php">Home</a></li>
     {foreach from=$breadcrumbs|@array_reverse:true item=cat}
@@ -55,20 +56,19 @@
 <div class="container-fluid">
 	<div class="row">
 		{foreach from=$products item=product}
-		<div class="product col-lg-3 col-sm-6 text-center">
-			<div class="thumbnail">
-			<a href="product.php?id={$product.id}" class="link-p">
-				<img src="../images/products/{$product.photo}" alt="">
-				</a>
-				<div class="caption">
-					<h4><a href="product.php?id={$product.id}">{$product.name}</a></h4>
-					&nbsp;
-						<div class="pull-left price">{$product.price}€</div>
-						<a href="#" class="pull-right button-product">
-						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
+			<div class="product col-lg-3 col-sm-6 text-center">
+				<div class="thumbnail" data-id="{$product.id}">
+					<a href="product.php?id={$product.id}" class="link-p">
+						<img src="../images/products/{$product.photo}" alt="">
+					</a>
+					<div class="caption">
+						<h4><a class="product-name" href="product.php?id={$product.id}">{$product.name}</a></h4> &nbsp;
+						<div class="pull-left price">{$product.price} €</div>
+						<a href="#" onclick="addToCart({$product.id});return false;" class="pull-right button-product">
+							<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
+					</div>
 				</div>
 			</div>
-		</div>
 		{foreachelse}
 		<div class="text-center">No products in this category yet.</div>
 		{/foreach}
@@ -101,6 +101,7 @@
 
 <script>
 var category = {$category};
+var base_url = '{$BASE_URL}';
 </script>
 
 {include file='common/footer.tpl'}

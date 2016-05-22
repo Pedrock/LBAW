@@ -55,16 +55,12 @@
 
 @media only screen and (max-width: 767px) {
    .qty_price {
-      padding-top: 20px;
+      margin-top: 20px;
    }
    #cart .qty {
       min-width: 70px;
       margin-right: 10px;
    }
-}
-
-#cart .subtotal {
-   text-align: right;
 }
 
 #btn-update {
@@ -76,4 +72,16 @@
    top: 2px;
    margin-right: 3px;
    /* color: red; */
+}
+
+.qty_price {
+   line-height: 34px;
+   position: relative;
+}
+
+.qty_price .fa-refresh {
+   text-decoration: none;
+   position: absolute;
+   right: -25px;
+   top: 10px;
 }

@@ -41,8 +41,8 @@
           </form>
         </div>
         <ul class="nav navbar-nav navbar-right">
-          {if $smarty.session.user}
           <li><a href="cart.php"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+          {if $smarty.session.user}
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {$smarty.session.username}<span class="caret"></span></a>
             <ul class="dropdown-menu">

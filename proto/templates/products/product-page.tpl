@@ -1,25 +1,29 @@
 {assign "title" {"HashStore - "|cat:$product.name}}
 {assign var="css" value=["product-page.css"]}
+{assign "js" ['cart_common.js']}
 {include file='common/header.tpl'}
+
+<span data-id="{$product.id}">
 <div id="title-products">
-		<h1 id="product-name">{$product.name}</h1>
-		{if $smarty.session.user}
+		<h1 id="product-name" class="product-name">{$product.name}</h1>
+	{if $smarty.session.user}
 		<button type="button" class="btn btn-primary btn-favorites pull-right hidden-xs" aria-label="Left Align">
 			<span aria-hidden="true"> Add to Favorites</span>
 		</button>
-		{/if}
+	{/if}
 </div>
 
 <div id="info-product" class="container-fluid">
+	<a href="product.php?id={$product.id}" class="link-p hidden"></a>
 	<div class="row">
 		<div class="col-lg-3 col-md-4">
 			<div id="product-main-img" class="row">
 				{if !empty($photos)}
-				<img class="img-responsive" src="../images/products/{$photos[0].location}" alt="">
+					<img class="img-responsive" src="../images/products/{$photos[0].location}" alt="">
 				{/if}
 			</div>
 			<div id="product-imgs" class="row">
-			{foreach from=$photos item=photo} 
+			{foreach from=$photos item=photo}
 				<div class="col-xs-3 other-photos"><a href="#"><img src="../images/products/{$photo.location}" alt="Image {$photo.photo_order}" class="img-responsive"></a></div>
 			{/foreach} 
 			</div>
@@ -31,7 +35,7 @@
 			<div class="row">
 				<div class="form-inline">
 					<div class="form-group form-product">
-						<label for="quantity">Quantity</label> 
+						<label for="quantity">Quantity</label>
 						{if $product.stock > 0}
 							{assign var="value" value=1}
 						{else}
@@ -45,7 +49,7 @@
 			<div class="row form-row">
 				<div class="form-inline">
 					<span class="form-product bold">{$product.new_price}€</span>
-					<button id="btn-add-to-cart" class="btn btn-info">Add to Cart</button> 
+					<a href="#" onclick="addToCart({$product.id},$('#quantity').val());return false;" id="btn-add-to-cart" class="btn btn-info">Add to Cart</a>
 					{if $product.discount > 0}
 						<br><br><del>{$product.price}€</del> <span id="discount">{$product.discount}% OFF!</span>
 					{/if}
@@ -53,7 +57,7 @@
 			</div>
 			<div id="row-score" class="row form-row">
 				{if $product.averagescore}
-				<div id="score-container" class="col-xs-3">
+					<div id="score-container" class="col-xs-3">
 					<br>
 					<span id="product-score">{$product.averagescore}</span>
 					<br>
@@ -65,7 +69,7 @@
 				</div>
 				{/if}
 				{if $smarty.session.user}
-				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
+					<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
 					<span aria-hidden="true"> Add to Favorites</span>
 				</button>
 				{/if}
@@ -77,13 +81,13 @@
 	<div class="well">
 		<h3>Reviews</h3>
 		{if $smarty.session.user}
-		<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
+			<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
 		{/if}
 		{foreach from=$reviews item=review}
-		<div class="row">
+			<div class="row">
 			<div class="col-md-12">
 				{for $star=1 to 5}
-				<span class="glyphicon glyphicon-star{if $review.score < $star}-empty{/if} star"></span>
+					<span class="glyphicon glyphicon-star{if $review.score < $star}-empty{/if} star"></span>
 				{/for}
 				<span class="info-review">{$review.reviewer}</span>
 				<span class="info-review pull-right">{$review.review_date}</span>
@@ -95,8 +99,11 @@
 		<p class="text-center">No reviews yet</p>
 		</div>
 		{/foreach}
-
 	</div>
 </div>
+</span>
+<script>
+	var base_url = '{$BASE_URL}';
+</script>
 
 {include file='common/footer.tpl'}

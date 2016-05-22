@@ -45,6 +45,11 @@
   try {
     $user = createUser($username, $email, $nif, $password);
     $_SESSION['user'] = $user['iduser'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['admin'] = $user['isadmin'];
+
+    cart_cookie_to_db($user['iduser']);
+    
     http_response_code(201);
   } catch (PDOException $e) {
       return_error("An error occurred while creating your account. Please try again.");

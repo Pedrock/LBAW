@@ -1,7 +1,7 @@
 {assign "title" "HashStore"}
 {assign "display_carousel" true}
+{assign "js" ['index.js','cart_common.js']}
 {include file='common/header.tpl'}
-{assign "js" ['index.js']}
 
 <div id="f"></div>
 <div id="main-title">
@@ -13,16 +13,14 @@
 		{foreach from=$products item=product}
 		{if $product@iteration <= $limit}
 		<div class="product col-lg-3 col-sm-6 text-center">
-			<div class="thumbnail">
+			<div class="thumbnail" data-id="{$product.id}">
 			<a href="product.php?id={$product.id}" class="link-p">
 				<img src="../images/products/{$product.photo}" alt="">
 				</a>
 				<div class="caption">
-				
-					<h4><a href="product.php?id={$product.id}">{$product.name}</a></h4>
-					&nbsp;
-						<div class="pull-left price">{$product.price}€</div>
-						<a href="#" class="pull-right button-product">
+					<h4><a class="product-name" href="product.php?id={$product.id}">{$product.name}</a></h4> &nbsp;
+						<div class="pull-left price">{$product.price} €</div>
+						<a href="#" onclick="addToCart({$product.id});return false;" class="pull-right button-product">
 						<span class="glyphicon glyphicon-shopping-cart"></span> <div class="plus"><span class="glyphicon glyphicon-plus"></span></div></a>
 				</div>
 			</div>
@@ -62,7 +60,8 @@
 <script> 
 var limit = {$limit};
 var n_pages = {$n_pages};
-var products = {$products|@json_encode}; 
+var products = {$products|@json_encode};
+var base_url = '{$BASE_URL}';
 </script>
 
 {include file='common/footer.tpl'}
