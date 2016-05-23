@@ -69,9 +69,9 @@
     if ($order_by == "") $order_by = "ts_rank_cd(tsv, q) DESC";
     $category_filter = $category == null ? "" : "AND idproduct in (SELECT get_category_products(?))";
     $stmt = $conn->prepare(
-    	"SELECT results.idProduct AS id, name, price, product_count, location AS photo
+    	"SELECT results.idProduct AS id, name, price, total_count, location AS photo
     	FROM
-    	(SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS product_count
+    	(SELECT idProduct, name, get_product_price(P.idProduct) price, COUNT(idProduct) OVER () AS total_count
     	FROM product_search
     	INNER JOIN Product P USING(idProduct)
     	CROSS JOIN plainto_tsquery(?) AS q
@@ -149,7 +149,7 @@
     if ($category === null)
     {
       $stmt = $conn->prepare(
-        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
+        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS total_count, location AS photo
           FROM Product P
           LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1
           ".$order_by."
@@ -159,7 +159,7 @@
     else
     {
       $stmt = $conn->prepare(
-        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS product_count, location AS photo
+        "SELECT P.idproduct AS id,name,get_product_price(P.idProduct) price, COUNT(P.idProduct) OVER () AS total_count, location AS photo
           FROM get_category_products(?) AS idProduct
           INNER JOIN Product P USING(idProduct)
           LEFT JOIN Photo ON P.idProduct = Photo.idProduct and photo_order = 1

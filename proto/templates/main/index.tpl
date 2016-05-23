@@ -61,7 +61,6 @@
 var limit = {$limit};
 var n_pages = {$n_pages};
 var products = {$products|@json_encode};
-var base_url = '{$BASE_URL}';
 </script>
 
 {include file='common/footer.tpl'}

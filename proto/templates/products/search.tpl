@@ -95,7 +95,6 @@
 
 <script>
 var query = '{$query}';
-var base_url = '{$BASE_URL}';
 </script>
 
 {include file='common/footer.tpl'}

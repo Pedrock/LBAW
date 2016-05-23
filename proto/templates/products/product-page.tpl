@@ -56,6 +56,11 @@
 				</div>
 			</div>
 			<div id="row-score" class="row form-row">
+				{if $smarty.session.user}
+				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
+					<span aria-hidden="true"> Add to Favorites</span>
+				</button>
+				{/if}
 				{if $product.averagescore}
 					<div id="score-container" class="col-xs-3">
 					<br>
@@ -67,11 +72,6 @@
 					</div>
 					<br>
 				</div>
-				{/if}
-				{if $smarty.session.user}
-					<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
-					<span aria-hidden="true"> Add to Favorites</span>
-				</button>
 				{/if}
 			</div>
 		</div>
@@ -102,8 +102,5 @@
 	</div>
 </div>
 </span>
-<script>
-	var base_url = '{$BASE_URL}';
-</script>
 
 {include file='common/footer.tpl'}

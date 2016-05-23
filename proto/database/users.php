@@ -59,4 +59,50 @@
     $stmt->execute(array($user_id, bin2hex($token)));
   }
 
+  // purchase history
+
+  function getPurchaseHistory($user_id,$limit,$page)
+  {
+     $offset = ($page-1)*$limit;
+    global $conn;
+
+    $stmt = $conn->prepare(
+      "SELECT idOrder AS id, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderDate, totalPrice AS price, COUNT(idOrder) OVER () AS total_count
+      FROM Orders 
+      WHERE idUser = ? 
+      ORDER BY idOrder DESC 
+      LIMIT ? OFFSET ?;");
+    $stmt->execute(array($user_id,$limit,$offset));
+    return $stmt->fetchAll();
+  }
+
+  function getInfoPurchaseHistory($user_id, $order_id)
+  {
+    global $conn;
+
+    $stmt1 = $conn->prepare(
+      "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
+        Coupon.percentage AS coupon_discount
+            FROM Orders 
+            LEFT JOIN Coupon USING(idcoupon)
+            WHERE idOrder = ? AND Orders.idUser = ?;");
+    
+    $stmt2 = $conn->prepare(
+      "SELECT ProductOrder.idProduct AS id, product_status, location AS photo, ProductOrder.quantity, name, ProductOrder.price
+                FROM ProductOrder
+                LEFT JOIN Orders USING(idOrder)
+                INNER JOIN Product USING(idProduct)
+                LEFT JOIN Photo ON ProductOrder.idProduct = Photo.idProduct AND photo_order = 1
+          WHERE idOrder = ? AND idUser = ?;");
+    
+    $conn->beginTransaction();
+    $stmt1->execute(array($order_id, $user_id));
+    $stmt2->execute(array($order_id, $user_id));
+    $conn->commit();
+
+    $order_info = $stmt1->fetch();
+    $order_products = $stmt2->fetchAll();
+    return array($order_info, $order_products);
+  }
+
 ?>
