@@ -10,6 +10,7 @@
 	</footer>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script>
+		var base_url = "{$BASE_URL}";
 		window.jQuery || document.write('<script src="{$BASE_URL}javascript/vendor/jquery-1.11.2.min.js"><\/script>')
 	</script>
 	<script src="{$BASE_URL}javascript/logout.js"></script>

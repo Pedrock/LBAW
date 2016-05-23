@@ -101,7 +101,6 @@
 
 <script>
 var category = {$category};
-var base_url = '{$BASE_URL}';
 </script>
 
 {include file='common/footer.tpl'}

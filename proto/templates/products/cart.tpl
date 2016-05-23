@@ -58,8 +58,4 @@
     <span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 
-<script language="javascript">
-    var base_url = '{$BASE_URL}';
-</script>
-
 {include file='common/footer.tpl'}
