@@ -15,7 +15,7 @@ function getOrderInfo() {
 		order_a.next('.order-info').find('.loading').remove();
 	})
 	.fail(function() {
-		alert('error');
+		order_a.next('.order-info').find('.fa-spinner').removeClass('fa-spinner');
 		order_a.addClass('loadable');
 	});
 };
