@@ -81,10 +81,6 @@ $(document).ready(function() {
 	function upload_file(i, files, error) {
 		$("#uploaded_num").html(i);
 
-		//var ms = 2000;
-		//ms += new Date().getTime();
-		//while (new Date() < ms){}
-
 		$('.progress .bar').css('width', (i / files.length) + '%');
 
 		if (i >= files.length || error) {
@@ -122,22 +118,17 @@ $(document).ready(function() {
 			dataType: 'json',
 			processData: false,
 			success: function(html) {
+				console.log(html.success);
+				var img_path = "../../../images/products/thumb_" + html.success;
 				$("#uploaded_num").html(parseInt($("#uploaded_num").html()) + 1);
-				var reader = new FileReader();
+				var elem = $("<li class=\"product_img\" id=\"img_" + order + "\"></li>");
+				var elem2 = $("<div class=\"del\">DEL<span class=\"hidden\">" + order + "</span></div>");
+				$(elem).append(elem2);
 
-				(function(ii) {
-					reader.onload = function(e) {
-						var elem = $("<li class=\"product_img\" id=\"img_" + order + "\"></li>");
-						var elem2 = $("<div class=\"del\">DEL<span class=\"hidden\">" + order + "</span></div>");
-						$(elem).append(elem2);
-						//$(elem2).append(elem2);
-						$(elem2).on('click', photoDelete);
-						$(".sortable").append(elem);
-						elem.css('background-image', 'url("' + e.target.result + '")');
-					}
-				}(i));
+				$(elem2).on('click', photoDelete);
+				$(".sortable").append(elem);
+				elem.css('background-image', 'url("' + img_path + '")');
 
-				reader.readAsDataURL(files[i]);
 				upload_file(i + 1, files, error);
 			},
 			xhr: function() {

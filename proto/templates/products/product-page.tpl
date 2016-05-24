@@ -1,6 +1,6 @@
 {assign "title" {"HashStore - "|cat:$product.name}}
 {assign var="css" value=["product-page.css"]}
-{assign "js" ['cart_common.js', 'review.js']}
+{assign "js" ['cart_common.js', 'product-page.js']}
 {include file='common/header.tpl'}
 
 <span id="header-product" data-id="{$product.id}">
@@ -19,12 +19,12 @@
 		<div class="col-lg-3 col-md-4">
 			<div id="product-main-img" class="row">
 				{if !empty($photos)}
-					<img class="img-responsive" src="../images/products/{$photos[0].location}" alt="">
+					<img class="img-responsive" src="../images/products/thumb_{$photos[0].location}" alt="">
 				{/if}
 			</div>
 			<div id="product-imgs" class="row">
 			{foreach from=$photos item=photo}
-				<div class="col-xs-3 other-photos"><a href="#"><img src="../images/products/{$photo.location}" alt="Image {$photo.photo_order}" class="img-responsive"></a></div>
+				<div class="col-xs-3 other-photos"><a href="#"><img src="../images/products/thumb_{$photo.location}" alt="Image {$photo.photo_order}" class="img-responsive"></a></div>
 			{/foreach} 
 			</div>
 		</div>
@@ -137,5 +137,9 @@
 	</div>
 </div>
 </span>
+
+<div class="popup_bg" id="popup_photo">
+	<img id="photo_large" src="">
+</div>
 
 {include file='common/footer.tpl'}

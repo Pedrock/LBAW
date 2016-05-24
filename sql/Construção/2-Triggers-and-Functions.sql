@@ -295,10 +295,12 @@ END;
 $BODY$
 LANGUAGE plpgsql;
  
-CREATE OR REPLACE FUNCTION delete_photo(product_id INTEGER, delete_order INTEGER) RETURNS void AS $BODY$
+CREATE OR REPLACE FUNCTION delete_photo(product_id INTEGER, delete_order INTEGER) RETURNS TEXT AS $BODY$
+DECLARE photo_location TEXT;
 BEGIN
-	DELETE FROM Photo WHERE idProduct = product_id AND photo_order = delete_order;
+	DELETE FROM Photo WHERE idProduct = product_id AND photo_order = delete_order RETURNING location INTO photo_location;
 	UPDATE Photo SET photo_order = photo_order - 1 WHERE idProduct = product_id AND photo_order > delete_order;
+	RETURN photo_location;
 END;
 $BODY$
 LANGUAGE plpgsql;
