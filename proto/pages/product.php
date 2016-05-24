@@ -4,7 +4,11 @@ include_once($BASE_DIR .'database/products.php');
 if (isset($_GET['id']))
 {
 	$id = $_GET['id'];
-	$product = getProduct($id, false);
+	if (empty($_SESSION['user']))
+		$product = getProduct($id, false);
+	else
+		$product = getProductAndUserReview($id, $_SESSION['user']);
+	
 	if ($product === false)
 	{
 		http_response_code(404);

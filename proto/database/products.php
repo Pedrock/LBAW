@@ -10,6 +10,26 @@
     return $stmt->fetch();
   }
 
+  function getProductScore($id){
+    global $conn;
+    $stmt = $conn->prepare("SELECT round(cast(averagescore AS numeric),1) AS averagescore FROM Product WHERE idProduct = ?");
+    $stmt->execute(array($id));
+    return $stmt->fetch()['averagescore'];
+  }
+
+  function getProductAndUserReview($id, $user_id) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT Product.idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price,weight, 
+      			Review.idUser IS NOT NULL AS reviewed
+        FROM Product
+        CROSS JOIN get_product_discount_and_price(idProduct)
+        LEFT JOIN Review ON Review.idProduct = Product.idProduct AND idUser = ?
+        WHERE Product.idProduct = ? AND isDeleted = FALSE;");
+    $stmt->execute(array($user_id,$id));
+    return $stmt->fetch();
+  }
+
   function getCarousel()
   {
     global $conn;
@@ -34,13 +54,22 @@
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-      "SELECT body,score,username AS reviewer,review_date FROM Review 
+      "SELECT body,score,username AS reviewer,to_char(review_date,'YYYY-MM-DD HH24:MI') AS review_date FROM Review 
         INNER JOIN Users USING(idUser)
         WHERE Review.idProduct = ? AND body IS NOT NULL
         ORDER BY review_date DESC
         LIMIT ? OFFSET ?;");
     $stmt->execute(array($idProduct,$limit,$offset));
     return $stmt->fetchAll();
+  }
+
+  function createProductReview($idProduct, $idUser, $score, $body)
+  {
+  	global $conn;
+  	$stmt = $conn->prepare(
+  		"INSERT INTO REVIEW(idProduct,idUser,score,body) VALUES(?, ?, ?, ?) RETURNING to_char(review_date,'YYYY-MM-DD HH24:MI') AS review_date;");
+  	$stmt->execute(array($idProduct, $idUser, $score, $body));
+  	return $stmt->fetch()['review_date'];
   }
 
   function getFeaturedProducts($limit, $page)
