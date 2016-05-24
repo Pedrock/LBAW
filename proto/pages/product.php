@@ -14,6 +14,10 @@ if (isset($_GET['id']))
 		$smarty->assign('product', $product);
 		$smarty->assign('reviews', getProductReviews($id,10,1));
 		$smarty->assign('photos', getProductPhotos($id));
+		if (!empty($_SESSION['user']))
+		{
+			$smarty->assign('UserAndReview', getProductAndUserReview($id, $_SESSION['user']));
+		}
 		$smarty->display('products/product-page.tpl');
 	}
 }

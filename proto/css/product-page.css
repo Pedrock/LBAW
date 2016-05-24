@@ -166,3 +166,68 @@
    content:"\2605\2605\2605\2605\2605";
    font-size: 20pt;
 }
+
+.rating > span:hover:before {
+   position: absolute;
+}
+
+.rating {
+   unicode-bidi: bidi-override;
+   direction: rtl;
+   font-size: xx-large;
+   color: orange;
+}
+.rating > span:hover:before,
+.rating > span:hover ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+
+.rating {
+   unicode-bidi: bidi-override;
+   direction: rtl;
+   margin: 5px 0;
+   padding-left: 5px;
+   margin-top: 0px;
+}
+.rating > span {
+  display: inline-block;
+  position: relative;
+  width: 1.1em;
+  cursor: pointer;
+}
+
+.rating > span:hover:before,
+.rating > span:hover ~ span:before, 
+.rating >.selected:before {
+   content: "\2605";
+   position: absolute;
+}
+
+#body-review{
+   margin-bottom: 10px;
+   border-radius: 0;
+}
+
+#score-box{
+   margin-bottom: 10px;
+   padding-bottom: 15px;
+   border-bottom: 1px solid #ccc;
+}
+
+#product-reviews .row:not(:last-child){
+   padding-bottom: 0;
+}
+
+#score h4{
+   line-height: 25px;
+   padding-top: 0;
+}
+
+#score{
+   padding-top: 0;
+}
+
+.review-row p {
+   white-space: pre-line
+}

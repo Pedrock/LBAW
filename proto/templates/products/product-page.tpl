@@ -1,9 +1,9 @@
 {assign "title" {"HashStore - "|cat:$product.name}}
 {assign var="css" value=["product-page.css"]}
-{assign "js" ['cart_common.js']}
+{assign "js" ['cart_common.js', 'review.js']}
 {include file='common/header.tpl'}
 
-<span data-id="{$product.id}">
+<span id="header-product" data-id="{$product.id}">
 <div id="title-products">
 		<h1 id="product-name" class="product-name">{$product.name}</h1>
 	{if $smarty.session.user}
@@ -79,12 +79,51 @@
 </div>
 <div id="product-reviews" class="row">
 	<div class="well">
-		<h3>Reviews</h3>
-		{if $smarty.session.user}
-			<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
-		{/if}
+		<div>
+			<div id="before-review">
+			<h3>Reviews</h3>
+			{if $smarty.session.user}
+				{if !{$UserAndReview.reviewed}}
+					<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
+				{/if}
+			{/if}
+			</div>
+			<div class="row" id="post-review-box" style="display: none;">
+                <div class="col-md-12">
+                    <form id="review-form" action="javascript:void(0);">
+                    	<div id="score" class="row">
+                    		<div class="col-sm-6 col-xs-12">
+                        		<h4> Leave a Review </h4>
+                        	</div>
+                        	<div class="rating col-sm-6 pull-left">
+								<span>☆</span>
+								<span>☆</span>
+								<span>☆</span>
+								<span>☆</span>
+								<span>☆</span>
+							</div>
+                        </div>
+                        <textarea id="body-review" class="form-control" cols="50" id="new-review" name="comment" rows="5"></textarea>
+                        <div id="score-box" class="text-right">
+                            <a class="btn btn-danger" id="close-review-box""><span class="glyphicon glyphicon-remove"></span> Cancel</a>
+                            <button id="submit-comment" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> Comment</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+		</div>
+		<div class="row review-row hidden">
+			<div class="col-md-12">
+				{for $star=1 to 5}
+				<span class="glyphicon glyphicon-star-empty star"></span>
+				{/for}
+				<span class="info-review">{$smarty.session.username}</span>
+				<span class="info-review pull-right review-date"></span>
+				<p></p>
+			</div>
+		</div>
 		{foreach from=$reviews item=review}
-			<div class="row">
+		<div class="row review-row">
 			<div class="col-md-12">
 				{for $star=1 to 5}
 					<span class="glyphicon glyphicon-star{if $review.score < $star}-empty{/if} star"></span>
