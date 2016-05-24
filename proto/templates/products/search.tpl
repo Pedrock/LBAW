@@ -53,7 +53,7 @@
 			<div class="product col-lg-3 col-sm-6 text-center">
 				<div class="thumbnail" data-id="{$product.id}">
 					<a href="product.php?id={$product.id}" class="link-p">
-						<img src="../images/products/{$product.photo}" alt="">
+						<img src="../images/products/thumb_{$product.photo}" alt="">
 					</a>
 					<div class="caption">
 						<h4><a class="product-name" href="product.php?id={$product.id}">{$product.name}</a></h4> &nbsp;
