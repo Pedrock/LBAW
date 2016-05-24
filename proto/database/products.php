@@ -10,7 +10,7 @@
     return $stmt->fetch();
   }
 
-  function getScoreProduct($id){
+  function getProductScore($id){
     global $conn;
     $stmt = $conn->prepare("SELECT round(cast(averagescore AS numeric),1) AS averagescore FROM Product WHERE idProduct = ?");
     $stmt->execute(array($id));

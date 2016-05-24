@@ -83,7 +83,7 @@
 			<div id="before-review">
 			<h3>Reviews</h3>
 			{if $smarty.session.user}
-				{if !{$UserAndReview.reviewed}}
+				{if !{$product.reviewed}}
 					<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
 				{/if}
 			{/if}
@@ -105,7 +105,7 @@
                         </div>
                         <textarea id="body-review" class="form-control" cols="50" id="new-review" name="comment" rows="5"></textarea>
                         <div id="score-box" class="text-right">
-                            <a class="btn btn-danger" id="close-review-box""><span class="glyphicon glyphicon-remove"></span> Cancel</a>
+                            <a class="btn btn-danger" id="close-review-box"><span class="glyphicon glyphicon-remove"></span> Cancel</a>
                             <button id="submit-comment" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> Comment</button>
                         </div>
                     </form>

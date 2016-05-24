@@ -14,7 +14,7 @@
 
 	try {
 		$date = createProductReview($product_id, $_SESSION['user'], $score, $body);
-		$averagescore = getScoreProduct($product_id);
+		$averagescore = getProductScore($product_id);
 		http_response_code(200);
 		echo json_encode(array('date' => $date,'averagescore' => $averagescore));
 	} catch (PDOException $e) {
