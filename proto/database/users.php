@@ -105,4 +105,42 @@
     return array($order_info, $order_products);
   }
 
+  function getUserAddresses($user_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT idaddress AS id, Address.name, address1, address2, nif, (code1||'-'||code2) AS zipcode, City.name AS city, phonenumber
+        FROM Users
+        FULL JOIN Address USING (idUser)
+        LEFT JOIN ZipCode USING (idZipCode)
+        LEFT JOIN City USING (idCity)
+        WHERE idUser = ?;");
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll();
+  }
+
+  function getUserAddress($user_id, $address_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT idaddress AS id, Address.name, address1, address2, (code1||'-'||code2) AS zipcode, City.name AS city, phonenumber
+        FROM Address
+        LEFT JOIN ZipCode USING (idZipCode)
+        LEFT JOIN City USING (idCity)
+        WHERE idUser = ? AND idAddress = ?;");
+    $stmt->execute(array($user_id, $address_id));
+    return $stmt->fetch();
+  }
+
+  function getCity($zip1, $zip2)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT City.name AS city
+        FROM ZipCode
+        INNER JOIN City USING (idCity)
+        WHERE code1 = ? AND code2 = ?");
+    $stmt->execute(array($zip1, $zip2));
+    return $stmt->fetch();
+  }
 ?>

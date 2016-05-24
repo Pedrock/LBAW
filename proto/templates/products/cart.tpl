@@ -54,7 +54,7 @@
         </div>
     </div>
 </div>
-<a href="checkout.php" id="btn-update" class="btn btn-primary pull-right">
+<a href="checkout/checkout.php" id="btn-update" class="btn btn-primary pull-right">
     <span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
 </a>
 
