@@ -61,18 +61,16 @@
 					<span aria-hidden="true"> Add to Favorites</span>
 				</button>
 				{/if}
-				{if $product.averagescore}
-					<div id="score-container" class="col-xs-3">
+				<div id="score-container" class="col-xs-3{if !$product.averagescore} hidden{/if}">
 					<br>
 					<span id="product-score">{$product.averagescore}</span>
 					<br>
 					<div class="ratings">
-					    <div class="empty-stars"></div>
-					    <div class="full-stars" style="width:{$product.averagescore * 20}%"></div>
+						<div class="empty-stars"></div>
+						<div class="full-stars" style="width:{$product.averagescore * 20}%"></div>
 					</div>
 					<br>
-				</div>
-				{/if}
+				</div>				
 			</div>
 		</div>
 	</div>
@@ -82,10 +80,8 @@
 		<div>
 			<div id="before-review">
 			<h3>Reviews</h3>
-			{if $smarty.session.user}
-				{if !{$product.reviewed}}
+			{if $smarty.session.user and !{$product.reviewed}}
 					<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
-				{/if}
 			{/if}
 			</div>
 			<div class="row" id="post-review-box" style="display: none;">
@@ -134,7 +130,7 @@
 			</div>
 		</div>
 		{foreachelse}
-		<div class="row">
+		<div id="no-reviews" class="row">
 		<p class="text-center">No reviews yet</p>
 		</div>
 		{/foreach}

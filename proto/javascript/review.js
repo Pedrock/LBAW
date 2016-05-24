@@ -45,6 +45,9 @@ $('#review-form').submit(function(e) {
 				$('#alert-error').slideUp();
 				insertReview(score, body, xhr.responseJSON.date);
 				$('span#product-score').text(xhr.responseJSON.averagescore);
+				$('#score-container').removeClass('hidden');
+				$('#no-reviews').slideUp();
+				$('#score-container .full-stars').css('width',(xhr.responseJSON.averagescore*20)+'%');
 				$('#leave-a-review').hide();
 				closeReviewBox();
 			}
