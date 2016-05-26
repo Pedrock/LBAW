@@ -121,3 +121,47 @@ function insertReview(score, body, date)
 	review.find('.review-date').text(date);
 	dummy_review.after(review);
 }
+
+
+function addToFavorites()
+{
+	var product_id = $('#header-product').attr('data-id');
+	$('.btn-favorites').addClass('favorites-disabled');
+	$.ajax({
+		type: "POST",
+		url: base_url + "api/favorites/add.php",
+		data: {product: product_id}
+	}).done(function() {
+		$('.btn-favorites').children().removeClass('hidden');
+		$('.btn-favorites').children('.text-add').addClass('hidden');
+		$('.btn-favorites').removeClass('favorites-disabled');
+	}).fail(function() {
+		$('.btn-favorites').removeClass('favorites-disabled');
+	});
+}
+
+function removeFromFavorites()
+{
+	var product_id = $('#header-product').attr('data-id');
+	$('.btn-favorites').addClass('favorites-disabled');
+	$.ajax({
+		type: "POST",
+		url: base_url + "api/favorites/remove.php",
+		data: {product: product_id}
+	}).done(function() {
+		$('.btn-favorites').children().removeClass('hidden');
+		$('.btn-favorites').children('.text-remove').addClass('hidden');
+		$('.btn-favorites').removeClass('favorites-disabled');
+	}).fail(function() {
+		$('.btn-favorites').removeClass('favorites-disabled');
+	});
+}
+
+$('.btn-favorites').on('click',function() {
+	if ($(this).hasClass('favorites-disabled'))
+		return;
+	if ($(this).children('.text-add.hidden').length)
+		removeFromFavorites();
+	else
+		addToFavorites();
+});

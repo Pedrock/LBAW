@@ -105,4 +105,32 @@
     return array($order_info, $order_products);
   }
 
+  function addToFavorites($user_id, $product_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO Favorite(idProduct, idUser, idFavoriteList) 
+      VALUES (?, ?, NULL);");
+    $stmt->execute(array($product_id,$user_id));
+  }
+
+  function removeFromFavorites($user_id, $product_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM Favorite WHERE idProduct = ? AND idUser = ?;");
+    $stmt->execute(array($product_id,$user_id));
+  }
+
+  function getUserFavorites($user_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT idfavoritelist, FavoriteList.name list, Product.idproduct, Product.name, location AS photo
+        FROM FavoriteList
+        FULL JOIN Favorite USING(idFavoriteList)
+        LEFT JOIN Product USING(idProduct) 
+        LEFT JOIN Photo ON Favorite.idProduct = Photo.idProduct AND photo_order = 1
+        WHERE FavoriteList.idUser = ? OR Favorite.idUser = ?
+        ORDER BY FavoriteList.idFavoriteList NULLS FIRST,product_position;");
+    $stmt->execute(array($user_id, $user_id));
+    return $stmt->fetchAll();
+  }
 ?>

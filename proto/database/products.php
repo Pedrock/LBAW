@@ -21,12 +21,13 @@
     global $conn;
     $stmt = $conn->prepare(
       "SELECT Product.idProduct AS id,name,description,round(cast(averagescore AS numeric),1) AS averagescore,stock,price,discount,new_price,weight, 
-      			Review.idUser IS NOT NULL AS reviewed
+      			Review.idUser IS NOT NULL AS reviewed, Favorite.idUser IS NOT NULL AS is_favorite
         FROM Product
         CROSS JOIN get_product_discount_and_price(idProduct)
         LEFT JOIN Review ON Review.idProduct = Product.idProduct AND idUser = ?
+        LEFT JOIN Favorite ON Favorite.idProduct = Product.idProduct AND Favorite.idUser = ?
         WHERE Product.idProduct = ? AND isDeleted = FALSE;");
-    $stmt->execute(array($user_id,$id));
+    $stmt->execute(array($user_id,$user_id,$id));
     return $stmt->fetch();
   }
 

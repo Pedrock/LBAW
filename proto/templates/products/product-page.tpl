@@ -8,7 +8,8 @@
 		<h1 id="product-name" class="product-name">{$product.name}</h1>
 	{if $smarty.session.user}
 		<button type="button" class="btn btn-primary btn-favorites pull-right hidden-xs" aria-label="Left Align">
-			<span aria-hidden="true"> Add to Favorites</span>
+			<span aria-hidden="true" class="text-add{if $product.is_favorite} hidden{/if}">Add to Favorites</span>
+			<span aria-hidden="true" class="text-remove{if !$product.is_favorite} hidden{/if}">Remove from Favorites</span>
 		</button>
 	{/if}
 </div>
@@ -58,7 +59,8 @@
 			<div id="row-score" class="row form-row">
 				{if $smarty.session.user}
 				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
-					<span aria-hidden="true"> Add to Favorites</span>
+					<span aria-hidden="true" class="text-add{if $product.is_favorite} hidden{/if}">Add to Favorites</span>
+					<span aria-hidden="true" class="text-remove{if !$product.is_favorite} hidden{/if}">Remove from Favorites</span>
 				</button>
 				{/if}
 				<div id="score-container" class="col-xs-3{if !$product.averagescore} hidden{/if}">
