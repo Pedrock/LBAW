@@ -42,11 +42,11 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="shipping_name">Name</label>
-                                <input type="text" class="form-control" id="shipping_name" name="shipping_name">
+                                <input required type="text" class="form-control" id="shipping_name" name="shipping_name">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_addr1">Address line 1</label>
-                                <input type="text" class="form-control" id="shipping_addr1" name="shipping_addr1" placeholder="Street address, P.O. box, company name">
+                                <input required type="text" class="form-control" id="shipping_addr1" name="shipping_addr1" placeholder="Street address, P.O. box, company name">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_addr2">Address line 2</label>
@@ -58,7 +58,7 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="shipping_zip">ZIP</label>
-                                <input type="text" class="form-control" id="shipping_zip" name="shipping_zip" >
+                                <input required type="text" class="form-control" id="shipping_zip" name="shipping_zip" >
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_city">City</label>
@@ -66,7 +66,7 @@
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_phone">Phone number</label>
-                                <input type="text" class="form-control" id="shipping_phone" name="shipping_phone">
+                                <input required type="text" class="form-control" id="shipping_phone" name="shipping_phone">
                             </fieldset>
                         </div>
                     </div>
@@ -126,11 +126,11 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="billing_name">Name</label>
-                                <input type="text" class="form-control" id="billing_name" name="billing_name">
+                                <input required type="text" class="form-control" id="billing_name" name="billing_name">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_addr1">Address line 1</label>
-                                <input type="text" class="form-control" id="billing_addr1" name="billing_addr1" placeholder="Street address, P.O. box, company name">
+                                <input required type="text" class="form-control" id="billing_addr1" name="billing_addr1" placeholder="Street address, P.O. box, company name">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_addr2">Address line 2</label>
@@ -142,7 +142,7 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="billing_zip">ZIP</label>
-                                <input type="text" class="form-control" id="billing_zip" name="billing_zip">
+                                <input required type="text" class="form-control" id="billing_zip" name="billing_zip">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_city">City</label>
@@ -150,7 +150,7 @@
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_phone">Phone number</label>
-                                <input type="text" class="form-control" id="billing_phone" name="billing_phone">
+                                <input required type="text" class="form-control" id="billing_phone" name="billing_phone">
                             </fieldset>
                         </div>
                     </div>
