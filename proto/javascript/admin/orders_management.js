@@ -1,26 +1,9 @@
-function changeChecked()
-{
-    var checked = $('input#show_shipped').is(':checked');
-    document.location.href = '?show_shipped='+checked;
-}
-/*
-function show_shipments(event){
-    var checked = $('input#show_shipped').is(':checked');
-
-    $.ajax({
-        url: "../../api/admin/orders_management.php",
-        type: "GET",
-        data: {checked: checked},
-        dataType: 'json'
-    }).done(function(data) {
-        alert('done');
-    })
-    .fail(function() {
-        alert('fail');
-    });
-}
-
-$('input#show_shipped').on('click', show_shipments);*/
+$('input#show_pending').on('change', function() {
+    if ($('input#show_pending').prop('checked'))
+        window.location = "orders_management.php?pending";
+    else
+        window.location = "orders_management.php";
+});
 
 function getOrderInfo() {
     var order_a = $(this);
@@ -59,9 +42,9 @@ function displayInfo(panel, info)
                         <div class="col-xs-2 col-md-2"> \
                             <div class="qty_price"><span class="vert_centered"><span class="vert_centered">'+product.price+'€</span></span></div> \
                         </div> \
-                        <div class="dropdown col-sm-3 col-md-2 pull-right-sm"> \
-                          <button class="btn btn-warning dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
-                            Pending \
+                        <div class="dropdown col-sm-3 col-md-2"> \
+                          <button class="btn btn-warning dropdown-toggle btn-status pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
+                            '+product.product_status+' \
                             <span class="caret"></span> \
                           </button> \
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"> \

@@ -1,5 +1,5 @@
 {assign "title" {"HashStore - Orders Management"}}
-{assign var="css" value=['my_orders.css', 'admin/main.css']}
+{assign var="css" value=['my_orders.css', 'admin/main.css', 'admin/orders_management.css']}
 {assign var="js" value=['orders_management.js']}
 {include file='admin/common/header.tpl'}
 
@@ -19,7 +19,7 @@
 			<br>
 			<div class="sort_div">
 				<label class="checkbox-inline">
-					<input type="checkbox" name="show_shipped" id="show_shipped" > Show only pending shipments
+					<input type="checkbox" id="show_pending" {if $pending}checked{/if}> Show only pending shipments
 				</label>
 			</div>
 			{if $n_pages > 0}
@@ -79,6 +79,29 @@
 			</div>
 			{else}
 				<div class="text-center">You have no orders yet.</div>
+			{/if}
+			{if $n_pages > 0}
+			<div class="text-center">
+				<ul class="pagination pagination-sm">
+					{if $page != $startpage} 
+					<li><a href="?page=1">&laquo; First</a></li>
+					<li><a href="?page={$page-1}">&lsaquo; Previous</a></li>
+					{else}
+					<li class="hidden-xs disabled"><a>&laquo; First</a></li>
+					<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
+					{/if}
+					{for $p=$startpage to $endpage}
+					<li{if $p == $page} class="active"{/if}><a href="?page={$p}">{$p}</a></li>
+					{/for}
+					{if $page != $endpage}
+					<li><a href="?page={$page+1}">Next &rsaquo;</a></li>
+					<li><a href="?page={$n_pages}">Last &raquo;</a></li>
+					{else}
+					<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
+					<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
+					{/if}
+				</ul>
+			</div>
 			{/if}
 		</div>
 	</div>
