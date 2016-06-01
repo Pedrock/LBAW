@@ -1,3 +1,4 @@
+var elem1;
 function deleteFavorite()
 {
 	var elem = $(this);
@@ -11,7 +12,31 @@ function deleteFavorite()
 	});
 }
 
+function deleteFavoriteList()
+{
+	var elem = elem1;
+	var id = elem.closest('.favorite-list').attr('data-id');
+	$.ajax({
+		type: "POST",
+		url: base_url + "api/favorites/remove_list.php",
+		data: {list_id: id}
+	}).done(function() {
+		var ele = elem.closest('.favorite-list');
+		ele.slideUp();
+	});
+	$('#modal_delete_list').modal('hide');
+}
+
 $('.btn-delete-favorite').on('click',deleteFavorite);
+
+$('#modal_delete_list #confirm-delete').on('click',deleteFavoriteList);
+$('#modal_delete_list #cancel-delete').on('click',function(){
+	$('#modal_delete_list').modal('hide');
+});
+$('.btn-delete-favorite-list').on('click',function(){
+	elem1 = $(this);
+	$('#modal_delete_list').modal('show');
+});
 
 $('#favorites').on('click', '.btn-move-favorite', function() {
 	var product_id = $(this).closest('.favorite').attr('data-id');
@@ -55,6 +80,11 @@ $('#modal_change form').submit(function()
 			var clone = $('.favorite[data-id="'+product_id+'"]').clone();
 			$('.favorite[data-id="'+product_id+'"]').attr('data-id','').slideUp(function() {$(this).remove();});
 			insertFavorite($('.favoritelist[data-id="'+new_list_id+'"] > .panel-body'), clone);
+			$('.btn-delete-favorite-list').on('click',function(){
+				elem1 = $(this);
+				$('#modal_delete_list').modal('show');
+			});
+
 		});
 	}
 });
@@ -72,11 +102,16 @@ $('#modal_new form').submit(function () {
 		clone.hide();
 		clone.attr('id','').removeClass('hidden');
 		clone.find('.name').text(name);
+		clone.closest('.favorite-list').attr('data-id',id);
 		clone.find('.favoritelist').attr('data-id',id).attr('id','collapse'+id);
 		clone.find('.panel-title > a').attr('href','#collapse'+id);
 		$('#dummy-list').before(clone);
 		clone.slideDown();
 		$('#categories_select').append('<option value="'+id+'">'+name+'</option>');
+		$('.btn-delete-favorite-list').on('click',function(){
+			elem1 = $(this);
+			$('#modal_delete_list').modal('show');
+		});
 	});
 });
 

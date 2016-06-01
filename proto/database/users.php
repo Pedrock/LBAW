@@ -148,4 +148,12 @@
     $stmt->execute(array($user_id, $list_name));
     return $stmt->fetch()['idfavoritelist'];
   }
+
+  function deleteFavoriteList($user_id, $list_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM FavoriteList WHERE idUser = ? and idfavoritelist = ?;");
+    $stmt->execute(array($user_id, $list_id));
+  }
+  
 ?>
