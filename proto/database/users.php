@@ -1,5 +1,5 @@
-  <?php
-  
+<?php
+
   function createUser($username, $email, $nif, $password) {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser,username,idadmin");
@@ -86,7 +86,7 @@
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
             WHERE idOrder = ? AND Orders.idUser = ?;");
-    
+
     $stmt2 = $conn->prepare(
       "SELECT ProductOrder.idProduct AS id, product_status, location AS photo, ProductOrder.quantity, name, ProductOrder.price
                 FROM ProductOrder
@@ -94,7 +94,7 @@
                 INNER JOIN Product USING(idProduct)
                 LEFT JOIN Photo ON ProductOrder.idProduct = Photo.idProduct AND photo_order = 1
           WHERE idOrder = ? AND idUser = ?;");
-    
+
     $conn->beginTransaction();
     $stmt1->execute(array($order_id, $user_id));
     $stmt2->execute(array($order_id, $user_id));
@@ -120,10 +120,17 @@
     $stmt->execute(array($product_id,$user_id));
   }
 
+  function moveFavorite($user_id, $product_id, $new_list)
+  {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Favorite SET idFavoriteList = ? WHERE idProduct = ? AND idUser = ?;");
+    $stmt->execute(array($new_list,$product_id,$user_id));
+  }
+
   function getUserFavorites($user_id)
   {
     global $conn;
-    $stmt = $conn->prepare("SELECT idfavoritelist, FavoriteList.name list, Product.idproduct, Product.name, location AS photo
+    $stmt = $conn->prepare("SELECT idfavoritelist, FavoriteList.name AS list, Product.idproduct, Product.name, location AS photo, product_position
         FROM FavoriteList
         FULL JOIN Favorite USING(idFavoriteList)
         LEFT JOIN Product USING(idProduct) 
@@ -132,5 +139,13 @@
         ORDER BY FavoriteList.idFavoriteList NULLS FIRST,product_position;");
     $stmt->execute(array($user_id, $user_id));
     return $stmt->fetchAll();
+  }
+
+  function createFavoriteList($user_id, $list_name)
+  {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO FavoriteList(idUser, name) VALUES (?, ?) RETURNING idfavoritelist;");
+    $stmt->execute(array($user_id, $list_name));
+    return $stmt->fetch()['idfavoritelist'];
   }
 ?>
