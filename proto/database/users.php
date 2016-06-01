@@ -143,4 +143,26 @@
     $stmt->execute(array($zip1, $zip2));
     return $stmt->fetch();
   }
+
+  function startPasswordRecovery($email, $token) {
+    global $conn;
+  
+    $stmt = $conn->prepare("SELECT create_recovery_token(?, ?)");
+    $stmt->execute(array($email, $token));
+    return $stmt->fetch()['create_recovery_token'];
+  }
+
+  function validResetToken($user_id, $token) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT iduser as id FROM password_recovery WHERE idUser = ? AND token = ?");
+    $stmt->execute(array($user_id, $token));
+    return $stmt->fetch();
+  }
+
+  function resetPassword($user_id, $new_password, $token) {
+    global $conn;
+  
+    $stmt = $conn->prepare("SELECT reset_password(?, ?, ?)");
+    $stmt->execute(array($user_id, sha1($new_password), $token));
+  }
 ?>
