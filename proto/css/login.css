@@ -25,10 +25,16 @@ body{
 {
     margin-bottom: 10px;
 }
+
 #form-signin .checkbox
 {
     font-weight: normal;
+    display: inline;
 }
+.recover-pw {
+    margin-top: 2px;
+}
+
 #form-signin input
 {
     position: relative;
@@ -106,4 +112,38 @@ body{
     text-align: center;
     margin-bottom: 5px;
     color: black;
+}
+
+.alert {
+    margin: 5px 15px 5px 15px;
+    display: none;
+}
+
+#error {
+    margin-top: 10px;
+}
+
+#success {
+    text-align: center;
+    margin-top: 10px;
+}
+
+#reset_btn {
+    margin-top: 15px;
+}
+
+#login_btn {
+    border-radius: 0;
+    margin: 10px 25px 15px 25px;
+    width: 300px;
+    display: none;
+}
+
+.error_feedback {
+    border-color: red;
+}
+
+#reset_error {
+    text-align: center;
+    padding: 20px;
 }

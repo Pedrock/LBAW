@@ -12,10 +12,11 @@
 				<input type="checkbox" name="remember-me"> Remember me
 			</label>
 		</div>
+		<a href="recover_password.php" class="pull-right recover-pw">Recover password</a>
 		<button id="login-button" class="btn btn-lg btn-warning btn-block" type="submit">Sign in</button>
 	</form>
 </div>
-<a href="register.php" class="text-center new-account">Create an account </a>
+<a href="register.php" class="text-center new-account">Create an account</a>
 <script> redirect_dest = '{$redirect_dest}'; </script> <!-- FIXME -->
 {assign var=js value=['login.js']}
 

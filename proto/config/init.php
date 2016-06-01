@@ -6,6 +6,7 @@
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
+  $LINK = "https://gnomo.fe.up.pt";
   $BASE_DIR = '/opt/lbaw/lbaw1564/public_html/proto/'; //FIXME
   $BASE_URL = '/~lbaw1564/proto/'; //FIXME
 
