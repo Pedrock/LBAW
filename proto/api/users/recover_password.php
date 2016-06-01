@@ -27,7 +27,6 @@
 	
 	$reset_url = $LINK . $BASE_URL . "pages/reset_password.php?id=" . $user_id . "&token=" . $token;
 
-	$to = 'soaresrebelo@gmail.com';
 	$message = "<h1>HashStore - Password Reset</h1>"
 	. "A request was made to reset your password.<br><br>"
 	. "Follow this link to reset your password:\r\n"
