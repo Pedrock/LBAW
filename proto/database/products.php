@@ -391,9 +391,37 @@
     $stmt = $conn->prepare("DELETE from category WHERE idCategory = ?");
     $stmt->execute(array($id));
   }
-  function deleteproduct($id, $bool) {
+  function deleteProduct($id, $bool) {
     global $conn;
     $stmt = $conn->prepare("UPDATE product SET isDeleted = ? WHERE idProduct = ?");
     $stmt->execute(array($bool, $id));
+  }
+
+  function shipOrder($order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE ProductOrder
+	SET product_status = 'Sent'
+	WHERE idOrder = ?;");
+    $stmt->execute(array($order_id));
+  }
+
+  function updateProductOrder($order_id, $product_id, $status)
+  {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE ProductOrder
+	SET product_status = ?
+	WHERE idOrder = ? AND idProduct = ?;");
+    $stmt->execute(array($status, $order_id, $product_id));
+  }
+
+  function getOrderStatus($order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT order_status
+      FROM Orders 
+      WHERE idOrder = ?");
+    $stmt->execute(array($order_id));
+    return $stmt->fetch();
   }
 ?>

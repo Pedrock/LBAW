@@ -1,5 +1,5 @@
 <?php
-    include_once('../../config/init.php');
+    include_once('../../../config/init.php');
     include_once($BASE_DIR . 'lib/admin_check.php');
     include_once($BASE_DIR . 'database/products.php');
 
