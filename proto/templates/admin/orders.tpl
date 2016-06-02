@@ -1,6 +1,6 @@
 {assign "title" {"HashStore - Orders Management"}}
-{assign var="css" value=['my_orders.css', 'admin/main.css', 'admin/orders_management.css']}
-{assign var="js" value=['orders_management.js']}
+{assign var="css" value=['my_orders.css', 'admin/main.css', 'admin/orders.css']}
+{assign var="js" value=['orders.js']}
 {include file='admin/common/header.tpl'}
 
 <div class="row" id="orders">
@@ -10,9 +10,10 @@
 			<br>
 			<form id="searchBar" role="search">
 				<div class="input-group">
-					<input type="text" class="form-control" name="search" placeholder="Search...">
+					<input type="text" class="form-control" name="search" placeholder="Search..."{if $search} value="{$search}"{/if}>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+						<a href="orders.php" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></a>
 					</span>
 				</div>
 			</form>
@@ -26,18 +27,18 @@
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
 					{if $page != $startpage} 
-					<li><a href="?page=1">&laquo; First</a></li>
-					<li><a href="?page={$page-1}">&lsaquo; Previous</a></li>
+					<li><a href="?page=1{if $pending}&pending{/if}">&laquo; First</a></li>
+					<li><a href="?page={$page-1}{if $pending}&pending{/if}">&lsaquo; Previous</a></li>
 					{else}
 					<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 					<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 					{/if}
 					{for $p=$startpage to $endpage}
-					<li{if $p == $page} class="active"{/if}><a href="?page={$p}">{$p}</a></li>
+					<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $pending}&pending{/if}">{$p}</a></li>
 					{/for}
 					{if $page != $endpage}
-					<li><a href="?page={$page+1}">Next &rsaquo;</a></li>
-					<li><a href="?page={$n_pages}">Last &raquo;</a></li>
+					<li><a href="?page={$page+1}{if $pending}&pending{/if}">Next &rsaquo;</a></li>
+					<li><a href="?page={$n_pages}{if $pending}&pending{/if}">Last &raquo;</a></li>
 					{else}
 					<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 					<li class="hidden-xs disabled"><a>Last &raquo;</a></li>
@@ -78,7 +79,7 @@
 				</div>
 			</div>
 			{else}
-				<div class="text-center">You have no orders yet.</div>
+				<div class="no-results text-center">{if $search}No orders found.{else}No orders available.{/if}</div>
 			{/if}
 			{if $n_pages > 0}
 			<div class="text-center">

@@ -200,31 +200,28 @@
     return $stmt->fetchAll();
   }
 
-  function show_shipments($checked = false, $limit, $page){
+  function getOrders($limit, $page, $pending_only = false){
 
     $offset = ($page-1)*$limit;
     global $conn;
-    if($checked) 
-    {
-      $stmt = $conn->prepare(
+    $stmt = $conn->prepare(
         "SELECT idOrder AS id, totalPrice AS price, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderdate, order_status, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, COUNT(idOrder) OVER () AS total_count 
-          FROM Orders
-          WHERE order_status != 'Sent'
-          ORDER BY orderDate
+          FROM Orders ".
+        ($pending_only ? "WHERE order_status != 'Sent'" : "")
+        ." ORDER BY orderDate
           LIMIT ? OFFSET ?;"
-          );
-      $stmt->execute(array($limit, $offset));
-    }
-    else
-    {
-      $stmt = $conn->prepare(
-        "SELECT idOrder AS id, totalPrice AS price, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderdate, order_status, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, COUNT(idOrder) OVER () AS total_count
+    );
+    $stmt->execute(array($limit, $offset));
+    return $stmt->fetchAll();
+  }
+
+  function searchOrder($id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT idOrder AS id, totalPrice AS price, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderdate, order_status, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, COUNT(idOrder) OVER () AS total_count 
           FROM Orders
-          ORDER BY orderDate
-          LIMIT ? OFFSET ?;"
-          );
-      $stmt->execute(array($limit, $offset));
-    }
+          WHERE idOrder = ?");
+    $stmt->execute(array($id));
     return $stmt->fetchAll();
   }
 
@@ -234,7 +231,7 @@
 
     $stmt1 = $conn->prepare(
       "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
-        Coupon.percentage AS coupon_discount
+        Coupon.percentage AS coupon_discount, shippingcost
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
             WHERE idOrder = ?");
@@ -242,7 +239,6 @@
     $stmt2 = $conn->prepare(
       "SELECT ProductOrder.idProduct AS id, product_status, location AS photo, ProductOrder.quantity, name, ProductOrder.price
                 FROM ProductOrder
-                LEFT JOIN Orders USING(idOrder)
                 INNER JOIN Product USING(idProduct)
                 LEFT JOIN Photo ON ProductOrder.idProduct = Photo.idProduct AND photo_order = 1
           WHERE idOrder = ?");
@@ -400,6 +396,4 @@
     $stmt = $conn->prepare("UPDATE product SET isDeleted = ? WHERE idProduct = ?");
     $stmt->execute(array($bool, $id));
   }
-
- 
 ?>

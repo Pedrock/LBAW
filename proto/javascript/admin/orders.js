@@ -1,8 +1,8 @@
 $('input#show_pending').on('change', function() {
     if ($('input#show_pending').prop('checked'))
-        window.location = "orders_management.php?pending";
+        window.location = "orders.php?pending";
     else
-        window.location = "orders_management.php";
+        window.location = "orders.php";
 });
 
 function getOrderInfo() {
@@ -13,7 +13,7 @@ function getOrderInfo() {
     order_a.removeClass('loadable');
 
     $.ajax({
-        url: "../../api/admin/orders_management.php",
+        url: "../../api/admin/get_order.php",
         type: "POST",
         data: {order_id: order_id},
         dataType: 'json'
@@ -27,12 +27,33 @@ function getOrderInfo() {
     });
 };
 
+$("#accordion").on("click", ".dropdown-menu > li", function(event){
+    event.preventDefault();
+    var button = $(this).closest('.dropdown').children('.btn');
+    var text = $(this).text();
+    button.children(':first-child').text(text);
+    fix_button_classes(button);
+});
+
+function fix_button_classes(buttons)
+{
+    buttons.removeClass('btn-warning btn-danger btn-success');
+    buttons.each(function () {
+        switch ($(this).children(':first-child').text())
+        {
+            case 'Pending': $(this).addClass('btn-warning'); break;
+            case 'Canceled': $(this).addClass('btn-danger'); break;
+            case 'Sent': $(this).addClass('btn-success'); break;
+        }
+    });
+}
+
 function displayInfo(panel, info)
 {
     for (var i = 0; i < info.products.length; i++)
     {
         var product = info.products[i];
-        panel.append('<div class="row"> \
+        panel.append('<div class="row product" data-id="'+product.id+'"> \
                         <div class="col-xs-7 col-md-8 product_title"> \
                             <a href="../product.php?id='+product.id+'" class="link-p"> \
                                 <img class="product_img" src="../../images/products/'+product.photo+'" alt=""> \
@@ -43,8 +64,8 @@ function displayInfo(panel, info)
                             <div class="qty_price"><span class="vert_centered"><span class="vert_centered">'+product.price+'€</span></span></div> \
                         </div> \
                         <div class="dropdown col-sm-3 col-md-2"> \
-                          <button class="btn btn-warning dropdown-toggle btn-status pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
-                            '+product.product_status+' \
+                          <button class="btn dropdown-toggle btn-status pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
+                            <span>'+product.product_status+'</span> \
                             <span class="caret"></span> \
                           </button> \
                           <ul class="dropdown-menu" aria-labelledby="dropdownMenu1"> \
@@ -55,13 +76,14 @@ function displayInfo(panel, info)
                         </div> \
                     </div>');
     }
-
+    fix_button_classes(panel.find('.btn'));
     var coupon = info.coupon_discount ? '<div><span class="bold">Coupon Discount:</span> '+info.coupon_discount+'%</div>' : '';
 
     panel.append('<div class="order-details row"> \
-                        <div class="visible-xs"><span class="bold">Total:</span> '+info.totalprice+' €</div>'
+                        <div><span class="bold">Shipping Costs:</span> '+info.shippingcost+' €</div>'
                         + coupon +
-                        '<br><div><span class="bold">State:</span> '+info.status+'</div> \
+                        '<div><span class="bold">Total:</span> '+info.totalprice+' €</div> \
+                        <br><div><span class="bold">State:</span> '+info.status+'</div> \
                         <div> \
                             <br><span class="bold">Shipping Address:</span> \
                             <br> '+info.shipping_name+' \
@@ -80,7 +102,7 @@ function displayInfo(panel, info)
                         </div> \
                     </div> \
                     <div class="btns pull-right"> \
-                        <button type="button" class="btn-ship btn btn-success" aria-label="Left Align">Mark as Shipped</button>\
+                        <button type="button" class="btn-ship btn btn-success" aria-label="Left Align">Mark All As Shipped</button>\
                     </div>'); 
 }
 

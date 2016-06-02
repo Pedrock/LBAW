@@ -7,7 +7,13 @@
 
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
   	$limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
-	$orders = show_shipments(isset($_GET['pending']), $limit, $page);
+	$search = (empty($_GET['search']) || !is_numeric($_GET['search'])) ? null : trim($_GET['search']);
+	if ($search)
+	{
+		$orders = searchOrder($search);
+	}
+	else
+		$orders = getOrders($limit, $page, isset($_GET['pending']));
 
 	extract(pagination($orders, $limit, $page));
 
@@ -18,6 +24,7 @@
 	$smarty->assign('startpage', $startpage);
 	$smarty->assign('endpage', $endpage);
 	$smarty->assign('limit', $limit);
-	$smarty->display('admin/orders_management.tpl');
+	$smarty->assign('search', $search);
+	$smarty->display('admin/orders.tpl');
 	
 ?>

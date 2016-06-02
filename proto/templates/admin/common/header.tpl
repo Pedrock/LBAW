@@ -39,7 +39,7 @@
 		<div id="sidebar-wrapper">
 			<div id="sidebar" class="list-group panel">
 				<a href="{$BASE_URL}pages/admin/index.php" class="list-group-item">Dashboard</a>
-				<a href="{$BASE_URL}pages/admin/orders_management.php" class="list-group-item">Orders</a>
+				<a href="{$BASE_URL}pages/admin/orders.php" class="list-group-item">Orders</a>
 				<a href="#sub3" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Products<span class="caret"></span></a>
 				<div class="collapse" id="sub3" aria-expanded="false" role="link">
 					<a href="{$BASE_URL}pages/admin/product/new.php" class="list-group-item">New Product</a>
