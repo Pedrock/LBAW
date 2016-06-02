@@ -6,6 +6,19 @@
 	padding-bottom: 10px;
 }
 
-.btn-ship {
+.btn-ship-container {
+	position: relative;
+}
+
+.dropdown .fa-refresh, .btn-ship-container .fa-refresh {
+	position: absolute;
+	top: 8px;
+}
+
+.dropdown .fa-refresh {
+	right: -3px;
+}
+
+.btn-ship-container {
 	margin-top: 10px;
 }

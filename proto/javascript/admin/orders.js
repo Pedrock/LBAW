@@ -42,8 +42,8 @@ $("#accordion").on("click", ".dropdown-menu > li", function(event){
     var order_id = order_info.attr('id');
     var product_id = $(this).closest('.product').attr('data-id');
 
-    button.children('.fa-refresh').remove();
-    button.append('<i class="fa fa-refresh fa-spin fa-fw"></i>');
+    button.next('.fa-refresh').remove();
+    button.after('<i class="fa fa-refresh fa-spin fa-fw"></i>');
 
     $.ajax({
         url: "../../api/admin/orders/update_product.php",
@@ -51,22 +51,22 @@ $("#accordion").on("click", ".dropdown-menu > li", function(event){
         data: {order_id: order_id, product_id: product_id, status: new_status},
         dataType: 'json'
     }).done(function(data) {
-        button.children('.fa-refresh').remove();
+        button.next('.fa-refresh').remove();
         button.children(':first-child').text(new_status);
         order_info.find('.order_status').text(data.order_status);
         fix_button_classes(button);
         statusUpdated(order_info, data.order_status);
     })
     .fail(function() {
-        button.children('.fa-refresh').removeClass('fa-spin');
+        button.next('.fa-refresh').removeClass('fa-spin');
     });
 });
 
 $("#accordion").on("click", ".btn-ship", function(event){
 
     var button = $(this);
-    button.children('.fa-refresh').remove();
-    button.append('<i class="fa fa-refresh fa-spin fa-fw"></i>');
+    button.next('.fa-refresh').remove();
+    button.after('<i class="fa fa-refresh fa-spin fa-fw"></i>');
     var order_info = $(this).closest('.order-info');
     var order_id = order_info.attr('id');
     $.ajax({
@@ -75,7 +75,7 @@ $("#accordion").on("click", ".btn-ship", function(event){
         data: {order_id: order_id},
         dataType: 'json'
     }).done(function(data) {
-        button.children('.fa-refresh').remove();
+        button.next('.fa-refresh').remove();
         button.slideUp();
         order_info.find('.order_status').text(data.order_status);
         var order_buttons = order_info.find('.btn-status');
@@ -84,7 +84,7 @@ $("#accordion").on("click", ".btn-ship", function(event){
         statusUpdated(order_info, data.order_status);
     })
     .fail(function() {
-        button.children('.fa-refresh').removeClass('fa-spin');
+        button.next('.fa-refresh').removeClass('fa-spin');
     });
 });
 
@@ -156,7 +156,7 @@ function displayInfo(panel, info)
                             <br> '+info.billing_city+' '+info.billing_zip1+'-'+info.billing_zip2+' \
                         </div> \
                     </div>' +
-                    (all_sent ? '' : '<div class="btns pull-right"> \
+                    (all_sent ? '' : '<div class="btn-ship-container pull-right"> \
                         <button type="button" class="btn-ship btn btn-success" aria-label="Left Align">Mark All As Shipped</button>\
                         </div>'));
 }
