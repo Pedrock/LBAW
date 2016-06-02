@@ -1,5 +1,5 @@
-  <?php
-  
+<?php
+
   function createUser($username, $email, $nif, $password) {
     global $conn;
     $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser,username,isadmin");
@@ -59,13 +59,10 @@
     $stmt->execute(array($user_id, bin2hex($token)));
   }
 
-  // purchase history
-
   function getPurchaseHistory($user_id,$limit,$page)
   {
-     $offset = ($page-1)*$limit;
+    $offset = ($page-1)*$limit;
     global $conn;
-
     $stmt = $conn->prepare(
       "SELECT idOrder AS id, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderDate, totalPrice AS price, COUNT(idOrder) OVER () AS total_count
       FROM Orders 
@@ -79,14 +76,13 @@
   function getInfoPurchaseHistory($user_id, $order_id)
   {
     global $conn;
-
     $stmt1 = $conn->prepare(
       "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
         Coupon.percentage AS coupon_discount
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
             WHERE idOrder = ? AND Orders.idUser = ?;");
-    
+
     $stmt2 = $conn->prepare(
       "SELECT ProductOrder.idProduct AS id, product_status, location AS photo, ProductOrder.quantity, name, ProductOrder.price
                 FROM ProductOrder
@@ -94,7 +90,7 @@
                 INNER JOIN Product USING(idProduct)
                 LEFT JOIN Photo ON ProductOrder.idProduct = Photo.idProduct AND photo_order = 1
           WHERE idOrder = ? AND idUser = ?;");
-    
+
     $conn->beginTransaction();
     $stmt1->execute(array($order_id, $user_id));
     $stmt2->execute(array($order_id, $user_id));
@@ -105,6 +101,57 @@
     return array($order_info, $order_products);
   }
 
+  function addToFavorites($user_id, $product_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO Favorite(idProduct, idUser, idFavoriteList) 
+      VALUES (?, ?, NULL);");
+    $stmt->execute(array($product_id,$user_id));
+  }
+
+  function removeFromFavorites($user_id, $product_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM Favorite WHERE idProduct = ? AND idUser = ?;");
+    $stmt->execute(array($product_id,$user_id));
+  }
+
+  function moveFavorite($user_id, $product_id, $new_list)
+  {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Favorite SET idFavoriteList = ? WHERE idProduct = ? AND idUser = ?;");
+    $stmt->execute(array($new_list,$product_id,$user_id));
+  }
+
+  function getUserFavorites($user_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT idfavoritelist, FavoriteList.name AS list, Product.idproduct, Product.name, location AS photo, product_position
+        FROM FavoriteList
+        FULL JOIN Favorite USING(idFavoriteList)
+        LEFT JOIN Product USING(idProduct) 
+        LEFT JOIN Photo ON Favorite.idProduct = Photo.idProduct AND photo_order = 1
+        WHERE FavoriteList.idUser = ? OR Favorite.idUser = ?
+        ORDER BY FavoriteList.idFavoriteList NULLS FIRST,product_position;");
+    $stmt->execute(array($user_id, $user_id));
+    return $stmt->fetchAll();
+  }
+
+  function createFavoriteList($user_id, $list_name)
+  {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO FavoriteList(idUser, name) VALUES (?, ?) RETURNING idfavoritelist;");
+    $stmt->execute(array($user_id, $list_name));
+    return $stmt->fetch()['idfavoritelist'];
+  }
+
+  function deleteFavoriteList($user_id, $list_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM FavoriteList WHERE idUser = ? and idfavoritelist = ?;");
+    $stmt->execute(array($user_id, $list_id));
+  }
+  
   function getUserAddresses($user_id)
   {
     global $conn;
@@ -146,7 +193,6 @@
 
   function startPasswordRecovery($email, $token) {
     global $conn;
-  
     $stmt = $conn->prepare("SELECT create_recovery_token(?, ?)");
     $stmt->execute(array($email, $token));
     return $stmt->fetch()['create_recovery_token'];
@@ -161,7 +207,6 @@
 
   function resetPassword($user_id, $new_password, $token) {
     global $conn;
-  
     $stmt = $conn->prepare("SELECT reset_password(?, ?, ?)");
     $stmt->execute(array($user_id, sha1($new_password), $token));
   }

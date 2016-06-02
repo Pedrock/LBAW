@@ -68,3 +68,19 @@
 	margin-top: 10px;
 	margin-bottom: 0;
 }
+
+#favorites-accordion .panel-title>a.collapsed > .icon:after {
+    content: "\e258";
+}
+#favorites-accordion .panel-title>a > .icon:after {
+    font-family: 'Glyphicons Halflings';
+    content: "\e259";
+    margin-left: 5px;
+    position: relative;
+    top: 2px;
+    font-size: 12px;
+}
+
+.icon {
+	float: right;
+}

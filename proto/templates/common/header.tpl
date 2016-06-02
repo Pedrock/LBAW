@@ -45,7 +45,7 @@
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> {$smarty.session.username}<span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="{$BASE_URL}pages/favorites.php">Favorites</a></li>
+              <li><a href="{$BASE_URL}pages/user/favorites.php">Favorites</a></li>
               <li><a href="{$BASE_URL}pages/user/my_orders.php">My Orders</a></li>
               <li><a href="#">Profile</a></li>
               {if $smarty.session.admin}
