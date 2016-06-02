@@ -31,17 +31,15 @@
 						</div>
 						</div>
 					{/if}
-						<div class="panel panel-info favorite-list" data-id="{$favorite.idfavoritelist}">
+						<div class="panel panel-info favoritelist" data-id="{$favorite.idfavoritelist}">
 							<div class="panel-heading">
+								<div class="pull-right">
+									<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
+								</div>
 								<h4 class="panel-title">
-									<div class="pull-right">
-									<a class="fav-btn btn-delete-favorite-list" href="javascript:void(0);"><span class="glyphicon glyphicon-remove"></span></a>
-									</div>
 									<a data-toggle="collapse" class="collapsed" data-parent="#favorites-accordion" href="#collapse{$favorite.idfavoritelist}"><span class="name">{$favorite.list}</span>
 									</a>
-									
 								</h4>
-
 							</div>
 							<div id="collapse{$favorite.idfavoritelist}" class="panel-collapse collapse favoritelist" data-id="{$favorite.idfavoritelist}">
 								<div class="panel-body">
@@ -64,28 +62,25 @@
 							</div></div>
 							<div class="panel panel-primary">
 								<div class="panel-heading"><h3 class="panel-title">Categorized Favorites</h3></div>
-								<div class="panel-body"><div><div><div>
-
+								<div class="panel-body">
+								<div class="panel-group" id="favorites-accordion"><div><div><div>
 			{/if}
-
-
-
 			</div>
 			</div>
 			</div>
-									<div id="dummy-list" class="panel panel-info favorite-list hidden" data-id="0">
+									<div id="dummy-list" class="panel panel-info favoritelist hidden" data-id="0">
+										<div class="pull-right">
+											<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
+										</div>
 										<div class="panel-heading">
 											<h4 class="panel-title">
-												<div class="pull-right">
-													<a class="fav-btn btn-delete-favorite-list" href="javascript:void(0);"><span class="glyphicon glyphicon-remove"></span></a>
-												</div>
 												<a data-toggle="collapse" class="collapsed" data-parent="#favorites-accordion" href="#collapse"><span class="name">Dummy</span></a>
 											</h4>
 										</div>
 										<div id="collapse" class="panel-collapse collapse favoritelist" data-id="dummy">
 											<div class="panel-body">
 											</div></div></div>
-			<a id="new-category" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal_new">New List</a>
+			<a id="new-category" class="btn btn-primary" data-toggle="modal" data-target="#modal_new">New List</a>
 			</div>
 		</div>
 	</div>
@@ -127,7 +122,7 @@
 					</div>
 					<div class="modal-body">
 						<fieldset class="form-group">
-							<label for="name">New list's name:</label>
+							<label for="list_name">New list's name:</label>
 							<input type="text" class="form-control" id="list_name" name="list_name">
 						</fieldset>
 					</div>
@@ -150,7 +145,7 @@
 					</div>
 					<div class="modal-body">
 						<fieldset class="form-group">
-							<label for="name">Are you sure you want to delete this list?</label>
+							<p>Are you sure you want to delete this list?</p>
 						</fieldset>
 					</div>
 					<div class="modal-footer">
