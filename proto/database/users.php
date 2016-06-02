@@ -2,7 +2,7 @@
 
   function createUser($username, $email, $nif, $password) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser,username,idadmin");
+    $stmt = $conn->prepare("INSERT INTO users(username,email,nif,password) VALUES (?, ?, ?, ?) RETURNING iduser,username,isadmin");
     $stmt->execute(array($username, $email, $nif, sha1($password)));
     return $stmt->fetch();
   }
@@ -59,13 +59,10 @@
     $stmt->execute(array($user_id, bin2hex($token)));
   }
 
-  // purchase history
-
   function getPurchaseHistory($user_id,$limit,$page)
   {
-     $offset = ($page-1)*$limit;
+    $offset = ($page-1)*$limit;
     global $conn;
-
     $stmt = $conn->prepare(
       "SELECT idOrder AS id, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderDate, totalPrice AS price, COUNT(idOrder) OVER () AS total_count
       FROM Orders 
@@ -79,7 +76,6 @@
   function getInfoPurchaseHistory($user_id, $order_id)
   {
     global $conn;
-
     $stmt1 = $conn->prepare(
       "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
         Coupon.percentage AS coupon_discount
@@ -156,4 +152,62 @@
     $stmt->execute(array($user_id, $list_id));
   }
   
+  function getUserAddresses($user_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT idaddress AS id, Address.name, address1, address2, nif, (code1||'-'||code2) AS zipcode, City.name AS city, phonenumber
+        FROM Users
+        FULL JOIN Address USING (idUser)
+        LEFT JOIN ZipCode USING (idZipCode)
+        LEFT JOIN City USING (idCity)
+        WHERE idUser = ?;");
+    $stmt->execute(array($user_id));
+    return $stmt->fetchAll();
+  }
+
+  function getUserAddress($user_id, $address_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT idaddress AS id, Address.name, address1, address2, (code1||'-'||code2) AS zipcode, City.name AS city, phonenumber
+        FROM Address
+        LEFT JOIN ZipCode USING (idZipCode)
+        LEFT JOIN City USING (idCity)
+        WHERE idUser = ? AND idAddress = ?;");
+    $stmt->execute(array($user_id, $address_id));
+    return $stmt->fetch();
+  }
+
+  function getCity($zip1, $zip2)
+  {
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT City.name AS city
+        FROM ZipCode
+        INNER JOIN City USING (idCity)
+        WHERE code1 = ? AND code2 = ?");
+    $stmt->execute(array($zip1, $zip2));
+    return $stmt->fetch();
+  }
+
+  function startPasswordRecovery($email, $token) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT create_recovery_token(?, ?)");
+    $stmt->execute(array($email, $token));
+    return $stmt->fetch()['create_recovery_token'];
+  }
+
+  function validResetToken($user_id, $token) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT iduser as id FROM password_recovery WHERE idUser = ? AND token = ?");
+    $stmt->execute(array($user_id, $token));
+    return $stmt->fetch();
+  }
+
+  function resetPassword($user_id, $new_password, $token) {
+    global $conn;
+    $stmt = $conn->prepare("SELECT reset_password(?, ?, ?)");
+    $stmt->execute(array($user_id, sha1($new_password), $token));
+  }
 ?>
