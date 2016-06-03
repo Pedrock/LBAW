@@ -29,7 +29,7 @@ function getOrderInfo() {
 
 function statusUpdated(order_info, order_status)
 {
-    if ($('#show_pending').prop('checked') && order_status == 'Sent')
+    if ($('#show_pending').prop('checked') && (order_status == 'Sent' || order_status == 'Canceled'))
         order_info.prev('a').addBack(order_info).slideUp();
 }
 
