@@ -93,6 +93,20 @@
 	buser-top: 1px solid #ccc;
 }
 
+#accordion-container .panel-heading {
+	height: 55px;
+}
+
+#accordion-container .panel-heading .username,
+#accordion-container .panel-heading .email {
+	padding-top: 7px;
+}
+
+
+#accordion-container .panel-heading:hover {
+	background-color: #eee;
+}
+
 .vert_centered {
 	line-height: 40px;
 }
