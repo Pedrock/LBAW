@@ -12,6 +12,12 @@
 				</div>
 				<input type="file" id="files" name="files[]" hidden="hidden " multiple>
 				<input class="btn btn-default btn-file" type="button" id="files_btn" value="Add photos">
+				{if $product.isdeleted}
+					<span id="product_hidden_warning">
+						<span class="fa fa-exclamation-triangle" aria-hidden="true"></span> 
+						This product is hidden. Make it visible <a href="edit.php?id={$id}">here</a>
+					</span>
+				{/if}
 				{if empty($photos)}
 					<span class="no_photos">&nbsp;The product has no photos</span>
 				{/if}
