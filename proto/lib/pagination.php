@@ -1,10 +1,10 @@
 <?php
 
-function pagination($products,$limit,$page)
+function pagination($products,$limit,$page, $total)
 {
 	if ($products !== false)
 	{
-		$product_count = $products[0]['total_count'];
+		$product_count = isset($total) ? $total : ($products[0]['total_count']);
 		$n_pages = ($product_count - $product_count % $limit) / $limit + ($product_count % $limit > 0);
 	}
 	else

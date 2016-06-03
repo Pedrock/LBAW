@@ -222,6 +222,24 @@
     global $conn;
     $stmt = $conn->prepare("SELECT username, email, nif, isadmin from  Users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
     $stmt->execute(array($user, $user));
-    return $stmt->fetch();
+    return $stmt->fetchAll();
+  }
+
+  function getAllUsers($limit, $page, $adminOnly = false){
+    $offset = ($page-1)*$limit;
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT iduser, username, email, nif, isadmin AS admin FROM  Users ".
+        ($adminOnly ? "WHERE isAdmin = 'true'" : "")
+        ."LIMIT ? OFFSET ?;"
+    );
+    $stmt->execute(array($limit, $offset));
+    return $stmt->fetchAll();
+  }
+  function userCount($adminOnly){
+    global $conn;
+    $stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM Users " . ($adminOnly ? "WHERE isAdmin = 'true'" : "") . ";");
+    $stmt->execute(array());
+    return $stmt->fetch()['cnt'];
   }
 ?>

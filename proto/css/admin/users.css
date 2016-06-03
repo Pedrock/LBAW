@@ -1,0 +1,98 @@
+#accordion, #accordion *{
+	buser-radius: 0;
+}
+
+#content-wrapper .pagination {
+	margin-top: 3px;
+}
+
+.user {
+	margin: 0;
+}
+
+.panel-users-list {
+	padding: 0;
+}
+
+.user .panel-heading {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.show-user-info {
+	position: absolute;
+	right: 30px;
+}
+
+.user-info .product_title {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+
+.user_date {
+	white-space: nowrap;
+}
+
+.user {
+	buser-radius: 0;
+	buser: none;
+	background: white;
+}
+
+.panel-users-list a {
+	text-decoration: none;
+	color: black;
+}
+
+.user .panel-heading {
+	background: #F3F3F3;
+	buser-radius: 0;
+	buser: none;
+}
+
+.user-info img {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	width: 30px;
+}
+
+.user-info .qty {
+	color: #888;
+	font-size: 0.9em;
+}
+
+.user-info {
+	buser-bottom: 1px solid #ccc;
+}
+
+.user .user-details {
+	padding-top: 15px;
+	padding-left: 15px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+#accordion > .panel-heading {
+	buser-bottom: 1px solid #bbb;
+}
+
+.panel-users-list a .panel-heading {
+	buser-bottom: 1px solid #ccc;
+}
+
+.panel-users-list a:last-of-type .panel-heading {
+	buser-bottom: none !important;
+}
+
+#accordion .user-info:last-of-type .panel-body {
+	buser-top: 1px solid #ccc;
+}
+
+.vert_centered {
+	line-height: 40px;
+}

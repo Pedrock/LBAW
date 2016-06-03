@@ -16,13 +16,13 @@
 		return_error('An action must be specified');
 
 	try {
-		$userinfo =  getUserInfoFromNameOrEmail($user);
-		if($userinfo === false)
+		$userinfo =  getUserInfoFromNameOrEmail($user)[0];
+		if($userinfo === false || count($userinfo) == 0)
 			return_error("User " . $user . "does not exist", 404);
 		changeAdminStatus($user, $setAdmin);
 		$success = ($userinfo['isadmin'] != ($setAdmin === "true"));
 		http_response_code(200);
-		echo json_encode(array('success' => $success, 'isadmin' => $userinfo['isadmin'], 'setAdmin' => $setAdmin));
+		echo json_encode(array('success' => $success));
 	} catch (PDOException $e) {
 		return_error("An error occurred while editing user. Please try again." . $e->getMessage());
 	}
