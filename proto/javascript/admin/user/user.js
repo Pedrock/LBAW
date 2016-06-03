@@ -43,7 +43,10 @@ $(document).ready(function() {
 				$("#ok").modal('toggle');
 			},
 			error: function(e) {
-				$("#error .modal-body").html(JSON.parse(e.responseText).error);
+				if(e.responseText)
+					$("#error .modal-body").html(JSON.parse(e.responseText).error);
+				else
+					$("#error .modal-body").html("Could not Connect!");
 				$("#error").modal('toggle');
 			}
 		});
