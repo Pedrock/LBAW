@@ -21,4 +21,9 @@
 
 .btn-ship-container {
 	margin-top: 10px;
+	padding-right: 5px;
+}
+
+.btn-ship {
+	margin-left: 20px;
 }

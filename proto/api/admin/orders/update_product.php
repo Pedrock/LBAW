@@ -16,5 +16,6 @@ try {
     echo json_encode(getOrderStatus($_POST['order_id']));
 } catch (PDOException $e) {
     http_response_code(400);
+    echo ($e->getMessage());
 }
 ?>

@@ -54,6 +54,8 @@ $("#accordion").on("click", ".dropdown-menu > li", function(event){
         button.next('.fa-refresh').remove();
         button.children(':first-child').text(new_status);
         order_info.find('.order_status').text(data.order_status);
+        order_info.add(order_info.prev()).find('.order_total').text(data.totalprice);
+        order_info.find('.order_shipping').text(data.shippingcost);
         fix_button_classes(button);
         statusUpdated(order_info, data.order_status);
     })
@@ -62,30 +64,38 @@ $("#accordion").on("click", ".dropdown-menu > li", function(event){
     });
 });
 
-$("#accordion").on("click", ".btn-ship", function(event){
-
-    var button = $(this);
+function updateOrder(button, status)
+{
     button.next('.fa-refresh').remove();
     button.after('<i class="fa fa-refresh fa-spin fa-fw"></i>');
-    var order_info = $(this).closest('.order-info');
+    var order_info = button.closest('.order-info');
     var order_id = order_info.attr('id');
     $.ajax({
-        url: "../../api/admin/orders/ship_order.php",
+        url: "../../api/admin/orders/update_order.php",
         type: "POST",
-        data: {order_id: order_id},
+        data: {order_id: order_id, status: status},
         dataType: 'json'
     }).done(function(data) {
         button.next('.fa-refresh').remove();
-        button.slideUp();
         order_info.find('.order_status').text(data.order_status);
+        order_info.add(order_info.prev()).find('.order_total').text(data.totalprice);
+        order_info.find('.order_shipping').text(data.shippingcost);
         var order_buttons = order_info.find('.btn-status');
-        order_buttons.children(':first-child').text('Sent');
+        order_buttons.children(':first-child').text(status);
         fix_button_classes(order_buttons);
         statusUpdated(order_info, data.order_status);
     })
-    .fail(function() {
-        button.next('.fa-refresh').removeClass('fa-spin');
-    });
+        .fail(function() {
+            button.next('.fa-refresh').removeClass('fa-spin');
+        });
+}
+
+$("#accordion").on("click", ".btn-ship", function(){
+    updateOrder($(this), 'Sent');
+});
+
+$("#accordion").on("click", ".btn-cancel", function(){
+    updateOrder($(this), 'Canceled');
 });
 
 function fix_button_classes(buttons)
@@ -103,11 +113,9 @@ function fix_button_classes(buttons)
 
 function displayInfo(panel, info)
 {
-    var all_sent = true;
     for (var i = 0; i < info.products.length; i++)
     {
         var product = info.products[i];
-        if (product.product_status != 'Sent') all_sent = false;
         panel.append('<div class="row product" data-id="'+product.id+'"> \
                         <div class="col-xs-7 col-md-8 product_title"> \
                             <a href="../product.php?id='+product.id+'" class="link-p"> \
@@ -135,9 +143,9 @@ function displayInfo(panel, info)
     var coupon = info.coupon_discount ? '<div><span class="bold">Coupon Discount:</span> '+info.coupon_discount+'%</div>' : '';
 
     panel.append('<div class="order-details row"> \
-                        <div><span class="bold">Shipping Costs:</span> '+info.shippingcost+' €</div>'
+                        <div><span class="bold">Shipping Costs:</span> <span class="order_shipping">'+info.shippingcost+'</span> €</div>'
                         + coupon +
-                        '<div><span class="bold">Total:</span> '+info.totalprice+' €</div> \
+                        '<div><span class="bold">Total:</span> <span class="order_total">'+info.totalprice+'</span> €</div> \
                         <br><div><span class="bold">State:</span> <span class="order_status">'+info.status+'</span></div> \
                         <div> \
                             <br><span class="bold">Shipping Address:</span> \
@@ -156,9 +164,10 @@ function displayInfo(panel, info)
                             <br> '+info.billing_city+' '+info.billing_zip1+'-'+info.billing_zip2+' \
                         </div> \
                     </div>' +
-                    (all_sent ? '' : '<div class="btn-ship-container pull-right"> \
-                        <button type="button" class="btn-ship btn btn-success" aria-label="Left Align">Mark All As Shipped</button>\
-                        </div>'));
+                    '<div class="btn-ship-container pull-right"> \
+                        <button type="button" class="btn-cancel btn btn-danger" aria-label="Cancel All">Cancel All</button>\
+                        <button type="button" class="btn-ship btn btn-success" aria-label="Mark All As Shipped">Mark All As Shipped</button>\
+                        </div>');
 }
 
 $(".order-accordion").on('click', getOrderInfo);

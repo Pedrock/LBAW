@@ -62,7 +62,7 @@
 							<div class="panel-heading">
 								<div id="order_id" class="col-xs-4">#{$order.id}</div>
 								<div class="order_date col-xs-4">{$order.orderdate}</div>
-								<div class="col-xs-2 hidden-xs">{$order.price}€</div>
+								<div class="col-xs-2 hidden-xs"><span class="order_total">{$order.price}</span> €</div>
 								&nbsp;
 							</div>
 						</a>

@@ -207,7 +207,7 @@
     $stmt = $conn->prepare(
         "SELECT idOrder AS id, totalPrice AS price, to_char(orderDate,'YYYY-MM-DD HH24:MI') AS orderdate, order_status, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, COUNT(idOrder) OVER () AS total_count 
           FROM Orders ".
-        ($pending_only ? "WHERE order_status != 'Sent'" : "")
+        ($pending_only ? "WHERE order_status = 'Pending'" : "")
         ." ORDER BY orderDate
           LIMIT ? OFFSET ?;"
     );
@@ -397,13 +397,13 @@
     $stmt->execute(array($bool, $id));
   }
 
-  function shipOrder($order_id)
+  function updateOrderStatus($order_id, $status)
   {
     global $conn;
     $stmt = $conn->prepare("UPDATE ProductOrder
-	SET product_status = 'Sent'
+	SET product_status = ?
 	WHERE idOrder = ?;");
-    $stmt->execute(array($order_id));
+    $stmt->execute(array($status, $order_id));
   }
 
   function updateProductOrder($order_id, $product_id, $status)
@@ -418,7 +418,7 @@
   function getOrderStatus($order_id)
   {
     global $conn;
-    $stmt = $conn->prepare("SELECT order_status
+    $stmt = $conn->prepare("SELECT order_status, totalprice, shippingcost
       FROM Orders 
       WHERE idOrder = ?");
     $stmt->execute(array($order_id));

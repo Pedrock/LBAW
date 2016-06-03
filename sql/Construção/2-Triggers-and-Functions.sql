@@ -194,7 +194,7 @@ CREATE OR REPLACE FUNCTION get_shipping_costs(weight INTEGER) RETURNS NUMERIC AS
 DECLARE shipping_cost NUMERIC;
 BEGIN
  IF weight IS NULL THEN
- 	 RAISE EXCEPTION 'Null weight';
+ 	 RETURN 0;
  END IF;
  SELECT price FROM shippingcosts WHERE maxweight >= weight ORDER BY maxweight LIMIT 1
  	INTO shipping_cost;
@@ -365,7 +365,6 @@ BEGIN
    	 	END IF;
  	END IF;
  
- 
  	IF EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idOrder AND idCoupon IS NOT NULL) THEN
  	 	SELECT percentage FROM Orders
  	 	LEFT JOIN Coupon USING(idCoupon)
@@ -374,14 +373,14 @@ BEGIN
   	ELSE
   	 	coupon_discount := 0;
   	END IF;
- 
+
   	UPDATE Orders SET totalprice = costs.totalprice, shippingCost = costs.shippingCost
   	FROM
-  	(SELECT (100-coupon_discount)*productsCost/100.0 + shippingCost AS totalPrice, shippingCost FROM
- 	 	(SELECT SUM(get_product_price(Product.idProduct)) AS productsCost, get_shipping_costs(SUM(weight)::INTEGER) shippingCost
+  	(SELECT COALESCE((100-coupon_discount)*productsCost/100.0 + shippingCost,0) AS totalPrice, shippingCost FROM
+ 	 	(SELECT SUM(ProductOrder.price) AS productsCost, get_shipping_costs(SUM(weight)::INTEGER) AS shippingCost
  		 	FROM ProductOrder
  		 	INNER JOIN Product USING(idProduct)
- 		 	WHERE idOrder = NEW.idOrder) subcosts) costs
+ 		 	WHERE idOrder = NEW.idOrder AND product_status != 'Canceled') subcosts) costs
   	WHERE idOrder = NEW.idOrder;
  
  	RETURN NEW;
