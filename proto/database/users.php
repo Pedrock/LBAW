@@ -210,4 +210,18 @@
     $stmt = $conn->prepare("SELECT reset_password(?, ?, ?)");
     $stmt->execute(array($user_id, sha1($new_password), $token));
   }
+
+  function changeAdminStatus($user, $setAdmin){
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Users SET isAdmin = ? WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
+    $stmt->execute(array($setAdmin, $user, $user));
+    return $stmt->rowCount() == 0 ? false : true;
+  }
+
+  function getUserInfoFromNameOrEmail($user){
+    global $conn;
+    $stmt = $conn->prepare("SELECT username, email, nif, isadmin from  Users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
+    $stmt->execute(array($user, $user));
+    return $stmt->fetch();
+  }
 ?>
