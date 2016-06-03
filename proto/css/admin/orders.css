@@ -1,0 +1,29 @@
+.btn-status{
+	width: 87px;
+}
+.no-results {
+	padding-top: 20px;
+	padding-bottom: 10px;
+}
+
+.btn-ship-container {
+	position: relative;
+}
+
+.dropdown .fa-refresh, .btn-ship-container .fa-refresh {
+	position: absolute;
+	top: 8px;
+}
+
+.dropdown .fa-refresh {
+	right: -3px;
+}
+
+.btn-ship-container {
+	margin-top: 10px;
+	padding-right: 5px;
+}
+
+.btn-ship {
+	margin-left: 20px;
+}
