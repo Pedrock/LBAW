@@ -30,9 +30,12 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <div class="col-lg-8 col-md-7 col-sm-6">
-          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/search.php">
+          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/list.php?potato">
             <div class="input-group">
-              <input type="text" class="form-control" name="q" placeholder="Search...">
+              {if $category}
+                <input type="hidden" name="cat" value="{$category}">
+              {/if}
+              <input type="text" class="form-control" name="search" placeholder="Search..." value="{if $query}{$query}{/if}">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
               </span>
@@ -78,7 +81,7 @@
         <div id="main-menu">
           <a href="#" id="deals" class="list-group-item">Deals</a>
           {foreach from=$categories item=category}
-          <a href="{$BASE_URL}pages/category.php?id={$category.id}" class="list-group-item">{$category.name}</a>
+          <a href="{$BASE_URL}pages/list.php?cat={$category.id}{$lnk_query}{$lnk_order}" class="list-group-item">{$category.name}</a>
           {/foreach}
         </div>
       </div>
