@@ -30,7 +30,7 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <div class="col-lg-8 col-md-7 col-sm-6">
-          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/list.php?potato">
+          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/list.php">
             <div class="input-group">
               {if $category}
                 <input type="hidden" name="cat" value="{$category}">
