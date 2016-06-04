@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{$BASE_URL}css/admin/main.css">
 	<link rel="stylesheet" href="{$BASE_URL}css/font-awesome/font-awesome.min.css">
 	<link rel="shortcut icon" type="image/png" href="{$BASE_URL}images/assets/favicon.ico" />
+	<link rel="stylesheet" href="{$BASE_URL}css/font-awesome/font-awesome.min.css">
 	{foreach $css as $elem}
 		<link rel="stylesheet" href="{$BASE_URL}css/{$elem}">
 	{/foreach}

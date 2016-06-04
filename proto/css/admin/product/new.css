@@ -92,3 +92,16 @@
 #field-submit {
 	padding-left: 0px;
 }
+
+.fa-asterisk {
+	font-size: 0.5em;
+	margin-left: 5px;
+	position: relative;
+	bottom: 5px;
+}
+
+#mandatory_info {
+	position: relative;
+	bottom: 20px;
+	right: 5px;
+}

@@ -21,13 +21,13 @@
 						<div class="col-md-6">
 							<div class="col-md-12">
 								<fieldset class="form-group">
-									<label for="name">Name</label>
+									<label for="name">Name<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="text" class="form-control" id="name" name="name" value="{$product.name}">
 								</fieldset>
 							</div>
 							<div class="col-md-6">
 								<fieldset class="form-group">
-									<label for="categories">Categories</label>
+									<label for="categories">Categories<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<select multiple="multiple" size="10" class="form-control insert-category" id="categories" name="categories[]">
 									{foreach from=$categories item=category}<option value="{$category.id}"{if in_array($category.id, $productcategories)} selected{/if}>{for $foo=1 to $category.level}&nbsp;{/for}{$category.name}</option>
 									{/foreach}
@@ -36,26 +36,26 @@
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="price">Price</label>
+									<label for="price">Price<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="price" name="price" placeholder="" value="{$product.price}">
 								</fieldset>
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="stock">Stock ({$product.stock})</label>
+									<label for="stock">Stock ({$product.stock})<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="stock" name="stock" value="0">
 								</fieldset>
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="weight">Weight</label>
+									<label for="weight">Weight<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="" value="{$product.weight}">
 								</fieldset>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<fieldset class="form-group">
-								<label for="description">Description</label>
+								<label for="description">Description<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 								<textarea id="description" name="description" class="form-control" rows="14" cols="50" placeholder="" >{$product.description|nl2br}</textarea>
 							</fieldset>
 						</div>
@@ -63,10 +63,12 @@
 					<div id="row-submit" class="row">
 						<div id="field-submit" class="col-xs-3">
 							<fieldset class="form-group">
-								<button id="btn-edit-product" class="btn btn-info" type="submit" value="Submit">Submit</button>
+								<button id="btn-edit-product" class="btn btn-info" type="submit" value="Submit">Save</button>
 							</fieldset>
 						</div>
 					</div>
+					
+					<span id="mandatory_info" class="pull-right"><i class="fa fa-asterisk" aria-hidden="true"></i> Mandatory field</span>
 
 					<!-- Modal Edit -->
 					<div class="modal fade" id="edit" role="dialog">

@@ -9,29 +9,19 @@
 					<h1>New Product</h1>
 				</div>
 				<br>
-				<!--<form id="images_form" action="{$BASE_URL}api/admin/product/add_photos.php" method="post" enctype="multipart/form-data">-->
 				</form>
 				<form id="main_form" action="{$BASE_URL}api/admin/product/new.php" method="post" enctype="multipart/form-data">
-					<!--<input type="file" id="files" name="files[]" multiple> -->
 					<div id="new-product" class="row">
 						<div class="col-md-6">
 							<div class="col-md-12">
 								<fieldset class="form-group">
-									<label for="name">Name</label>
+									<label for="name">Name<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="text" class="form-control" id="name" name="name">
 								</fieldset>
-								<!--<form id="images_form" action="../../api/admin/product_photos.php" method="post" enctype="multipart/form-data">
-									<fieldset class="form-group">
-											<input class="btn btn-default btn-file"type="button" id="files_btn" value="Browse">
-										<label class="control-label">Add Images</label>
-										<div class="drop_zone">
-										</div>
-									</fieldset>
-								</form>-->
 							</div>
 							<div class="col-sm-6">
 								<fieldset class="form-group">
-									<label for="categories">Categories</label>
+									<label for="categories">Categories<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<select multiple="multiple" size="10" class="form-control insert-category" id="categories" name="categories[]">
 									{foreach from=$categories item=category}
 										<option value="{$category.id}">{for $foo=1 to $category.level}&nbsp;{/for}{$category.name}</option>
@@ -41,26 +31,26 @@
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="price">Price</label>
+									<label for="price">Price<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="price" name="price" placeholder="" min="0">
 								</fieldset>
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="stock">Stock</label>
+									<label for="stock">Stock<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="stock" name="stock" min="0" value="1">
 								</fieldset>
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="weight">Weight</label>
+									<label for="weight">Weight<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="" min="0">
 								</fieldset>
 							</div>
 						</div>
 						<div class="col-sm-12 col-md-6">
 							<fieldset class="form-group">
-								<label for="description">Description</label>
+								<label for="description">Description<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 								<textarea id="description" name="description" class="form-control" rows="14" cols="50"></textarea>
 							</fieldset>
 						</div>
@@ -72,6 +62,8 @@
 							</fieldset>
 						</div>
 					</div>
+
+					<span id="mandatory_info" class="pull-right"><i class="fa fa-asterisk" aria-hidden="true"></i> Mandatory field</span>
 				</form>
 			</div>
 		</div>
