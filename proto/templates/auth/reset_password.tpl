@@ -12,15 +12,20 @@
 			<a href="recover_password.php" class="recover-pw">Recover password</a>
 		</div>
 	{else}
-		<div class="panel-title"><h4>Reset Password</h4></div>
+		<div class="panel-title">
+			<h4>Reset Password</h4>
+			<span class="inline_pw_help">
+				The new password must have at least 6 characters
+			</span>
+		</div>
 		<div id="error" class="alert alert-danger slide in">
 			<a href="#" class="close">&times;</a>
 			<strong>Error!</strong>
-			<span id="msg">
+			<span class="msg">
 			</span>
 		</div>
 		<div id="success" class="alert alert-success slide in">
-			<span id="msg">
+			<span class="msg">
 				Password reset successfully. You can now login with the new password.
 			</span>
 		</div>
