@@ -50,7 +50,7 @@
 				<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
 				<div class="collapse" id="sub6" aria-expanded="false" role="link">
 					<a href="#" class="list-group-item">Coupon codes</a>
-					<a href="#" class="list-group-item">Promotions</a>
+					<a href="{$BASE_URL}pages/admin/promotions.php" class="list-group-item">Promotions</a>
 				</div>
 			</div>
 		</div>

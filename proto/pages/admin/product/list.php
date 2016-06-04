@@ -51,6 +51,9 @@
 	
 	extract(pagination($products,$limit,$page));
 
+	$promotion = isset($_GET['promotion']);
+	$smarty->assign('promotion', $promotion);
+
 	$smarty->assign('category', $category);
 	$smarty->assign('search', $search);
 	$smarty->assign('category_name', $category_name);

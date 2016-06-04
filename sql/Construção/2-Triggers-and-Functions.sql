@@ -154,8 +154,8 @@ CREATE TRIGGER FavoriteCheck BEFORE INSERT OR UPDATE
 -- Check if discount doesn’t overlap with existing one and if creator the discount is admin
 CREATE OR REPLACE FUNCTION check_discount() RETURNS TRIGGER AS $BODY$
 BEGIN
- IF EXISTS (SELECT * FROM Discount WHERE idProduct = NEW.idProduct AND startDate <= NEW.endDate AND NEW.startDate <= endDate) THEN
-  RAISE EXCEPTION 'Discount % overlaps with existing one', iddiscount;
+ IF EXISTS (SELECT * FROM Discount WHERE idProduct = NEW.idProduct AND Discount.idDiscount <> NEW.idDiscount AND startDate <= NEW.endDate AND NEW.startDate <= endDate) THEN
+  RAISE EXCEPTION 'Discount % overlaps with existing one', NEW.iddiscount;
  ELSIF NOT EXISTS (SELECT * FROM Users WHERE idUser = NEW.idUser AND isAdmin) THEN
   RAISE EXCEPTION 'Issuer % is not an admin', NEW.idUser;
  ELSE
