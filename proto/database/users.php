@@ -78,7 +78,7 @@
     global $conn;
     $stmt1 = $conn->prepare(
       "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
-        Coupon.percentage AS coupon_discount
+        Coupon.percentage AS coupon_discount, shippingcost
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
             WHERE idOrder = ? AND Orders.idUser = ?;");

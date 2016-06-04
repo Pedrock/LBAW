@@ -6,6 +6,7 @@ function deleteFromCart(product)
         data: {product: product}
     }).done(function() {
         $('.product-cart[data-id="'+product+'"]').slideUp(400, function() {$(this).remove(); updateTotal();});
+        $('.empty-cart').hide().removeClass('hidden').slideDown();
     });
 }
 
@@ -41,3 +42,8 @@ function updateTotal()
     });
     $('#subtotal').text(Math.round(total * 100) / 100);
 }
+
+$('#btn-checkout').click(function() {
+    if ($('.product-cart').length)
+        window.location = "checkout/checkout.php";
+});

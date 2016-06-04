@@ -41,10 +41,11 @@ function displayInfo(panel, info)
 	var coupon = info.coupon_discount ? '<div><span class="bold">Coupon Discount:</span> '+info.coupon_discount+'%</div>' : '';
 
 	panel.append('<div class="order-details row"> \
-						<div class="visible-xs"><span class="bold">Total:</span> '+info.totalprice+' €</div>'
+						<div><span class="bold">Shipping Costs:</span> <span class="order_shipping">'+info.shippingcost+'</span> €</div>'
 						+ coupon +
-						'<br><div><span class="bold">State:</span> '+info.status+'</div> \
-						<div> \
+						'<div><span class="bold">Total:</span> <span class="order_total">'+info.totalprice+'</span> €</div> \
+                        <br><div><span class="bold">State:</span> <span class="order_status">'+info.status+'</span></div> \
+                        <div> \
 							<br><span class="bold">Shipping Address:</span> \
 							<br> '+info.shipping_name+' \
 							<br> '+info.shipping_phone+' \

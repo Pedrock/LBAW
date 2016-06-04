@@ -6,7 +6,7 @@
     $order_id = trim($_POST['order_id']);
 
     try {
-        list($order_info, $order_products) = getInfoShipments($order_id);
+        list($order_info, $order_products) = getInfoOrderAdmin($order_id);
         http_response_code(200);
         $order_info['products'] = $order_products;
         echo json_encode($order_info);
