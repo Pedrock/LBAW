@@ -477,4 +477,45 @@
     $stmt->execute(array($product, $iduser, $percentage, $start, $end));
     return $stmt->fetch()['iddiscount'];
   }
+
+
+  function getCoupons($limit, $page, $active = false) {
+    $offset = ($page - 1) * $limit;
+    global $conn;
+
+    if($active)
+      $where = " WHERE (CURRENT_TIMESTAMP between startdate and enddate) ";
+    else $where = "";
+
+    $stmt = $conn->prepare(
+      "SELECT idcoupon, code, startdate, enddate, percentage, users.username as issuer,
+      (CURRENT_TIMESTAMP between startdate and enddate) as active, 
+      COUNT(idcoupon) OVER () AS total_count FROM coupon join users ON coupon.iduser = users.iduser "
+      . $where . 
+      " ORDER BY startdate DESC LIMIT ? OFFSET ? ;");
+
+    $arr = array($limit, $offset);
+
+    $stmt->execute($arr);
+    return $stmt->fetchAll();
+  }
+
+  function editCoupon($id, $percentage, $start, $end) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE coupon SET percentage = ?, startdate = ?, enddate = ? WHERE idcoupon = ?;");
+    $stmt->execute(array($percentage, $start, $end, $id));
+  }
+
+  function deleteCoupon($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE from coupon WHERE idcoupon = ?;");
+    $stmt->execute(array($id));
+  }
+
+  function createCoupon($iduser, $percentage, $start, $end) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO coupon(iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon;");
+    $stmt->execute(array($iduser, $percentage, $start, $end));
+    return $stmt->fetch()['idcoupon'];
+  }
 ?>
