@@ -52,7 +52,7 @@
 					<div class="top_row row">
 						<div class="col-xs-4">Number</div>
 						<div class="col-xs-4">Date</div>
-						<div class="col-xs-2 hidden-xs">Total</div>
+						<div class="col-xs-4 hidden-xs">Total</div>
 					</div>
 				</div>
 				<div id="accordion-container" class="panel-orders-list panel-body">
@@ -62,8 +62,8 @@
 							<div class="panel-heading">
 								<div id="order_id" class="col-xs-4">#{$order.id}</div>
 								<div class="order_date col-xs-4">{$order.orderdate}</div>
-								<div class="col-xs-2 hidden-xs"><span class="order_total">{$order.price}</span> €</div>
-								&nbsp;
+								<div class="col-xs-4 hidden-xs"><span class="order_total">{$order.price}</span> €</div>
+								<span class="clearfix"></span>
 							</div>
 						</a>
 						<div id="{$order.id}" class="order-info panel-collapse collapse">
@@ -85,18 +85,18 @@
 			<div class="text-center">
 				<ul class="pagination pagination-sm">
 					{if $page != $startpage} 
-					<li><a href="?page=1">&laquo; First</a></li>
-					<li><a href="?page={$page-1}">&lsaquo; Previous</a></li>
+					<li><a href="?page=1{if $pending}&pending{/if}">&laquo; First</a></li>
+					<li><a href="?page={$page-1}{if $pending}&pending{/if}">&lsaquo; Previous</a></li>
 					{else}
 					<li class="hidden-xs disabled"><a>&laquo; First</a></li>
 					<li class="hidden-xs disabled"><a>&lsaquo; Previous</a></li>
 					{/if}
 					{for $p=$startpage to $endpage}
-					<li{if $p == $page} class="active"{/if}><a href="?page={$p}">{$p}</a></li>
+					<li{if $p == $page} class="active"{/if}><a href="?page={$p}{if $pending}&pending{/if}">{$p}</a></li>
 					{/for}
 					{if $page != $endpage}
-					<li><a href="?page={$page+1}">Next &rsaquo;</a></li>
-					<li><a href="?page={$n_pages}">Last &raquo;</a></li>
+					<li><a href="?page={$page+1}{if $pending}&pending{/if}">Next &rsaquo;</a></li>
+					<li><a href="?page={$n_pages}{if $pending}&pending{/if}">Last &raquo;</a></li>
 					{else}
 					<li class="hidden-xs disabled"><a>Next &rsaquo;</a></li>
 					<li class="hidden-xs disabled"><a>Last &raquo;</a></li>

@@ -113,6 +113,7 @@ function fix_button_classes(buttons)
 
 function displayInfo(panel, info)
 {
+    var disabled = info.status == 'Payment Pending' ? ' disabled' : '';
     for (var i = 0; i < info.products.length; i++)
     {
         var product = info.products[i];
@@ -127,7 +128,7 @@ function displayInfo(panel, info)
                             <div class="qty_price"><span class="vert_centered"><span class="vert_centered">'+product.price+'€</span></span></div> \
                         </div> \
                         <div class="dropdown col-sm-3 col-md-2"> \
-                          <button class="btn dropdown-toggle btn-status pull-right" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
+                          <button class="btn dropdown-toggle btn-status pull-right'+disabled+'" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"> \
                             <span>'+product.product_status+'</span> \
                             <span class="caret"></span> \
                           </button> \
@@ -165,8 +166,8 @@ function displayInfo(panel, info)
                         </div> \
                     </div>' +
                     '<div class="btn-ship-container pull-right"> \
-                        <button type="button" class="btn-cancel btn btn-danger" aria-label="Cancel All">Cancel All</button>\
-                        <button type="button" class="btn-ship btn btn-success" aria-label="Mark All As Shipped">Mark All As Shipped</button>\
+                        <button type="button" class="btn-cancel btn btn-danger'+disabled+'" aria-label="Cancel All">Cancel All</button>\
+                        <button type="button" class="btn-ship btn btn-success'+disabled+'" aria-label="Mark All As Shipped">Mark All As Shipped</button>\
                         </div>');
 }
 
