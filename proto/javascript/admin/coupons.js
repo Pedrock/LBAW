@@ -14,10 +14,11 @@ if(create)
 	$("#new").modal('show');
 
 $("#new_promo").click(function(e) {
-	if(create)
+	e.preventDefault();
+	if(query != '')
 		$("#new").modal('show');
-	else
-		window.location = "product/list.php?promotion";
+	//else
+	//	window.location = "product/list.php?coupon";
 });
 
 $("#promotions_body").on('click', '.promotion_row', function(e) {
@@ -25,7 +26,7 @@ $("#promotions_body").on('click', '.promotion_row', function(e) {
 	e.stopPropagation();
 	hideError();
 	id = $(this).data('id');
-	var name = $(this).children('.name').text();
+	var name = $(this).children('.code').text();
 	var perc = $(this).children('.perc').children('.num').text();
 	var start = $(this).children('.span').children('.start').text();
 	var end = $(this).children('.span').children('.end').text();
@@ -44,6 +45,9 @@ $("#btn_del").click(function(e) {
 });
 
 $('input#active_only').on('change', function() {
+	if(query)
+		query = "search=" + query;
+
 	if ($('input#active_only').prop('checked'))
 		window.location = "coupons.php?&active";
 	else
@@ -72,7 +76,7 @@ $("#btn_del_confirm").click(function(e) {
 
 			$('#disc_' + id).slideUp(400, function() { $(this).remove(); });
 
-			if($('.promotion_row').length > 0)
+			if($('.promotion_row').length == 0)
 				$('#no_discounts').slideDown();
 		}
 	}).fail(function(err) {
@@ -141,7 +145,7 @@ $('#form_create').submit(function(e) {
 		if(data.error)
 			showError(data['error']);
 		else {
-			//window.location = "?search=" + data['success'];
+			//window.location = "?search=" + fd.get('id');
 			/*
 			var perc = $('#edit').find('.percentage').val();
 			var start = $('#edit').find('.start').val();

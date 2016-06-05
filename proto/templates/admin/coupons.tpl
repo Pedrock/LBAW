@@ -1,10 +1,10 @@
 {assign "title" "Coupons"}
-{assign "css" ['admin/promotions.css', 'jquery-ui/jquery-ui.css', 'jquery-ui-timepicker-addon.min.css']}
+{assign "css" ['admin/coupons.css', 'jquery-ui/jquery-ui.css', 'jquery-ui-timepicker-addon.min.css']}
 {include file='admin/common/header.tpl'}
 
-{if $query}{assign "lnk_query" value="&search={$query}"}{/if}
-{if $active}{assign "lnk_active" value="&active"}{/if}
-{assign "pag_link" value="{$lnk_query}{$lnk_active}"}
+{if $query}{assign var="lnk_query" value="&search={$query}"}{/if}
+{if $active}{assign var="lnk_active" value="&active"}{/if}
+{assign var="pag_link" value="{$lnk_query}{$lnk_active}"}
 
 <div class="row">
 	<div class="col-lg-12">
@@ -13,7 +13,7 @@
 			<a href="#" class="pull-right" id="new_promo">
 				<span class="glyphicon glyphicon-plus"></span> New coupon
 			</a>
-			<br><br>
+			<span class="clearfix"></span>
 			<div class="sort_div">
 				<label class="checkbox-inline">
 				<input type="checkbox" id="active_only" {if $active}checked{/if}> Show only active coupons
@@ -55,7 +55,7 @@
 				<div id="promotions_body">
 					{foreach from=$coupons item=coup name=coup}
 						<a href="javascript:void(0)" id="disc_{$coup.idcoupon}" data-id="{$coup.idcoupon}" class="promotion_row">
-							<div class="col-xs-3 name">{$coup.code}</div>
+							<div class="col-xs-3 code">{$coup.code}</div>
 							<div class="col-xs-3 perc">
 								<span class="num">{$coup.percentage}</span>%
 								{if $coup.active}
@@ -66,8 +66,8 @@
 								Start: <span class="start">{$coup.startdate|date_format:"%Y-%m-%d %H:%M"}</span><br>
 								End: <span class="end">{$coup.enddate|date_format:"%Y-%m-%d %H:%M"}</span>
 							</div>
-							<div class="col-xs-3 name">{$coup.issuer}</div>
-							&nbsp;
+							<div class="col-xs-3 issuer">{$coup.issuer}</div>
+							<span class="clearfix"></span>
 						</a>
 					{/foreach}
 					<div id="no_discounts">
@@ -113,7 +113,7 @@
 				</div>
 			{/if}
 			<div class="pull-right">
-				<i class="fa fa-check" aria-hidden="true"></i> Active promotion
+				<i class="fa fa-check" aria-hidden="true"></i> Active coupon
 			</div>
 			&nbsp;
 		</div>
@@ -129,9 +129,13 @@
 			<input type="hidden" name="id" value="{$query}">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">New coupon</h4>
+				<h4 class="modal-title">New Coupon</h4>
 			</div>
 			<div class="modal-body">
+				<fieldset class="form-group">
+					<label for="product">Product</label>
+					<input type="text" class="insert-number form-control product" name="product" value="#{$query}" disabled>
+				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
 					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="0" max="100" required>
@@ -166,11 +170,11 @@
 			<input class="promo_id" type="hidden" name="id">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit coupon</h4>
+				<h4 class="modal-title">Edit coupons</h4>
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Product</label>
+					<label for="product">Code</label>
 					<input type="text" class="insert-number form-control product" name="product" disabled>
 				</fieldset>
 				<fieldset class="form-group">
@@ -205,10 +209,8 @@
 	</div>
 </div>
 <script>
-	var create = false;
-	{if $create}
-		create = true;
-	{/if}
+	var query = '{$query}';
+	var create = {$create|json_encode};
 </script>
-{assign var=js value=['coupons.js', '../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js']}
+{assign var=js value=['../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js', 'coupons.js']}
 {include file='admin/common/footer.tpl'}

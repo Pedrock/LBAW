@@ -10,12 +10,11 @@
   	$active = isset($_GET['active']);
 
 	
-	$coupons =  getCoupons($limit, $page, $active);
+	$coupons = getCoupons($limit, $page, $active);
 
-	extract(pagination($discounts,$limit,$page));
+	extract(pagination($coupons,$limit,$page));
 
-	if($query && isset($_GET['create']))
-		$smarty->assign('create', true);
+	$smarty->assign('create', isset($_GET['create']));
 	$smarty->assign('coupons', $coupons);
 	$smarty->assign('page', $page);
 	$smarty->assign('active', $active);
