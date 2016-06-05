@@ -38,7 +38,7 @@
                     <br> {$shipping_address['zipcode']}, {$shipping_address['city']}
                 </div>
                 <div>
-                    <br><b>Shipping address:</b>
+                    <br><b>Billing address:</b>
                     <br> {$billing_address['name']}
                     <br> {$billing_address['address1']}
                     {if $billing_address['address2']}<br> {$billing_address['address2']}{/if}

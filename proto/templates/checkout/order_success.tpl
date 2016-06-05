@@ -38,7 +38,7 @@
                     <br> {$order_info['shipping_zip1']}-{$order_info['shipping_zip2']}, {$order_info['shipping_city']}
                 </div>
                 <div>
-                    <br><b>Shipping address:</b>
+                    <br><b>Billing address:</b>
                     <br> {$order_info['billing_name']}
                     <br> {$order_info['billing_address1']}
                     {if $order_info['billing_address2']}<br> {$order_info['billing_address2']}{/if}
