@@ -80,13 +80,13 @@
     $stmt = $conn->prepare(
       "SELECT f.idProduct AS id, name, discount, get_product_price(f.idProduct) price, photo
         FROM
-        (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount, location AS photo
-        FROM Product P
-        LEFT JOIN Discount USING(idProduct)
-        LEFT JOIN Photo ON Photo.idProduct = P.idProduct AND photo_order = 1
-        WHERE isDeleted = FALSE 
-        ORDER BY discount DESC, purchases DESC
-        LIMIT ? OFFSET ?) AS f;");
+          (SELECT P.idProduct, name, COALESCE(percentage,0) AS discount, location AS photo
+           FROM Product P
+             LEFT JOIN Discount ON Discount.idProduct = P.idProduct AND now() BETWEEN startdate AND enddate
+             LEFT JOIN Photo ON Photo.idProduct = P.idProduct AND photo_order = 1
+           WHERE isDeleted = FALSE
+           ORDER BY discount DESC, purchases DESC
+           LIMIT ? OFFSET ?) AS f;");
     $stmt->execute(array($limit,$offset));
     return $stmt->fetchAll();
   }
