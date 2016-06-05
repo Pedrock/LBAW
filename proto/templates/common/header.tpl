@@ -50,7 +50,7 @@
             <ul class="dropdown-menu">
               <li><a href="{$BASE_URL}pages/user/favorites.php">Favorites</a></li>
               <li><a href="{$BASE_URL}pages/user/my_orders.php">My Orders</a></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="{$BASE_URL}pages/user/profile.php">Profile</a></li>
               {if $smarty.session.admin}
                 <li role="separator" class="divider"></li>
                 <li><a href="{$BASE_URL}pages/admin/">Administration</a></li>

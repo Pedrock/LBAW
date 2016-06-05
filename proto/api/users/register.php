@@ -1,8 +1,9 @@
 <?php
   include_once('../../config/init.php');
-  include_once($BASE_DIR .'database/users.php');  
+  include_once($BASE_DIR .'database/users.php');
+  include_once($BASE_DIR .'lib/nif.php');
 
-  if (!$_POST['username'] || !$_POST['email'] || !$_POST['nif'] || !$_POST['password']) {
+if (!$_POST['username'] || !$_POST['email'] || !$_POST['nif'] || !$_POST['password']) {
     return_error('All fields are mandatory');
   }
 
@@ -67,19 +68,5 @@ function return_errors($error)
   http_response_code(422);
   echo json_encode(array('errors' => $error));
   die();
-}
-
-function validNIF($nif) { 
-  if (!is_numeric($nif) || strlen($nif)!=9)
-    return false; 
-  $nifSplit=str_split($nif); 
-  $checkDigit=0; 
-  for($i=0; $i<8; $i++) { 
-    $checkDigit+=$nifSplit[$i]*(10-$i-1); 
-  } 
-  $checkDigit=11-($checkDigit % 11);
-  if($checkDigit>=10) 
-    $checkDigit=0; 
-  return ($checkDigit==$nifSplit[8]);
 }
 ?>
