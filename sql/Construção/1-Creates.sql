@@ -52,8 +52,8 @@ CREATE TABLE MetadataCategory(
 );
  
 CREATE TABLE Metadata(
-	idMetadataCategory INTEGER NOT NULL REFERENCES MetadataCategory(idMetadataCategory),
-	idProduct INTEGER NOT NULL REFERENCES Product(idProduct),
+	idMetadataCategory INTEGER NOT NULL REFERENCES MetadataCategory(idMetadataCategory) ON DELETE CASCADE,
+	idProduct INTEGER NOT NULL REFERENCES Product(idProduct) ON DELETE CASCADE,
 	description TEXT NOT NULL,
 	CONSTRAINT MetadataPrimary PRIMARY KEY (idMetadataCategory, idProduct)
 );

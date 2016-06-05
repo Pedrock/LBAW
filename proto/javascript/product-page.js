@@ -165,3 +165,33 @@ $('.btn-favorites').on('click',function() {
 	else
 		addToFavorites();
 });
+
+$('#metadata_toggle').click(function(e) {
+	var elem = $(this).children('.glyphicon');
+	var deg;
+	if(elem.hasClass('glyphicon-menu-down'))
+		deg = -180;
+	else
+		deg = 180;
+
+	$({deg: 0}).animate({deg: deg}, {
+		duration: 250,
+		step: function(now) {
+			elem.css({
+				transform: 'rotate(' + now + 'deg)'
+			});
+		},
+		complete: function() {
+			elem.css({
+				transform: 'rotate(0deg)'
+			});
+			if(elem.hasClass('glyphicon-menu-down')) {
+				elem.removeClass('glyphicon-menu-down');
+				elem.addClass('glyphicon-menu-up');
+			} else {
+				elem.addClass('glyphicon-menu-down');
+				elem.removeClass('glyphicon-menu-up');
+			}
+		}
+    });
+});

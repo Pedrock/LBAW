@@ -16,6 +16,8 @@ if (isset($_GET['id']))
 	}
 	else
 	{
+		$metadata = getMetadata($id);
+		$smarty->assign('metadata', $metadata);
 		$smarty->assign('product', $product);
 		$smarty->assign('reviews', getProductReviews($id,10,1));
 		$smarty->assign('photos', getProductPhotos($id));

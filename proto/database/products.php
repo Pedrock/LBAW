@@ -477,4 +477,69 @@
     return $stmt->fetchAll();
   }
 
+  function getMetadata($product_id) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT metadata.idmetadatacategory as idcategory,
+              metadatacategory.name as category,
+              metadata.description as description
+       FROM metadata
+       LEFT JOIN metadatacategory ON metadatacategory.idmetadatacategory = metadata.idmetadatacategory
+       WHERE metadata.idproduct = ?");
+    $stmt->execute(array($product_id));
+    return $stmt->fetchAll();
+  }
+
+  function getMetadataCategories() {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT metadatacategory.idmetadatacategory as id,
+              metadatacategory.name as name
+       FROM metadatacategory");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
+
+  function createMetadataCategory($name) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "INSERT INTO metadatacategory(name) VALUES(?) RETURNING idmetadatacategory;");
+    $stmt->execute(array($name));
+    return $stmt->fetch()['idmetadatacategory'];
+  }
+  
+  function deleteMetadataCategory($id) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "DELETE FROM metadatacategory WHERE idmetadatacategory = ?;");
+    $stmt->execute(array($id));
+  }
+
+  function editMetadataCategory($id, $txt) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "UPDATE metadatacategory SET name = ? WHERE idmetadatacategory = ?;");
+    $stmt->execute(array($txt, $id));
+  }
+
+  function createMetadata($product, $cat_id, $description) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "INSERT INTO metadata(idproduct, idmetadatacategory, description) VALUES(?, ?, ?) RETURNING idmetadatacategory;");
+    $stmt->execute(array($product, $cat_id, $description));
+  }
+  
+  function deleteMetadata($product, $cat_id) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "DELETE FROM metadata WHERE idmetadatacategory = ? AND idproduct = ?;");
+    $stmt->execute(array($cat_id, $product));
+  }
+
+  function editMetadata($product, $cat_id, $description) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "UPDATE metadata SET description = ? WHERE idmetadatacategory = ? AND idproduct = ?;");
+    $stmt->execute(array($description, $cat_id, $product));
+  }
 ?>

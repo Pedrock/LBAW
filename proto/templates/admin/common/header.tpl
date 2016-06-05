@@ -45,6 +45,7 @@
 				<div class="collapse" id="sub3" aria-expanded="false" role="link">
 					<a href="{$BASE_URL}pages/admin/product/new.php" class="list-group-item">New Product</a>
 					<a href="{$BASE_URL}pages/admin/product/list.php" class="list-group-item">Edit product</a>
+					<a href="{$BASE_URL}pages/admin/product/metadata_categories.php" class="list-group-item">Metadata categories</a>
 				</div>
 				<a href="{$BASE_URL}pages/admin/categories.php" class="list-group-item">Categories</a>
 				<a href="{$BASE_URL}pages/admin/users.php" class="list-group-item">Users</a>
