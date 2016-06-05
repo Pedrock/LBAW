@@ -85,3 +85,10 @@ function input_valid(selector)
 	$(selector+" .glyphicon").removeClass("glyphicon-ok glyphicon-warning-sign glyphicon-remove").addClass("glyphicon-ok");
 	$(selector+" .has-feedback").removeClass().addClass("has-feedback has-success");
 }
+
+$('.inline_help_open').click(function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+
+	$(this).parent().tooltip('enable').attr('title', $(this).next().text()).tooltip('fixTitle').tooltip('show').tooltip('disable');
+});

@@ -9,6 +9,7 @@
 		$product = getProduct($id, true);
 		if ($product === false) {
 			http_response_code(404);
+			$smarty->display('404.tpl');
 		} else {
 			$smarty->assign('product', $product);
 			$smarty->assign('id', $id);
@@ -17,5 +18,6 @@
 		}
 	} else {
 		http_response_code(404);
+		$smarty->display('404.tpl');
 	}	
 ?>

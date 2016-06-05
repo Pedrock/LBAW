@@ -225,12 +225,11 @@
     return $stmt->fetchAll();
   }
 
-  function getInfoShipments($order_id)
+  function getInfoOrderAdmin($order_id)
   {
     global $conn;
-
     $stmt1 = $conn->prepare(
-      "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
+      "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, nif,
         Coupon.percentage AS coupon_discount, shippingcost
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
@@ -296,7 +295,6 @@
     $stmt->execute(array($category));
     return $stmt->fetchAll();
   }
-
   
   function createProduct($name, $price, $stock, $weight, $description, $categories, $hidden = false) {
     global $conn;
@@ -467,4 +465,16 @@
     $stmt->execute(array($product, $iduser, $percentage, $start, $end));
     return $stmt->fetch()['iddiscount'];
   }
+
+  function getOrderProducts($order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT ProductOrder.idProduct AS id, ProductOrder.quantity, name, ProductOrder.price
+          FROM ProductOrder
+          INNER JOIN Product USING(idProduct)
+          WHERE idOrder = ?");
+    $stmt->execute(array($order_id));
+    return $stmt->fetchAll();
+  }
+
 ?>

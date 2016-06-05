@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="{$BASE_URL}css/admin/main.css">
 	<link rel="stylesheet" href="{$BASE_URL}css/font-awesome/font-awesome.min.css">
 	<link rel="shortcut icon" type="image/png" href="{$BASE_URL}images/assets/favicon.ico" />
+	<link rel="stylesheet" href="{$BASE_URL}css/font-awesome/font-awesome.min.css">
 	{foreach $css as $elem}
 		<link rel="stylesheet" href="{$BASE_URL}css/{$elem}">
 	{/foreach}
@@ -46,7 +47,7 @@
 					<a href="{$BASE_URL}pages/admin/product/list.php" class="list-group-item">Edit product</a>
 				</div>
 				<a href="{$BASE_URL}pages/admin/categories.php" class="list-group-item">Categories</a>
-				<a href="#sub5" class="list-group-item">Users</a>
+				<a href="{$BASE_URL}pages/admin/users.php" class="list-group-item">Users</a>
 				<a href="#sub6" class="list-group-item collapsed" data-toggle="collapse" data-parent="#sidebar-wrapper" aria-expanded="false">Marketing<span class="caret"></span></a>
 				<div class="collapse" id="sub6" aria-expanded="false" role="link">
 					<a href="#" class="list-group-item">Coupon codes</a>

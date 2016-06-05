@@ -24,12 +24,12 @@ CREATE TRIGGER ProductAverageScore AFTER INSERT OR DELETE OR UPDATE
 -- Add product to cart
 CREATE OR REPLACE FUNCTION add_to_cart(user_id INTEGER, product_id INTEGER, quantity_product INTEGER) RETURNS void AS $BODY$
 BEGIN
-	IF EXISTS (SELECT * FROM ProductCart WHERE idProduct = product_id AND idUser = user_id) THEN
-		UPDATE ProductCart SET quantity = quantity + quantity_product WHERE idProduct = product_id AND idUser = user_id;
-	ELSE
-		INSERT INTO ProductCart(idUser,idProduct,quantity,price) 
-			VALUES (user_id,product_id,quantity_product, (SELECT price FROM Product WHERE idProduct = product_id));
-	END IF;
+  IF EXISTS (SELECT * FROM ProductCart WHERE idProduct = product_id AND idUser = user_id) THEN
+    UPDATE ProductCart SET quantity = quantity + quantity_product WHERE idProduct = product_id AND idUser = user_id;
+  ELSE
+    INSERT INTO ProductCart(idUser,idProduct,quantity,price)
+    VALUES (user_id,product_id,quantity_product, get_product_price(product_id));
+  END IF;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -77,60 +77,59 @@ LANGUAGE plpgsql;
 -- Make an order
 CREATE OR REPLACE FUNCTION make_order(user_id INTEGER, billingAddress INTEGER, shippingAddress INTEGER, order_nif TEXT, coupon_code TEXT) RETURNS INTEGER AS $BODY$
 DECLARE order_id INTEGER;
-DECLARE coupon_id INTEGER;
-DECLARE coupon_discount INTEGER;
+        DECLARE coupon_id INTEGER;
+        DECLARE coupon_discount INTEGER;
 BEGIN
- 
-	IF NOT EXISTS (SELECT * FROM ProductCart WHERE idUser = user_id) THEN
-		RAISE EXCEPTION 'Empty cart';
-	END IF;
- 
-	IF EXISTS (SELECT * FROM ProductCart WHERE idUser = user_id AND price != get_product_price(idProduct)) THEN
-		RAISE EXCEPTION 'Prices have changed';
-	END IF;
- 
-	IF NOT EXISTS (SELECT * FROM Address WHERE idAddress = billingAddress AND idUser = user_id) THEN
-		RAISE EXCEPTION 'Invalid billing address';
-	END IF;
- 
-	IF NOT EXISTS (SELECT * FROM Address WHERE idAddress = shippingAddress AND idUser = user_id) THEN
-		RAISE EXCEPTION 'Invalid shipping address';
-	END IF;
- 
-	IF coupon_code IS NOT NULL THEN
-		SELECT idCoupon FROM Coupon WHERE code = coupon_code AND startdate <= now() AND enddate >= now() INTO coupon_id;
-		IF coupon_id IS NULL THEN
-			RAISE EXCEPTION 'Invalid coupon';
-		END IF;
-	END IF;
- 
-	IF coupon_id IS NOT NULL THEN
-		SELECT percentage FROM Coupon WHERE idCoupon = coupon_id INTO coupon_discount;
-	ELSE
-		coupon_discount := 0;
-	END IF;
-	INSERT INTO Orders(billing_address1, billing_address2, billing_city, billing_name, billing_phone, billing_zip1, billing_zip2,
-					shipping_address1, shipping_address2, shipping_city, shipping_name, shipping_phone, shipping_zip1, shipping_zip2,
-					nif, totalPrice, shippingCost, idUser, idCoupon)  
-				(SELECT * FROM
-					(SELECT address1 billing_address1, address2 billing_address2, City.name billing_city, 
-						Address.name billing_name, phoneNumber billing_phone, code1 billing_zip1, code2 billing_zip2  
-					 FROM address
-					 NATURAL JOIN ZipCode 
-					 INNER JOIN City ON ZipCode.idCity = City.idCity 
-					 WHERE idAddress = billingAddress) billing_address,
-					(SELECT address1 shipping_address1, address2 shipping_address2, City.name shipping_city, 
-						Address.name shipping_name, phoneNumber shipping_phone, code1 shipping_zip1, code2 shipping_zip2  
-					 FROM address
-					 NATURAL JOIN ZipCode
-					 INNER JOIN City ON ZipCode.idCity = City.idCity
-					 WHERE idAddress = shippingAddress) shipping_address,
-					 (SELECT order_nif, user_id AS idUser, coupon_id AS idCoupon) extraFields
-				)	RETURNING idOrder INTO order_id;
-	INSERT INTO ProductOrder(idproduct,idorder,price,quantity
-)		SELECT idproduct,order_id AS idorder, price, quantity FROM ProductCart WHERE idUser = user_id ORDER BY product_position;
-	DELETE FROM ProductCart WHERE idUser = user_id;
-	RETURN order_id;
+
+  IF NOT EXISTS (SELECT * FROM ProductCart WHERE idUser = user_id) THEN
+    RAISE EXCEPTION 'Empty cart';
+  END IF;
+
+  IF EXISTS (SELECT * FROM ProductCart WHERE idUser = user_id AND price != get_product_price(idProduct)) THEN
+    RAISE EXCEPTION 'Prices have changed';
+  END IF;
+
+  IF NOT EXISTS (SELECT * FROM Address WHERE idAddress = billingAddress AND idUser = user_id) THEN
+    RAISE EXCEPTION 'Invalid billing address';
+  END IF;
+
+  IF NOT EXISTS (SELECT * FROM Address WHERE idAddress = shippingAddress AND idUser = user_id) THEN
+    RAISE EXCEPTION 'Invalid shipping address';
+  END IF;
+
+  IF coupon_code IS NOT NULL THEN
+    SELECT idCoupon FROM Coupon WHERE code = coupon_code AND startdate <= now() AND enddate >= now() INTO coupon_id;
+    IF coupon_id IS NULL THEN
+      RAISE EXCEPTION 'Invalid coupon';
+    END IF;
+  END IF;
+
+  IF coupon_id IS NOT NULL THEN
+    SELECT percentage FROM Coupon WHERE idCoupon = coupon_id INTO coupon_discount;
+  ELSE
+    coupon_discount := 0;
+  END IF;
+  INSERT INTO Orders(billing_address1, billing_address2, billing_city, billing_name, billing_phone, billing_zip1, billing_zip2,
+                     shipping_address1, shipping_address2, shipping_city, shipping_name, shipping_phone, shipping_zip1, shipping_zip2,
+                     nif, idUser, idCoupon)
+    (SELECT * FROM
+      (SELECT address1 billing_address1, address2 billing_address2, City.name billing_city,
+              Address.name billing_name, phoneNumber billing_phone, code1 billing_zip1, code2 billing_zip2
+       FROM address
+         NATURAL JOIN ZipCode
+         INNER JOIN City ON ZipCode.idCity = City.idCity
+       WHERE idAddress = billingAddress) billing_address,
+      (SELECT address1 shipping_address1, address2 shipping_address2, City.name shipping_city,
+              Address.name shipping_name, phoneNumber shipping_phone, code1 shipping_zip1, code2 shipping_zip2
+       FROM address
+         NATURAL JOIN ZipCode
+         INNER JOIN City ON ZipCode.idCity = City.idCity
+       WHERE idAddress = shippingAddress) shipping_address,
+      (SELECT order_nif, user_id AS idUser, coupon_id AS idCoupon) extraFields
+    )	RETURNING idOrder INTO order_id;
+  INSERT INTO ProductOrder(idproduct,idorder,price,quantity
+  )		SELECT idproduct,order_id AS idorder, price, quantity FROM ProductCart WHERE idUser = user_id ORDER BY product_position;
+  RETURN order_id;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -235,10 +234,17 @@ EXECUTE PROCEDURE check_category_loop();
 -- Check if coupon used in an order is valid
 CREATE OR REPLACE FUNCTION check_order() RETURNS TRIGGER AS $BODY$
 BEGIN
- IF NEW.idCoupon IS NOT NULL AND NOT EXISTS (SELECT * FROM Coupon WHERE idCoupon = NEW.idCoupon AND startDate <= NEW.orderDate AND endDate >= NEW.orderDate) THEN
- 	RAISE EXCEPTION 'Order %: Invalid coupon', NEW.idOrder;
- END IF;
- RETURN NEW;
+  IF NEW.idCoupon IS NOT NULL AND NOT EXISTS (SELECT * FROM Coupon WHERE idCoupon = NEW.idCoupon AND startDate <= NEW.orderDate AND endDate >= NEW.orderDate) THEN
+    RAISE EXCEPTION 'Order %: Invalid coupon', NEW.idOrder;
+  END IF;
+  IF TG_OP = 'UPDATE' AND OLD.order_status = 'Payment Pending' AND NEW.order_status <> 'Payment Pending' THEN
+    UPDATE Product
+      SET stock = stock - ProductOrder.quantity, purchases = purchases + ProductOrder.quantity
+      FROM ProductOrder
+      WHERE ProductOrder.idOrder = NEW.idOrder
+        AND Product.idProduct = ProductOrder.idProduct;
+  END IF;
+  RETURN NEW;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -331,14 +337,17 @@ AFTER INSERT OR UPDATE OR DELETE ON ProductOrder
 FOR EACH ROW EXECUTE PROCEDURE
 product_purchases_update();
 -- Insert an address, verifying if zip code is valid
-CREATE OR REPLACE FUNCTION insert_address(idUser INTEGER, name TEXT, address1 TEXT, address2 TEXT, phoneNumber TEXT, zip1 INTEGER, zip2 INTEGER) RETURNS void AS $BODY$
-DECLARE zipcode_id INTEGER;
+CREATE OR REPLACE FUNCTION insert_address(user_id INTEGER, addr_name TEXT, addr1 TEXT, addr2 TEXT, phone TEXT, zip1 INTEGER, zip2 INTEGER) RETURNS INTEGER AS $BODY$
+DECLARE
+  zipcode_id INTEGER;
+  address_id INTEGER;
 BEGIN
- SELECT idZipCode FROM ZipCode WHERE code1 = zip1 AND code2 = zip2 INTO zipcode_id;
-IF zipcode_id IS NULL THEN
- RAISE EXCEPTION 'Invalid Zip Code';
-END IF;
- INSERT INTO Address (address1, address2, name, phoneNumber, idUser, idZipCode) VALUES (address1,address2,name,phoneNumber,idUser,zipcode_id);
+  SELECT idZipCode FROM ZipCode WHERE code1 = zip1 AND code2 = zip2 INTO zipcode_id;
+  IF zipcode_id IS NULL THEN
+    RAISE EXCEPTION 'Invalid Zip Code';
+  END IF;
+  INSERT INTO Address (address1, address2, name, phoneNumber, idUser, idZipCode) VALUES (addr1,addr2,addr_name,phone,user_id,zipcode_id) RETURNING idAddress INTO address_id;
+  RETURN address_id;
 END;
 $BODY$
 LANGUAGE plpgsql;
@@ -346,44 +355,47 @@ LANGUAGE plpgsql;
 CREATE OR REPLACE FUNCTION changed_product_order() RETURNS TRIGGER AS $BODY$
 DECLARE coupon_discount INTEGER;
 BEGIN
-	IF NOT EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status <> 'Canceled') THEN
- 		UPDATE Orders SET order_status = 'Canceled' WHERE idOrder = NEW.idOrder;
- 	ELSEIF NOT EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status = 'Pending') THEN
- 		UPDATE Orders SET order_status = 'Sent' WHERE idOrder = NEW.idOrder;
- 	ELSEIF EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status = 'Sent') THEN
- 		UPDATE Orders SET order_status = 'Partially Sent' WHERE idOrder = NEW.idOrder;
- 	ELSEIF NOT EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idOrder AND order_status = 'Payment Pending') THEN
- 		UPDATE Orders SET order_status = 'Pending' WHERE idOrder = NEW.idOrder;
- 	END IF;
- 	IF TG_OP = 'INSERT' AND NEW.product_status <> 'Canceled' THEN
-		UPDATE Product SET stock = stock - NEW.quantity WHERE idProduct = NEW.idProduct;
-	ELSEIF TG_OP = 'UPDATE' THEN
-   	 	IF NEW.product_status <> 'Canceled' AND NEW.quantity <> OLD.quantity THEN
-    		 	UPDATE Product SET stock = stock + OLD.quantity - NEW.quantity WHERE idProduct = NEW.idProduct;
-   	 	ELSEIF NEW.product_status = 'Canceled' AND NEW.product_status <> OLD.product_status THEN
-    		 	UPDATE Product SET stock = stock + OLD.quantity WHERE idProduct = NEW.idProduct;
-   	 	END IF;
- 	END IF;
- 
- 	IF EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idOrder AND idCoupon IS NOT NULL) THEN
- 	 	SELECT percentage FROM Orders
- 	 	LEFT JOIN Coupon USING(idCoupon)
-	 	WHERE idOrder = NEW.idOrder 
-	 	INTO coupon_discount;
-  	ELSE
-  	 	coupon_discount := 0;
-  	END IF;
+  IF EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idorder AND order_status <> 'Payment Pending') THEN
+    IF NOT EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status <> 'Canceled') THEN
+      UPDATE Orders SET order_status = 'Canceled' WHERE idOrder = NEW.idOrder;
+    ELSEIF NOT EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status = 'Pending') THEN
+      UPDATE Orders SET order_status = 'Sent' WHERE idOrder = NEW.idOrder;
+    ELSEIF EXISTS (SELECT * FROM ProductOrder WHERE idOrder = NEW.idorder AND product_status = 'Sent') THEN
+      UPDATE Orders SET order_status = 'Partially Sent' WHERE idOrder = NEW.idOrder;
+    ELSEIF NOT EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idOrder AND order_status = 'Payment Pending') THEN
+      UPDATE Orders SET order_status = 'Pending' WHERE idOrder = NEW.idOrder;
+    END IF;
+    IF TG_OP = 'INSERT' AND NEW.product_status <> 'Canceled' THEN
+      UPDATE Product SET stock = stock - NEW.quantity, purchases = purchases + NEW.quantity WHERE idProduct = NEW.idProduct;
+    ELSEIF TG_OP = 'UPDATE' THEN
+      IF NEW.product_status <> 'Canceled' AND NEW.quantity <> OLD.quantity THEN
+        UPDATE Product SET stock = stock + OLD.quantity - NEW.quantity, purchases = purchases + NEW.quantity - OLD.quantity
+            WHERE idProduct = NEW.idProduct;
+      ELSEIF NEW.product_status = 'Canceled' AND NEW.product_status <> OLD.product_status THEN
+        UPDATE Product SET stock = stock + OLD.quantity, purchases = purchases - OLD.quantity WHERE idProduct = NEW.idProduct;
+      END IF;
+    END IF;
+  END IF;
 
-  	UPDATE Orders SET totalprice = costs.totalprice, shippingCost = costs.shippingCost
-  	FROM
-  	(SELECT COALESCE((100-coupon_discount)*productsCost/100.0 + shippingCost,0) AS totalPrice, shippingCost FROM
- 	 	(SELECT SUM(ProductOrder.price) AS productsCost, get_shipping_costs(SUM(weight)::INTEGER) AS shippingCost
- 		 	FROM ProductOrder
- 		 	INNER JOIN Product USING(idProduct)
- 		 	WHERE idOrder = NEW.idOrder AND product_status != 'Canceled') subcosts) costs
-  	WHERE idOrder = NEW.idOrder;
- 
- 	RETURN NEW;
+  IF EXISTS (SELECT * FROM Orders WHERE idOrder = NEW.idOrder AND idCoupon IS NOT NULL) THEN
+    SELECT percentage FROM Orders
+      LEFT JOIN Coupon USING(idCoupon)
+    WHERE idOrder = NEW.idOrder
+    INTO coupon_discount;
+  ELSE
+    coupon_discount := 0;
+  END IF;
+
+  UPDATE Orders SET totalprice = costs.totalprice, shippingCost = costs.shippingCost
+  FROM
+    (SELECT COALESCE((100-coupon_discount)*productsCost/100.0 + shippingCost,0) AS totalPrice, shippingCost FROM
+      (SELECT SUM(ProductOrder.price*ProductOrder.quantity) AS productsCost, get_shipping_costs(SUM(weight)::INTEGER) AS shippingCost
+       FROM ProductOrder
+         INNER JOIN Product USING(idProduct)
+       WHERE idOrder = NEW.idOrder AND product_status != 'Canceled') subcosts) costs
+  WHERE idOrder = NEW.idOrder;
+
+  RETURN NEW;
 END;
 $BODY$
 LANGUAGE plpgsql;

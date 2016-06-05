@@ -1,12 +1,17 @@
-$("#same").change(function (e) {
-    if (this.checked) {
+sameChecked();
+
+$("#same").change(sameChecked);
+
+function sameChecked()
+{
+    if ($("#same")[0].checked) {
         $("#billing_box").slideUp();
         $("#same_as_shipping").slideDown();
     } else {
         $("#billing_box").slideDown();
         $("#same_as_shipping").slideUp();
     }
-});
+}
 
 function payment() {
     var validates = true;
@@ -22,11 +27,14 @@ function payment() {
             $('#payment-form').append('<input type="hidden" name="ship_addr" value="'+address_id+'">');
     }
     else
+    {
         $('#new_shipping_address > form input[name]').clone().attr('type','hidden').appendTo('#payment-form');
+        if ($('[name="save_shipping"]').prop('checked'))
+            $('#payment-form').append('<input type="hidden" name="same" value="on">');
+    }
 
-    var same_as_shipping = $('#same').prop('checked');
-    if (same_as_shipping)
-        $('#payment-form').append('<input type="hidden" name="same" value="'+same_as_shipping+'">');
+    if ($('#same').prop('checked'))
+        $('#payment-form').append('<input type="hidden" name="same" value="on">');
     else {
         if ($('#saved_billing_addresses.active').length) {
             var address_id = $('#saved_billing_addresses [name="bill_addr"]:checked').val();
@@ -38,14 +46,18 @@ function payment() {
             else $('#payment-form').append('<input type="hidden" name="bill_addr" value="'+address_id+'">');
         }
         else
-            $('#new_billing_address > form input[name]').clone().attr('type','hidden').appendTo('#payment-form');
+        {
+            $('#new_billing_address > form input[name]').clone().attr('type', 'hidden').appendTo('#payment-form');
+            if ($('[name="save_billing"]').prop('checked'))
+                $('#payment-form').append('<input type="hidden" name="same" value="on">');
+        }
     }
     $('#payment-form').append('<input type="hidden" name="nif" value="'+$('#nif').val()+'">');
-    if ($('#payment-form [name="payment_method"]:checked').length == 0)
+    /*if ($('#payment-form [name="payment_method"]:checked').length == 0)
     {
         tooltip_error($('#payment_methods > .row > .row'),'Payment method required');
         validates = false;
-    }
+    }*/
     return validates && validate_addresses();
 }
 

@@ -37,7 +37,6 @@ $('#error .close').click(function(e) {
 });
 
 function complete(xhr) {
-	console.log(xhr.responseText);
 	if (Math.floor(xhr.status / 100) == 2) {
 		$("#form-signin").slideUp();
 		$("#error").slideUp();

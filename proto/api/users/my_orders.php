@@ -8,7 +8,7 @@
 		die();
 	}
 
-	$order_id = trim($_POST['order_id']);
+	$order_id = $_POST['order_id'];
 
 	try {
 		list($order_info, $order_products) = getInfoPurchaseHistory($_SESSION['user'],$order_id);

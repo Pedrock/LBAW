@@ -147,3 +147,22 @@ body{
     text-align: center;
     padding: 20px;
 }
+
+.inline_help_label {
+    width: 100%;
+}
+
+.inline_help {
+    display: inline;
+    position: relative;
+}
+
+.ui-tooltip {
+    min-width: 400px;
+}
+
+.inline_pw_help {
+    padding-top: 10px;
+    font-size: 0.9em;
+    display: block;
+}

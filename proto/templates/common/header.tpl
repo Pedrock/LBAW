@@ -21,7 +21,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{$BASE_URL}pages/index.php">Online Store</a>
+        <a class="navbar-brand" href="{$BASE_URL}pages/index.php">HashStore</a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
@@ -30,9 +30,12 @@
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <div class="col-lg-8 col-md-7 col-sm-6">
-          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/search.php">
+          <form id="searchBar" class="navbar-form navbar-left" role="search" action="{$BASE_URL}pages/list.php">
             <div class="input-group">
-              <input type="text" class="form-control" name="q" placeholder="Search...">
+              {if $category}
+                <input type="hidden" name="cat" value="{$category}">
+              {/if}
+              <input type="text" class="form-control" name="search" placeholder="Search..." value="{if $query}{$query}{/if}">
               <span class="input-group-btn">
                 <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
               </span>
@@ -47,7 +50,7 @@
             <ul class="dropdown-menu">
               <li><a href="{$BASE_URL}pages/user/favorites.php">Favorites</a></li>
               <li><a href="{$BASE_URL}pages/user/my_orders.php">My Orders</a></li>
-              <li><a href="#">Profile</a></li>
+              <li><a href="{$BASE_URL}pages/user/profile.php">Profile</a></li>
               {if $smarty.session.admin}
                 <li role="separator" class="divider"></li>
                 <li><a href="{$BASE_URL}pages/admin/">Administration</a></li>
@@ -78,7 +81,7 @@
         <div id="main-menu">
           <a href="#" id="deals" class="list-group-item">Deals</a>
           {foreach from=$categories item=category}
-          <a href="{$BASE_URL}pages/category.php?id={$category.id}" class="list-group-item">{$category.name}</a>
+          <a href="{$BASE_URL}pages/list.php?cat={$category.id}{$lnk_query}{$lnk_order}" class="list-group-item">{$category.name}</a>
           {/foreach}
         </div>
       </div>

@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap.min.css">
   <link rel="stylesheet" href="{$BASE_URL}css/bootstrap/bootstrap-theme.min.css">
   <link rel="stylesheet" href="{$BASE_URL}css/login.css">
+  <link rel="stylesheet" href="{$BASE_URL}css/font-awesome/font-awesome.min.css">
 
 </head>
 <body>

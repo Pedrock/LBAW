@@ -37,7 +37,7 @@
                 </ul>
             </div>
             <div id="new_shipping_address" class="tab-pane fade">
-                <form>
+                <form action="javascript:void(0);">
                     <div class="col-md-6">
                         <div class="row">
                             <fieldset class="form-group">
@@ -68,6 +68,11 @@
                                 <label for="shipping_phone">Phone number</label>
                                 <input required type="text" class="form-control" id="shipping_phone" name="shipping_phone">
                             </fieldset>
+                            {*<fieldset class="form-group">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="save_shipping"> Save for future purchases
+                                </label>
+                            </fieldset>*}
                         </div>
                     </div>
                     <div class="row"></div>
@@ -82,7 +87,7 @@
             <span class="title"><span class="glyphicon glyphicon-euro"> </span> Billing Address</span>
         </div>
     </div>
-    <form class="form-inline" role="form">
+    <form class="form-inline" role="form" action="javascript:void(0);">
         <label for="name">NIF</label>
         <input type="text" class="form-control" id="nif" value="{$nif}">
         &nbsp;&nbsp;
@@ -121,7 +126,7 @@
                 </ul>
             </div>
             <div id="new_billing_address" class="tab-pane fade">
-                <form>
+                <form action="javascript:void(0);">
                     <div class="col-md-6">
                         <div class="row">
                             <fieldset class="form-group">
@@ -152,6 +157,11 @@
                                 <label for="billing_phone">Phone number</label>
                                 <input required type="text" class="form-control" id="billing_phone" name="billing_phone">
                             </fieldset>
+                           {* <fieldset class="form-group">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="save_billing"> Save for future purchases
+                                </label>
+                            </fieldset>*}
                         </div>
                     </div>
                     <div class="row"></div>
@@ -162,7 +172,7 @@
 </div>
 
 <form id="payment-form" action="confirm.php" method="post" onsubmit="return payment();">
-    <div id="payment_methods">
+    {*<div id="payment_methods">
         <div class="top_row row">
             <span class="title"><span class="glyphicon glyphicon-credit-card"> </span> Payment Method</span>
         </div>
@@ -187,7 +197,7 @@
                 &nbsp;
             </div>
         </div>
-    </div>
+    </div> *}
     <br>
     <button id="btn-update" class="btn btn-success pull-right">
         Continue <span class="glyphicon glyphicon-chevron-right"></span>

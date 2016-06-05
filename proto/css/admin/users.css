@@ -1,0 +1,135 @@
+#accordion, #accordion *{
+	border-radius: 0;
+}
+
+#content-wrapper .pagination {
+	margin-top: 3px;
+}
+
+.user {
+	margin: 0;
+}
+
+.panel-users-list {
+	padding: 0;
+}
+
+.user .panel-heading {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.show-user-info {
+	position: absolute;
+	right: 30px;
+}
+
+.user-info .product_title {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+
+.user_date {
+	white-space: nowrap;
+}
+
+.user {
+	border-radius: 0;
+	border: none;
+	background: white;
+}
+
+.panel-users-list a {
+	text-decoration: none;
+	color: black;
+}
+
+.user .panel-heading {
+	background: #F3F3F3;
+	border-radius: 0;
+	border: none;
+}
+
+.user-info img {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	width: 30px;
+}
+
+.user-info .qty {
+	color: #888;
+	font-size: 0.9em;
+}
+
+.user-info {
+	border-bottom: 1px solid #ccc;
+}
+
+.user .user-details {
+	padding-top: 15px;
+	padding-left: 15px;
+}
+
+.bold {
+	font-weight: bold;
+}
+
+#accordion > .panel-heading {
+	border-bottom: 1px solid #bbb;
+}
+
+.panel-users-list a .panel-heading {
+	border-bottom: 1px solid #ccc;
+}
+
+.panel-users-list a:last-of-type .panel-heading {
+	border-bottom: none !important;
+}
+
+#accordion .user-info:last-of-type .panel-body {
+	border-top: 1px solid #ccc;
+}
+
+#accordion-container .panel-heading {
+	
+}
+
+#accordion-container .panel-heading .username,
+#accordion-container .panel-heading .email {
+	padding-top: 7px;
+	word-break: break-all;
+}
+
+
+#accordion-container .panel-heading:hover {
+	background-color: #eee;
+}
+
+.vert_centered {
+	line-height: 40px;
+}
+
+.user-row{
+    color: rgb(71, 91, 101);
+	padding: 3px 0;
+}
+
+.panel-primary>.panel-heading {
+	color: black;
+}
+
+.add-admin, .remove-admin {
+	padding: 4px 10px;
+    margin: 2px;
+}
+
+.btn-user.btn-success>span:before {
+	content: "\e212";
+}
+
+.btn-user.btn-danger>span:before {
+	content: "\e213";
+}

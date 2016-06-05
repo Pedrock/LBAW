@@ -8,7 +8,16 @@
 
 
       <div id="username" class="form-group">
-        <label class="control-label" for="username-input">Username</label>
+        <label class="inline_help_label control-label" for="username-input">Username
+          <div class="inline_help">
+            <a class="inline_help_open" href="javascript:void(0)">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </a>
+            <div class="inline_help_desc hidden">
+             Between 3 and 16 characters, can contain letters, numbers, underscores and dashes
+            </div>
+          </div>
+        </label>
         <div class="has-feedback">
           <input name="username" type="text" class="form-control" id="username-input" data-toggle="tooltip" data-placement="top" required>
           <span class="glyphicon form-control-feedback"></span>
@@ -32,7 +41,16 @@
       </div>
 
       <div id="password" class="form-group">
-        <label class="control-label" for="password-input">Password</label>
+        <label class="inline_help_label control-label" for="password-input">Password
+          <div class="inline_help">
+            <a class="inline_help_open" href="javascript:void(0)">
+              <i class="fa fa-question-circle" aria-hidden="true"></i>
+            </a>
+            <div class="inline_help_desc hidden">
+             At least 6 characters
+            </div>
+          </div>
+        </label>
         <div class="has-feedback">
           <input name="password" type="password" class="form-control" id="password-input" data-toggle="tooltip" data-placement="top" required>
           <span class="glyphicon form-control-feedback"></span>

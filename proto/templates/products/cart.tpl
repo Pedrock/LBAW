@@ -38,12 +38,13 @@
             <div class="col-xs-5 col-sm-2">
                 <div class="qty_price">
                     <a href="#" onclick="updateQuantity({$product.id});return false;" class="fa fa-refresh fa-fw hidden"></a>
-                    <input type="text" class="form-control qty" value="{$product.quantity}">
+                    <input data-toggle="tooltip" data-trigger="manual" title="Not enough stock" type="text" class="form-control qty{if (!$product.enough_stock)} low-stock{/if}" value="{$product.quantity}">
                 </div>
             </div>
         </div>
+            <div class="text-center hidden empty-cart">Your cart is empty.</div>
         {foreachelse}
-            <div class="text-center">Your cart is empty.</div>
+            <div class="text-center empty-cart">Your cart is empty.</div>
         {/foreach}
 
         <div class="row text-right">
@@ -54,8 +55,8 @@
         </div>
     </div>
 </div>
-<a href="checkout/checkout.php" id="btn-update" class="btn btn-primary pull-right">
+<button id="btn-checkout" class="btn btn-primary pull-right">
     <span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
-</a>
+</button>
 
 {include file='common/footer.tpl'}

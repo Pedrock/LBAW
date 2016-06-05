@@ -95,3 +95,8 @@ ul.sortable li.placeholder {
 	padding: 3px 5px;
 	border-radius: 0px 0px 5px 0px;
 }
+
+#product_hidden_warning {
+	margin-left: 5px;
+	padding-top: 4px;
+}
