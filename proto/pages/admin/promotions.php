@@ -25,8 +25,7 @@
 
 	extract(pagination($discounts,$limit,$page));
 
-	if($query && isset($_GET['create']))
-		$smarty->assign('create', true);
+	$smarty->assign('create', ($query && isset($_GET['create'])));
 	$smarty->assign('discounts', $discounts);
 	$smarty->assign('page', $page);
 	$smarty->assign('active', $active);

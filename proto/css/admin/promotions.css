@@ -11,6 +11,11 @@
 	font-weight: bold;
 }
 
+.top_row > div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 #promotions_body a {
 	text-decoration: none;
 	display: block;
@@ -19,7 +24,7 @@
 
 .promotion_row {
 	border-top: 1px solid #aaa;
-	height: 60px;
+	padding-bottom: 5px;
 }
 
 .promotion_row .name,
@@ -40,7 +45,6 @@
 }
 
 .promotion_row .name {
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -85,6 +89,9 @@
 	font-weight: bold;
 }
 
+#searchBar {
+	margin-top: 10px;
+}
 #accordion{
 	border-radius: 0;
 }
