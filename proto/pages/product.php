@@ -12,6 +12,7 @@ if (isset($_GET['id']))
 	if ($product === false)
 	{
 		http_response_code(404);
+		$smarty->display('404.tpl');
 	}
 	else
 	{
@@ -23,6 +24,7 @@ if (isset($_GET['id']))
 }
 else
 {
-	http_response_code(400);
+	http_response_code(404);
+	$smarty->display('404.tpl');
 }
 ?>

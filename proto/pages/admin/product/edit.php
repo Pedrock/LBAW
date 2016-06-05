@@ -11,6 +11,7 @@
 		if ($product === false)
 		{
 			http_response_code(404);
+			$smarty->display('404.tpl');
 		}
 		else
 		{
@@ -45,5 +46,6 @@
 	else
 	{
 		http_response_code(404);
+		$smarty->display('404.tpl');
 	}	
 ?>
