@@ -47,7 +47,10 @@ if (empty($cart))
     header("Location: $BASE_URL"."pages/cart.php");
     die();
 }
-$costs = getCartCosts($_SESSION['user']); // TODO - Coupon
+if (isset($_SESSION['coupon']))
+    $costs = getCartCosts($_SESSION['user'], $_SESSION['coupon']);
+else
+    $costs = getCartCosts($_SESSION['user']);
 
 $smarty->assign('shipping_address',$shipping_address);
 $smarty->assign('billing_address',$billing_address);
@@ -55,5 +58,7 @@ $smarty->assign('nif',$nif);
 $smarty->assign('cart',$cart);
 $smarty->assign('shipping',round($costs['shippingcost'],2));
 $smarty->assign('total',round($costs['totalprice'],2));
+$smarty->assign('discount',$costs['coupon_discount']);
 $smarty->assign('vars',$_POST);
 $smarty->display('checkout/confirm.tpl');
+

@@ -24,6 +24,9 @@
             </div>
             {/foreach}
             <div class="order-details row">
+                {if $discount}
+                    <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Discount:</b> {$discount}%</div>
+                {/if}
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Subtotal:</b> {$total} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Shipping:</b> {$shipping} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Total:</b> {$total + $shipping} €</div>

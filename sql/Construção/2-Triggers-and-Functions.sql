@@ -389,7 +389,7 @@ BEGIN
   UPDATE Orders SET totalprice = costs.totalprice, shippingCost = costs.shippingCost
   FROM
     (SELECT COALESCE((100-coupon_discount)*productsCost/100.0 + shippingCost,0) AS totalPrice, shippingCost FROM
-      (SELECT SUM(ProductOrder.price*ProductOrder.quantity) AS productsCost, get_shipping_costs(SUM(weight)::INTEGER) AS shippingCost
+      (SELECT SUM(ProductOrder.price*ProductOrder.quantity) AS productsCost, get_shipping_costs(SUM(weight*quantity)::INTEGER) AS shippingCost
        FROM ProductOrder
          INNER JOIN Product USING(idProduct)
        WHERE idOrder = NEW.idOrder AND product_status != 'Canceled') subcosts) costs

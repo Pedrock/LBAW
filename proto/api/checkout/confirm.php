@@ -77,7 +77,7 @@ if ($shipping_address == false || $billing_address == false)
 
 $nif = $_POST['nif'];
 
-$order_id = makeOrder($idUser, $billing_address_id, $shipping_address_id, $nif, NULL); // TODO - Coupon
+$order_id = makeOrder($idUser, $billing_address_id, $shipping_address_id, $nif, $_SESSION['coupon']);
 $products = getOrderProducts($order_id);
 $costs = getOrderCosts($order_id);
 
@@ -99,6 +99,8 @@ $payer->setPaymentMethod("paypal");
 
 $items = array();
 
+$total_without_discount = 0;
+
 foreach ($products as $row => $product)
 {
     $item = new Item();
@@ -110,15 +112,22 @@ foreach ($products as $row => $product)
         ->setTax(0.23)
         ->setPrice($product['price']);
     array_push($items, $item);
+    $total_without_discount += $product['price']*$product['quantity'];
 }
 
-//$discount = new Item(); // TODO - Coupon
-//$discount->setName('Coupon Code')
-//    ->setDescription('Coupon Code')
-//    ->setCurrency('EUR')
-//    ->setQuantity(1)
-//    ->setTax(0)
-//    ->setPrice(-17.5);
+$subtotal = $costs['totalprice']-$costs['shippingcost'];
+
+if ($costs['coupon_discount'])
+{
+    $discount = new Item();
+    $discount->setName('Coupon Code Discount')
+        ->setDescription('Code: '.$_SESSION['coupon'])
+        ->setCurrency('EUR')
+        ->setQuantity(1)
+        ->setTax(0.23)
+        ->setPrice($subtotal-$total_without_discount);
+    array_push($items, $discount);
+}
 
 $itemList = new ItemList();
 $itemList->setItems($items)
@@ -126,8 +135,7 @@ $itemList->setItems($items)
 
 $details = new Details();
 $details->setShipping($costs['shippingcost'])
-    ->setSubtotal($costs['totalprice']-$costs['shippingcost']);
-
+    ->setSubtotal($subtotal);
 
 $amount = new Amount();
 $amount->setCurrency("EUR")
@@ -162,5 +170,6 @@ try {
     echo json_encode($link);
 } catch (Exception $ex) {
     http_response_code(400);
+    echo parseApiError($ex->getData());
     exit(1);
 }

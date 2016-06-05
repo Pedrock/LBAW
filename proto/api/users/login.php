@@ -1,7 +1,7 @@
 <?php
   include_once('../../config/init.php');
   include_once($BASE_DIR .'database/users.php');
-  include_once($BASE_DIR .'lib/cart_cookie_to_db.php');
+  include_once($BASE_DIR . 'lib/cart_cookie.php');
 
 if (!$_POST['email'] || !$_POST['password'] || !$_POST['remember']) {
     return_error("Both fields are required", 400);
