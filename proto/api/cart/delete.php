@@ -1,5 +1,6 @@
 <?php
 include_once('../../config/init.php');
+include_once($BASE_DIR .'lib/cart_cookie.php');
 include_once($BASE_DIR .'database/cart.php');
 
 

@@ -13,7 +13,7 @@ function cart_cookie_to_db($user_id)
 
 function get_cart_json($cookie = NULL)
 {
-    if ($cookie === NULL) $_COOKIE['cart'];
+    if ($cookie === NULL) $cookie = $_COOKIE['cart'];
     $products = explode(';', $cookie);
     $length = count($products);
     $products_objects = array();
