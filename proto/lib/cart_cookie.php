@@ -20,10 +20,13 @@ function get_cart_json($cookie = NULL)
     for ($i = 0; $i < $length; $i++)
     {
         list($product_id,$product_quantity) = explode(':',$products[$i],2);
-        $item = new stdClass();
-        $item->p = $product_id;
-        $item->q = $product_quantity;
-        array_push($products_objects, $item);
+        if (!empty($product_id) && !empty($product_quantity))
+        {
+            $item = new stdClass();
+            $item->p = $product_id;
+            $item->q = $product_quantity;
+            array_push($products_objects, $item);
+        }
     }
     return json_encode($products_objects);
 }
