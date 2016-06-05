@@ -1,0 +1,25 @@
+#contact-us > .contact-emails{
+	padding-bottom: 20px;
+}
+
+#contact-us .email, #contact-us .phone{
+	margin-left: 0px;
+	padding-bottom: 7px;
+}
+
+.contact-emails h4,.contact-phones h4{
+	margin-bottom: 15px;
+}
+
+#test-about-us div{
+	margin-left: 0px;
+}
+
+.img-feup{
+	padding-bottom: 30px;
+}
+
+#text-about-us .row{
+	text-align: justify;
+    text-justify: inter-word;
+}
