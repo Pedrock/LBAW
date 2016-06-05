@@ -477,4 +477,16 @@
     return $stmt->fetchAll();
   }
 
+  function getMetadata($product_id) {
+    global $conn;
+    $stmt = $conn->prepare(
+      "SELECT metadata.idmetadatacategory as idcategory,
+              metadatacategory.name as category,
+              metadata.description as description
+       FROM metadata
+       LEFT JOIN metadatacategory ON metadatacategory.idmetadatacategory = metadata.idmetadatacategory
+       WHERE metadata.idproduct = ?");
+    $stmt->execute(array($product_id));
+    return $stmt->fetchAll();
+  }
 ?>
