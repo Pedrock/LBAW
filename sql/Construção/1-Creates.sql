@@ -130,7 +130,8 @@ CREATE TABLE Coupon(
 	percentage INTEGER NOT NULL,
 	code TEXT NOT NULL,
 	startDate TIMESTAMP NOT NULL CHECK(startDate < endDate),
-	idUser INTEGER NOT NULL REFERENCES Users(idUser)
+	idUser INTEGER NOT NULL REFERENCES Users(idUser),
+	isDeleted BOOLEAN NOT NULL DEFAULT FALSE
 );
  
 CREATE TYPE OrderStatus AS ENUM ('Payment Pending', 'Pending', 'Sent', 'Canceled', 'Partially Sent');
