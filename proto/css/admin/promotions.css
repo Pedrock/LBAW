@@ -84,3 +84,7 @@
 .error .error_title {
 	font-weight: bold;
 }
+
+#accordion{
+	border-radius: 0;
+}
