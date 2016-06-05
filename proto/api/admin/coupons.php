@@ -14,8 +14,10 @@
 
 	$id = $_POST['id'];
 
-	if(!is_numeric($id))
-		return_error('Invalid id');
+	if($action !== 'create' && !is_numeric($id))
+		return_error('Invalid id ' . $id);
+
+	$code = $_POST['code'];
 
 	if($action == 'edit' || $action == 'create') {
 		if(!isset($_POST['percentage']))
@@ -26,6 +28,9 @@
 
 		if(!isset($_POST['end']))
 			return_error('No end specified');
+
+		if(!isset($_POST['code']))
+			return_error('No code specified');
 
 		$percentage = $_POST['percentage'];
 		$start = $_POST['start'];
@@ -40,21 +45,21 @@
 
 	try {
 		if($action == 'create') {
-			$id = createCoupon($id, $_SESSION['user'], $percentage, $start, $end);
+			$ret = createCoupon($code, $_SESSION['user'], $id, $percentage, $start, $end);
 		} else if($action == 'edit') {
-			editCoupon($id, $percentage, $start, $end);
+			$ret = editCoupon($code, $_SESSION['user'], $id, $percentage, $start, $end);
 		} else if($action == 'delete') {
-			deleteCoupon($id);
+			$ret = deleteCoupon($id);
 		} else
 			return_error('Invalid action');
 	} catch (PDOException $e) {
 		if (strpos($e->getMessage(), 'overlaps') !== false)
-			return_error('Coupon overlaps with another');
+			return_error('Coupon overlaps with another ' . $id);
 		else
 			return_error($e->getMessage());
 	}
 
-	echo json_encode(array('success' => $id));
+	echo json_encode($ret);
 
 	function return_error($error) {
 		http_response_code(422);

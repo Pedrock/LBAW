@@ -482,13 +482,13 @@
     global $conn;
 
     if($active)
-      $where = " WHERE (CURRENT_TIMESTAMP between startdate and enddate) ";
+      $where = " AND (CURRENT_TIMESTAMP between startdate and enddate) ";
     else $where = "";
 
     $stmt = $conn->prepare(
       "SELECT idcoupon, code, startdate, enddate, percentage, users.username as issuer,
       (CURRENT_TIMESTAMP between startdate and enddate) as active, 
-      COUNT(idcoupon) OVER () AS total_count FROM coupon join users ON coupon.iduser = users.iduser "
+      COUNT(idcoupon) OVER () AS total_count FROM coupon join users ON coupon.iduser = users.iduser WHERE coupon.isdeleted = false"
       . $where . 
       " ORDER BY startdate DESC LIMIT ? OFFSET ? ;");
 
@@ -498,23 +498,38 @@
     return $stmt->fetchAll();
   }
 
-  function editCoupon($id, $percentage, $start, $end) {
+  function editCoupon($code, $iduser, $id, $percentage, $start, $end) {
     global $conn;
-    $stmt = $conn->prepare("UPDATE coupon SET percentage = ?, startdate = ?, enddate = ? WHERE idcoupon = ?;");
-    $stmt->execute(array($percentage, $start, $end, $id));
+    $conn->beginTransaction();
+    $stmt = $conn->prepare("UPDATE coupon SET isdeleted = true WHERE idcoupon = ?;");
+    $stmt->execute(array($id));
+    $stmt = $conn->prepare("INSERT INTO coupon(code, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon, code, iduser, percentage, startdate, enddate;");
+    $stmt->execute(array($code, $iduser, $percentage, $start, $end));
+    $ret = $stmt->fetch();
+    $conn->commit();
+    return $ret;
   }
 
   function deleteCoupon($id) {
     global $conn;
-    $stmt = $conn->prepare("DELETE from coupon WHERE idcoupon = ?;");
+    $stmt = $conn->prepare("UPDATE coupon SET isdeleted = true WHERE idcoupon = ?;");
     $stmt->execute(array($id));
+    return true;
   }
 
-  function createCoupon($iduser, $percentage, $start, $end) {
+  function createCoupon($code, $iduser, $id, $percentage, $start, $end) {
     global $conn;
-    $stmt = $conn->prepare("INSERT INTO coupon(iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon;");
-    $stmt->execute(array($iduser, $percentage, $start, $end));
-    return $stmt->fetch()['idcoupon'];
+    if(!isset($code) || $code == ""){
+      $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $length = 11;
+      $code = "";
+      for ($i = 0; $i < $length; $i++) {
+          $code .= $chars[rand(0, strlen($chars) - 1)];
+      }
+    }
+    $stmt = $conn->prepare("INSERT INTO coupon(code, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon, code, iduser, percentage, startdate, enddate;");
+    $stmt->execute(array($code, $iduser, $percentage, $start, $end));
+    return $stmt->fetch();
   }
 
 ?>

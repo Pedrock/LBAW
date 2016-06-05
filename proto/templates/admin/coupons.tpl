@@ -10,7 +10,7 @@
 	<div class="col-lg-12">
 		<div class="content">
 			<h1 id="title">Coupons</h1>
-			<a href="#" class="pull-right" id="new_promo">
+			<a href="#" class="pull-right" id="new_coupon">
 				<span class="glyphicon glyphicon-plus"></span> New coupon
 			</a>
 			<span class="clearfix"></span>
@@ -52,9 +52,9 @@
 						<div class="col-xs-3">Issuer</div>
 					</div>
 				</div>
-				<div id="promotions_body">
+				<div id="coupons_body">
 					{foreach from=$coupons item=coup name=coup}
-						<a href="javascript:void(0)" id="disc_{$coup.idcoupon}" data-id="{$coup.idcoupon}" class="promotion_row">
+						<a href="javascript:void(0)" id="disc_{$coup.idcoupon}" data-id="{$coup.idcoupon}" class="coupon_row">
 							<div class="col-xs-3 code">{$coup.code}</div>
 							<div class="col-xs-3 perc">
 								<span class="num">{$coup.percentage}</span>%
@@ -73,20 +73,6 @@
 					<div id="no_discounts">
 						No coupons found
 					</div>
-					<!--
-					<a href="javascript:void(0)" class="promotion_row promotion_row_template hidden">
-						<div class="col-xs-5 name"></div>
-						<div class="col-xs-2 perc">
-							<span class="num">{$disc.percentage}</span>%
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</div>
-						<div class="col-xs-5 span">
-							Start: <span class="start"></span><br>
-							End: <span class="end"></span>
-						</div>
-						&nbsp;
-					</a>
-					-->
 				</div>
 			</div>
 			{if $n_pages > 0}
@@ -133,8 +119,8 @@
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Product</label>
-					<input type="text" class="insert-number form-control product" name="product" value="#{$query}" disabled>
+					<label for="code">Code</label>
+					<input type="text" class="insert-number form-control code" name="code" value="">
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
@@ -167,15 +153,15 @@
 	<div class="modal-dialog modal-sm">
 		<form id="form_edit" class="modal-content" action="javascript:void(0);">
 			<input type="hidden" name="action" value="edit">
-			<input class="promo_id" type="hidden" name="id">
+			<input class="coupon_id" type="hidden" name="id">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">Edit coupons</h4>
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Code</label>
-					<input type="text" class="insert-number form-control product" name="product" disabled>
+					<label for="code">Code</label>
+					<input type="text" class="insert-number form-control code" name="code">
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
