@@ -295,7 +295,6 @@
     $stmt->execute(array($category));
     return $stmt->fetchAll();
   }
-
   
   function createProduct($name, $price, $stock, $weight, $description, $categories, $hidden = false) {
     global $conn;
@@ -424,6 +423,49 @@
     return $stmt->fetch();
   }
 
+  function getDiscounts($limit, $page, $product_id = null, $active = false) {
+    $offset = ($page - 1) * $limit;
+    global $conn;
+    $where = ($product_id != null ? ' AND discount.idproduct = ? ' : ' ');
+
+    if($active)
+      $where = $where . " AND (CURRENT_TIMESTAMP between startdate and enddate) ";
+
+    $stmt = $conn->prepare(
+      "SELECT iddiscount, discount.idproduct, name, startdate, enddate, percentage, 
+      (CURRENT_TIMESTAMP between startdate and enddate) as active,
+      COUNT(iddiscount) OVER () AS total_count FROM discount, product
+      WHERE product.idproduct = discount.idproduct" . $where . 
+      "ORDER BY startdate DESC LIMIT ? OFFSET ? ");
+
+    if($product_id == null)
+      $arr = array($limit, $offset);
+    else
+      $arr = array($product_id, $limit, $offset);
+
+    $stmt->execute($arr);
+    return $stmt->fetchAll();
+  }
+
+  function editDiscount($id, $percentage, $start, $end) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE discount SET percentage = ?, startdate = ?, enddate = ? WHERE iddiscount = ?");
+    $stmt->execute(array($percentage, $start, $end, $id));
+  }
+
+  function deleteDiscount($id) {
+    global $conn;
+    $stmt = $conn->prepare("DELETE from discount WHERE iddiscount = ?");
+    $stmt->execute(array($id));
+  }
+
+  function createDiscount($product, $iduser, $percentage, $start, $end) {
+    global $conn;
+    $stmt = $conn->prepare("INSERT INTO discount(idproduct, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING iddiscount");
+    $stmt->execute(array($product, $iduser, $percentage, $start, $end));
+    return $stmt->fetch()['iddiscount'];
+  }
+
   function getOrderProducts($order_id)
   {
     global $conn;
@@ -434,4 +476,5 @@
     $stmt->execute(array($order_id));
     return $stmt->fetchAll();
   }
+
 ?>
