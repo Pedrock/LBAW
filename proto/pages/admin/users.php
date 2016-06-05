@@ -1,10 +1,10 @@
 <?php
-	include_once('../../../config/init.php');
+	include_once('../../config/init.php');
 	include_once($BASE_DIR . 'database/products.php');
 	include_once($BASE_DIR . 'database/users.php');
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
-	include_once($BASE_DIR .'lib/pagination.php');
+	include_once($BASE_DIR . 'lib/pagination.php');
 
 	$page = isset($_GET['page']) ? $_GET['page'] : 1;
   	$limit = isset($_GET['limit']) ? $_GET['limit'] : 10;
@@ -12,13 +12,12 @@
 	if ($search)
 	{
 		$users = getUserInfoFromNameOrEmail($search);
-		$num = 1;
+		extract(pagination($users, $limit, $page, 1));
 	}
 	else{
 		$users = getAllUsers($limit, $page, isset($_GET['adminOnly']));
-		$num = userCount(isset($_GET['adminOnly']));
+		extract(pagination($users, $limit, $page));
 	}
-	extract(pagination($users, $limit, $page, $num));
 
 	$smarty->assign('adminOnly',isset($_GET['adminOnly']));
 	$smarty->assign('users', $users);
@@ -29,5 +28,5 @@
 	$smarty->assign('limit', $limit);
 	$smarty->assign('search', $search);
 
-	$smarty->display('admin/user/user.tpl');
+	$smarty->display('admin/users.tpl');
 ?>

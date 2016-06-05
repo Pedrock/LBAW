@@ -1,5 +1,5 @@
 {assign "title" "Edit Users"}
-{assign var="css" value=['my_orders.css', 'admin/main.css', 'admin/orders.css', 'admin/users.css']}
+{assign var="css" value=[ 'admin/main.css', 'admin/users.css']}
 {include file='admin/common/header.tpl'}
 <div class="row" id="orders">
 	<div class="col-lg-12">
@@ -11,7 +11,7 @@
 					<input type="text" class="form-control" name="search" placeholder="Search..."{if $search} value="{$search}"{/if}>
 					<span class="input-group-btn">
 						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-						<a href="user.php" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></a>
+						<a href="users.php" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></a>
 					</span>
 				</div>
 			</form>
@@ -49,19 +49,25 @@
 				<div class="panel-heading">
 					<div class="top_row row">
 						<div class="col-xs-4">Username</div>
-						<div class="col-xs-6">Email</div>
-						<div class="col-xs-2">Admin</div>
+						<div class="col-xs-5 col-sm-6">Email</div>
+						<div class="col-xs-3 col-sm-2">Admin</div>
 					</div>
 				</div>
 				<div id="accordion-container" class="panel-orders-list panel-body">
 					<div class="order panel panel-primary">
 						{foreach from=$users item=user}
 						<a class="order-accordion loadable" data-toggle="collapse" data-parent="#accordion-container">
-							<div class="panel-heading">
-								<div class="username col-xs-4">{$user.username}</div>
-								<div class="email col-xs-6">{$user.email}</div>
-								<div class="col-xs-2">{if $user.admin}<button class="btn btn-success remove-admin" type="button"><span class="glyphicon glyphicon-queen"></span></button>{else}<button class="btn btn-danger add-admin" type="button"><span class="glyphicon glyphicon-pawn"></span></button>{/if}</div>
-								&nbsp;
+							<div class="user-row panel-heading" data-id="{$user.id}">
+								<div class="username col-xs-4">{$user.username} </div>
+								<div class="email col-xs-5 col-sm-6">{$user.email}</div>
+								<div class="col-xs-3 col-sm-2">
+									{if $user.admin}
+										<button class="btn btn-success btn-user" type="button"><span class="glyphicon"></span></button>
+									{else}
+										<button class="btn btn-danger btn-user" type="button"><span class="glyphicon"></span></button>
+									{/if}
+								</div>
+								<span class="clearfix"></span>
 							</div>
 						</a>
 						{/foreach}
@@ -155,7 +161,5 @@
 	</div>
 </div>
 
-<button id="dummy-remove" class="btn btn-success remove-admin" type="button" ><span class="glyphicon glyphicon-queen" ></span></button>
-<button id="dummy-add" class="btn btn-danger add-admin" type="button"><span class="glyphicon glyphicon-pawn" ></span></button>
-{assign var=js value=['/user/user.js']}
+{assign var=js value=['users.js']}
 {include file='admin/common/footer.tpl'}

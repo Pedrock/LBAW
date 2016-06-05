@@ -211,16 +211,17 @@
     $stmt->execute(array($user_id, sha1($new_password), $token));
   }
 
-  function changeAdminStatus($user, $setAdmin){
+  function changeAdminStatus($user_id, $setAdmin){
     global $conn;
-    $stmt = $conn->prepare("UPDATE Users SET isAdmin = ? WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
-    $stmt->execute(array($setAdmin, $user, $user));
-    return $stmt->rowCount() == 0 ? false : true;
+    $stmt = $conn->prepare("UPDATE Users SET isAdmin = ? WHERE idUser = ? AND isAdmin <> ?");
+    $stmt->execute(array($setAdmin, $user_id, $setAdmin));
+    return $stmt->fetch() !== false;
   }
 
   function getUserInfoFromNameOrEmail($user){
     global $conn;
-    $stmt = $conn->prepare("SELECT username, email, nif, isadmin from  Users WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
+    $stmt = $conn->prepare("SELECT idUser AS id, username, email, nif, isadmin, COUNT(idUser) OVER () AS total_count FROM Users
+            WHERE LOWER(username) = LOWER(?) OR LOWER(email) = LOWER(?);");
     $stmt->execute(array($user, $user));
     return $stmt->fetchAll();
   }
@@ -229,17 +230,12 @@
     $offset = ($page-1)*$limit;
     global $conn;
     $stmt = $conn->prepare(
-        "SELECT iduser, username, email, nif, isadmin AS admin FROM  Users ".
+        "SELECT iduser AS id, username, email, nif, isadmin AS admin, COUNT(idUser) OVER () AS total_count FROM Users ".
         ($adminOnly ? "WHERE isAdmin = 'true'" : "")
-        ."LIMIT ? OFFSET ?;"
+        ." LIMIT ? OFFSET ?;"
     );
     $stmt->execute(array($limit, $offset));
     return $stmt->fetchAll();
   }
-  function userCount($adminOnly){
-    global $conn;
-    $stmt = $conn->prepare("SELECT COUNT(*) AS cnt FROM Users " . ($adminOnly ? "WHERE isAdmin = 'true'" : "") . ";");
-    $stmt->execute(array());
-    return $stmt->fetch()['cnt'];
-  }
+
 ?>

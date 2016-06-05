@@ -4,27 +4,23 @@
 
 	include_once($BASE_DIR . 'lib/admin_check.php');
 
-	if (!$_POST['user'])
-		return_error('A user must be specified');
+	if (empty($_POST['user']) || empty($_POST['setAdmin']))
+		return_error('Bad Request', 400);
 
 	$user = trim($_POST['user']);
 	if($user == "")
-		return_error('A user must be specified');
+		return_error('A user must be specified', 400);
 
 	$setAdmin = trim($_POST['setAdmin']);
 	if($setAdmin == "")
-		return_error('An action must be specified');
+		return_error('An action must be specified', 400);
 
 	try {
-		$userinfo =  getUserInfoFromNameOrEmail($user)[0];
-		if($userinfo === false || count($userinfo) == 0)
-			return_error("User " . $user . "does not exist", 404);
-		changeAdminStatus($user, $setAdmin);
-		$success = ($userinfo['isadmin'] != ($setAdmin === "true"));
+		$success = changeAdminStatus($user, $setAdmin);
 		http_response_code(200);
 		echo json_encode(array('success' => $success));
 	} catch (PDOException $e) {
-		return_error("An error occurred while editing user. Please try again." . $e->getMessage());
+		return_error("An error occurred while editing user. Please try again.");
 	}
 
 	function return_error($error, $error_code = 422) {

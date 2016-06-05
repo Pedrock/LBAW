@@ -1,5 +1,5 @@
 #accordion, #accordion *{
-	buser-radius: 0;
+	border-radius: 0;
 }
 
 #content-wrapper .pagination {
@@ -36,8 +36,8 @@
 }
 
 .user {
-	buser-radius: 0;
-	buser: none;
+	border-radius: 0;
+	border: none;
 	background: white;
 }
 
@@ -48,8 +48,8 @@
 
 .user .panel-heading {
 	background: #F3F3F3;
-	buser-radius: 0;
-	buser: none;
+	border-radius: 0;
+	border: none;
 }
 
 .user-info img {
@@ -65,7 +65,7 @@
 }
 
 .user-info {
-	buser-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
 .user .user-details {
@@ -78,28 +78,29 @@
 }
 
 #accordion > .panel-heading {
-	buser-bottom: 1px solid #bbb;
+	border-bottom: 1px solid #bbb;
 }
 
 .panel-users-list a .panel-heading {
-	buser-bottom: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
 }
 
 .panel-users-list a:last-of-type .panel-heading {
-	buser-bottom: none !important;
+	border-bottom: none !important;
 }
 
 #accordion .user-info:last-of-type .panel-body {
-	buser-top: 1px solid #ccc;
+	border-top: 1px solid #ccc;
 }
 
 #accordion-container .panel-heading {
-	height: 55px;
+	
 }
 
 #accordion-container .panel-heading .username,
 #accordion-container .panel-heading .email {
 	padding-top: 7px;
+	word-break: break-all;
 }
 
 
@@ -109,4 +110,26 @@
 
 .vert_centered {
 	line-height: 40px;
+}
+
+.user-row{
+    color: rgb(71, 91, 101);
+	padding: 3px 0;
+}
+
+.panel-primary>.panel-heading {
+	color: black;
+}
+
+.add-admin, .remove-admin {
+	padding: 4px 10px;
+    margin: 2px;
+}
+
+.btn-user.btn-success>span:before {
+	content: "\e212";
+}
+
+.btn-user.btn-danger>span:before {
+	content: "\e213";
 }
