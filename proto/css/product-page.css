@@ -262,3 +262,8 @@
    max-width: 95%;
    max-height: 95%;
 }
+
+#quantity {
+   margin-left: 5px;
+   padding-left: 3px;
+}

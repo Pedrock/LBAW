@@ -78,7 +78,7 @@
     global $conn;
     $stmt1 = $conn->prepare(
       "SELECT order_status AS status, totalprice, shipping_name, shipping_phone, shipping_address1, shipping_address2, shipping_city, shipping_zip1, shipping_zip2, billing_name, billing_phone, billing_address1, billing_address2, billing_city, billing_zip1, billing_zip2, 
-        Coupon.percentage AS coupon_discount
+        Coupon.percentage AS coupon_discount, shippingcost
             FROM Orders 
             LEFT JOIN Coupon USING(idcoupon)
             WHERE idOrder = ? AND Orders.idUser = ?;");
@@ -285,4 +285,11 @@
     return $stmt->fetch();
   }
 
+  function orderAlreadyPaid($user_id, $order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT idOrder FROM Orders WHERE idOrder = ? AND idUser = ? AND order_status <> 'Payment Pending'");
+    $stmt->execute(array($order_id, $user_id));
+    return $stmt->fetch() !== false;
+  }
 ?>

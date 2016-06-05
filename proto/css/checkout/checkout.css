@@ -90,3 +90,7 @@
 #billing_box {
 	display: none;
 }
+
+.title {
+	font-size: large;
+}

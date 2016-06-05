@@ -1,4 +1,5 @@
 <?php
+  ob_start("sanitize_output");
   $load_start = microtime(true);
   define('SECRET_KEY','MqTrC7HetY5YWvmdVAtQ2h4akgqsfNN38BwGg11MPiaRQelTIBCkSqorwS8FG9mI');
   session_set_cookie_params(3600, '/~lbaw1564/'); //FIXME
@@ -106,6 +107,25 @@ function timingSafeCompare($safe, $user) {
 
     // They are only identical strings if $result is exactly 0...
     return $result === 0;
+}
+
+function sanitize_output($buffer) {
+
+    $search = array(
+        '/\>[^\S ]+/s',  // strip whitespaces after tags, except space
+        '/[^\S ]+\</s',  // strip whitespaces before tags, except space
+        '/(\s)+/s'       // shorten multiple whitespace sequences
+    );
+
+    $replace = array(
+        '>',
+        '<',
+        '\\1'
+    );
+
+    $buffer = preg_replace($search, $replace, $buffer);
+
+    return $buffer;
 }
 
 ?>

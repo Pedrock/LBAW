@@ -32,3 +32,35 @@
 .vert_centered {
 	line-height: 40px;
 }
+
+.title {
+	font-size: large;
+}
+
+#spinner > span {
+	height: 30px;
+	width: 30px;
+	display: inline-block;
+	box-sizing: content-box;
+	opacity: 1;
+	filter: alpha(opacity=100);
+	background-color: rgba(255,255,255,.701961);
+	-webkit-animation: fa-spin .7s infinite linear;
+	-moz-animation: fa-spin .7s infinite linear;
+	-o-animation: fa-spin .7s infinite linear;
+	animation: fa-spin .7s infinite linear;
+	border-left: 8px solid rgba(0,0,0,.2);
+	border-right: 8px solid rgba(0,0,0,.2);
+	border-bottom: 8px solid rgba(0,0,0,.2);
+	border-top: 8px solid #2180c0;
+	border-radius: 100%;
+}
+
+.btns {
+	margin-top: 20px;
+	position: relative;
+}
+
+#spinner {
+	margin: 10px 20px 0;
+}
