@@ -1,0 +1,22 @@
+.top_row {
+    margin-bottom: 15px;
+    margin-top: 20px;
+    border-bottom-style: groove;
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
+
+.content {
+    background: white;
+    border: 1px solid #DDDDDD;
+    line-height: 2.5em;
+    padding: 10px;
+}
+
+.content > .row {
+    padding: 50px 15px;
+}
+
+.title {
+    font-size: large;
+}

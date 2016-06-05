@@ -48,10 +48,32 @@
             </div>
         </div>
     </div>
-    <br>
-    <a href="#" id="btn-confirm" class="btn btn-success pull-right">
-        Confirm <span class="glyphicon glyphicon-chevron-right"></span>
-    </a>
+    <div class="btns text-right">
+        <a href="#" id="btn-confirm" class="btn btn-success">
+            Confirm <span class="glyphicon glyphicon-chevron-right"></span>
+        </a>
+        <div id="spinner" class="hidden">
+            <span aria-label="Loading"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="error" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content panel-danger">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                An error occurred. Please try again.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

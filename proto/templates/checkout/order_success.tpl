@@ -8,7 +8,7 @@
         <span class="title"><span class="glyphicon glyphicon-shopping-cart"> </span> Order Complete</span>
     </div>
     <div class="row content">
-        <div id="order1" class="order-info">
+        <div class="order-info">
             {foreach from=$products item=product}
                 <div class="row">
                     <div class="col-xs-8 product_title">

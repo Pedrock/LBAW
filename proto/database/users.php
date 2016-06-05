@@ -285,4 +285,11 @@
     return $stmt->fetch();
   }
 
+  function orderAlreadyPaid($user_id, $order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT idOrder FROM Orders WHERE idOrder = ? AND idUser = ? AND order_status <> 'Payment Pending'");
+    $stmt->execute(array($order_id, $user_id));
+    return $stmt->fetch() !== false;
+  }
 ?>

@@ -13,6 +13,14 @@ function updateCartProductQuantity($id, $user_id, $quantity)
     $stmt->execute(array($quantity, $user_id, $id));
 }
 
+function enoughStock($product_id, $quantity)
+{
+    global $conn;
+    $stmt = $conn->prepare("SELECT stock >= ? AS enough_stock FROM Product WHERE idProduct = ?");
+    $stmt->execute(array($quantity, $product_id));
+    return $stmt->fetch()['enough_stock'];
+}
+
 function removeProductFromCart($id, $user_id)
 {
     global $conn;
@@ -103,7 +111,8 @@ function finishOrderPayment()
 function cancelOrderPayment()
 {
     global $conn;
-    $conn->rollBack();
+    if ($conn->inTransaction())
+        $conn->rollBack();
 }
 
 function getCartCosts($user_id, $coupon_code = NULL)

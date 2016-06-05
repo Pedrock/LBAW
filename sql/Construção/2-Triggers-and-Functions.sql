@@ -337,16 +337,17 @@ AFTER INSERT OR UPDATE OR DELETE ON ProductOrder
 FOR EACH ROW EXECUTE PROCEDURE
 product_purchases_update();
 -- Insert an address, verifying if zip code is valid
-CREATE OR REPLACE FUNCTION insert_address(idUser INTEGER, name TEXT, address1 TEXT, address2 TEXT, phoneNumber TEXT, zip1 INTEGER, zip2 INTEGER) RETURNS INTEGER AS $BODY$
-DECLARE zipcode_id INTEGER;
-DECLARE address_id INTEGER;
+CREATE OR REPLACE FUNCTION insert_address(user_id INTEGER, addr_name TEXT, addr1 TEXT, addr2 TEXT, phone TEXT, zip1 INTEGER, zip2 INTEGER) RETURNS INTEGER AS $BODY$
+DECLARE
+  zipcode_id INTEGER;
+  address_id INTEGER;
 BEGIN
- SELECT idZipCode FROM ZipCode WHERE code1 = zip1 AND code2 = zip2 INTO zipcode_id;
-IF zipcode_id IS NULL THEN
- RAISE EXCEPTION 'Invalid Zip Code';
-END IF;
- INSERT INTO Address (address1, address2, name, phoneNumber, idUser, idZipCode) VALUES (address1,address2,name,phoneNumber,idUser,zipcode_id) RETURNING idAddress INTO address_id;
- RETURN address_id;
+  SELECT idZipCode FROM ZipCode WHERE code1 = zip1 AND code2 = zip2 INTO zipcode_id;
+  IF zipcode_id IS NULL THEN
+    RAISE EXCEPTION 'Invalid Zip Code';
+  END IF;
+  INSERT INTO Address (address1, address2, name, phoneNumber, idUser, idZipCode) VALUES (addr1,addr2,addr_name,phone,user_id,zipcode_id) RETURNING idAddress INTO address_id;
+  RETURN address_id;
 END;
 $BODY$
 LANGUAGE plpgsql;

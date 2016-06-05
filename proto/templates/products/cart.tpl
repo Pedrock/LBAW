@@ -38,7 +38,7 @@
             <div class="col-xs-5 col-sm-2">
                 <div class="qty_price">
                     <a href="#" onclick="updateQuantity({$product.id});return false;" class="fa fa-refresh fa-fw hidden"></a>
-                    <input type="text" class="form-control qty" value="{$product.quantity}">
+                    <input data-toggle="tooltip" data-trigger="manual" title="Not enough stock" type="text" class="form-control qty{if (!$product.enough_stock)} low-stock{/if}" value="{$product.quantity}">
                 </div>
             </div>
         </div>

@@ -17,44 +17,67 @@ use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Details;
 
+$idUser = $_SESSION['user'];
+
+$matches = array();
+
 if (!empty($_POST['ship_addr'])) {
     $shipping_address_id = $_POST['ship_addr'];
-    $shipping_address = getUserAddress($_SESSION['user'], $shipping_address_id);
+}
+else if (!empty($_POST['shipping_name']) && !empty($_POST['shipping_addr1'])
+    && isset($_POST['shipping_addr2']) && !empty($_POST['shipping_zip'])
+    && preg_match( '/^([0-9]{4})\-([0-9]{3})$/' , $_POST['shipping_zip'], $matches) && count($matches) == 3
+    && !empty($_POST['shipping_phone']))
+{
+    $name = $_POST['shipping_name'];
+    $address1 = $_POST['shipping_addr1'];
+    $address2 = $_POST['shipping_addr2'];
+    $zip1 = $matches[1];
+    $zip2 = $matches[2];
+    $phoneNumber = $_POST['shipping_phone'];
+    $shipping_address_id = addAddress($idUser, $name, $address1, $address2, $phoneNumber, $zip1, $zip2);
 }
 else {
-    $shipping_address = array(
-        'name' => $_POST['shipping_name'],
-        'address1' => $_POST['shipping_addr1'],
-        'address2' => $_POST['shipping_addr2'],
-        'zipcode' => $_POST['shipping_zip'],
-        'city' => $_POST['shipping_city'],
-        'phonenumber' => $_POST['shipping_phone']
-    );
+    http_response_code(400);
+    die();
 }
 
 if (!empty($_POST['same'])) {
     $billing_address_id = $shipping_address_id;
-    $billing_address = getUserAddress($_SESSION['user'], $billing_address_id);
 }
 else if (!empty($_POST['bill_addr'])) {
     $billing_address_id = $_POST['ship_addr'];
-    $billing_address = getUserAddress($_SESSION['user'], $billing_address_id);
+}
+else if (!empty($_POST['billing_name']) && !empty($_POST['billing_addr1'])
+    && isset($_POST['billing_addr2']) && !empty($_POST['billing_zip'])
+    && preg_match( '/^([0-9]{4})\-([0-9]{3})$/' , $_POST['billing_zip'], $matches) && count($matches) == 3
+    && !empty($_POST['billing_phone']))
+{
+    $name = $_POST['billing_name'];
+    $address1 = $_POST['billing_addr1'];
+    $address2 = $_POST['billing_addr2'];
+    $zip1 = $matches[1];
+    $zip2 = $matches[2];
+    $phoneNumber = $_POST['billing_phone'];
+    $billing_address_id = addAddress($idUser, $name, $address1, $address2, $phoneNumber, $zip1, $zip2);
 }
 else {
-    $billing_address = array(
-        'name' => $_POST['billing_name'],
-        'address1' => $_POST['billing_addr1'],
-        'address2' => $_POST['billing_addr2'],
-        'zipcode' => $_POST['billing_zip'],
-        'city' => $_POST['billing_city'],
-        'phonenumber' => $_POST['billing_phone']
-    );
-    throw new Exception('Not implemented');
+    http_response_code(400);
+    die();
+}
+
+$shipping_address = getUserAddress($idUser, $shipping_address_id);
+$billing_address = getUserAddress($idUser, $billing_address_id);
+
+if ($shipping_address == false || $billing_address == false)
+{
+    http_response_code(400);
+    die();
 }
 
 $nif = $_POST['nif'];
 
-$order_id = makeOrder($_SESSION['user'], $billing_address_id, $shipping_address_id, $nif, NULL); // TODO - Coupon
+$order_id = makeOrder($idUser, $billing_address_id, $shipping_address_id, $nif, NULL); // TODO - Coupon
 $products = getOrderProducts($order_id);
 $costs = getOrderCosts($order_id);
 

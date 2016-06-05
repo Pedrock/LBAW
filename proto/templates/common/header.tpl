@@ -21,7 +21,7 @@
   <nav class="navbar navbar-inverse">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="{$BASE_URL}pages/index.php">Online Store</a>
+        <a class="navbar-brand" href="{$BASE_URL}pages/index.php">HashStore</a>
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>

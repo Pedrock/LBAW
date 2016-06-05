@@ -1,5 +1,6 @@
 $('#btn-confirm').click(function () {
     $(this).addClass('disabled');
+    $('#spinner').removeClass('hidden');
     $.ajax({
         url: "../../api/checkout/confirm.php",
         method: "POST",
@@ -11,17 +12,21 @@ $('#btn-confirm').click(function () {
 
 function confirmComplete(xhr)
 {
-
     if (xhr.status == 200 && xhr.responseJSON)
     {
         window.location.href = xhr.responseJSON;
+        return;
     }
     else if(xhr.responseJSON)
     {
-        alert(xhr.responseJSON);
+        $('#error .modal-body').text(xhr.responseJSON);
+        $('#error').modal('show');
     }
     else
     {
-        alert("An error occurred. Please try again.");
+        $('#error .modal-body').text('An error occurred. Please try again.');
+        $('#error').modal('show');
     }
+    $('#spinner').addClass('hidden');
+    $('#btn-confirm').removeClass('disabled');
 }

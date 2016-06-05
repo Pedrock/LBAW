@@ -85,3 +85,7 @@
    right: -25px;
    top: 10px;
 }
+
+.low-stock {
+   border-color: red;
+}

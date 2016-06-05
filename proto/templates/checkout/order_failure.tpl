@@ -1,5 +1,5 @@
 {assign "title" "HashStore - Order Failure"}
-{assign "css" ["checkout/confirm.css"]}
+{assign "css" ["checkout/order_failure.css"]}
 {assign "js" []}
 {include file='common/header.tpl'}
 
@@ -8,11 +8,10 @@
         <span class="title">Order Failure</span>
     </div>
     <div class="row content text-center">
-        <div id="order1" class="order-info">
-            <div class="row">
-                {$message}
-            </div>
+        <div class="row">
+            {$message}
         </div>
+        <a href="{$BASE_URL}pages/cart.php" class="btn btn-success pull-right">Go To Cart</a>
     </div>
 </div>
 

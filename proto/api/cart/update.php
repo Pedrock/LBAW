@@ -13,6 +13,8 @@ if (!validPostNumber($_POST['product']) || !validPostNumber($_POST['quantity']))
     die();
 }
 
+echo json_encode(enoughStock($_POST['product'], $_POST['quantity']));
+
 if (empty($_SESSION["user"]))
 {
     if (!empty($_COOKIE['cart']))

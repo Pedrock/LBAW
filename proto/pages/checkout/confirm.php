@@ -25,7 +25,7 @@ else {
 if (!empty($_POST['same']))
     $billing_address = $shipping_address;
 else if (!empty($_POST['bill_addr'])) {
-    $billing_address = getUserAddress($_SESSION['user'], $_POST['ship_addr']);
+    $billing_address = getUserAddress($_SESSION['user'], $_POST['bill_addr']);
 }
 else {
     $billing_address = array(
