@@ -8,7 +8,8 @@
 	
 	$email = $_POST['email'];
 
-	$token = bin2hex(openssl_random_pseudo_bytes(32));
+  	if (strlen($_POST['password']) < 6)
+  		return_error("The new password must have at least 6 characters.");
 
 	try {
 		resetPassword($_POST['id'], $_POST['password'], $_POST['token']);

@@ -29,7 +29,7 @@
 
   // Check password
   if (strlen($password) < 6)
-    $errors['password'] = "Passwords should have at least 6 characters";
+    $errors['password'] = "The password must have at least 6 characters";
 
   // Check NIF
   if (!validNIF($nif))
