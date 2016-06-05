@@ -6,8 +6,12 @@ function deleteFromCart(product)
         data: {product: product},
         dataType: "json"
     }).done(function(shipping) {
-        $('.product-cart[data-id="'+product+'"]').slideUp(400, function() {$(this).remove(); updateTotal();});
-        $('.empty-cart').hide().removeClass('hidden').slideDown();
+        $('.product-cart[data-id="'+product+'"]').slideUp(400, function() {
+            $(this).remove();
+            updateTotal();
+            if (!$('.product-cart').length)
+                $('.empty-cart').hide().removeClass('hidden').slideDown();}
+        );
         if ($.isNumeric(shipping)) shipping += " €";
         $('#shipping').text(shipping);
     });
@@ -50,8 +54,13 @@ function updateTotal()
         total += $(this).attr('data-quantity') * $(this).attr('data-price');
     });
     $('#subtotal').text(Math.round(total * 100) / 100);
-    var total2 = (100-$('#cart').attr('data-discount')) * total / 100;
-    $('#totalcoupon').text(Math.round(total2 * 100) / 100);
+    if ($('#cart').attr('data-discount'))
+    {
+        var total2 = (100-$('#cart').attr('data-discount')) * total / 100;
+        $('#totalcoupon').text(Math.round(total2 * 100) / 100);
+    }
+    else
+        total2 = total;
     var shipping = $('#shipping').text().replace(/€$/g, "");
     if ($.isNumeric(shipping))
     {

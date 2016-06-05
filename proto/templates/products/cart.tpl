@@ -42,11 +42,10 @@
                 </div>
             </div>
         </div>
-            <div class="text-center hidden empty-cart">Your cart is empty.</div>
         {foreachelse}
             <div class="text-center empty-cart">Your cart is empty.</div>
         {/foreach}
-
+            <div class="text-center hidden empty-cart">Your cart is empty.</div>
         <div class="row text-right">
             <div class="col-sm-offset-8 col-sm-2 col-xs-4 col-xs-offset-4">Subtotal: </div>
             <div class="col-sm-2 col-xs-4">
