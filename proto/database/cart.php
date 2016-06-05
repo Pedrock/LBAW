@@ -32,7 +32,9 @@ function getUserCart($user_id)
 {
     global $conn;
     $stmt = $conn->prepare(
-        "SELECT Product.idProduct AS id, name, quantity, ProductCart.price AS cart_price, get_product_price(Product.idProduct) AS price, location AS photo, stock >= quantity AS enough_stock
+        "SELECT Product.idProduct AS id, name, quantity, ProductCart.price AS cart_price, 
+            get_product_price(Product.idProduct) AS price, 
+            location AS photo, stock >= quantity AS enough_stock
         FROM ProductCart
         INNER JOIN Product USING(idProduct)
         LEFT JOIN Photo ON Photo.idProduct = Product.idProduct AND photo_order = 1
@@ -40,6 +42,18 @@ function getUserCart($user_id)
         ORDER BY product_position;");
     $stmt->execute(array($user_id));
     return $stmt->fetchAll();
+}
+
+function getUserCartShipping($user_id)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT get_shipping_costs(SUM(weight*quantity)::INTEGER) AS shipping
+        FROM ProductCart
+        INNER JOIN Product USING(idProduct)
+        WHERE ProductCart.idUser = ? AND Product.isDeleted = false;");
+    $stmt->execute(array($user_id));
+    return $stmt->fetch()['shipping'];
 }
 
 function getUserCartSimple($user_id)
@@ -66,6 +80,18 @@ function getCartFromJson($products)
         WHERE Product.isDeleted = false;");
     $stmt->execute(array($products));
     return $stmt->fetchAll();
+}
+
+function getShippingFromJson($products)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT get_shipping_costs(SUM(weight*q)::INTEGER) AS shipping
+        FROM json_to_recordset(?) as x(p int, q int)
+        INNER JOIN Product ON p = idProduct
+        WHERE Product.isDeleted = false;");
+    $stmt->execute(array($products));
+    return $stmt->fetch()['shipping'];
 }
 
 function addToCartFromJson($user_id, $products)
@@ -118,22 +144,40 @@ function cancelOrderPayment()
 function getCartCosts($user_id, $coupon_code = NULL)
 {
     global $conn;
-    $stmt = $conn->prepare("SELECT COALESCE((100-coupon_discount)*productsCost/100.0 + shippingCost,0) AS totalprice, shippingcost FROM
-    (SELECT SUM(ProductCart.price*ProductCart.quantity) AS productsCost,
-            get_shipping_costs(SUM(weight)::INTEGER) AS shippingCost,
-            COALESCE(MAX(Coupon.percentage), 0) AS coupon_discount
+    $stmt = $conn->prepare(
+        "SELECT COALESCE((100-coupon_discount)*productsCost/100.0,0) AS totalprice,
+              shippingcost,
+              coupon_discount
+    FROM
+      (SELECT SUM(ProductCart.price*ProductCart.quantity) AS productsCost,
+              get_shipping_costs(SUM(weight*quantity)::INTEGER) AS shippingCost,
+              MAX(Coupon.percentage) AS coupon_discount
        FROM ProductCart
-       INNER JOIN Product USING(idProduct)
-       LEFT JOIN Coupon ON code IS NOT NULL AND code = ? AND startdate <= now() AND enddate >= now()
-     WHERE ProductCart.idUser = ?) costs");
+         INNER JOIN Product USING(idProduct)
+         LEFT JOIN Coupon ON code IS NOT NULL AND code = ? AND now() BETWEEN startdate AND enddate
+       WHERE ProductCart.idUser = ? GROUP BY idCoupon) costs");
     $stmt->execute(array($coupon_code, $user_id));
+    return $stmt->fetch();
+}
+
+function getCouponDiscount($coupon_code)
+{
+    global $conn;
+    $stmt = $conn->prepare(
+        "SELECT percentage AS discount
+         FROM Coupon
+         WHERE code = ? AND now() BETWEEN startdate AND enddate");
+    $stmt->execute(array($coupon_code));
     return $stmt->fetch();
 }
 
 function getOrderCosts($order_id)
 {
     global $conn;
-    $stmt = $conn->prepare("SELECT totalprice, shippingcost FROM Orders WHERE idOrder = ?");
+    $stmt = $conn->prepare("SELECT totalprice, shippingcost, percentage AS coupon_discount 
+          FROM Orders 
+          LEFT JOIN Coupon USING(idcoupon)
+          WHERE idOrder = ?");
     $stmt->execute(array($order_id));
     return $stmt->fetch();
 }

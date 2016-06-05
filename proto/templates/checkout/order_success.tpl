@@ -24,6 +24,9 @@
                 </div>
             {/foreach}
             <div class="order-details row">
+                {if $order_info['coupon_discount']}
+                    <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Discount:</b> {$order_info['coupon_discount']}%</div>
+                {/if}
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Subtotal:</b> {$order_info['totalprice']} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Shipping:</b> {$order_info['shippingcost']} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Total:</b> {$order_info['totalprice']+ $shipping} €</div>

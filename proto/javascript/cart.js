@@ -3,10 +3,13 @@ function deleteFromCart(product)
     $.ajax({
         type: "POST",
         url: base_url + "api/cart/delete.php",
-        data: {product: product}
-    }).done(function() {
+        data: {product: product},
+        dataType: "json"
+    }).done(function(shipping) {
         $('.product-cart[data-id="'+product+'"]').slideUp(400, function() {$(this).remove(); updateTotal();});
         $('.empty-cart').hide().removeClass('hidden').slideDown();
+        if ($.isNumeric(shipping)) shipping += " €";
+        $('#shipping').text(shipping);
     });
 }
 
@@ -26,10 +29,14 @@ function updateQuantity(product)
         url: base_url + "api/cart/update.php",
         data: {product: product, quantity: quantity},
         dataType: "json"
-    }).done(function(enough_stock) {
+    }).done(function(data) {
+        var low_stock = !data['enough_stock'];
+        var shipping = data['shipping'];
         product_row.attr('data-quantity',quantity);
         product_row.find('.fa-refresh').removeClass('fa-spin').addClass('hidden');
-        product_row.find('.qty_price > input').toggleClass('low-stock',!enough_stock);
+        product_row.find('.qty_price > input').toggleClass('low-stock',low_stock);
+        if ($.isNumeric(shipping)) shipping += " €";
+        $('#shipping').text(shipping);
         updateTotal();
     }).error(function() {
         product_row.find('.fa-refresh').removeClass('fa-spin');
@@ -43,11 +50,18 @@ function updateTotal()
         total += $(this).attr('data-quantity') * $(this).attr('data-price');
     });
     $('#subtotal').text(Math.round(total * 100) / 100);
+    var total2 = (100-$('#cart').attr('data-discount')) * total / 100;
+    $('#totalcoupon').text(Math.round(total2 * 100) / 100);
+    var shipping = $('#shipping').text().replace(/€$/g, "");
+    if ($.isNumeric(shipping))
+    {
+        $('#total').text(Math.round((total2+Number(shipping)) * 100) / 100);
+    }
     updateTooltips();
 }
 
 $('#btn-checkout').click(function() {
-    if ($('.product-cart').length && !$('.low-stock').length)
+    if ($('.product-cart').length && !$('.low-stock').length && $('#shipping').text() != 'Too heavy')
         window.location = "checkout/checkout.php";
 });
 

@@ -26,7 +26,6 @@ if(isset($_GET['success'])) {
                 clearCart($_SESSION['user']);
             } catch (\PayPal\Exception\PPConnectionException $ex) {
                 cancelOrderPayment();
-                $message = parseApiError($ex->getData());
                 $message = "An error occurred while completing your purchase.
                             <br>Please contact the administrator.
                             <br>Error code: ".$ex->getCode();

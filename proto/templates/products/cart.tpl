@@ -3,7 +3,7 @@
 {include file='common/header.tpl'}
 {assign "js" ['cart.js','cart_common.js']}
 
-<div id="cart">
+<div id="cart" {if $discount}data-discount="{$discount}"{/if}>
     <div class="top_row row">
         <div id="cart_title" class="col-xs-12 col-sm-8">
             <span class="title"><span class="glyphicon glyphicon-shopping-cart"></span> Shopping Cart</span>
@@ -52,11 +52,38 @@
             <div class="col-sm-2 col-xs-4">
                 <span><span id="subtotal">{$total}</span> €</span>
             </div>
+            {if $discount}
+                <div class="col-sm-offset-8 col-sm-2 col-xs-4 col-xs-offset-4">With coupon: </div>
+                <div class="col-sm-2 col-xs-4">
+                    <span><span id="totalcoupon">{($total*(100-$discount)/100.0)|round:"2"}</span> €</span>
+                </div>
+                {assign var="total" value={$total*(100-$discount)/100.0}}
+            {/if}
+            <div class="col-sm-offset-8 col-sm-2 col-xs-4 col-xs-offset-4">Shipping: </div>
+            <div class="col-sm-2 col-xs-4">
+                <span id="shipping">{$shipping}{if is_numeric($shipping)} €{/if}</span>
+            </div>
+            <div class="col-sm-offset-8 col-sm-2 col-xs-4 col-xs-offset-4">Total: </div>
+            <div class="col-sm-2 col-xs-4">
+                <span><span id="total">{($shipping + $total)|round:"2"}</span> €</span>
+            </div>
         </div>
     </div>
 </div>
+
+<form id="coupon-form"">
+    <div class="form-group">
+        <label for="couponCode">Coupon Code: </label>
+        <div class="input-group">
+            <input autocomplete="off" type="text" class="form-control{if $invalid_coupon} invalid{/if}" name="coupon" placeholder="Coupon Code" value="{$coupon}">
+            <button class="btn btn-default">OK</button>
+        </div>
+    </div>
+</form>
+
 <button id="btn-checkout" class="btn btn-primary pull-right">
     <span>Checkout </span><span class="glyphicon glyphicon-chevron-right"></span>
 </button>
+
 
 {include file='common/footer.tpl'}
