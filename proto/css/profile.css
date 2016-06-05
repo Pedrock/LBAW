@@ -1,0 +1,162 @@
+.info-addresses{
+	padding-left: 15px;
+    padding-right: 15px;
+}
+
+.form-inline{
+	margin-bottom: 15px;
+}
+
+#profile input{
+	border-radius: 0;
+}
+
+.address
+{
+	padding: 5px 0;
+}
+
+
+#profile .top_row {
+	margin-bottom: 15px;
+	margin-top: 20px;
+	border-bottom-style: groove;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.tab_content {
+	background: white;
+	border: 1px solid #DDDDDD;
+	border-top: none;
+	padding: 15px;
+}
+
+#saved_addresses ul {
+	margin-bottom: 0;
+}
+
+#saved_addresses ul input {
+	margin-right: 15px;
+}
+
+#saved_addresses li {
+	display: table-row;
+	border: none;
+}
+
+#saved_addresses ul label {
+	font-weight: normal;
+}
+
+#saved_addresses li > div {
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.top_row {
+	margin-bottom: 15px;
+	margin-top: 20px;
+	border-bottom-style: groove;
+	padding-bottom: 10px;
+	padding-left: 15px;
+}
+
+.content {
+	background: white;
+	border: 1px solid #DDDDDD;
+	padding: 15px;
+	padding-bottom: 0px;
+}
+
+.content .radio {
+	margin-top: 15px;
+	margin-bottom: 0;
+}
+
+.order-info img {
+	margin-top: 5px;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	width: 30px;
+}
+
+.order-details {
+	padding: 15px;
+}
+
+#billing_address > .row {
+	margin-top: 20px;
+}
+
+#same_as_shipping {
+	background: white;
+	border: 1px solid #DDDDDD;
+	padding: 15px;
+	margin-top: 20px;
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+#billing_box {
+	display: none;
+}
+
+.form-horizontal{
+	margin-bottom: 15px;
+}
+
+#form-profile{
+	margin-top: 15px;
+	border: 1px solid #DDDDDD;
+}
+
+#saved_addresses .list-group-item {
+	min-height: 130px;
+}
+
+.address-btns > a, .address-btns > a:hover, .address-btns > a:focus {
+	font-size: 1.2em;
+	text-decoration: none;
+	color: black;
+	margin-right: 10px;
+}
+
+.address-btns > a:hover {
+	color: #551A8B;
+}
+
+.address-btns > a:focus {
+	color: #23527c;
+}
+
+.address-btns {
+	position: relative;
+	width: 24px;
+}
+
+.btn-delete-addr {
+	position: absolute;
+	top: 30%;
+}
+
+.btn-edit-addr {
+	position: absolute;
+	top: 55%;
+}
+
+@media (min-width: 768px) {
+	.modal-edit {
+		width: 900px;
+	}
+}
+
+.modal-body{
+	margin-right: 0px;
+	margin-left: 0px;
+}
+
+.alert-success{
+	margin-top: 10px;
+	border-radius: 0;
+}

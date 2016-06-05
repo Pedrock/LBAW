@@ -166,6 +166,28 @@
     return $stmt->fetchAll();
   }
 
+  function getUserProfile($user_id){
+    global $conn;
+    $stmt = $conn->prepare("SELECT email, nif FROM Users WHERE idUser = ?;");
+    $stmt->execute(array($user_id));
+    return $stmt->fetch();
+  }
+
+  function updateUserProfile($user_id, $new_email, $new_nif){
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Users SET email = ?, nif = ? WHERE idUser = ?;");
+    $stmt->execute(array($new_email, $new_nif, $user_id));
+    return $stmt->fetch();
+  }
+
+  function updateUserProfileAndPassword($user_id, $email, $nif, $current_password, $new_password)
+  {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Users SET password = ?, email = ?, nif = ? WHERE idUser = ? AND password = ?;");
+    $stmt->execute(array(sha1($new_password), $email, $nif, $user_id, sha1($current_password)));
+    return $stmt->fetch();
+  }
+
   function getUserAddress($user_id, $address_id)
   {
     global $conn;
@@ -226,16 +248,41 @@
     return $stmt->fetchAll();
   }
 
-  function getAllUsers($limit, $page, $adminOnly = false){
-    $offset = ($page-1)*$limit;
+  function getAllUsers($limit, $page, $adminOnly = false)
+  {
+    $offset = ($page - 1) * $limit;
     global $conn;
     $stmt = $conn->prepare(
-        "SELECT iduser AS id, username, email, nif, isadmin AS admin, COUNT(idUser) OVER () AS total_count FROM Users ".
+        "SELECT iduser AS id, username, email, nif, isadmin AS admin, COUNT(idUser) OVER () AS total_count FROM Users " .
         ($adminOnly ? "WHERE isAdmin = 'true'" : "")
-        ." LIMIT ? OFFSET ?;"
+        . " LIMIT ? OFFSET ?;"
     );
     $stmt->execute(array($limit, $offset));
     return $stmt->fetchAll();
+  }
+
+  function addAddress($idUser, $name, $address1, $address2, $phoneNumber, $zip1, $zip2)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT insert_address(?, ?, ?, ?, ?, ?, ?);");
+    $stmt->execute(array($idUser, $name, $address1, $address2, $phoneNumber, $zip1, $zip2));
+    return $stmt->fetch()['insert_address'];
+  }
+
+  function deleteAddress($idAddress)
+  {
+    global $conn;
+    $stmt = $conn->prepare("DELETE FROM Address WHERE idAddress = ?;");
+    $stmt->execute(array($idAddress));
+  }
+
+  function editAddress($idAddress, $name, $address1, $address2, $phoneNumber, $zip1, $zip2){
+    global $conn;
+    $stmt = $conn->prepare("UPDATE Address SET name = ?, address1 = ?, address2 = ?, phoneNumber = ?, idZipCode = ZipCode.idZipCode
+      FROM ZipCode
+      WHERE idAddress = ? AND code1 = ? and code2 = ?;");
+    $stmt->execute(array($name, $address1, $address2, $phoneNumber, $idAddress, $zip1, $zip2));
+    return $stmt->fetch();
   }
 
 ?>
