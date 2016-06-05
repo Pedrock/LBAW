@@ -295,7 +295,6 @@
     $stmt->execute(array($category));
     return $stmt->fetchAll();
   }
-
   
   function createProduct($name, $price, $stock, $weight, $description, $categories, $hidden = false) {
     global $conn;
@@ -478,7 +477,6 @@
     return $stmt->fetch()['iddiscount'];
   }
 
-
   function getCoupons($limit, $page, $active = false) {
     $offset = ($page - 1) * $limit;
     global $conn;
@@ -518,4 +516,5 @@
     $stmt->execute(array($iduser, $percentage, $start, $end));
     return $stmt->fetch()['idcoupon'];
   }
+
 ?>

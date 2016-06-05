@@ -14,7 +14,8 @@ if(create)
 	$("#new").modal('show');
 
 $("#new_promo").click(function(e) {
-	if(create)
+	e.preventDefault();
+	if(query != '')
 		$("#new").modal('show');
 	else
 		window.location = "product/list.php?promotion";
@@ -75,7 +76,7 @@ $("#btn_del_confirm").click(function(e) {
 
 			$('#disc_' + id).slideUp(400, function() { $(this).remove(); });
 
-			if($('.promotion_row').length > 0)
+			if($('.promotion_row').length == 0)
 				$('#no_discounts').slideDown();
 		}
 	}).fail(function(err) {
@@ -144,7 +145,7 @@ $('#form_create').submit(function(e) {
 		if(data.error)
 			showError(data['error']);
 		else {
-			window.location = "?search=" + data['success'];
+			window.location = "?search=" + fd.get('id');
 			/*
 			var perc = $('#edit').find('.percentage').val();
 			var start = $('#edit').find('.start').val();

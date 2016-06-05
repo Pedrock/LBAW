@@ -2,9 +2,9 @@
 {assign "css" ['admin/promotions.css', 'jquery-ui/jquery-ui.css', 'jquery-ui-timepicker-addon.min.css']}
 {include file='admin/common/header.tpl'}
 
-{if $query}{assign "lnk_query" value="&search={$query}"}{/if}
-{if $active}{assign "lnk_active" value="&active"}{/if}
-{assign "pag_link" value="{$lnk_query}{$lnk_active}"}
+{if $query}{assign var="lnk_query" value="&search={$query}"}{/if}
+{if $active}{assign var="lnk_active" value="&active"}{/if}
+{assign var="pag_link" value="{$lnk_query}{$lnk_active}"}
 
 <div class="row">
 	<div class="col-lg-12">
@@ -13,7 +13,7 @@
 			<a href="#" class="pull-right" id="new_promo">
 				<span class="glyphicon glyphicon-plus"></span> New promotion
 			</a>
-			<br><br>
+			<span class="clearfix"></span>
 			<form id="searchBar" role="search" method="get">
 				<div class="input-group">
 					{if $active}
@@ -77,7 +77,7 @@
 								Start: <span class="start">{$disc.startdate|date_format:"%Y-%m-%d %H:%M"}</span><br>
 								End: <span class="end">{$disc.enddate|date_format:"%Y-%m-%d %H:%M"}</span>
 							</div>
-							&nbsp;
+							<span class="clearfix"></span>
 						</a>
 					{/foreach}
 					<div id="no_discounts">
@@ -220,10 +220,7 @@
 </div>
 <script>
 	var query = '{$query}';
-	var create = false;
-	{if $create}
-		create = true;
-	{/if}
+	var create = {$create|json_encode};
 </script>
-{assign var=js value=['promotions.js', '../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js']}
+{assign var=js value=['../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js', 'promotions.js']}
 {include file='admin/common/footer.tpl'}
