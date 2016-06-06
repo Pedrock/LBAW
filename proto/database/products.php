@@ -498,8 +498,10 @@
     return $stmt->fetchAll();
   }
 
-  function editCoupon($code, $iduser, $id, $percentage, $start, $end) {
+  function editCoupon($iduser, $id, $percentage, $start, $end, $code = "") {
     global $conn;
+    if($code === "")
+      $code = randomString();
     $conn->beginTransaction();
     $stmt = $conn->prepare("UPDATE coupon SET isdeleted = true WHERE idcoupon = ?;");
     $stmt->execute(array($id));
@@ -517,19 +519,22 @@
     return true;
   }
 
-  function createCoupon($code, $iduser, $id, $percentage, $start, $end) {
+  function createCoupon($iduser, $id, $percentage, $start, $end, $code = "") {
     global $conn;
-    if(!isset($code) || $code == ""){
-      $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-      $length = 11;
-      $code = "";
-      for ($i = 0; $i < $length; $i++) {
-          $code .= $chars[rand(0, strlen($chars) - 1)];
-      }
-    }
+    if($code === "")
+      $code = randomString();
     $stmt = $conn->prepare("INSERT INTO coupon(code, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon, code, iduser, percentage, startdate, enddate;");
     $stmt->execute(array($code, $iduser, $percentage, $start, $end));
     return $stmt->fetch();
   }
-
+  
+  function randomString(){
+      $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $length = 11;
+      $out = "";
+      for ($i = 0; $i < $length; $i++) {
+          $out .= $chars[rand(0, strlen($chars) - 1)];
+      }
+      return $out;
+  }
 ?>

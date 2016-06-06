@@ -143,8 +143,8 @@
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Code</label>
-					<input type="text" class="insert-number form-control code" name="code" value="" disabled>
+					<label for="product">Product</label>
+					<input type="text" class="insert-number form-control product" name="product" value="#{$query}" disabled>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>

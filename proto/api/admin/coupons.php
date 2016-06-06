@@ -45,9 +45,9 @@
 
 	try {
 		if($action == 'create') {
-			$ret = createCoupon($code, $_SESSION['user'], $id, $percentage, $start, $end);
+			$ret = createCoupon($_SESSION['user'], $id, $percentage, $start, $end, $code);
 		} else if($action == 'edit') {
-			$ret = editCoupon($code, $_SESSION['user'], $id, $percentage, $start, $end);
+			$ret = editCoupon($_SESSION['user'], $id, $percentage, $start, $end, $code);
 		} else if($action == 'delete') {
 			$ret = deleteCoupon($id);
 		} else
