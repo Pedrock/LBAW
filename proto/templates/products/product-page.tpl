@@ -21,6 +21,8 @@
 			<div id="product-main-img" class="row">
 				{if !empty($photos)}
 					<img class="img-responsive" src="../images/products/thumb_{$photos[0].location}" alt="">
+				{else}
+					<img class="img-responsive" src="../images/assets/default_product.png" alt="">
 				{/if}
 			</div>
 			<div id="product-imgs" class="row">
@@ -56,6 +58,22 @@
 					{/if}
 				</div>
 			</div>
+			{if !empty($metadata)}
+				<div id="metadata_container">
+					<a href="#metadata" id="metadata_toggle" class="btn btn-primary" data-toggle="collapse">
+						Product Details
+						<span class="glyphicon glyphicon-menu-down"></span>
+					</a>
+					<div id="metadata" class="collapse">
+						{foreach from=$metadata item=data}
+							<div class="item">
+								<span class="category">{$data.category}</span><br>
+								<span class="description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$data.description}</span>
+							</div>
+						{/foreach} 
+					</div>
+				</div>
+			{/if}
 			<div id="row-score" class="row form-row">
 				{if $smarty.session.user}
 				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
@@ -63,16 +81,6 @@
 					<span aria-hidden="true" class="text-remove{if !$product.is_favorite} hidden{/if}">Remove from Favorites</span>
 				</button>
 				{/if}
-				<div id="score-container" class="col-xs-3{if !$product.averagescore} hidden{/if}">
-					<br>
-					<span id="product-score">{$product.averagescore}</span>
-					<br>
-					<div class="ratings">
-						<div class="empty-stars"></div>
-						<div class="full-stars" style="width:{$product.averagescore * 20}%"></div>
-					</div>
-					<br>
-				</div>				
 			</div>
 		</div>
 	</div>
@@ -81,10 +89,18 @@
 	<div class="well">
 		<div>
 			<div id="before-review">
-			<h3>Reviews</h3>
-			{if $smarty.session.user and !{$product.reviewed}}
+				<h3>Reviews</h3>
+				{if $smarty.session.user and !{$product.reviewed}}
 					<button id="leave-a-review" class="btn btn-success">Leave a Review</button>
-			{/if}
+				{/if}
+				<div id="score-container" class="{if !$product.averagescore} hidden{/if}">
+					<span id="product-score">{$product.averagescore}</span>
+					<div class="ratings">
+						<div class="empty-stars"></div>
+						<div class="full-stars" style="width:{$product.averagescore * 20}%"></div>
+					</div>
+					<br>
+				</div>
 			</div>
 			<div class="row" id="post-review-box" style="display: none;">
                 <div class="col-md-12">
@@ -128,7 +144,7 @@
 				{/for}
 				<span class="info-review">{$review.reviewer}</span>
 				<span class="info-review pull-right">{$review.review_date}</span>
-				<p>{$review.body|escape}</p>
+				<p>{$review.body}</p>
 			</div>
 		</div>
 		{foreachelse}

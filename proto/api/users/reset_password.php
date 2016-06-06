@@ -1,7 +1,6 @@
 <?php
 	include_once('../../config/init.php');
 	include_once($BASE_DIR .'database/users.php');
-	include_once($BASE_DIR .'lib/cart_cookie_to_db.php');
 
 	if (!$_POST['password'] || !$_POST['token'] || !$_POST['id']) 
 		return_error('Missing POST data', 400);

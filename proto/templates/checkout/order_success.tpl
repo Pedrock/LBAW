@@ -13,7 +13,7 @@
                 <div class="row">
                     <div class="col-xs-8 product_title">
                         <a href="#" class="link-p">
-                            <img class="product_img" src="../../images/products/thumb_{$product.photo}" alt="">
+                            <img class="product_img"{if $product.photo} src="../../images/products/thumb_{$product.photo}"{else} src="../../images/assets/default_product.png"{/if} alt="">
                         </a>
                         <!-- TODO prevent title text break -->
                         <span class="qty">{$product.quantity}x </span><a href="../product.php?id={$product.id}"><span>{$product.name}</span></a>
@@ -24,6 +24,9 @@
                 </div>
             {/foreach}
             <div class="order-details row">
+                {if $order_info['coupon_discount']}
+                    <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Discount:</b> {$order_info['coupon_discount']}%</div>
+                {/if}
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Subtotal:</b> {$order_info['totalprice']} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Shipping:</b> {$order_info['shippingcost']} €</div>
                 <div class="col-xs-6 col-xs-offset-6 col-sm-4 col-sm-offset-8"><b>Total:</b> {$order_info['totalprice']+ $shipping} €</div>
@@ -35,7 +38,7 @@
                     <br> {$order_info['shipping_zip1']}-{$order_info['shipping_zip2']}, {$order_info['shipping_city']}
                 </div>
                 <div>
-                    <br><b>Shipping address:</b>
+                    <br><b>Billing address:</b>
                     <br> {$order_info['billing_name']}
                     <br> {$order_info['billing_address1']}
                     {if $order_info['billing_address2']}<br> {$order_info['billing_address2']}{/if}

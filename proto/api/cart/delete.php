@@ -1,5 +1,6 @@
 <?php
 include_once('../../config/init.php');
+include_once($BASE_DIR .'lib/cart_cookie.php');
 include_once($BASE_DIR .'database/cart.php');
 
 
@@ -31,9 +32,21 @@ if (empty($_SESSION["user"]))
         }
         $cookie = implode(";",$products);
         setcookie('cart', $cookie, 2147483647, $BASE_URL);
+        try {
+            $shipping = getShippingFromJson(get_cart_json($cookie));
+        }
+        catch (Exception $e) {$shipping = 'Too heavy';}
     }
 }
 else
+{
     removeProductFromCart($_POST['product'], $_SESSION["user"]);
+    try {
+        $shipping = getUserCartShipping($_SESSION['user']);
+    }
+    catch (Exception $e) {$shipping = 'Too heavy';}
+}
+
+echo json_encode($shipping);
 
 ?>

@@ -86,6 +86,23 @@
    top: 10px;
 }
 
-.low-stock {
+.low-stock, .invalid {
    border-color: red;
+}
+
+#coupon-form, #coupon-form * {
+   display: inline-block;
+}
+
+#coupon-form input {
+   max-width: 150px;
+   border-radius: 0;
+}
+
+#coupon-form label{
+   margin-right: 10px;
+}
+
+.row.text-right :nth-child(n+3){
+   margin-top: 10px;
 }
