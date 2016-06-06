@@ -8,7 +8,7 @@
 		{foreach from=$carousel item=car name=car}
 			<div class="item {if $smarty.foreach.car.first}active{/if}">
 				{if $car.link != null}<a href="{$car.link}">{/if}
-				<img src="../images/carroussel/{$car.image}">
+				<img src="../images/carousel/{$car.image}">
 				{if $car.link != null}</a>{/if}
 			</div>
 		{/foreach}
