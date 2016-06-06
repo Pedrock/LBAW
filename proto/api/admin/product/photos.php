@@ -100,18 +100,25 @@
 		$imgContent = file_get_contents($src);
 		$final_img = $img = imagecreatefromstring($imgContent);
 
-		if ($width > $height) {
-			$x = ($width - $height) / 2;
-			$y = 0;
-			$smallest = $height;
+		$thumb = imagecreatetruecolor($thumbSize, $thumbSize);
+		$white = imagecolorallocate($thumb, 255, 255, 255);
+		imagefill($thumb, 0, 0, $white);
+
+		if (($width / $height) >= ($thumbSize / $thumbSize)) {
+			// by width
+			$nw = $thumbSize;
+			$nh = $height * ($thumbSize / $width);
+			$nx = 0;
+			$ny = round(abs($thumbSize - $nh) / 2);
 		} else {
-			$x = 0;
-			$y = ($height - $width) / 2;
-			$smallest = $width;
+			// by height
+			$nw = $width * ($thumbSize / $height);
+			$nh = $thumbSize;
+			$nx = round(abs($thumbSize - $nw) / 2);
+			$ny = 0;
 		}
 
-		$thumb = imagecreatetruecolor($thumbSize, $thumbSize);
-		imagecopyresampled($thumb, $img, 0, 0, $x, $y, $thumbSize, $thumbSize, $smallest, $smallest);
+		imagecopyresized($thumb, $img, $nx, $ny, 0, 0, $nw, $nh, $width, $height);
 
 		imagejpeg($thumb, $dst_path . 'thumb_' . $dst_file);
 
@@ -126,5 +133,8 @@
 		}
 
 		imagejpeg($final_img, $dst_path . $dst_file);
+
+		imagedestroy($final_img);
+		imagedestroy($thumb);
 	}
 ?>
