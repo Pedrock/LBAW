@@ -65,5 +65,19 @@
 {else}
 	<div class="text-center">You have no orders yet.</div>
 {/if}
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content"> 
+				<div class="modal-header"> 
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button> 
+					<h4 class="modal-title" id="myModalLabel">Added to Cart</h4> 
+				</div>
+				<div class="modal-footer"> 
+					<a type="button" class="btn btn-default" href="../cart.php">Go to Cart</a> 
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Continue</button> 
+				</div> 
+			</div> 
+		</div> 
+	</div>
 
 {include file='common/footer.tpl'}

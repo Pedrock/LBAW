@@ -145,7 +145,7 @@ function getCartCosts($user_id, $coupon_code = NULL)
 {
     global $conn;
     $stmt = $conn->prepare(
-        "SELECT COALESCE((100-coupon_discount)*productsCost/100.0,0) AS totalprice,
+        "SELECT COALESCE((100-COALESCE(coupon_discount,0))*productsCost/100.0,0) AS totalprice,
               shippingcost,
               coupon_discount
     FROM
@@ -182,6 +182,19 @@ function getOrderCosts($order_id)
     return $stmt->fetch();
 }
 
+function addPreviousOrder($user_id, $order_id){
+    global $conn;
+    $conn->beginTransaction();
+    $stmt = $conn->prepare("SELECT idproduct, quantity FROM productorder WHERE idorder = ?");
+    $stmt->execute(array($order_id));
+    $items = $stmt->fetchAll();
+    foreach ($items as &$item) {
+        addProductToCart($item['idproduct'], $user_id, $item['quantity']);
+    }
+    $conn->commit();
+    return true;
+}
+
 function updateCartPrices($user_id)
 {
     global $conn;
@@ -189,3 +202,5 @@ function updateCartPrices($user_id)
     $stmt->execute(array($user_id));
     return $stmt->fetch();
 }
+
+?>
