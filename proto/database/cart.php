@@ -145,7 +145,7 @@ function getCartCosts($user_id, $coupon_code = NULL)
 {
     global $conn;
     $stmt = $conn->prepare(
-        "SELECT COALESCE((100-coupon_discount)*productsCost/100.0,0) AS totalprice,
+        "SELECT COALESCE((100-COALESCE(coupon_discount,0))*productsCost/100.0,0) AS totalprice,
               shippingcost,
               coupon_discount
     FROM
