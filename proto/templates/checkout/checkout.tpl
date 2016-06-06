@@ -174,33 +174,6 @@
 </div>
 
 <form id="payment-form" action="confirm.php" method="post" onsubmit="return payment();">
-    {*<div id="payment_methods">
-        <div class="top_row row">
-            <span class="title"><span class="glyphicon glyphicon-credit-card"> </span> Payment Method</span>
-        </div>
-        <div class="row content">
-            Please choose a payment method:
-            <div class="row">
-                <div class="col-xs-4 radio">
-                    <label>
-                        <input type="radio" name="payment_method" value="cc">Credit Card</input>
-                    </label>
-                </div>
-                <div class="col-xs-4 radio">
-                    <label>
-                        <input type="radio" name="payment_method" value="pp">PayPal</input>
-                    </label>
-                </div>
-                <div class="col-xs-4 radio">
-                    <label>
-                        <input type="radio" name="payment_method" value="atm">ATM</input>
-                    </label>
-                </div>
-                &nbsp;
-            </div>
-        </div>
-    </div> *}
-    <br>
     <button id="btn-update" class="btn btn-success pull-right">
         Continue <span class="glyphicon glyphicon-chevron-right"></span>
     </button>
