@@ -116,7 +116,7 @@ $('#form_edit').submit(function(e) {
 			$('#disc_' + id).children('.perc').children('.num').text(perc);
 			$('#disc_' + id).children('.span').children('.start').text(start);
 			$('#disc_' + id).children('.span').children('.end').text(end);
-			$('#disc_' + id).attr('data-id', data.idcoupon);
+			$('#disc_' + id).data('id', data.idcoupon);
 			$('#disc_' + id).attr('id', "#disc_" + data.idcoupon);
 			$('#edit').modal('hide');
 		}
