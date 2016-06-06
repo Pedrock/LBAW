@@ -51,15 +51,14 @@
 		} else if($action == 'delete') {
 			$ret = deleteCoupon($id);
 		} else
-			return_error('Invalid action');
+			return return_error('Invalid action');
+		echo json_encode($ret);
 	} catch (PDOException $e) {
 		if (strpos($e->getMessage(), 'overlaps') !== false)
 			return_error('Coupon overlaps with another ' . $id);
 		else
 			return_error($e->getMessage());
 	}
-
-	echo json_encode($ret);
 
 	function return_error($error) {
 		http_response_code(422);

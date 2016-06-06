@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('.datetime').datetimepicker({
 		dateFormat: "yy-mm-dd",
-		timeFormat: "hh:mm"
+		timeFormat: "HH:mm"
 	});
 });
 
@@ -71,7 +71,7 @@ $("#btn_del_confirm").click(function(e) {
 		else {
 			$("#edit").modal('hide');
 
-			$('#disc_' + id).slideUp(400, function() { $(this).remove(); });
+			$('.disc_' + id).slideUp(400, function() { $(this).remove(); });
 
 			if($('.coupon_row').length == 0)
 				$('#no_discounts').slideDown();
@@ -108,14 +108,14 @@ $('#form_edit').submit(function(e) {
 			var perc = $('#edit').find('.percentage').val();
 			var start = $('#edit').find('.start').val();
 			var end = $('#edit').find('.end').val();
-
-
-			$('#disc_' + id).children('.code').text(code);
-			$('#disc_' + id).children('.perc').children('.num').text(perc);
-			$('#disc_' + id).children('.span').children('.start').text(start);
-			$('#disc_' + id).children('.span').children('.end').text(end);
-			$('#disc_' + id).data('id', data.idcoupon);
-			$('#disc_' + id).attr('id', "#disc_" + data.idcoupon);
+			
+			$('.disc_' + id).children('.code').text(code);
+			$('.disc_' + id).children('.perc').children('.num').text(perc);
+			$('.disc_' + id).children('.span').children('.start').text(start);
+			$('.disc_' + id).children('.span').children('.end').text(end);
+			$('.disc_' + id).data('id', data.idcoupon);
+			$('.disc_' + id).attr('data-id', data.idcoupon);
+			$('.disc_' + id).removeClass('disc_' + id).addClass('disc_' + data.idcoupon);
 			$('#edit').modal('hide');
 		}
 	}).fail(function(err) {

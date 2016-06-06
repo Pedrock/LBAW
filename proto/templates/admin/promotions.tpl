@@ -83,20 +83,6 @@
 					<div id="no_discounts">
 						No promotions found
 					</div>
-					<!--
-					<a href="javascript:void(0)" class="promotion_row promotion_row_template hidden">
-						<div class="col-xs-5 name"></div>
-						<div class="col-xs-2 perc">
-							<span class="num">{$disc.percentage}</span>%
-							<i class="fa fa-check" aria-hidden="true"></i>
-						</div>
-						<div class="col-xs-5 span">
-							Start: <span class="start"></span><br>
-							End: <span class="end"></span>
-						</div>
-						&nbsp;
-					</a>
-					-->
 				</div>
 			</div>
 			{if $n_pages > 0}
@@ -148,7 +134,7 @@
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
-					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="0" max="100" required>
+					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="1" max="99" required>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="start">Start date</label>
@@ -206,14 +192,14 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<div id="del">
-					<span>Delete?</span>
-					<button type="button" class="pull-right btn btn-danger" id="btn_del_confirm">Confirm</button>
-					<button type="button" class="pull-right btn btn-primary" id="btn_del_cancel">Cancel</button>
+				<div id="del" class="text-right">
+					<span class="pull-left">Delete?</span>
+					<button type="button" class="btn btn-danger" id="btn_del_confirm">Confirm</button>
+					<button type="button" class="btn btn-default" id="btn_del_cancel">Cancel</button>
 				</div><br>
-				<button type="submit" class="btn btn-primary" id="btn_save">Save</button>
+				<button type="submit" class="btn btn-success" id="btn_save">Save</button>
 				<button type="button" class="btn btn-danger" id="btn_del">Delete</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-default" id="btn_cancel" data-dismiss="modal">Cancel</button>
 			</div>
 		</form>
 	</div>

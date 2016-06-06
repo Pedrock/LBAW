@@ -54,7 +54,7 @@
 				</div>
 				<div id="coupons_body">
 					{foreach from=$coupons item=coup name=coup}
-						<a href="javascript:void(0)" id="disc_{$coup.idcoupon}" data-id="{$coup.idcoupon}" class="coupon_row">
+						<a href="javascript:void(0)" data-id="{$coup.idcoupon}" class="coupon_row disc_{$coup.idcoupon}">
 							<div class="col-xs-3 code">{$coup.code}</div>
 							<div class="col-xs-3 perc">
 								<span class="num">{$coup.percentage}</span>%
@@ -182,14 +182,14 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<div id="del">
-					<span>Delete?</span>
-					<button type="button" class="pull-right btn btn-danger" id="btn_del_confirm">Confirm</button>
-					<button type="button" class="pull-right btn btn-primary" id="btn_del_cancel">Cancel</button>
+				<div id="del" class="text-right">
+					<span class="pull-left">Delete?</span>
+					<button type="button" class="btn btn-danger" id="btn_del_confirm">Confirm</button>
+					<button type="button" class="btn btn-default" id="btn_del_cancel">Cancel</button>
 				</div><br>
-				<button type="submit" class="btn btn-primary" id="btn_save">Save</button>
+				<button type="submit" class="btn btn-success" id="btn_save">Save</button>
 				<button type="button" class="btn btn-danger" id="btn_del">Delete</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				<button type="button" class="btn btn-default" id="btn_cancel" data-dismiss="modal">Cancel</button>
 			</div>
 		</form>
 	</div>

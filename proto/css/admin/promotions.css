@@ -59,7 +59,6 @@
 }
 
 #del {
-	text-align: left;
 	display: none;
 	margin-bottom: 10px;
 }
@@ -67,6 +66,7 @@
 #del span {
 	position: relative;
 	top: 7px;
+	font-weight: bold;
 }
 
 #btn_del_cancel {
@@ -93,5 +93,9 @@
 	margin-top: 10px;
 }
 #accordion{
+	border-radius: 0;
+}
+
+#btn_del_confirm, #btn_del_cancel, #btn_save, #btn_del, #btn_cancel{
 	border-radius: 0;
 }

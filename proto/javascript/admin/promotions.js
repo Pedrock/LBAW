@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	$('.datetime').datetimepicker({
 		dateFormat: "yy-mm-dd",
-		timeFormat: "hh:mm"
+		timeFormat: "HH:mm"
 	});
 });
 
