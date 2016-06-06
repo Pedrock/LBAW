@@ -291,3 +291,25 @@ h1 {
 .sort_div select {
 	border-radius: 0;
 }
+
+
+.product h4>a {
+	position: relative;
+	height: 2em; /* exactly three lines */
+	overflow:hidden;
+	display: block;
+}
+.product h4>a:after {
+	content: "";
+	text-align: right;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	width: 30%;
+	height: 1em;
+	background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.product .caption {
+	padding: 0 9px 20px;
+}

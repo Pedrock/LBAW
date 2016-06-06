@@ -5,179 +5,201 @@
    ========================================================================== */
 
 
-   .navbar {
-   	border-radius: 0;
-   	margin-bottom: 0;
-   }
+.navbar {
+    border-radius: 0;
+    margin-bottom: 0;
+}
 
-   body {
-   	padding-top: 0px;
-   	background-color: #fafafa;
-   }
+body {
+    padding-top: 0px;
+    background-color: #fafafa;
+}
 
-   .nav-2nd-row {
-   	padding-left: 0px;
-   	padding-bottom: 10px;
-   }
+.nav-2nd-row {
+    padding-left: 0px;
+    padding-bottom: 10px;
+}
 
-   .carousel-inner {
-   	overflow: hidden;
-   }
+.carousel-inner {
+    overflow: hidden;
+}
 
-   .carousel-inner img {
-   	width: 100%;
-   	height: 300px;
-   }
+.carousel-inner img {
+    width: 100%;
+    height: 300px;
+}
 
-   #categories, #main-title {
-   	font-size: large;
-   	margin-bottom: 15px;
-   	border-bottom-style: groove;
-   	padding-bottom: 10px;
-   	padding-left: 15px;
-   }
+#categories, #main-title {
+    font-size: large;
+    margin-bottom: 15px;
+    border-bottom-style: groove;
+    padding-bottom: 10px;
+    padding-left: 15px;
+}
 
-   .caption .price {
-      font-weight: bold;
-      font-size: 1.3em;
-   }
+.caption .price {
+    font-weight: bold;
+    font-size: 1.3em;
+    position: relative;
+    bottom: -15px;
+}
 
-   .caption > h4
-   {
-      line-height: 18px;
-      height: 18px;
-   }
+.caption > h4
+{
+    line-height: 18px;
+    height: 18px;
+}
 
-   .button-product{
-      font-size: 1.4em;
-   	padding: 6px;
-      text-decoration: none;
-      position: relative;
-      bottom: 7px;
-   }
+.button-product{
+    font-size: 1.4em;
+    text-decoration: none;
+    position: relative;
+    bottom: -15px;
+}
 
-   .button-product .plus {
-      font-size: 0.65em;
-      display: inline;
-      position: relative;
-      bottom: 5px;
-   }
+.button-product .plus {
+    font-size: 0.65em;
+    display: inline;
+    position: relative;
+    bottom: 5px;
+}
 
-   .button-product:hover {
-      text-decoration: none;
-   }
+.button-product:hover {
+    text-decoration: none;
+}
 
-   .button-product, #main-menu a{
-   	border-radius: 0px;
-   }
+.button-product, #main-menu a{
+    border-radius: 0px;
+}
 
-   #main-menu{
-   	margin-top: 10px;
-      background-color: initial;
-      margin-bottom: 20px;
-   }
+#main-menu{
+    margin-top: 10px;
+    background-color: initial;
+    margin-bottom: 20px;
+}
 
-   #main-menu > a {
-   	background-color: initial;
-      border-left: none;
-      border-right: none;
-   }
+#main-menu > a {
+    background-color: initial;
+    border-left: none;
+    border-right: none;
+}
 
-   #main-menu > a:hover {
-      background-color: #e5e5e5;
-   }
+#main-menu > a:hover {
+    background-color: #e5e5e5;
+}
 
-   #main-menu > a:active {
-      background-color: #ccc;
-   }
+#main-menu > a:active {
+    background-color: #ccc;
+}
 
-   a#deals{
-   	background-color: rgb(181, 212, 207);
-   	margin-bottom: 2px;
-   }
+a#deals{
+    background-color: rgb(181, 212, 207);
+    margin-bottom: 2px;
+}
 
-   a#deals:hover {
-      background-color: #c4e8e2;
-   }
+a#deals:hover {
+    background-color: #c4e8e2;
+}
 
-   a#deals:active {
-      background-color: #93b5b0;
-   }
+a#deals:active {
+    background-color: #93b5b0;
+}
 
-   #wrapper{
-   	padding-bottom: 20px;
-      padding-top: 20px;
-   }
+#wrapper{
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
 
-   #inside-footer{
-   	padding: 15px;
-   }
+#inside-footer{
+    padding: 15px;
+}
 
-   #inside-footer a{
-   	padding-right: 20px;
-   	text-decoration: none;
-   	color: #9d9d9d;
-   }
+#inside-footer a{
+    padding-right: 20px;
+    text-decoration: none;
+    color: #9d9d9d;
+}
 
-   .navbar-form .input-group {
+.navbar-form .input-group {
     display: table;
-	}
+}
 
-	.navbar-form .input-group .input-group-addon, .navbar-form .input-group .input-group-btn {
+.navbar-form .input-group .input-group-addon, .navbar-form .input-group .input-group-btn {
     white-space: nowrap;
     width: 5%;
-	}
-	.navbar-form .input-group .form-control {
+}
+.navbar-form .input-group .form-control {
     width: 100%;
-	}
+}
 
-   /* Sticky footer */
-   
-   html {
-      position: relative;
-      min-height: 100%
-   }
-   
-   footer {
-      border-top-style: ridge;
-      background-color: #1a1a1a;
+/* Sticky footer */
 
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      /* Set the fixed height of the footer here */
-      height: 53px;
-   }
-   
-   body {
-      /* Margin bottom by footer height */
-      margin-bottom: 50px;
-   }
+html {
+    position: relative;
+    min-height: 100%
+}
 
-   .product-title{
-      color: #337ab7;
-   }
+footer {
+    border-top-style: ridge;
+    background-color: #1a1a1a;
 
-   #content-wrapper .pagination {
-      margin-top: 3px;
-   }
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 53px;
+}
 
-   .pagination.pagination-sm > li > a,
-   .thumbnail, 
-   #searchBar *, 
-   .well,
-   .form-group > select,
-   .form-control.qty,
-   .btn
-   {
-      border-radius: 0;
-   }
+body {
+    /* Margin bottom by footer height */
+    margin-bottom: 50px;
+}
 
-   #no-pagination
-   {
-      height: 60px;
-   }
+.product-title{
+    color: #337ab7;
+}
 
-   .text-center>.pagination>.disabled>a {
-      cursor: default;
-   }
+#content-wrapper .pagination {
+    margin-top: 3px;
+}
+
+.pagination.pagination-sm > li > a,
+.thumbnail,
+#searchBar *,
+.well,
+.form-group > select,
+.form-control.qty,
+.btn
+{
+    border-radius: 0;
+}
+
+#no-pagination
+{
+    height: 60px;
+}
+
+.text-center>.pagination>.disabled>a {
+    cursor: default;
+}
+
+.caption .product-name {
+    position: relative;
+    height: 2em; /* exactly three lines */
+    overflow:hidden;
+    display: block;
+}
+.caption .product-name:after {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: 1em;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
+.product .caption {
+    padding: 0 9px 20px;
+}
