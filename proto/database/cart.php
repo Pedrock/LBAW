@@ -181,3 +181,11 @@ function getOrderCosts($order_id)
     $stmt->execute(array($order_id));
     return $stmt->fetch();
 }
+
+function updateCartPrices($user_id)
+{
+    global $conn;
+    $stmt = $conn->prepare("UPDATE ProductCart SET price = get_product_price(idProduct) WHERE idUser = ?");
+    $stmt->execute(array($user_id));
+    return $stmt->fetch();
+}

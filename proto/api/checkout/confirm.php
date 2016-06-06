@@ -77,9 +77,20 @@ if ($shipping_address == false || $billing_address == false)
 
 $nif = $_POST['nif'];
 
-$order_id = makeOrder($idUser, $billing_address_id, $shipping_address_id, $nif, $_SESSION['coupon']);
-$products = getOrderProducts($order_id);
-$costs = getOrderCosts($order_id);
+try {
+    $order_id = makeOrder($idUser, $billing_address_id, $shipping_address_id, $nif, $_SESSION['coupon']);
+    $products = getOrderProducts($order_id);
+    $costs = getOrderCosts($order_id);
+}
+catch (Exception $ex)
+{
+    http_response_code(422);
+    if ($ex->getCode() == "P0001"){
+        $error = substr($ex->getMessage(), strpos($ex->getMessage(), "ERROR: ") + 7);
+        echo json_encode(array('error' => $error));
+    }
+    die();
+}
 
 // Add Shipping Address
 $shippingAddress = new ShippingAddress();
@@ -170,6 +181,5 @@ try {
     echo json_encode($link);
 } catch (Exception $ex) {
     http_response_code(400);
-    echo parseApiError($ex->getData());
     exit(1);
 }

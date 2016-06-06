@@ -23,6 +23,15 @@ $('.qty_price input').on('change', function() {
     updateQuantity(product);
 });
 
+$('#prices-changed button').click(function () {
+    $.ajax({
+        type: "POST",
+        url: base_url + "api/cart/accept.php"
+    }).complete(function() {
+        location.reload();
+    });
+});
+
 function updateQuantity(product)
 {
     var product_row = $('.product-cart[data-id="'+product+'"]');
@@ -70,7 +79,7 @@ function updateTotal()
 }
 
 $('#btn-checkout').click(function() {
-    if ($('.product-cart').length && !$('.low-stock').length && $('#shipping').text() != 'Too heavy')
+    if ($('.product-cart').length && !$('.low-stock').length && $('#shipping').text() != 'Too heavy' && !$('#prices-changed').length)
         window.location = "checkout/checkout.php";
 });
 

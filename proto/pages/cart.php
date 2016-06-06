@@ -3,6 +3,8 @@ include_once('../config/init.php');
 include_once($BASE_DIR .'lib/cart_cookie.php');
 include_once($BASE_DIR .'database/cart.php');
 
+$prices_changed = false;
+
 if (empty($_SESSION['user']))
 {
     if (empty($_COOKIE['cart']))
@@ -22,6 +24,13 @@ else {
         $shipping = getUserCartShipping($_SESSION['user']);
     }
     catch (Exception $e) {$shipping = 'Too heavy';}
+    foreach ($cart as $item) {
+        if ($item['price'] != $item['cart_price'])
+        {
+            $prices_changed = true;
+            break;
+        }
+    }
 }
 
 if (isset($_GET['coupon']))
@@ -51,6 +60,7 @@ $smarty->assign('cart', $cart);
 $smarty->assign('coupon', $coupon);
 $smarty->assign('discount', $discount);
 $smarty->assign('shipping', $shipping);
+$smarty->assign('prices_changed', $prices_changed);
 $smarty->assign('invalid_coupon', $invalid_coupon);
 $smarty->display('products/cart.tpl');
 ?>
