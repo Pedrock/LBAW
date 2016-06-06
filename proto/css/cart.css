@@ -106,3 +106,21 @@
 .row.text-right :nth-child(n+3){
    margin-top: 10px;
 }
+
+#prices-changed {
+   box-sizing: content-box;
+   min-height: 32px;
+   border-radius: 0;
+   position: relative;
+}
+
+#prices-changed > div {
+   margin-top: 6px;
+   padding-right: 46px;
+}
+
+#prices-changed button {
+   position: absolute;
+   right: 5px;
+   bottom: 5px;
+}
