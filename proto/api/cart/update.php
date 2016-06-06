@@ -30,7 +30,6 @@ if (empty($_SESSION["user"]))
             }
         }
         $cookie = implode(";",$products);
-        setcookie('cart', $cookie, 2147483647, $BASE_URL);
         try {
             $shipping = getShippingFromJson(get_cart_json($cookie));
         }
@@ -46,6 +45,13 @@ else
     catch (Exception $e) {$shipping = 'Too heavy';}
 }
 
-echo json_encode(array('enough_stock' => enoughStock($_POST['product'], $_POST['quantity']), 'shipping' => $shipping));
+try {
+    echo json_encode(array('enough_stock' => enoughStock($_POST['product'], $_POST['quantity']), 'shipping' => $shipping));
+    if (isset($cookie))
+        setcookie('cart', $cookie, 2147483647, $BASE_URL);
+}
+catch (Exception $e) {
+    http_response_code(400);
+}
 
 ?>

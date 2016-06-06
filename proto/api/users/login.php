@@ -23,7 +23,9 @@ if (!$_POST['email'] || !$_POST['password'] || !$_POST['remember']) {
       $_SESSION['username'] = $user['username'];
       $_SESSION['admin'] = $user['isadmin'];
 
-      cart_cookie_to_db($user['iduser']);
+      try {
+        cart_cookie_to_db($user['iduser']);
+      } catch (Exception $e) { }
 
       if (json_decode($_POST['remember']) == true)
       {
