@@ -16,8 +16,6 @@ if(create)
 $("#new_coupon").click(function(e) {
 	e.preventDefault();
 	$("#new").modal('show');
-	//else
-	//	window.location = "product/list.php?coupon";
 });
 
 $("#coupons_body").on('click', '.coupon_row', function(e) {
