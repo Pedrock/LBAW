@@ -124,7 +124,7 @@
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
-					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="0" max="100" required>
+					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="1" max="99" required>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="start">Start date</label>
@@ -165,7 +165,7 @@
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
-					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="0" max="100" required>
+					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="1" max="99" required>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="start">Start date</label>

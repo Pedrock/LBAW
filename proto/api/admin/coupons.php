@@ -39,7 +39,7 @@
 		if(strtotime($start) > strtotime($end))
 			return_error('End date must be after start date');
 
-		if(!is_numeric($percentage) || $percentage <= 0 | $percentage >= 100)
+		if(!is_numeric($percentage) || $percentage <= 0 || $percentage >= 100)
 			return_error('Invalid percentage');
 	}
 
