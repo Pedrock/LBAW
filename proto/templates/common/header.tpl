@@ -79,7 +79,6 @@
           <span class="title">Categories</span>
         </div>
         <div id="main-menu">
-          <a href="#" id="deals" class="list-group-item">Deals</a>
           {foreach from=$categories item=category}
           <a href="{$BASE_URL}pages/list.php?cat={$category.id}{$lnk_query}{$lnk_order}" class="list-group-item">{$category.name}</a>
           {/foreach}
