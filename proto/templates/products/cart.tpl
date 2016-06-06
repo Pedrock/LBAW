@@ -21,7 +21,7 @@
         <div class="row product-cart" data-id="{$product.id}" data-price="{$product.price}" data-quantity="{$product.quantity}">
             <div class="col-xs-12 col-sm-8">
                 <a href="product.php?id={$product.id}" class="link-p">
-                    <img class="product_img" src="{$BASE_URL}images/products/{$product.photo}" alt="">
+                    <img class="product_img"{if $product.photo} src="{$BASE_URL}images/products/thumb_{$product.photo}"{else} src="{$BASE_URL}images/assets/default_product.png"{/if} alt="">
                 </a>
                 <div class="product_info">
                     <a href="product.php?id={$product.id}"><span class="product_title">{$product.name}</span></a>
