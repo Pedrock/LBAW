@@ -69,7 +69,7 @@
   	global $conn;
   	$stmt = $conn->prepare(
   		"INSERT INTO REVIEW(idProduct,idUser,score,body) VALUES(?, ?, ?, ?) RETURNING to_char(review_date,'YYYY-MM-DD HH24:MI') AS review_date;");
-  	$stmt->execute(array($idProduct, $idUser, $score, $body));
+  	$stmt->execute(array($idProduct, $idUser, $score, htmlspecialchars($body)));
   	return $stmt->fetch()['review_date'];
   }
 

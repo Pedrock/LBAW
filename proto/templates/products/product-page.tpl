@@ -142,7 +142,7 @@
 				{/for}
 				<span class="info-review">{$review.reviewer}</span>
 				<span class="info-review pull-right">{$review.review_date}</span>
-				<p>{$review.body|escape}</p>
+				<p>{$review.body}</p>
 			</div>
 		</div>
 		{foreachelse}

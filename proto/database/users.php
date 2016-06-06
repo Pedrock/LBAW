@@ -265,7 +265,8 @@
   {
     global $conn;
     $stmt = $conn->prepare("SELECT insert_address(?, ?, ?, ?, ?, ?, ?);");
-    $stmt->execute(array($idUser, $name, $address1, $address2, $phoneNumber, $zip1, $zip2));
+    $stmt->execute(array($idUser, htmlspecialchars($name), htmlspecialchars($address1),
+                      htmlspecialchars($address2), htmlspecialchars($phoneNumber), $zip1, $zip2));
     return $stmt->fetch()['insert_address'];
   }
 
