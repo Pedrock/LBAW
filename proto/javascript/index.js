@@ -4,12 +4,16 @@ function changePage(page)
 	for (var i = 0; i < limit; i++)
 	{
 		var product = products[(page-1)*limit+i];
+		if (product.photo)
+			var img = '<img src="../images/products/thumb_'+product.photo+'" alt="">';
+		else 
+			var img = '<img src="../images/assets/default_product.png" alt="">';
 		$("#products").append(
-			'<div class="product col-lg-3 col-md-4 col-sm-6 text-center"> \
+			'<div class="product col-lg-3 col-sm-6 text-center"> \
 			<div class="thumbnail" data-id="'+product.id+'"> \
-			<a href="product.php?id='+product.id+'" class="link-p"> \
-				<img src="../images/products/thumb_'+product.photo+'" alt=""> \
-				</a> \
+			<a href="product.php?id='+product.id+'" class="link-p">'
+				 + img +
+				'</a> \
 				<div class="caption"> \
 					<h4><a class="product-name" href="product.php?id='+product.id+'">'+product.name+'</a></h4> &nbsp; \
 						<div class="pull-left price">'+product.price+' €</div> \
