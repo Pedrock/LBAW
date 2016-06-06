@@ -107,10 +107,10 @@
 }
 
 #edit_photos{
-	width: 132px;
 	margin-right: 3px;
 }
 
 #edit_photos, #edit_metadata{
+	min-width: 132px;
 	margin-bottom: 3px;
 }
