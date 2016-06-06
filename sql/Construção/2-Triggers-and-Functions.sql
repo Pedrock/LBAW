@@ -172,7 +172,7 @@ CREATE TRIGGER DiscountCheck BEFORE INSERT OR UPDATE
 -- Check if coupon doesn’t overlap with existing one and if who creator the coupon is admin
 CREATE OR REPLACE FUNCTION check_coupon() RETURNS TRIGGER AS $BODY$
 BEGIN
- IF EXISTS (SELECT * FROM Coupon WHERE code = NEW.code AND startDate <= NEW.endDate AND NEW.startDate <= endDate AND isDeleted = FALSE) THEN
+ IF EXISTS (SELECT * FROM Coupon WHERE code = NEW.code AND startDate <= NEW.endDate AND NEW.startDate <= endDate AND idCoupon <> NEW.idCoupon AND isDeleted=false) THEN
   RAISE EXCEPTION 'Coupon % overlaps with existing one', NEW.idCoupon;
  ELSIF NOT EXISTS (SELECT * FROM Users WHERE idUser = NEW.idUser AND isAdmin) THEN
   RAISE EXCEPTION 'Issuer % is not an admin', NEW.idUser;

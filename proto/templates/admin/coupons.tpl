@@ -1,5 +1,5 @@
-{assign "title" "Promotions"}
-{assign "css" ['admin/promotions.css', 'jquery-ui/jquery-ui.css', 'jquery-ui-timepicker-addon.min.css']}
+{assign "title" "Coupons"}
+{assign "css" ['admin/coupons.css', 'jquery-ui/jquery-ui.css', 'jquery-ui-timepicker-addon.min.css']}
 {include file='admin/common/header.tpl'}
 
 {if $query}{assign var="lnk_query" value="&search={$query}"}{/if}
@@ -9,26 +9,14 @@
 <div class="row">
 	<div class="col-lg-12">
 		<div class="content">
-			<h1 id="title">Promotions</h1>
-			<a href="#" class="pull-right" id="new_promo">
-				<span class="glyphicon glyphicon-plus"></span> New promotion
+			<h1 id="title">Coupons</h1>
+			<a href="#" class="pull-right" id="new_coupon">
+				<span class="glyphicon glyphicon-plus"></span> New coupon
 			</a>
 			<span class="clearfix"></span>
-			<form id="searchBar" role="search" method="get">
-				<div class="input-group">
-					{if $active}
-						<input type="hidden" value="" name="active">
-					{/if}
-					<input type="text" class="form-control" name="search" placeholder="Search product id..."{if $query} value="{$query}"{/if}>
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
-						<a href="promotions.php" class="btn btn-default" type="button"><span class="glyphicon glyphicon-remove"></span></a>
-					</span>
-				</div>
-			</form>
 			<div class="sort_div">
 				<label class="checkbox-inline">
-				<input type="checkbox" id="active_only" {if $active}checked{/if}> Show only active promotions
+				<input type="checkbox" id="active_only" {if $active}checked{/if}> Show only active coupons
 				</label>
 			</div>
 			<br>
@@ -58,30 +46,32 @@
 			<div class="panel panel-primary" id="accordion">
 				<div class="panel-heading">
 					<div class="top_row row">
-						<div class="col-xs-5">Product</div>
-						<div class="col-xs-2">Percentage</div>
-						<div class="col-xs-5">Timespan</div>
+						<div class="col-xs-3">Code</div>
+						<div class="col-xs-3">Percentage</div>
+						<div class="col-xs-3">Timespan</div>
+						<div class="col-xs-3">Issuer</div>
 					</div>
 				</div>
-				<div id="promotions_body">
-					{foreach from=$discounts item=disc name=disc}
-						<a href="javascript:void(0)" id="disc_{$disc.iddiscount}" data-id="{$disc.iddiscount}" class="promotion_row">
-							<div class="col-xs-5 name">#{$disc.idproduct}: {$disc.name}</div>
-							<div class="col-xs-2 perc">
-								<span class="num">{$disc.percentage}</span>%
-								{if $disc.active}
+				<div id="coupons_body">
+					{foreach from=$coupons item=coup name=coup}
+						<a href="javascript:void(0)" data-id="{$coup.idcoupon}" class="coupon_row disc_{$coup.idcoupon}">
+							<div class="col-xs-3 code">{$coup.code}</div>
+							<div class="col-xs-3 perc">
+								<span class="num">{$coup.percentage}</span>%
+								{if $coup.active}
 									<i class="fa fa-check" aria-hidden="true"></i>
 								{/if}
 							</div>
-							<div class="col-xs-5 span">
-								Start: <span class="start">{$disc.startdate|date_format:"%Y-%m-%d %H:%M"}</span><br>
-								End: <span class="end">{$disc.enddate|date_format:"%Y-%m-%d %H:%M"}</span>
+							<div class="col-xs-3 span">
+								Start: <span class="start">{$coup.startdate|date_format:"%Y-%m-%d %H:%M"}</span><br>
+								End: <span class="end">{$coup.enddate|date_format:"%Y-%m-%d %H:%M"}</span>
 							</div>
+							<div class="col-xs-3 issuer">{$coup.issuer}</div>
 							<span class="clearfix"></span>
 						</a>
 					{/foreach}
 					<div id="no_discounts">
-						No promotions found
+						No coupons found
 					</div>
 				</div>
 			</div>
@@ -109,7 +99,7 @@
 				</div>
 			{/if}
 			<div class="pull-right">
-				<i class="fa fa-check" aria-hidden="true"></i> Active promotion
+				<i class="fa fa-check" aria-hidden="true"></i> Active coupon
 			</div>
 			&nbsp;
 		</div>
@@ -125,12 +115,12 @@
 			<input type="hidden" name="id" value="{$query}">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">New promotion</h4>
+				<h4 class="modal-title">New Coupon</h4>
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Product</label>
-					<input type="text" class="insert-number form-control product" name="product" value="#{$query}" disabled>
+					<label for="code">Code</label>
+					<input type="text" class="insert-number form-control code" name="code" value="">
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
@@ -163,19 +153,19 @@
 	<div class="modal-dialog modal-sm">
 		<form id="form_edit" class="modal-content" action="javascript:void(0);">
 			<input type="hidden" name="action" value="edit">
-			<input class="promo_id" type="hidden" name="id">
+			<input class="coupon_id" type="hidden" name="id">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Edit promotion</h4>
+				<h4 class="modal-title">Edit coupons</h4>
 			</div>
 			<div class="modal-body">
 				<fieldset class="form-group">
-					<label for="product">Product</label>
-					<input type="text" class="insert-number form-control product" name="product" disabled>
+					<label for="code">Code</label>
+					<input type="text" class="insert-number form-control code" name="code">
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="percentage">Percentage</label>
-					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="0" max="100" required>
+					<input type="number" class="insert-number form-control percentage" name="percentage" placeholder="e.g. 50%" min="1" max="99" required>
 				</fieldset>
 				<fieldset class="form-group">
 					<label for="start">Start date</label>
@@ -208,5 +198,5 @@
 	var query = '{$query}';
 	var create = {$create|json_encode};
 </script>
-{assign var=js value=['../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js', 'promotions.js']}
+{assign var=js value=['../vendor/jquery-ui.min.js', '../vendor/jquery-ui-timepicker-addon.min.js', 'coupons.js']}
 {include file='admin/common/footer.tpl'}

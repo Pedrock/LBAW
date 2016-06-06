@@ -7,34 +7,32 @@ $(document).ready(function(){
 
 hideError();
 
-if($('.promotion_row').length > 0)
+if($('.coupon_row').length > 0)
 	$('#no_discounts').hide();
 
 if(create)
 	$("#new").modal('show');
 
-$("#new_promo").click(function(e) {
+$("#new_coupon").click(function(e) {
 	e.preventDefault();
-	if(query != '')
-		$("#new").modal('show');
-	else
-		window.location = "product/list.php?promotion";
+	$("#new").modal('show');
 });
 
-$("#promotions_body").on('click', '.promotion_row', function(e) {
+$("#coupons_body").on('click', '.coupon_row', function(e) {
 	e.preventDefault();
 	e.stopPropagation();
 	hideError();
 	id = $(this).data('id');
-	var name = $(this).children('.name').text();
+	var code = $(this).children('.code').text();
 	var perc = $(this).children('.perc').children('.num').text();
 	var start = $(this).children('.span').children('.start').text();
 	var end = $(this).children('.span').children('.end').text();
-	$('#edit').find('.product').val(name);
+	$('#edit').find('.code').val(code);
 	$('#edit').find('.percentage').val(perc);
 	$('#edit').find('.start').val(start);
 	$('#edit').find('.end').val(end);
-	$('#edit').find('.promo_id').val(id);
+	console.log(id);
+	$('#edit').find('.coupon_id').val(id);
 	$("#edit").modal('show');
 	$('#del').hide();
 });
@@ -45,13 +43,11 @@ $("#btn_del").click(function(e) {
 });
 
 $('input#active_only').on('change', function() {
-	if(query)
-		query = "search=" + query;
 
 	if ($('input#active_only').prop('checked'))
-		window.location = "promotions.php?" + query + "&active";
+		window.location = "coupons.php?&active";
 	else
-		window.location = "promotions.php?" + query;
+		window.location = "coupons.php?";
 });
 
 $("#btn_del_cancel").click(function(e) {
@@ -64,19 +60,20 @@ $("#btn_del_confirm").click(function(e) {
 	hideError();
 
 	$.ajax({
-		url: "../../api/admin/promotions.php",
+		url: "../../api/admin/coupons.php",
 		type: "POST",
 		data: {action: 'delete', id: id},
 		dataType: 'json'
 	}).done(function(data) {
+		console.log(data);
 		if(data.error)
 			showError(data['error']);
 		else {
 			$("#edit").modal('hide');
 
-			$('#disc_' + id).slideUp(400, function() { $(this).remove(); });
+			$('.disc_' + id).slideUp(400, function() { $(this).remove(); });
 
-			if($('.promotion_row').length == 0)
+			if($('.coupon_row').length == 0)
 				$('#no_discounts').slideDown();
 		}
 	}).fail(function(err) {
@@ -97,7 +94,7 @@ $('#form_edit').submit(function(e) {
 	var fd = new FormData(this);
 
 	$.ajax({
-		url: "../../api/admin/promotions.php",
+		url: "../../api/admin/coupons.php",
 		type: "POST",
 		data:fd,
 		contentType: false,
@@ -107,14 +104,18 @@ $('#form_edit').submit(function(e) {
 		if(data.error)
 			showError(data['error']);
 		else {
+			var code = $('#edit').find('.code').val();
 			var perc = $('#edit').find('.percentage').val();
 			var start = $('#edit').find('.start').val();
 			var end = $('#edit').find('.end').val();
-
-			$('#disc_' + id).children('.perc').children('.num').text(perc);
-			$('#disc_' + id).children('.span').children('.start').text(start);
-			$('#disc_' + id).children('.span').children('.end').text(end);
-
+			
+			$('.disc_' + id).children('.code').text(code);
+			$('.disc_' + id).children('.perc').children('.num').text(perc);
+			$('.disc_' + id).children('.span').children('.start').text(start);
+			$('.disc_' + id).children('.span').children('.end').text(end);
+			$('.disc_' + id).data('id', data.idcoupon);
+			$('.disc_' + id).attr('data-id', data.idcoupon);
+			$('.disc_' + id).removeClass('disc_' + id).addClass('disc_' + data.idcoupon);
 			$('#edit').modal('hide');
 		}
 	}).fail(function(err) {
@@ -135,7 +136,7 @@ $('#form_create').submit(function(e) {
 	var fd = new FormData(this);
 
 	$.ajax({
-		url: "../../api/admin/promotions.php",
+		url: "../../api/admin/coupons.php",
 		type: "POST",
 		data:fd,
 		contentType: false,
@@ -145,32 +146,7 @@ $('#form_create').submit(function(e) {
 		if(data.error)
 			showError(data['error']);
 		else {
-			window.location = "?search=" + fd.get('id');
-			/*
-			var perc = $('#edit').find('.percentage').val();
-			var start = $('#edit').find('.start').val();
-			var end = $('#edit').find('.end').val();
-
-			var elem = $('.promotion_row_template').clone();
-
-			elem.removeClass('hidden');
-			elem.removeClass('promotion_row_template');
-
-			var perc = $('#new').find('.percentage').val();
-			var start = $('#new').find('.start').val();
-			var end = $('#new').find('.end').val();
-
-			console.log(perc + " " + start + " " + end);
-
-			elem.data('id', data['success']);
-			elem.attr('id', "disc_" + data['success']);
-			elem.children('.perc').children('.num').text(perc);
-			elem.children('.span').children('.start').text(start);
-			elem.children('.span').children('.end').text(end);
-
-			$('#promotions_body').append(elem);
-
-			$('#new').modal('hide');*/
+			window.location.reload();
 		}
 	}).fail(function(err) {
 		console.log(err);
