@@ -58,7 +58,7 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="shipping_zip">ZIP</label>
-                                <input required type="text" class="form-control" id="shipping_zip" name="shipping_zip" >
+                                <input required type="text" class="form-control zipcode" id="shipping_zip" name="shipping_zip" >
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_city">City</label>
@@ -66,7 +66,7 @@
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="shipping_phone">Phone number</label>
-                                <input required type="text" class="form-control" id="shipping_phone" name="shipping_phone">
+                                <input required type="text" class="form-control phone" id="shipping_phone" name="shipping_phone">
                             </fieldset>
                             {*<fieldset class="form-group">
                                 <label class="checkbox-inline">
@@ -149,7 +149,7 @@
                         <div class="row">
                             <fieldset class="form-group">
                                 <label for="billing_zip">ZIP</label>
-                                <input required type="text" class="form-control" id="billing_zip" name="billing_zip">
+                                <input required type="text" class="form-control zipcode" id="billing_zip" name="billing_zip">
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_city">City</label>
@@ -157,7 +157,7 @@
                             </fieldset>
                             <fieldset class="form-group">
                                 <label for="billing_phone">Phone number</label>
-                                <input required type="text" class="form-control" id="billing_phone" name="billing_phone">
+                                <input required type="text" class="form-control phone" id="billing_phone" name="billing_phone">
                             </fieldset>
                            {* <fieldset class="form-group">
                                 <label class="checkbox-inline">
