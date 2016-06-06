@@ -166,7 +166,7 @@ function getCouponDiscount($coupon_code)
     $stmt = $conn->prepare(
         "SELECT percentage AS discount
          FROM Coupon
-         WHERE code = ? AND now() BETWEEN startdate AND enddate");
+         WHERE code = ? AND isDeleted = FALSE AND now() BETWEEN startdate AND enddate");
     $stmt->execute(array($coupon_code));
     return $stmt->fetch();
 }
