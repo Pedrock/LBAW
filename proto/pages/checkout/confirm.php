@@ -1,14 +1,15 @@
 <?php
 include_once('../../config/init.php');
 include_once($BASE_DIR .'lib/user_check.php');
+include_once($BASE_DIR .'lib/nif.php');
 include_once($BASE_DIR .'database/users.php');
 include_once($BASE_DIR .'database/cart.php');
 
-/*if (!validNIF($_POST['nif']))
+if (empty($_POST['nif']) || !validNIF($_POST['nif']))
 {
-    header('Location: checkout.php'); // TODO
+    header('Location: checkout.php');
     die();
-}*/
+}
 
 if (!empty($_POST['ship_addr']))
     $shipping_address = getUserAddress($_SESSION['user'], $_POST['ship_addr']);

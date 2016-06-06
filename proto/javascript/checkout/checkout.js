@@ -53,17 +53,38 @@ function payment() {
         }
     }
     $('#payment-form').append('<input type="hidden" name="nif" value="'+$('#nif').val()+'">');
+
+    if (!validNIF($('#nif').val())) {
+        input_error($('#nif'),'Invalid NIF');
+        validates = false;
+    }
     /*if ($('#payment-form [name="payment_method"]:checked').length == 0)
     {
         tooltip_error($('#payment_methods > .row > .row'),'Payment method required');
         validates = false;
     }*/
+
+
     return validates && validate_addresses();
 }
 
-$('#shipping_zip, #billing_zip').on('input', function() {
+$('#shipping_zip, #billing_zip, #nif').on('input', function() {
     input_valid($(this));
 });
+
+function validNIF(nif){
+    if(!$.isNumeric(nif) || nif.length != 9)
+        return false;
+    var nifSplit = nif.split("");
+    var checkDigit = 0;
+    for(var i = 0; i < 8; i++){
+        checkDigit += nifSplit[i]*(10-i-1);
+    }
+    checkDigit = 11-(checkDigit % 11);
+    if(checkDigit >= 10)
+        checkDigit=0;
+    return (checkDigit == nifSplit[8]);
+}
 
 function validate_addresses()
 {
@@ -121,7 +142,7 @@ $('#shipping_zip, #billing_zip').on('change focusout', function() {
 function input_error(element, error)
 {
     tooltip_error(element, error);
-    element.parent().addClass("has-feedback has-error");
+    element.parent().addClass("has-error");
 }
 
 function tooltip_error(element, error)
