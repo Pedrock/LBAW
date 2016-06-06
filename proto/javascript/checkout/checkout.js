@@ -60,12 +60,6 @@ function payment() {
         input_error($('#nif'),'Invalid NIF');
         validates = false;
     }
-    /*if ($('#payment-form [name="payment_method"]:checked').length == 0)
-    {
-        tooltip_error($('#payment_methods > .row > .row'),'Payment method required');
-        validates = false;
-    }*/
-
 
     return validates && validate_addresses();
 }
@@ -141,9 +135,15 @@ function updateCity() {
             data: {zip1: codes[1], zip2: codes[2]},
             dataType: "json"
         }).done(function (data) {
-            input.closest('div').find('.city').val(data['city']);
-            input.attr('data-zip', zip_code);
-            input_valid(input);
+            if (data) {
+                input.closest('div').find('.city').val(data['city']);
+                input.attr('data-zip', zip_code);
+                input_valid(input);
+            }
+            else {
+                input_error(input, 'Unknown zip code');
+                input.closest('div').find('.city').val('');
+            }
         }).fail(function () {
             input_error(input, 'Unknown zip code');
         });

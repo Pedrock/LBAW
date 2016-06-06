@@ -94,3 +94,7 @@
 .title {
 	font-size: large;
 }
+
+#payment-form {
+	padding-top: 20px;
+}
