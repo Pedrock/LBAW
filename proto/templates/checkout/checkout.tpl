@@ -88,8 +88,10 @@
         </div>
     </div>
     <form class="form-inline" role="form" action="javascript:void(0);">
-        <label for="name">NIF</label>
-        <input type="text" class="form-control" id="nif" value="{$nif}">
+        <fieldset class="form-group">
+            <label for="name">NIF</label>
+            <input type="text" class="form-control" id="nif" value="{$nif}">
+        </fieldset>
         &nbsp;&nbsp;
         <label class="checkbox-inline">
             <input checked="checked" type="checkbox" name="same" id="same"> Same address as shipping
