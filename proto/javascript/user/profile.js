@@ -43,7 +43,10 @@ function validate_address(element)
     var validates = true;
     element.find('input[name]:not([name="addr2"])').each( function() {
         if ($(this).attr('data-valid') === 'false')
+        {
             validates = false;
+            input_error($(this), "Invalid ZIP");
+        }
         else if ($(this).val() == "")
         {
             validates = false;
@@ -51,6 +54,7 @@ function validate_address(element)
         }
         else if ($(this).attr('name') == 'phone' && !$(this).val().match(/^(\+(?:[0-9] ?))?[0-9]{6,14}$/))
         {
+            validates = false;
             input_error($(this), "Invalid phone number");
         }
         else

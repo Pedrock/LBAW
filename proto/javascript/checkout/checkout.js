@@ -1,5 +1,7 @@
 sameChecked();
 
+$('.zipcode:not([value=""])').filter(function(){ return this.value; }).each(updateCity);
+
 $("#same").change(sameChecked);
 
 function sameChecked()
@@ -95,7 +97,17 @@ function validate_addresses()
             if ($(this).val() == "")
             {
                 validates = false;
-                input_error($(this), "Input required")
+                input_error($(this), "Input required");
+            }
+            else if ($(this).hasClass('zipcode') && $(this).attr('data-zip') != $(this).val())
+            {
+                validates = false;
+                input_error($(this), "Invalid ZIP");
+            }
+            else if ($(this).hasClass('phone') && !$(this).val().match(/^(\+(?:[0-9] ?))?[0-9]{6,14}$/))
+            {
+                validates = false;
+                input_error($(this), "Invalid phone number");
             }
             else
                 input_valid($(this));
@@ -116,20 +128,23 @@ $('#shipping_address a[data-toggle="tab"]').on('click', function () {
     $('#shipping_address *').tooltip('destroy');
 });
 
-$('#shipping_zip, #billing_zip').on('change focusout', function() {
+$('#shipping_zip, #billing_zip').on('change focusout', updateCity);
+
+function updateCity() {
     var input = $(this);
     var zip_code = input.val();
     var codes = zip_code.match(/^([0-9]{4})\-([0-9]{3})$/);
-    if (codes && codes.length == 3)
-    {
+    if (codes && codes.length == 3) {
         $.ajax({
             url: "../../api/city.php",
             method: "GET",
-            data: { zip1 : codes[1], zip2 : codes[2] },
+            data: {zip1: codes[1], zip2: codes[2]},
             dataType: "json"
-        }).done(function(data) {
+        }).done(function (data) {
             input.closest('div').find('.city').val(data['city']);
-        }).fail(function() {
+            input.attr('data-zip', zip_code);
+            input_valid(input);
+        }).fail(function () {
             input_error(input, 'Unknown zip code');
         });
     }
@@ -137,7 +152,7 @@ $('#shipping_zip, #billing_zip').on('change focusout', function() {
         input.closest('div').find('.city').val('');
         input_error(input, 'Invalid zip code');
     }
-});
+}
 
 function input_error(element, error)
 {
