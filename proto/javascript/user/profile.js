@@ -77,8 +77,15 @@ function validate_zip(input)
             data: { zip1 : codes[1], zip2 : codes[2] },
             dataType: "json"
         }).done(function(data) {
-            input.closest('div').find('.city').val(data['city']);
-            input.attr('data-valid','true');
+            if (data) {
+                input.closest('div').find('.city').val(data['city']);
+                input.attr('data-valid', 'true');
+            }
+            else
+            {
+                input_error(input, 'Unknown zip code');
+                input.closest('div').find('.city').val('');
+            }
         }).fail(function() {
             input_error(input, 'Unknown zip code');
         });
@@ -100,15 +107,12 @@ $('form input').on('change input', function () {
         input_valid($(this).closest('form').find('[name="password2"]'));
 });
 
-function input_error(element, error)
-{
+function input_error(element, error) {
     tooltip_error(element, error);
     element.parent().addClass("has-feedback has-error");
 }
-
-function tooltip_error(element, error)
-{
-    element.attr('title',error).tooltip({'trigger': 'hover focus'}).tooltip('fixTitle').tooltip('enable');
+function tooltip_error(element, error) {
+    element.attr('title', error).tooltip({'trigger': 'hover focus'}).tooltip('fixTitle').tooltip('enable');
     setTimeout(function() {element.tooltip('show');}, 100);
 }
 
@@ -121,7 +125,7 @@ function input_valid(element)
 $('#form-profile form').submit(function() {
     if ($(this).attr('disabled') === 'disabled') return;
     $(this).attr('disabled','disabled');
-    $('.alert').slideUp(100);
+    $('.alert').slideUp(400);
     var nif = $('input[name="nif"]').val();
     var email = $('input[name="email"]').val();
     var password = $('input[name="password"]').val();
@@ -167,7 +171,7 @@ $('#form-profile form').submit(function() {
 
 function profileUpdateComplete(xhr)
 {
-    $('.alert').slideUp(100);
+    $('.alert').slideUp(400);
     $('#form-profile form').removeAttr('disabled');
     if (Math.floor(xhr.status/100) == 2)
     {
