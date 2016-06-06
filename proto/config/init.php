@@ -2,16 +2,16 @@
   ob_start("sanitize_output");
   $load_start = microtime(true);
   define('SECRET_KEY','MqTrC7HetY5YWvmdVAtQ2h4akgqsfNN38BwGg11MPiaRQelTIBCkSqorwS8FG9mI');
-  session_set_cookie_params(3600, '/~lbaw1564/'); //FIXME
+  session_set_cookie_params(3600, '/LBAW/'); //FIXME
   session_start();
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
   $LINK = "https://gnomo.fe.up.pt";
-  $BASE_DIR = '/opt/lbaw/lbaw1564/public_html/proto/'; //FIXME
-  $BASE_URL = '/~lbaw1564/proto/'; //FIXME
+  $BASE_DIR = 'D:/xampp/htdocs/LBAW/proto/'; //FIXME
+  $BASE_URL = '/LBAW/proto/'; //FIXME
 
-  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1564', 'lbaw1564', 'UA9GDW2I'); //FIXME
+  $conn = new PDO('pgsql:host=dbm.fe.up.pt;dbname=lbaw1564', 'lbaw1564', 'UA9GDW2I'); //FIXME
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -19,15 +19,22 @@
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
   
-  global $smarty;
   $smarty = new Smarty;
   $smarty->template_dir = $BASE_DIR . 'templates/';
   $smarty->compile_dir = $BASE_DIR . 'templates_c/';
   $smarty->assign('BASE_URL', $BASE_URL);
+  
+  $smarty->assign('ERROR_MESSAGES', $_SESSION['error_messages']);  
+  $smarty->assign('FIELD_ERRORS', $_SESSION['field_errors']);
+  $smarty->assign('SUCCESS_MESSAGES', $_SESSION['success_messages']);
+  $smarty->assign('FORM_VALUES', $_SESSION['form_values']);
+  $smarty->assign('USERNAME', $_SESSION['username']);
   $smarty->assign('load_start', $load_start);  
   
-  set_error_handler("print_error_page", E_ERROR);
-  set_exception_handler("print_error_page");
+  unset($_SESSION['success_messages']);
+  unset($_SESSION['error_messages']);  
+  unset($_SESSION['field_errors']);
+  unset($_SESSION['form_values']);
 
   if (empty($_SESSION["user"]))
   {
@@ -119,13 +126,6 @@ function sanitize_output($buffer) {
     $buffer = preg_replace($search, $replace, $buffer);
 
     return $buffer;
-}
-
-function print_error_page()
-{
-  global $smarty;
-  $smarty->display('error.tpl');
-  die();
 }
 
 ?>

@@ -95,3 +95,10 @@
 .vert_centered {
 	line-height: 40px;
 }
+#btn-add-to-cart {
+	color: white;
+	display: inline-block;
+}
+#button-wrapper{
+	text-align: center;
+}

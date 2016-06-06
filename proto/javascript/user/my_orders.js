@@ -11,10 +11,12 @@ function getOrderInfo() {
 		data: {order_id: order_id},
 		dataType: 'json'
 	}).done(function(data) {
+		console.log(data);
 		displayInfo(order_a.next('.order-info').children('.panel-body') , data);
 		order_a.next('.order-info').find('.loading').remove();
 	})
-	.fail(function() {
+	.fail(function(data) {
+		console.log(data);
 		order_a.next('.order-info').find('.fa-spinner').removeClass('fa-spinner');
 		order_a.addClass('loadable');
 	});
@@ -39,7 +41,7 @@ function displayInfo(panel, info)
 	}
 
 	var coupon = info.coupon_discount ? '<div><span class="bold">Coupon Discount:</span> '+info.coupon_discount+'%</div>' : '';
-
+	console.log(info);
 	panel.append('<div class="order-details row"> \
 						<div><span class="bold">Shipping Costs:</span> <span class="order_shipping">'+info.shippingcost+'</span> €</div>'
 						+ coupon +
@@ -61,7 +63,23 @@ function displayInfo(panel, info)
 							<br> '+info.billing_address2+' \
 							<br> '+info.billing_city+' '+info.billing_zip1+'-'+info.billing_zip2+' \
 						</div> \
-					</div>');
+					</div>\
+					<div id="button-wrapper"> \
+					<a href="#" onclick="addOrderToCart(' + info.order_id + ');return false;" id="btn-add-to-cart" class="btn btn-info">Add to Cart</a> \
+					<div>');
 }
 
 $(".order-accordion").on('click', getOrderInfo);
+
+function addOrderToCart(order)
+{
+	console.log(order);
+	$.ajax({
+		type: "POST",
+		url: base_url + "api/users/my_orders.php",
+		dataType: 'json',
+		data: {action: "add", order_id: order}
+	}).done(function(e) {
+		$("#cartModal").modal("toggle");
+	});
+}
