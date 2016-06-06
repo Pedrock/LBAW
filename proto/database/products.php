@@ -423,6 +423,17 @@
     return $stmt->fetch();
   }
 
+  function getOrderProducts($order_id)
+  {
+    global $conn;
+    $stmt = $conn->prepare("SELECT ProductOrder.idProduct AS id, ProductOrder.quantity, name, ProductOrder.price
+          FROM ProductOrder
+          INNER JOIN Product USING(idProduct)
+          WHERE idOrder = ?");
+    $stmt->execute(array($order_id));
+    return $stmt->fetchAll();
+  }
+
   function getDiscounts($limit, $page, $product_id = null, $active = false) {
     $offset = ($page - 1) * $limit;
     global $conn;
@@ -466,15 +477,65 @@
     return $stmt->fetch()['iddiscount'];
   }
 
-  function getOrderProducts($order_id)
-  {
+  function getCoupons($limit, $page, $active = false) {
+    $offset = ($page - 1) * $limit;
     global $conn;
-    $stmt = $conn->prepare("SELECT ProductOrder.idProduct AS id, ProductOrder.quantity, name, ProductOrder.price
-          FROM ProductOrder
-          INNER JOIN Product USING(idProduct)
-          WHERE idOrder = ?");
-    $stmt->execute(array($order_id));
+
+    if($active)
+      $where = " AND (CURRENT_TIMESTAMP between startdate and enddate) ";
+    else $where = "";
+
+    $stmt = $conn->prepare(
+      "SELECT idcoupon, code, startdate, enddate, percentage, users.username as issuer,
+      (CURRENT_TIMESTAMP between startdate and enddate) as active, 
+      COUNT(idcoupon) OVER () AS total_count FROM coupon join users ON coupon.iduser = users.iduser WHERE coupon.isdeleted = false"
+      . $where . 
+      " ORDER BY startdate DESC LIMIT ? OFFSET ? ;");
+
+    $arr = array($limit, $offset);
+
+    $stmt->execute($arr);
     return $stmt->fetchAll();
+  }
+
+  function editCoupon($iduser, $id, $percentage, $start, $end, $code = "") {
+    global $conn;
+    if($code === "")
+      $code = randomString();
+    $conn->beginTransaction();
+    $stmt = $conn->prepare("UPDATE coupon SET isdeleted = true WHERE idcoupon = ?;");
+    $stmt->execute(array($id));
+    $stmt = $conn->prepare("INSERT INTO coupon(code, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon, code, iduser, percentage, startdate, enddate;");
+    $stmt->execute(array($code, $iduser, $percentage, $start, $end));
+    $ret = $stmt->fetch();
+    $conn->commit();
+    return $ret;
+  }
+
+  function deleteCoupon($id) {
+    global $conn;
+    $stmt = $conn->prepare("UPDATE coupon SET isdeleted = true WHERE idcoupon = ?;");
+    $stmt->execute(array($id));
+    return true;
+  }
+
+  function createCoupon($iduser, $id, $percentage, $start, $end, $code = "") {
+    global $conn;
+    if($code === "")
+      $code = randomString();
+    $stmt = $conn->prepare("INSERT INTO coupon(code, iduser, percentage, startdate, enddate) VALUES (?, ?, ?, ?, ?) RETURNING idcoupon, code, iduser, percentage, startdate, enddate;");
+    $stmt->execute(array($code, $iduser, $percentage, $start, $end));
+    return $stmt->fetch();
+  }
+  
+  function randomString(){
+      $chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      $length = 11;
+      $out = "";
+      for ($i = 0; $i < $length; $i++) {
+          $out .= $chars[rand(0, strlen($chars) - 1)];
+      }
+      return $out;
   }
 
   function getMetadata($product_id) {
@@ -542,4 +603,6 @@
       "UPDATE metadata SET description = ? WHERE idmetadatacategory = ? AND idproduct = ?;");
     $stmt->execute(array($description, $cat_id, $product));
   }
+
+
 ?>

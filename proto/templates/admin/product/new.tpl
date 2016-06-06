@@ -43,7 +43,7 @@
 							</div>
 							<div class="col-sm-4 col-sm-offset-1">
 								<fieldset class="form-group">
-									<label for="weight">Weight<i class="fa fa-asterisk" aria-hidden="true"></i></label>
+									<label for="weight">Weight (gr)<i class="fa fa-asterisk" aria-hidden="true"></i></label>
 									<input type="number" class="insert-number form-control" id="weight" name="weight" placeholder="" min="0">
 								</fieldset>
 							</div>

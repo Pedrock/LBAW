@@ -19,7 +19,7 @@ function confirmComplete(xhr)
     }
     else if(xhr.responseJSON)
     {
-        $('#error .modal-body').text(xhr.responseJSON);
+        $('#error .modal-body').text(xhr.responseJSON.error);
         $('#error').modal('show');
     }
     else

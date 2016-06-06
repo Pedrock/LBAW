@@ -166,7 +166,7 @@ function getCouponDiscount($coupon_code)
     $stmt = $conn->prepare(
         "SELECT percentage AS discount
          FROM Coupon
-         WHERE code = ? AND now() BETWEEN startdate AND enddate");
+         WHERE code = ? AND isDeleted = FALSE AND now() BETWEEN startdate AND enddate");
     $stmt->execute(array($coupon_code));
     return $stmt->fetch();
 }
@@ -193,6 +193,14 @@ function addPreviousOrder($user_id, $order_id){
     }
     $conn->commit();
     return true;
+}
+
+function updateCartPrices($user_id)
+{
+    global $conn;
+    $stmt = $conn->prepare("UPDATE ProductCart SET price = get_product_price(idProduct) WHERE idUser = ?");
+    $stmt->execute(array($user_id));
+    return $stmt->fetch();
 }
 
 ?>

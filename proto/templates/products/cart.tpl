@@ -15,6 +15,13 @@
             Quantity
         </div>
     </div>
+    {if $prices_changed}
+        <div id="prices-changed" class="alert alert-danger">
+            <div><strong>Attention!</strong> The price of at least one of your products has changed.
+                Please review your cart and press OK to accept it.</div>
+            <button class="btn btn-danger">OK</button>
+        </div>
+    {/if}
     <div class="content">
         {assign var="total" value=0}
         {foreach from=$cart item=product}

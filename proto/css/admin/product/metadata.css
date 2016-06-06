@@ -6,8 +6,7 @@
 	position: relative;
 	top: 4px;
 	text-decoration:none;
-	color: black;
-	cursor: pointer; cursor: hand;
+	cursor: pointer;
 }
 
 #new-product-title h1 {
@@ -35,9 +34,6 @@
 	padding: 10px 15px;
 }
 
-#metadata_container .item .category {
-	font-weight: bold;
-}
 
 #metadata_container .item > button {
 	position: relative;
@@ -54,6 +50,7 @@
 	right: 10px;
 	margin-top: 8px;
 	margin-left: 20px;
+	color: #337ab7;
 }
 
 .href_add .glyphicon,
@@ -87,6 +84,7 @@
 
 .filter {
 	margin-top: 5px;
+	border-radius: 0;
 }
 
 .error {
@@ -108,4 +106,8 @@
 .item2 button {
 	position: relative !important;
 	top: -4px !important;
+}
+
+.href_manage, .href_add{
+	display: inline-block;
 }

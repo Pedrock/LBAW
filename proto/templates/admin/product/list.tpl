@@ -84,7 +84,7 @@
 							<div class="product col-lg-3 col-sm-6 text-center">
 								<div class="thumbnail">
 									<a href="{$product_link}" class="link-p">
-										<img src="{$BASE_URL}images/products/{$product.photo}" alt="">
+										<img{if $product.photo} src="{$BASE_URL}/images/products/thumb_{$product.photo}"{else} src="{$BASE_URL}/images/assets/default_product.png"{/if} alt="">
 									</a>
 									<div class="caption">
 										<h4><a href="{$product_link}">{$product.name}</a></h4>

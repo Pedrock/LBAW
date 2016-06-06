@@ -48,7 +48,7 @@
 				{if $favorite.idproduct}
 					<div class="row favorite" data-id="{$favorite.idproduct}" data-position="{$favorite.product_position}">
 						<div class="col-sm-8 product_title">
-							<a href="#"><img class="fav_img" src="../../images/products/thumb_{$favorite.photo}" alt=""></a>
+							<a href="#"><img class="fav_img"{if $favorite.photo} src="../../images/products/thumb_{$favorite.photo}"{else} src="../../images/assets/default_product.png"{/if} alt=""></a>
 							<a href="../product.php?id={$favorite.idproduct}"><span>{$favorite.name}</span></a>
 						</div>
 						<div class="pull-right">
