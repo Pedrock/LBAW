@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-xs-8 product_title">
                     <a href="#" class="link-p">
-                        <img class="product_img" src="../../images/products/thumb_{$product.photo}" alt="">
+                        <img class="product_img"{if $product.photo} src="../../images/products/thumb_{$product.photo}"{else} src="../../images/assets/default_product.png"{/if} alt="">
                     </a>
                     <!-- TODO prevent title text break -->
                     <span class="qty">{$product.quantity}x </span><a href="../product.php?id={$product.id}"><span>{$product.name}</span></a>

@@ -21,6 +21,8 @@
 			<div id="product-main-img" class="row">
 				{if !empty($photos)}
 					<img class="img-responsive" src="../images/products/thumb_{$photos[0].location}" alt="">
+				{else}
+					<img class="img-responsive" src="../images/assets/default_product.png" alt="">
 				{/if}
 			</div>
 			<div id="product-imgs" class="row">
