@@ -24,8 +24,6 @@
 		
 		if($_POST['action'] === "add"){
 			try {
-				//http_response_code(200);
-				//echo json_encode(['success' => true, 'ok' => 'ok']);
 				$success = addPreviousOrder($_SESSION['user'], $order_id);
 				
 				http_response_code(200);
