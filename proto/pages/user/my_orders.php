@@ -12,7 +12,6 @@
 
   extract(pagination($orders,$limit,$page));
 
-  $smarty->assign('categories', getMainCategories());
   $smarty->assign('orders', $orders);
   $smarty->assign('productsOrder', $productsOrder);
   $smarty->assign('page', $page);
