@@ -2,20 +2,20 @@
   ob_start("sanitize_output");
   $load_start = microtime(true);
   define('SECRET_KEY','MqTrC7HetY5YWvmdVAtQ2h4akgqsfNN38BwGg11MPiaRQelTIBCkSqorwS8FG9mI');
-  session_set_cookie_params(3600, '/~lbaw1564/'); //FIXME
+  session_set_cookie_params(3600, '/~lbaw1564/');
   session_start();
 
   error_reporting(E_ERROR | E_WARNING); // E_NOTICE by default
 
   $LINK = "https://gnomo.fe.up.pt";
-  $BASE_DIR = '/opt/lbaw/lbaw1564/public_html/proto/'; //FIXME
-  $BASE_URL = '/~lbaw1564/proto/'; //FIXME
+  $BASE_DIR = '/opt/lbaw/lbaw1564/public_html/final/';
+  $BASE_URL = '/~lbaw1564/final/';
 
-  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1564', 'lbaw1564', 'UA9GDW2I'); //FIXME
+  $conn = new PDO('pgsql:host=dbm;dbname=lbaw1564', 'lbaw1564', 'UA9GDW2I');
   $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-  $conn->exec('SET SCHEMA \'public\''); //FIXME?
+  $conn->exec('SET SCHEMA \'scrape\'');
 
   include_once($BASE_DIR . 'lib/smarty/Smarty.class.php');
   
