@@ -58,7 +58,7 @@ $('.rating > span').on('click',function() {
 $('#review-form').submit(function(e) {
 	e.preventDefault();
 
-	var product_id = $('span#header-product').attr('data-id');
+	var product_id = $('#header-product').attr('data-id');
 	var score = $('#score .selected').length;
 	var body = $('#body-review').val();
 

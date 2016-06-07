@@ -74,7 +74,7 @@ ul.sortable li.placeholder {
 	top: 4px;
 	text-decoration:none;
 	color: black;
-	cursor: pointer; cursor: hand;
+	cursor: pointer;
 }
 
 #new-product-title h1 {
@@ -87,7 +87,7 @@ ul.sortable li.placeholder {
 	color: white;
 	position: relative;
 	top: 1px;
-	cursor: pointer; cursor: hand;
+	cursor: pointer;
 }
 
 .product_img:hover .del {

@@ -3,7 +3,7 @@
 {assign "js" ['cart_common.js', 'product-page.js']}
 {include file='common/header.tpl'}
 
-<span id="header-product" data-id="{$product.id}">
+<div id="header-product" data-id="{$product.id}">
 <div id="title-products">
 		<h1 id="product-name" class="product-name">{$product.name}</h1>
 	{if $smarty.session.user}
@@ -28,7 +28,7 @@
 			<div id="product-imgs" class="row">
 			{foreach from=$photos item=photo}
 				<div class="col-xs-3 other-photos"><a href="#"><img src="../images/products/thumb_{$photo.location}" alt="Image {$photo.photo_order}" class="img-responsive"></a></div>
-			{/foreach} 
+			{/foreach}
 			</div>
 		</div>
 		<div class="col-lg-9 col-md-8">
@@ -70,13 +70,13 @@
 								<span class="category">{$data.category}</span><br>
 								<span class="description">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$data.description}</span>
 							</div>
-						{/foreach} 
+						{/foreach}
 					</div>
 				</div>
 			{/if}
 			<div id="row-score" class="row form-row">
 				{if $smarty.session.user}
-				<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
+					<button type="button" class="btn btn-primary btn-favorites visible-xs" aria-label="Left Align">
 					<span aria-hidden="true" class="text-add{if $product.is_favorite} hidden{/if}">Add to Favorites</span>
 					<span aria-hidden="true" class="text-remove{if !$product.is_favorite} hidden{/if}">Remove from Favorites</span>
 				</button>
@@ -117,7 +117,7 @@
 								<span>☆</span>
 							</div>
                         </div>
-                        <textarea id="body-review" class="form-control" cols="50" id="new-review" name="comment" rows="5"></textarea>
+                        <textarea id="body-review" class="form-control" cols="50" name="comment" rows="5"></textarea>
                         <div id="score-box" class="text-right">
                             <a class="btn btn-danger" id="close-review-box"><span class="glyphicon glyphicon-remove"></span> Cancel</a>
                             <button id="submit-comment" class="btn btn-success" type="submit"><span class="glyphicon glyphicon-ok"></span> Comment</button>
@@ -129,7 +129,7 @@
 		<div class="row review-row hidden">
 			<div class="col-md-12">
 				{for $star=1 to 5}
-				<span class="glyphicon glyphicon-star-empty star"></span>
+					<span class="glyphicon glyphicon-star-empty star"></span>
 				{/for}
 				<span class="info-review">{$smarty.session.username}</span>
 				<span class="info-review pull-right review-date"></span>
@@ -137,7 +137,7 @@
 			</div>
 		</div>
 		{foreach from=$reviews item=review}
-		<div class="row review-row">
+			<div class="row review-row">
 			<div class="col-md-12">
 				{for $star=1 to 5}
 					<span class="glyphicon glyphicon-star{if $review.score < $star}-empty{/if} star"></span>
@@ -154,10 +154,12 @@
 		{/foreach}
 	</div>
 </div>
-</span>
+</div>
 
 <div class="popup_bg" id="popup_photo">
-	<img id="photo_large" src="">
+	<img id="photo_large"
+		 src={if !empty($photos)}"../images/products/thumb_{$photos[0].location}"{else}"../images/assets/default_product.png"{/if}
+		 alt="Product Photo">
 </div>
 
 {include file='common/footer.tpl'}
