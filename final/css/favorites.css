@@ -41,8 +41,8 @@
 }
 
 .fav-btn {
-	margin-top: -10px;
 	padding-right: 10px;
+
 }
 
 .fav-btn > span {
@@ -54,6 +54,10 @@
 		line-height: 40px;
 		margin: 0;
 	}
+}
+
+.btn-delete-favorite-list {
+	line-height: 40px;
 }
 
 .favorite {

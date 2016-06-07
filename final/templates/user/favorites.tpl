@@ -67,10 +67,8 @@
 			</div>
 			</div>
 									<div id="dummy-list" class="panel panel-info favoritelist hidden" data-id="0">
-										<div class="pull-right">
-											<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
-										</div>
 										<div class="panel-heading">
+											<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
 											<h4 class="panel-title">
 												<a data-toggle="collapse" class="collapsed" data-parent="#favorites-accordion" href="#collapse"><span class="name">Dummy</span></a>
 											</h4>
