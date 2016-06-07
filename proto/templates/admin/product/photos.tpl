@@ -3,14 +3,20 @@
 	<div class="col-lg-12">
 		<div class="content tab-content">
 			<div id="new_address" class="tab-pane fade in active">
+				<span id="spinner" class="pull-right" style="display:none;">
+					<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+					<span class="sr-only">Loading...</span>
+				</span>
 				<div id="new-product-title">
 					<h1>
 						<a href="edit.php?id={$id}">
 							<span class="glyphicon glyphicon-menu-left"></span>
 						</a>
-						Edit photos for &quot;{$product.name}&quot;</h1>
+						Edit photos for &quot;{$product.name}&quot;
+					</h1>
 				</div>
 				<input type="file" id="files" name="files[]" hidden="hidden " multiple>
+
 				<input class="btn btn-default btn-file" type="button" id="files_btn" value="Add photos">
 				{if $product.isdeleted}
 					<span id="product_hidden_warning">

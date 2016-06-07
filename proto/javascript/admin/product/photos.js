@@ -35,31 +35,8 @@ $(document).ready(function() {
 
 	ul_sortable.disableSelection();
 
-	function alert_error(error) {
-		$("#error").modal('toggle');
-		console.log(error);
-		$("#error_description").html(error);
-	}
-
-	function complete(xhr) {
-		if (Math.floor(xhr.status / 100) == 2) {
-			$("#confirmation").modal('toggle');
-		} else if (xhr.responseJSON) {
-			if (xhr.responseJSON.errors) {
-				for (input in xhr.responseJSON.errors)
-					input_error("#" + input, xhr.responseJSON.errors[input]);
-			} else if (xhr.responseJSON.error) {
-				alert_error(xhr.responseJSON.error);
-			}
-		} else {
-			alert_error("An error occurred. Please try again.");
-		}
-	}
-
 	$("#files").on('change', function(event) {
 		var files = event.target.files;
-
-		var numAnswers = 0;
 
 		if (files.length > 0) {
 			$("#uploading_header").show();
@@ -73,11 +50,6 @@ $(document).ready(function() {
 		}
 	});
 
-	function update_message() {
-		if (num_photos() != 0) $('.no_photos').hide();
-		else $('.no_photos').show();
-	}
-
 	function upload_file(i, files, error) {
 		$("#uploaded_num").html(i);
 
@@ -85,7 +57,6 @@ $(document).ready(function() {
 
 		if (i >= files.length || error) {
 			if (!error)
-			//$("#uploading").modal('hide');
 				$("#error").html("Photos added successfully.");
 			else {
 				$("#error").html("There was an error, some photos weren't added.");
@@ -134,10 +105,6 @@ $(document).ready(function() {
 			xhr: function() {
 				var xhr = $.ajaxSettings.xhr();
 				xhr.upload.onprogress = function(e) {
-					if (e.lengthComputable) {
-						//var perc = parseInt(100 * e.loaded / e.total);
-						//$(".status_message").html('Uploading... ' + perc + '%');
-					}
 				};
 				return xhr;
 			},
@@ -155,7 +122,6 @@ $(document).ready(function() {
 			var elem2 = $("<div class=\"del\">DEL<span class=\"hidden\">" + (i + 1) + "</span></div>");
 			$(this).html("");
 			$(this).append(elem2);
-			//s$(elem2).append(elem2);
 			$(elem2).on('click', photoDelete);
 		});
 	}
@@ -175,7 +141,8 @@ $(document).ready(function() {
 		$("#editing .progress").show();
 		$(".done").hide();
 		$("#total_num").html(files.length);
-		$("#editing").modal('show');
+		
+		$('#spinner').show();
 
 		$.ajax({
 			url: "../../../api/admin/product/photos.php",
@@ -185,14 +152,15 @@ $(document).ready(function() {
 			cache: false,
 			dataType: 'json',
 			processData: false,
-			success: function(html) {
+			success: function() {
+				$('#spinner').hide();
 				$("#editing").modal('hide');
 				update_photo_orders();
 			},
 			error: function(xhr, textStatus, errorThrown) {
+				$('#spinner').hide();
 				console.log('error' + textStatus + errorThrown + xhr.responseText);
 				$("#editing_error").html("There was an error.");
-
 				$("#editing .done").show();
 				$("#editing_error").show();
 			}
@@ -232,7 +200,7 @@ $(document).ready(function() {
 			cache: false,
 			dataType: 'json',
 			processData: false,
-			success: function(html) {
+			success: function() {
 				$("#del").modal('hide');
 				$("#img_" + del_order).remove();
 				update_photo_orders();

@@ -100,3 +100,7 @@ ul.sortable li.placeholder {
 	margin-left: 5px;
 	padding-top: 4px;
 }
+
+.content {
+	overflow: hidden;
+}
