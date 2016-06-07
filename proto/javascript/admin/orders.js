@@ -117,10 +117,14 @@ function displayInfo(panel, info)
     for (var i = 0; i < info.products.length; i++)
     {
         var product = info.products[i];
+        if (product.photo)
+            var img = '../../images/products/'+product.photo;
+        else
+            var img = '../../images/assets/default_product.png';
         panel.append('<div class="row product" data-id="'+product.id+'"> \
                         <div class="col-xs-7 col-md-8 product_title"> \
                             <a href="../product.php?id='+product.id+'" class="link-p"> \
-                                <img class="product_img" src="../../images/products/'+product.photo+'" alt=""> \
+                                <img class="product_img" src="'+img+'" alt=""> \
                             </a> \
                             <span class="qty">'+product.quantity+'x </span><a href="../product.php?id='+product.id+'"><span>'+product.name+'</span></a> \
                         </div> \
