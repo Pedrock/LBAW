@@ -604,5 +604,17 @@
     $stmt->execute(array($description, $cat_id, $product));
   }
 
-
+  function getPurchases() {
+    global $conn;
+    $stmt = $conn->prepare(
+            "SELECT
+        COUNT( idOrder ) AS purchases,
+        EXTRACT(MONTH FROM orderDate) AS month,
+        EXTRACT(YEAR FROM orderDate) AS year
+      FROM Orders
+      GROUP BY month, year
+      ORDER BY year, month;");
+    $stmt->execute();
+    return $stmt->fetchAll();
+  }
 ?>
