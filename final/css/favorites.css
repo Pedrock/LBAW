@@ -84,3 +84,14 @@
 .icon {
 	float: right;
 }
+
+.favoritelist > .panel-heading {
+	position: relative;
+}
+
+.favoritelist > .panel-heading > .btn-delete-favorite-list {
+	position: absolute;
+	right: -1px;
+	top: -1px;
+}
+

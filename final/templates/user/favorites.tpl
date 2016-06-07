@@ -33,9 +33,7 @@
 					{/if}
 						<div class="panel panel-info favoritelist" data-id="{$favorite.idfavoritelist}">
 							<div class="panel-heading">
-								<div class="pull-right">
-									<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
-								</div>
+								<a class="fav-btn btn-delete-favorite-list" href="#" data-toggle="modal" data-target="#modal_delete_list"><span class="glyphicon glyphicon-remove"></span></a>
 								<h4 class="panel-title">
 									<a data-toggle="collapse" class="collapsed" data-parent="#favorites-accordion" href="#collapse{$favorite.idfavoritelist}"><span class="name">{$favorite.list}</span>
 									</a>
